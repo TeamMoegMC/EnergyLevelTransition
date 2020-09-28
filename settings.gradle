@@ -1,0 +1,14 @@
+pluginManagement {
+    repositories {
+        jcenter()
+        maven {
+            name = 'Fabric'
+            url = 'https://maven.fabricmc.net/'
+        }
+        gradlePluginPortal()
+    }
+}
+rootProject.name = 'Energy-Level-Transition'
+
+include 'eltcore'
+include 'elt'

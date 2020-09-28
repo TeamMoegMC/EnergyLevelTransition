@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "id": "eltcore",
+  "version": "${version}",
+
+  "name": "ELT Core",
+  "description": "Take Minecraft to a new level of complexity",
+  "authors": [
+    "TeamMoeg"
+  ],
+  "contact": {
+    "homepage": "https://wordpress.terrafirmarescue.net/",
+    "sources": "https://github.com/MoegTech/ELTCore/"
+  },
+
+  "license": "GPLv3",
+  "icon": "assets/eltcore/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.moeg.eltcore.ELTCORE_Main"
+    ],
+    "client": [
+      "net.moeg.eltcore.ELTCORE_Main_Client"
+    ]
+  },
+  "mixins": [
+    "eltcore.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "fabric": "*",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "flamingo": "*"
+  },
+  "accessWidener": "energyleveltransition.aw"
+
+}

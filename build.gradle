@@ -1,0 +1,201 @@
+plugins {
+	id 'fabric-loom' version '0.5-SNAPSHOT'
+	id 'maven-publish'
+}
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+allprojects {
+	apply plugin: 'java'
+	apply plugin: "fabric-loom"
+
+	group = rootProject.maven_group
+	version = rootProject.mod_version
+
+	sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+	tasks.withType(JavaCompile) {
+		options.encoding = "UTF-8"
+	}
+
+	repositories {
+		maven {
+			name = "FabricMC"
+			url = "https://maven.fabricmc.net"
+		}
+		maven {
+			name = "CottonMC"
+			url = "https://server.bbkr.space/artifactory/libs-release"
+		}
+		maven {
+			url = 'https://raw.githubusercontent.com/Devan-Kerman/Devan-Repo/master/'
+		}
+		maven {
+			name = "Ladysnake Libs"
+			url = 'https://dl.bintray.com/ladysnake/libs'
+		}
+		maven {
+			name = "BuildCraft"
+			url = "https://mod-buildcraft.com/maven"
+		}
+		mavenLocal()
+	}
+
+	minecraft {
+		accessWidener = file("src/main/resources/energyleveltransition.aw")
+	}
+
+	dependencies {
+		// Annotations
+		compile group: 'com.google.code.findbugs', name: 'jsr305', version: '3.0.2'
+
+		// Minecraft
+		minecraft "com.mojang:minecraft:${project.minecraft_version}"
+		mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+
+		// Fabric Loader and Fabric API
+		modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+		modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+
+		// Implementation
+		modImplementation("me.shedaniel:RoughlyEnoughItems:5.2.3") {exclude module: 'fabric-api'}
+		modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {exclude module: 'fabric-api'}
+
+		// Used Libraries
+		include(modCompile(group: 'net.devtech', name: 'arrp', version: '0.2.4')) {exclude module: 'fabric-api'}
+		include(modCompile("io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2")) {exclude module: 'fabric-api'}
+		include(modCompile("io.github.onyxstudios:Cardinal-Components-API:2.6.0")) {exclude module: 'fabric-api-base'}
+		include(modCompile("alexiil.mc.lib:libblockattributes-all:0.8.1")) {exclude module: 'fabric-api'}
+	}
+
+	configurations {
+		dev
+	}
+
+	loom {
+		shareCaches = true
+	}
+
+	jar {
+		classifier = "dev"
+	}
+
+	afterEvaluate {
+		remapJar {
+			input = file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar")
+			archiveName = "${archivesBaseName}-${version}.jar"
+			remapAccessWidener = true
+		}
+
+		artifacts {
+			dev file: file("${project.buildDir}/libs/$archivesBaseName-${version}-dev.jar"), type: "jar", builtBy: jar
+		}
+
+		processResources {
+			inputs.property "version", project.version
+
+			from(sourceSets.main.resources.srcDirs) {
+				include "fabric.mod.json"
+				expand "version": project.version
+			}
+
+			from(sourceSets.main.resources.srcDirs) {
+				exclude "fabric.mod.json"
+			}
+		}
+	}
+
+	task sourcesJar(type: Jar, dependsOn: classes) {
+		classifier = "sources"
+		from sourceSets.main.allSource
+	}
+}
+
+def privateProperties = new Properties();
+
+String maven_username = 'unknown'
+String maven_password = 'unknown'
+
+if (project.file('private.properties').exists()) {
+	privateProperties.load(new StringReader(project.file('private.properties').getText('UTF-8')))
+	maven_username = privateProperties.getOrDefault('maven_username', 'unknown')
+	maven_password = privateProperties.getOrDefault('maven_password', 'unknown')
+}
+
+subprojects {
+
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				// add all the jars that should be included when publishing to maven
+				artifact(remapJar) {
+					builtBy remapJar
+					classifier = project.name
+				}
+				artifact(sourcesJar) {
+					builtBy remapSourcesJar
+					classifier = "${project.name}-source"
+				}
+			}
+		}
+
+		repositories {
+			maven{
+				name = "archive"
+				url = "http://maven2.jihuayu.site/releases"
+				credentials {
+					username = maven_username
+					password = maven_password
+				}
+			}
+		}
+	}
+
+}
+
+repositories {
+
+}
+
+dependencies {
+	afterEvaluate {
+		subprojects.each {
+			compile project(path: ":${it.name}", configuration: "dev")
+			include project("${it.name}:")
+		}
+	}
+}
+
+//publishing {
+//	publications {
+//		mavenJava(MavenPublication) {
+//			artifact("${project.buildDir}/libs/$archivesBaseName-${version}.jar") {
+//				builtBy remapJar
+//			}
+//			artifact(sourcesJar) {
+//				builtBy remapSourcesJar
+//			}
+////			artifact javadocJar
+//			pom.withXml {
+//				def depsNode = asNode().appendNode("dependencies")
+//				subprojects.each {
+//					def depNode = depsNode.appendNode("dependency")
+//					depNode.appendNode("groupId", it.group)
+//					depNode.appendNode("artifactId", it.name)
+//					depNode.appendNode("version", it.version)
+//					depNode.appendNode("scope", "compile")
+//				}
+//			}
+//		}
+//	}
+//	repositories {
+//		maven{
+//			name = "archive"
+//			url = "http://maven2.jihuayu.site/releases"
+//			credentials {
+//				username = maven_username
+//				password = maven_password
+//			}
+//		}
+//	}
+//}

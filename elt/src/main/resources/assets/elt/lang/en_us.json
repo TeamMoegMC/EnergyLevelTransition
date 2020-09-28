@@ -1,0 +1,10 @@
+{
+  "container.woodcutter": "Manual Wood Cutter",
+
+  "itemGroup.elt.material": "ELT: Materials",
+  "itemGroup.elt.tools": "ELT: Tools",
+  "itemGroup.elt.food": "ELT: Food",
+  "itemGroup.elt.machine": "ELT: Machines",
+  "itemGroup.elt.fluid": "ELT: Fluids",
+  "itemGroup.elt.misc": "ELT: Miscellaneous"
+}

@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "hardened=false": { "model": "eltcore:block/example_block" },
+    "hardened=true": { "model": "eltcore:block/example_block_hardened" }
+  }
+}

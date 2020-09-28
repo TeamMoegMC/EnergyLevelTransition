@@ -1,0 +1,10 @@
+{
+  "container.woodcutter": "原木切割案",
+
+  "itemGroup.elt.material": "能级跃迁: 材料",
+  "itemGroup.elt.tools": "能级跃迁: 工具",
+  "itemGroup.elt.food": "能级跃迁: 事物",
+  "itemGroup.elt.machine": "能级跃迁: 机器",
+  "itemGroup.elt.fluid": "能级跃迁: 流体",
+  "itemGroup.elt.misc": "能级跃迁: 其他"
+}

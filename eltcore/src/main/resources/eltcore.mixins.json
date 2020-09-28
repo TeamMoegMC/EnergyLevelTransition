@@ -1,0 +1,18 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.moeg.eltcore.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MixinGeneratorOptions",
+    "MixinIngredient",
+    "MixinPlayerEntity"
+  ],
+  "client": [
+    "MixinPlayerEntity",
+    "client.MixinEltCoreClient"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
