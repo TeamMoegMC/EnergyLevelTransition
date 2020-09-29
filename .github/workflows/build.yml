@@ -1,6 +1,14 @@
 # Last update: Sep 29 2020
 name: Build
-on: [push, pull_request]
+on:
+  push:
+    branches: 
+      - '1.16'
+  pull_request:
+    branches: 
+      - '1.16'
+  workflow_dispatch:
+  
 jobs:
   build:
     strategy:
@@ -8,10 +16,8 @@ jobs:
         java-version: [1.8, 11, 14]
     runs-on: ubuntu-20.04
     steps:
-    - name: Checkout
-      - uses: actions/checkout@v1
-    - name: Cache Gradle
-      - uses: actions/cache@v2
+    - uses: actions/checkout@v1
+    - uses: actions/cache@v2
       with:
         path: |
           ~/.gradle/caches
