@@ -25,7 +25,7 @@ import net.moeg.elt.gui.WoodCutterScreen;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.eltcore.render.LeavesColorProvider;
 
-import static net.moeg.elt.handlers.Handler_Blocks.EXAMPLE_BLOCK;
+import static net.moeg.elt.handlers.BlocksELT.EXAMPLE_BLOCK;
 
 public class ELT_Main_Client implements ClientModInitializer {
 

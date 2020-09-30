@@ -47,7 +47,7 @@ import static net.moeg.eltcore.data.CS.T;
  * }
  */
 
-public class Handler_Blocks {
+public class BlocksELT {
 
     public static final Block EXAMPLE_BLOCK;
     public static final Block MANUAL_WOOD_CUTTER;

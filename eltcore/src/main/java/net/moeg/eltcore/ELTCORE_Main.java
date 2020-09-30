@@ -18,18 +18,29 @@
 
 package net.moeg.eltcore;
 
+import com.google.common.collect.ImmutableMap;
+import com.google.common.collect.Maps;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
+import net.minecraft.block.Blocks;
+import net.minecraft.client.world.GeneratorType;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.BiomeKeys;
+import net.minecraft.world.gen.chunk.*;
+import net.minecraft.world.gen.feature.StructureFeature;
 import net.moeg.eltcore.code.ArrayListNoNulls;
 import net.moeg.eltcore.handlers.*;
+import net.moeg.eltcore.mixin.GeneratorTypeAccessor;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Optional;
 
 import static net.moeg.eltcore.data.CS.F;
 
@@ -43,6 +54,25 @@ public class ELTCORE_Main implements ModInitializer {
     public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create(MOD_ID + ":main");
     public static final Handler_ItemGroups ITEM_GROUPS_ELT = new Handler_ItemGroups();
 
+    public static FlatChunkGeneratorConfig getDefaultConfig(Registry<Biome> biomeRegistry) {
+        StructuresConfig structuresConfig = new StructuresConfig(Optional.of(StructuresConfig.DEFAULT_STRONGHOLD), Maps.newHashMap(ImmutableMap.of(StructureFeature.VILLAGE, StructuresConfig.DEFAULT_STRUCTURES.get(StructureFeature.VILLAGE))));
+        FlatChunkGeneratorConfig flatChunkGeneratorConfig = new FlatChunkGeneratorConfig(structuresConfig, biomeRegistry);
+        flatChunkGeneratorConfig.biome = () -> {
+            return (Biome)biomeRegistry.getOrThrow(BiomeKeys.PLAINS);
+        };
+        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
+        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(2, Blocks.DIRT));
+        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(1, Blocks.BONE_BLOCK));
+        flatChunkGeneratorConfig.updateLayerBlocks();
+        return flatChunkGeneratorConfig;
+    }
+
+    private static final GeneratorType ELTREALISTIC = new GeneratorType("elt_realistic") {
+        protected ChunkGenerator getChunkGenerator(Registry<Biome> biomeRegistry, Registry<ChunkGeneratorSettings> chunkGeneratorSettingsRegistry, long seed) {
+            return new FlatChunkGenerator(ELTCORE_Main.getDefaultConfig(biomeRegistry));
+        }
+    };
+
     @Override
     public void onInitialize() {
 
@@ -53,6 +83,8 @@ public class ELTCORE_Main implements ModInitializer {
                 new Handler_WorldTypes()
         );
         for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
+
+        GeneratorTypeAccessor.getValues().add(ELTREALISTIC);
 
         Handler_Worldgen Handler_WORLDGEN = new Handler_Worldgen();
         Handler_Items Handler_ITEMS = new Handler_Items();

@@ -21,7 +21,9 @@ package net.moeg.eltcore.handlers;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.blockstate.JState;
 import net.devtech.arrp.json.models.JModel;
+import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
+import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
@@ -44,8 +46,10 @@ import static net.moeg.eltcore.data.CS.F;
 
 public class Handler_Blocks {
 
-    static {
+    public static final Block EXAMPLE_BLOCK;
 
+    static {
+         EXAMPLE_BLOCK = register("example_block", new Block(FabricBlockSettings.of(Material.STONE)));
     }
 
     // No Model is registered

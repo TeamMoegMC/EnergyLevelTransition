@@ -27,7 +27,7 @@ import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.registry.Registry;
 import net.moeg.elt.blockentity.DemoBlockEntity;
 import net.moeg.elt.blockentity.WoodCutterBlockEntity;
-import net.moeg.elt.handlers.Handler_Blocks;
+import net.moeg.elt.handlers.BlocksELT;
 import net.moeg.elt.handlers.Handler_Items;
 import net.moeg.elt.handlers.ScreenHandlerTypeELT;
 import net.moeg.elt.recipe.WoodCutterRecipe;
@@ -36,8 +36,8 @@ import org.apache.logging.log4j.Logger;
 
 import static net.devtech.arrp.api.RuntimeResourcePack.id;
 import static net.devtech.arrp.json.loot.JLootTable.*;
-import static net.moeg.elt.handlers.Handler_Blocks.EXAMPLE_BLOCK;
-import static net.moeg.elt.handlers.Handler_Blocks.MANUAL_WOOD_CUTTER;
+import static net.moeg.elt.handlers.BlocksELT.EXAMPLE_BLOCK;
+import static net.moeg.elt.handlers.BlocksELT.MANUAL_WOOD_CUTTER;
 
 public class ELT_Main implements ModInitializer {
 
@@ -57,27 +57,12 @@ public class ELT_Main implements ModInitializer {
     public void onInitialize() {
 
         LOGGER.info("~~~~~ Thanks for playing Energy Level Transition! ~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~        ~~~  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~          ~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~  ~~~~~~~~~  ~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~        ~~~  ~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~        ~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~  ~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
         LOGGER.info("~~~~~~~~~~~~~~~~~ Created by TeamMoeg ~~~~~~~~~~~~~~~~~");
         LOGGER.info("~~ https://github.com/MoegTech/EnergyLevelTransition ~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
 
 
         Handler_Items Handler_ITEMS = new Handler_Items();
-        Handler_Blocks Handler_BLOCKS = new Handler_Blocks();
+        BlocksELT Handler_BLOCKS = new BlocksELT();
         ScreenHandlerTypeELT SHTELT = new ScreenHandlerTypeELT();
 
         RESOURCE_PACK.addLootTable(id("minecraft:blocks/acacia_fence"),

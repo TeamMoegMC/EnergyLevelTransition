@@ -88,9 +88,9 @@ public class Handler_Items {
         Flint_Hammer = register("tool/flint_hammer", "Flint Hammer", "燧石锤", new ToolHarpoon(ToolMaterials_ELT.CHIPPED_FLINT, (new Item.Settings())));
 
         //blockitems
-        EXAMPLE_BLOCK = register(Handler_Blocks.EXAMPLE_BLOCK, Handler_ItemGroups.ELT_MACHINE);
-        MANUAL_WOOD_CUTTER = register(Handler_Blocks.MANUAL_WOOD_CUTTER, Handler_ItemGroups.ELT_MACHINE);
-        EXAMPLE_2 = register(Handler_Blocks.EXAMPLE_2, Handler_ItemGroups.ELT_MACHINE);
+        EXAMPLE_BLOCK = register(BlocksELT.EXAMPLE_BLOCK, Handler_ItemGroups.ELT_MACHINE);
+        MANUAL_WOOD_CUTTER = register(BlocksELT.MANUAL_WOOD_CUTTER, Handler_ItemGroups.ELT_MACHINE);
+        EXAMPLE_2 = register(BlocksELT.EXAMPLE_2, Handler_ItemGroups.ELT_MACHINE);
 
     }
 
