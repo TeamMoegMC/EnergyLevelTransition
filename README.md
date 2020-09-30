@@ -19,7 +19,7 @@ This is an open source mod licensed under [GNU General Public License Version 3]
   
 ## Introduction
 
-This is a Tech Mod - which illustrates Realism with hidden Magical Elements - of World Generation, Natural Environment, Player Properties, and more. 
+A Tech Mod that brings in Science, Etherology, and Magic!
 
 ## Dependencies
 
