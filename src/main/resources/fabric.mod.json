@@ -1,26 +1,24 @@
 {
   "schemaVersion": 1,
   "id": "energyleveltransition",
+  "name": "Energy Level Transition",
   "version": "${version}",
-  "name": "Energy Level Transition - Main",
-  "description": "Take Minecraft to a new level of complexity",
+  "environment": "*",
+  "license": "GPL-3.0",
+  "icon": "assets.energyleveltransition/icon.png",
+  "contact": {
+    "homepage": "https://www.teammoeg.com",
+    "sources": "https://github.com/MoegTech/EnergyLevelTransition",
+    "issues": "https://github.com/MoegTech/EnergyLevelTransition/issues"
+  },
   "authors": [
     "TeamMoeg"
   ],
-
-  "contact": {
-    "homepage": "https://wordpress.terrafirmarescue.net",
-    "sources": "https://github.com/MoegTech/EnergyLevelTransition"
-  },
-
-  "license": "GPLv3",
-  "icon": "assets.energyleveltransition/icon.png",
-
   "depends": {
     "fabricloader": ">=0.8.9",
     "fabric": "*",
     "minecraft": "1.16.x"
   },
-  "accessWidener": "energyleveltransition.aw"
-
+  "accessWidener": "energyleveltransition.aw",
+  "description": "A Tech Mod that brings in Science, Etherology, and Magic!"
 }

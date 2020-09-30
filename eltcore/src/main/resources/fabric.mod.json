@@ -1,22 +1,25 @@
 {
   "schemaVersion": 1,
   "id": "eltcore",
-  "version": "${version}",
-
   "name": "ELT Core",
-  "description": "Take Minecraft to a new level of complexity",
+  "version": "${version}",
+  "environment": "*",
+  "license": "GPL-3.0",
+  "icon": "assets/eltcore/icon.png",
+  "contact": {
+    "homepage": "https://www.teammoeg.com",
+    "sources": "https://github.com/MoegTech/EnergyLevelTransition",
+    "issues": "https://github.com/MoegTech/EnergyLevelTransition/issues"
+  },
   "authors": [
     "TeamMoeg"
   ],
-  "contact": {
-    "homepage": "https://wordpress.terrafirmarescue.net/",
-    "sources": "https://github.com/MoegTech/ELTCore/"
+  "depends": {
+    "fabricloader": ">=0.8.9",
+    "fabric": "*",
+    "minecraft": "1.16.x"
   },
-
-  "license": "GPLv3",
-  "icon": "assets/eltcore/icon.png",
-
-  "environment": "*",
+  "accessWidener": "energyleveltransition.aw",
   "entrypoints": {
     "main": [
       "net.moeg.eltcore.ELTCORE_Main"
@@ -28,15 +31,5 @@
   "mixins": [
     "eltcore.mixins.json"
   ],
-
-  "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": "1.16.x"
-  },
-  "suggests": {
-    "flamingo": "*"
-  },
-  "accessWidener": "energyleveltransition.aw"
-
+  "description": "Core module of Energy Level Transition"
 }

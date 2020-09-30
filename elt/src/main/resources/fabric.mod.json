@@ -1,22 +1,26 @@
 {
   "schemaVersion": 1,
   "id": "elt",
+  "name": "ELT Main",
   "version": "${version}",
-
-  "name": "Energy Level Transition",
-  "description": "Take Minecraft to a new level of complexity",
+  "environment": "*",
+  "license": "GPL-3.0",
+  "icon": "assets/elt/icon.png",
+  "contact": {
+    "homepage": "https://www.teammoeg.com",
+    "sources": "https://github.com/MoegTech/EnergyLevelTransition",
+    "issues": "https://github.com/MoegTech/EnergyLevelTransition/issues"
+  },
   "authors": [
     "TeamMoeg"
   ],
-  "contact": {
-    "homepage": "https://wordpress.terrafirmarescue.net/",
-    "sources": "https://github.com/MoegTech/EnergyLevelTransition"
+  "depends": {
+    "fabricloader": ">=0.8.9",
+    "fabric": "*",
+    "minecraft": "1.16.x",
+    "eltcore": "*"
   },
-
-  "license": "GPLv3",
-  "icon": "assets/elt/icon.png",
-
-  "environment": "*",
+  "accessWidener": "energyleveltransition.aw",
   "entrypoints": {
     "main": [
       "net.moeg.elt.ELT_Main"
@@ -28,15 +32,5 @@
   "mixins": [
     "elt.mixins.json"
   ],
-
-  "depends": {
-    "fabricloader": ">=0.7.4",
-    "fabric": "*",
-    "minecraft": "1.16.x",
-    "eltcore": "*"
-  },
-  "suggests": {
-    "flamingo": "*"
-  },
-  "accessWidener": "energyleveltransition.aw"
+  "description": "Main module of Energy Level Transition"
 }
