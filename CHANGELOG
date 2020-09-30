@@ -1,0 +1,8 @@
+# This is the Changelog for Minecraft Mod - Energy Level Transition (1.16)
+# [+] = Added a feature, [-] = Removed a feature, [\] = Changed a feature, [<Other>] = Other
+
+0.02.06:
+[+] Setup the multi-project structure of the mod.
+
+0.01.xx:
+[+] Wood Cutter and some flint tools are added.
