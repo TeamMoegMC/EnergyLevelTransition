@@ -19,6 +19,13 @@
 package net.moeg.eltcore.data;
 
 
+import net.minecraft.block.Block;
+import net.minecraft.item.ItemStack;
+import net.moeg.eltcore.items.ItemELT;
+
+import java.util.Arrays;
+import java.util.Map;
+
 public class CS {
 
     /**
@@ -63,5 +70,11 @@ public class CS {
             RED = 0xf91313,
             BLUE = 0x3495eb,
             WHITE = 0xffffff;
+
+    public static class ItemsELT {
+        /** The MultiItems */
+        public static ItemELT TECH, FOOD, TOOLS;
+        public static ItemELT[] ALL_MULTI_ITEMS = new ItemELT[] {TECH, TOOLS, FOOD};
+    }
 
 }

@@ -102,39 +102,39 @@ public class Handler_Blocks {
     private static void registerBlockState(boolean isCustomBlockState, String path) {
         if (!isCustomBlockState) {
             Identifier resourceId = new Identifier("eltcore", path);
-            RESOURCE_PACK.addBlockState(JState.state(JState.variant(JState.model("eltcore:block/" + path))), resourceId);
+            ELTRESOURCE.addBlockState(JState.state(JState.variant(JState.model("eltcore:block/" + path))), resourceId);
         }
     }
 
     private static void registerModel(boolean isCustomModel, String path, String parent) {
         if (!isCustomModel) {
             Identifier resourceId = new Identifier("eltcore", "block/" + path);
-            RESOURCE_PACK.addModel(JModel.model(parent).textures(JModel.textures().var("all", "eltcore:block/" + path).particle("#all")), resourceId);
+            ELTRESOURCE.addModel(JModel.model(parent).textures(JModel.textures().var("all", "eltcore:block/" + path).particle("#all")), resourceId);
         }
     }
 
     private static void registerBlockItemModel(String path) {
         Identifier resourceId = new Identifier("eltcore", "item/" + path);
-        RESOURCE_PACK.addModel(JModel.model("eltcore:block/" + path), resourceId);
+        ELTRESOURCE.addModel(JModel.model("eltcore:block/" + path), resourceId);
     }
 
     private static void registerModel(boolean isCustomModel, String path) {
         if (!isCustomModel) {
             Identifier resourceId = new Identifier("eltcore", "block/" + path);
-            RESOURCE_PACK.addModel(JModel.model("block/cube_all").textures(JModel.textures().var("all", "eltcore:block/" + path).particle("#all")), resourceId);
+            ELTRESOURCE.addModel(JModel.model("block/cube_all").textures(JModel.textures().var("all", "eltcore:block/" + path).particle("#all")), resourceId);
         }
     }
 
     private static void registerLang(String path, String language, String name) {
         if (language.equalsIgnoreCase("en_us"))
-            RESOURCE_PACK.addLang(new Identifier("eltcore", language), EN_US.translate("block.eltcore." + path, name));
+            ELTRESOURCE.addLang(new Identifier("eltcore", language), EN_US.translate("block.eltcore." + path, name));
         if (language.equalsIgnoreCase("zh_cn"))
-            RESOURCE_PACK.addLang(new Identifier("eltcore", language), ZH_CN.translate("block.eltcore." + path, name));
+            ELTRESOURCE.addLang(new Identifier("eltcore", language), ZH_CN.translate("block.eltcore." + path, name));
     }
 
     private static void registerAnimation(String path, int frametime) {
         Identifier aniID = new Identifier("eltcore", "block/" + path);
-        RESOURCE_PACK.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
+        ELTRESOURCE.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
     }
 
 }

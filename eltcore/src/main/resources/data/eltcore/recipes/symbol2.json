@@ -7,14 +7,14 @@
   ],
   "key": {
     "W": {
-      "tag": "minecraft:logs"
+      "tag": "eltcore:branch"
     },
     "R": {
       "item": "minecraft:redstone"
     }
   },
   "result": {
-    "item": "elt:symbol",
+    "item": "eltcore:symbol2",
     "count": 1
   }
 }

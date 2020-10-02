@@ -23,9 +23,12 @@ import com.google.common.collect.Maps;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
+import net.devtech.arrp.json.tags.JTag;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.world.GeneratorType;
+import net.minecraft.tag.ItemTags;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.biome.BiomeKeys;
@@ -34,15 +37,16 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.moeg.eltcore.code.ArrayListNoNulls;
 import net.moeg.eltcore.handlers.*;
 import net.moeg.eltcore.mixin.GeneratorTypeAccessor;
+import net.moeg.eltcore.util.TM;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Optional;
 
 import static net.moeg.eltcore.data.CS.F;
+import static net.moeg.eltcore.handlers.Handler_Items.ELT_SYMBOL;
 
 public class ELTCORE_Main implements ModInitializer {
 
@@ -51,7 +55,7 @@ public class ELTCORE_Main implements ModInitializer {
     public static final Logger LOGGER = LogManager.getFormatterLogger(MOD_NAME);
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();
-    public static final RuntimeResourcePack RESOURCE_PACK = RuntimeResourcePack.create(MOD_ID + ":main");
+    public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
     public static final Handler_ItemGroups ITEM_GROUPS_ELT = new Handler_ItemGroups();
 
     public static FlatChunkGeneratorConfig getDefaultConfig(Registry<Biome> biomeRegistry) {
@@ -85,15 +89,16 @@ public class ELTCORE_Main implements ModInitializer {
         for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
 
         GeneratorTypeAccessor.getValues().add(ELTREALISTIC);
-
         Handler_Worldgen Handler_WORLDGEN = new Handler_Worldgen();
-        Handler_Items Handler_ITEMS = new Handler_Items();
-        Handler_Blocks Handler_BLOCKS = new Handler_Blocks();
         Handler_Components Handler_COMPONENTS = new Handler_Components();
-
         Handler_WORLDGEN.setBiomesRidge(new ArrayList<Biome>());
         Handler_COMPONENTS.registerComponents();
-        RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK));
+        new Handler_Items();
+        new Handler_Blocks();
+
+        ELTRESOURCE.addTag(new Identifier("eltcore", "branch"), JTag.tag().add(new Identifier("minecraft:grass_block")));
+        ELTRESOURCE.addTag(new Identifier("eltcore", "branch"), JTag.tag().add(new Identifier("minecraft:stone")));
+        RRPCallback.EVENT.register(a -> a.add(ELTRESOURCE));
 
         LOGGER.info("---Energy Level Transition Initialized!---");
     }

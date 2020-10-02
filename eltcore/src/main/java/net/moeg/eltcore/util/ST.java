@@ -1,22 +1,22 @@
 /*
- *  Copyright (c) 2020. TeamMoeg
+ * Copyright (c) 2020. TeamMoeg
  *
- *  This file is part of Energy Level Transition.
+ * This file is part of Energy Level Transition.
  *
- *  Energy Level Transition is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, version 3.
+ * Energy Level Transition is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, version 3.
  *
- *   Energy Level Transition is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
+ * Energy Level Transition is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *  You should have received a copy of the GNU General Public License
- *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
+ * You should have received a copy of the GNU General Public License
+ * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package net.moeg.eltcore.handlers;
+package net.moeg.eltcore.util;
 
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
@@ -26,48 +26,21 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import net.moeg.eltcore.items.ItemTooltip;
 
 import static net.moeg.eltcore.ELTCORE_Main.*;
+import static net.moeg.eltcore.ELTCORE_Main.ELTRESOURCE;
 
 /**
- * 这是一个用来注册物品和方块的物品形态的类
- * 先定义一个物品的静态字段
- * 然后在静态域注册
- * <p>
- * 例子
- * public static final Item ELT_SYMBOL;
- * <p>
- * static {
- * <p>
- * ELT_SYMBOL = register("symbol", new ItemTooltip((new Item.Settings()).group(ItemGroups_ELTCore.ELT_MISC)));
- * }
- * <p>
- * 如果要注册方块的物品形态
- * static {
- * <p>
- * EXAMPLE_BLOCK = register(Handler_Blocks.EXAMPLE_BLOCK, ItemGroups_ELTCore.ELT_MACHINE);
- * <p>
- * }
+ * @author YueSha (GitHub @yuesha-yc)
  */
-public class Handler_Items {
+public class ST {
 
-    public static final Item
-            ELT_SYMBOL, ELT_SYMBOL2,
-            OAK_BRANCH, BRICH_BRANCH;
 
-    static {
-        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
-        ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
 
-        OAK_BRANCH = register("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        BRICH_BRANCH = register("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-    }
 
     /**
      * Methods with Block Item.
      */
-
     private static Item register(Block block, ItemGroup group) {
         return register(new BlockItem(block, (new Item.Settings()).group(group)));
     }
@@ -206,5 +179,4 @@ public class Handler_Items {
         Identifier aniID = new Identifier("eltcore", "item/" + path);
         ELTRESOURCE.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
     }
-
 }
