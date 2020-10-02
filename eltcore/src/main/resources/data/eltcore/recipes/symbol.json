@@ -3,14 +3,17 @@
   "pattern": [
     "WWW",
     "W W",
-    "WWW"
+    "WDW"
   ],
   "key": {
     "W": {
       "tag": "minecraft:rails"
+    },
+    "D": {
+      "tag": "c:block_branch"
     }
   },
   "result": {
-    "item": "eltcore:symbol2"
+    "item": "eltcore:symbol"
   }
 }

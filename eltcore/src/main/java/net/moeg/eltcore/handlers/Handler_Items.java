@@ -27,6 +27,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.moeg.eltcore.items.ItemTooltip;
+import net.moeg.eltcore.util.TM;
 
 import static net.moeg.eltcore.ELTCORE_Main.*;
 

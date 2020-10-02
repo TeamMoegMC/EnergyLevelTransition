@@ -95,9 +95,8 @@ public class ELTCORE_Main implements ModInitializer {
         Handler_COMPONENTS.registerComponents();
         new Handler_Items();
         new Handler_Blocks();
+        TM.addTags();
 
-        ELTRESOURCE.addTag(new Identifier("eltcore", "branch"), JTag.tag().add(new Identifier("minecraft:grass_block")));
-        ELTRESOURCE.addTag(new Identifier("eltcore", "branch"), JTag.tag().add(new Identifier("minecraft:stone")));
         RRPCallback.EVENT.register(a -> a.add(ELTRESOURCE));
 
         LOGGER.info("---Energy Level Transition Initialized!---");
