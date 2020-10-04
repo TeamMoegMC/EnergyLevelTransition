@@ -26,8 +26,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
+import net.moeg.eltcore.ELTCORE_Main;
+import net.moeg.eltcore.items.ItemBase;
 import net.moeg.eltcore.items.ItemTooltip;
-import net.moeg.eltcore.util.TM;
+import net.moeg.eltcore.tag.ELTTag;
+
+import java.util.List;
+import java.util.ListIterator;
 
 import static net.moeg.eltcore.ELTCORE_Main.*;
 
@@ -53,7 +58,7 @@ import static net.moeg.eltcore.ELTCORE_Main.*;
  */
 public class Handler_Items {
 
-    public static final Item
+    public static final ItemBase
             ELT_SYMBOL, ELT_SYMBOL2,
             OAK_BRANCH, BRICH_BRANCH;
 
@@ -61,8 +66,20 @@ public class Handler_Items {
         ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
         ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
 
-        OAK_BRANCH = register("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        BRICH_BRANCH = register("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
+        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)), PROTON);
+        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)), PROTON);
+    }
+
+    /** Oredict */
+    private static ItemBase create(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item, ELTTag... aTags) {
+        ItemBase rItem = register(path, enName, cnName, enTooltip, cnTooltip, item);
+        if (aTags.length > 0) {
+            for (ELTTag tTag : aTags) {
+                tTag.mTag.values.remove("minecraft:air");
+                tTag.mTag.add(Registry.ITEM.getId(rItem));
+            }
+        }
+        return rItem;
     }
 
     /**
@@ -96,7 +113,6 @@ public class Handler_Items {
         if (item instanceof BlockItem) {
             ((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
         }
-
         return Registry.register(Registry.ITEM, id, item);
     }
 
@@ -127,13 +143,13 @@ public class Handler_Items {
     }
 
     // No animation is registered
-    private static Item register(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item) {
+    private static ItemBase register(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item) {
 
         Identifier itemId = new Identifier("eltcore", path);
         registerModel(path);
         registerLang(path, "en_us", enName, enTooltip);
         registerLang(path, "zh_cn", cnName, cnTooltip);
-        return register(itemId, item);
+        return (ItemBase)register(itemId, item);
     }
 
     private static Item register(String path, String enName, String cnName, Item item) {

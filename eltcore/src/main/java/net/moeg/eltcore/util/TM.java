@@ -35,10 +35,11 @@ public class TM {
 
     public static void addTags() {
         // testing
-        ELTRESOURCE.addTag(new Identifier("c", "items/branch"), JTag.tag().add(new Identifier("eltcore:oak_branch")));
-        ELTRESOURCE.addTag(new Identifier("c", "items/long_branch"), JTag.tag().add(new Identifier("eltcore:birch_branch")));
-        ELTRESOURCE.addTag(new Identifier("minecraft", "items/rails"), JTag.tag().add(new Identifier("minecraft:dirt")));
-        ELTRESOURCE.addTag(new Identifier("c", "items/block_branch"), JTag.tag().add(new Identifier("minecraft:stone")));
+//        ELTRESOURCE.addTag(new Identifier("c", "items/branch"), JTag.tag().add(new Identifier("eltcore:oak_branch")));
+//        ELTRESOURCE.addTag(new Identifier("c", "items/long_branch"), JTag.tag().add(new Identifier("eltcore:birch_branch")));
+//        ELTRESOURCE.addTag(new Identifier("minecraft", "items/rails"), JTag.tag().add(new Identifier("minecraft:dirt")));
+//        ELTRESOURCE.addTag(new Identifier("c", "items/block_branch"), JTag.tag().add(new Identifier("minecraft:stone")));
+
     }
 
     @ApiStatus.Experimental
@@ -50,6 +51,18 @@ public class TM {
             jTag.add(Registry.ITEM.getId(tItem));
         }
         ELTRESOURCE.addTag(new Identifier("c", "items/" + aTagName), jTag);
-        ELTRESOURCE.addTag(new Identifier("c", "blocks/" + aTagName), jTag);
+        ELTRESOURCE.addTag(new Identifier("c", "blocks/" + aTagName), jTagBlocks);
+    }
+
+    @ApiStatus.Experimental
+    public static void appendTag(String aTagName, Item... aItems) {
+        JTag jTag = new JTag();
+        JTag jTagBlocks = new JTag();
+        for (Item tItem : aItems) {
+            if (tItem instanceof BlockItem) jTagBlocks.add(Registry.ITEM.getId(tItem));
+            jTag.add(Registry.ITEM.getId(tItem));
+        }
+        ELTRESOURCE.addTag(new Identifier("c", "items/" + aTagName), jTag);
+        ELTRESOURCE.addTag(new Identifier("c", "blocks/" + aTagName), jTagBlocks);
     }
 }

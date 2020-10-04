@@ -50,29 +50,31 @@ public class ComponentPlayerEgestion implements IComponentPlayerEgestion {
 
     @Override
     public void update(PlayerEntity playerEntity) {
-        if (doEgest(playerEntity)) {
-            this.egestionLevel = Math.min(this.egestionLevel + 0.004F, 20.0F);
-        }
-        if (this.egestionLevel > 19.0F) {
-            ++this.noEgestionTimer;
-            if (this.noEgestionTimer >= 200) {
-                this.noEgestionTimer = 0.0F;
-                playerEntity.applyStatusEffect(new StatusEffectInstance(NAUSEA, 100));
-                playerEntity.applyStatusEffect(new StatusEffectInstance(SLOWNESS, 150));
+        if (!playerEntity.isCreative()) {
+            if (doEgest(playerEntity)) {
+                this.egestionLevel = Math.min(this.egestionLevel + 0.004F, 20.0F);
             }
-        }
-        if (playerEntity.isSneaking() && this.egestionLevel > 10.0F) {
-            this.noEgestionTimer = 0.0F;
-            this.egestionLevel -= 0.1F;
-            if (this.egestionLevel > 15.0F) {
-                this.afterEgestionTimer++;
-                if (this.afterEgestionTimer > 150.0F) {
-                    this.afterEgestionTimer = 0.0F;
-                    playerEntity.applyStatusEffect(new StatusEffectInstance(SPEED, 100));
+            if (this.egestionLevel > 19.0F) {
+                ++this.noEgestionTimer;
+                if (this.noEgestionTimer >= 200) {
+                    this.noEgestionTimer = 0.0F;
+                    playerEntity.applyStatusEffect(new StatusEffectInstance(NAUSEA, 100));
+                    playerEntity.applyStatusEffect(new StatusEffectInstance(SLOWNESS, 150));
                 }
             }
+            if (playerEntity.isSneaking() && this.egestionLevel > 10.0F) {
+                this.noEgestionTimer = 0.0F;
+                this.egestionLevel -= 0.1F;
+                if (this.egestionLevel > 15.0F) {
+                    this.afterEgestionTimer++;
+                    if (this.afterEgestionTimer > 150.0F) {
+                        this.afterEgestionTimer = 0.0F;
+                        playerEntity.applyStatusEffect(new StatusEffectInstance(SPEED, 100));
+                    }
+                }
+            }
+            this.sync();
         }
-        this.sync();
     }
 
     @Override

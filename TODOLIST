@@ -1,0 +1,5 @@
+在一个类里注册若干个JTag本身 - tagmanager#createtag
+
+能够在注册物品/方块时 在若干个JTag实例里加入这个物品/方块 在每个jtag里加物品
+
+在ARRP加载Jtag - tagmanager#TAG_MAP 一个一个分别注册

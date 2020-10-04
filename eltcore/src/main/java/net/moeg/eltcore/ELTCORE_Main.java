@@ -23,11 +23,9 @@ import com.google.common.collect.Maps;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
-import net.devtech.arrp.json.tags.JTag;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.world.GeneratorType;
-import net.minecraft.tag.ItemTags;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
@@ -37,16 +35,17 @@ import net.minecraft.world.gen.feature.StructureFeature;
 import net.moeg.eltcore.code.ArrayListNoNulls;
 import net.moeg.eltcore.handlers.*;
 import net.moeg.eltcore.mixin.GeneratorTypeAccessor;
-import net.moeg.eltcore.util.TM;
+import net.moeg.eltcore.tag.ELTTag;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Optional;
 
 import static net.moeg.eltcore.data.CS.F;
-import static net.moeg.eltcore.handlers.Handler_Items.ELT_SYMBOL;
+import static net.moeg.eltcore.tag.ELTTag.createTag;
 
 public class ELTCORE_Main implements ModInitializer {
 
@@ -77,6 +76,8 @@ public class ELTCORE_Main implements ModInitializer {
         }
     };
 
+    public static ELTTag PROTON = createTag(1, "protest", "Proton");
+
     @Override
     public void onInitialize() {
 
@@ -93,10 +94,24 @@ public class ELTCORE_Main implements ModInitializer {
         Handler_Components Handler_COMPONENTS = new Handler_Components();
         Handler_WORLDGEN.setBiomesRidge(new ArrayList<Biome>());
         Handler_COMPONENTS.registerComponents();
+
+        // Register all item and blocks
         new Handler_Items();
         new Handler_Blocks();
-        TM.addTags();
 
+//        ELTCORE_Main.PROTON.getTag().values.clear();
+//
+//        ELTCORE_Main.PROTON.getTag().add(new Identifier("eltcore:oak_branch"));
+
+//        ELTRESOURCE.addTag(new Identifier("c", "items/" + ELTCORE_Main.PROTON.mNameInternal), ELTCORE_Main.PROTON.getTag());
+
+
+        // Register all the tags to RRP
+        for (Map.Entry<String, ELTTag> entry : ELTTag.TAG_MAP.entrySet()) {
+            ELTRESOURCE.addTag(new Identifier("c", "items/" + entry.getKey()), entry.getValue().getTag());
+        }
+
+        // Init RRP
         RRPCallback.EVENT.register(a -> a.add(ELTRESOURCE));
 
         LOGGER.info("---Energy Level Transition Initialized!---");

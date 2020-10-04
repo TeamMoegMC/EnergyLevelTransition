@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 public class JTag {
 	private Boolean replace;
-	private List<String> values = new ArrayList<>();
+	public List<String> values = new ArrayList<>();
 
 	/**
 	 * @see #tag()
