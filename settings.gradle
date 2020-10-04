@@ -12,3 +12,4 @@ rootProject.name = 'Energy-Level-Transition'
 
 include 'eltcore'
 include 'elt'
+include 'arrp'

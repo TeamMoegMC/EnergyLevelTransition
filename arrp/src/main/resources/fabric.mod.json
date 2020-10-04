@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "advanced_runtime_resource_pack",
+  "version": "${version}",
+  "name": "Runtime Resource Pack",
+  "description": "a mod that allows mods to generate assets/data on the fly",
+  "authors": [
+    "HalfOf2"
+  ],
+  "contact": {
+    "sources": "https://github.com/Devan-Kerman/RRP"
+  },
+  "license": "MPLv2",
+  "icon": "assets/stated/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "preLaunch": [
+      "net.devtech.arrp.ARRP"
+    ]
+  },
+  "mixins": [
+    "arrp.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.8.8+build.202",
+    "minecraft": ">=1.16.1"
+  }
+}
