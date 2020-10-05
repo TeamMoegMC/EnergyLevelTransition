@@ -1,12 +1,15 @@
 [English](README.md)  [简体中文](README.CN.md)
 
-# Energy Level Transition ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
+# Energy Level Transition 
+![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
 
 This is the official repository of the Minecraft Mod - Energy Level Transition on Minecraft 1.16 and beyond
 
+[LOGO](src/main/resources/logos/ELT-logo-600.800.png)
+
 Requires: [Fabric API](https://github.com/FabricMC/fabric)
 
-- [Energy Level Transition 1.16](#energy-level-transition-116)
+- [Energy Level Transition](#energy-level-transition)
 - [License](#license)
 - [Introduction](#introduction)
 - [Acknowledgement](#acknowledgement)
