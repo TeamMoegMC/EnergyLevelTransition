@@ -5,7 +5,7 @@
 
 This is the official repository of the Minecraft Mod - Energy Level Transition on Minecraft 1.16 and beyond
 
-![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/ELT-logo-600.800.png)
+![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/ELT-logo-300.400.png)
 
 Requires: [Fabric API](https://github.com/FabricMC/fabric)
 
