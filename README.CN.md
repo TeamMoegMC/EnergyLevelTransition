@@ -5,6 +5,8 @@
 
 这是 Minecraft 模组 - 能级跃迁(Energy Level Transition)的官方仓库，使用于Minecraft 1.16+
 
+[LOGO](src/main/resources/logos/ELT-logo-600.800.png)
+
 - [能级跃迁](#能级跃迁)
 - [协议](#协议)
 - [导言](#导言)
