@@ -1,7 +1,6 @@
 [English](README.md)  [简体中文](README.CN.md)
 
-# Energy Level Transition 
-![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
+# Energy Level Transition ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
 This is the official repository of the Minecraft Mod - Energy Level Transition on Minecraft 1.16 and beyond
 
 ![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/ELT-logo-300.400.png)
