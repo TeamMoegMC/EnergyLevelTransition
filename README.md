@@ -1,4 +1,4 @@
-[English](README.md)  [简体中文](README-zh_cn.md)
+[English](README.md)  [简体中文](README.CN.md)
 
 # Energy Level Transition ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
 
@@ -15,8 +15,13 @@ Requires: [Fabric API](https://github.com/FabricMC/fabric)
 
 ## License
 
-This is an open source mod licensed under [GNU General Public License Version 3](https://www.gnu.org/licenses/). 
-  
+This is a Mod licensed under [GNU General Public License Version 3](LICENSE). 
+All assets, unless otherwise stated, are dedicated to the public domain
+according to the [ELT Assets License](src/main/resources/LICENSE.assets).
+Any assets containing the [ELT logo](src/main/resources/assets.energyleveltransition/icon.png) or any
+derivative of it are licensed under the
+[Creative Commons Attribution-NonCommercial 4.0 International Public License](src/main/resources/LICENSE.logos).
+
 ## Introduction
 
 A Tech Mod that brings in Science, Etherology, and Magic!

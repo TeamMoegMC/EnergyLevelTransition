@@ -1,4 +1,4 @@
-[English](README.md)  [简体中文](README-zh_cn.md)
+[English](README.md)  [简体中文](README.CN.md)
 
 # 能级跃迁 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/ELT%20Snapshot%20Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
 
@@ -13,7 +13,12 @@
 
 ## 协议
 
-这是一个以 [GNU通用公共许可证第3版](https://www.gnu.org/licenses/) 授权的开源mod。
+这是一个以 [GNU General Public License Version 3](LICENSE) 授权的Mod。
+除非另有说明，所有的资产都专用于公共领域。
+根据 [ELT 资产许可证](src/main/resources/LICENSE.assets)。
+任何包含 [ELT 徽标](src/main/resources/assets.energyleveltransition/icon.png)的资产或任何一个
+的衍生品按照
+[知识共享署名-非商业4.0国际公共许可证](src/main/resources/LICENSE.logos)进行许可。
   
 ## 导言
 
