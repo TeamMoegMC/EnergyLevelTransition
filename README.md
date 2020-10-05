@@ -15,20 +15,27 @@ Requires: [Fabric API](https://github.com/FabricMC/fabric)
 
 ## License
 
-This is a Mod licensed under [GNU General Public License Version 3](LICENSE). 
+All modules of this Mod starting with "elt" are licensed under [GNU General Public License Version 3](LICENSE). 
+
 All assets, unless otherwise stated, are dedicated to the public domain
 according to the [ELT Assets License](src/main/resources/LICENSE.assets).
-Any assets containing the [ELT logo](src/main/resources/assets.energyleveltransition/icon.png) or any
-derivative of it are licensed under the
-[Creative Commons Attribution-NonCommercial 4.0 International Public License](src/main/resources/LICENSE.logos).
+
+Any assets containing the [ELT logos](src/main/resources/assets.energyleveltransition/icon.png) or any
+derivative of it are licensed under the [Creative Commons Attribution-NonCommercial 4.0 International Public License](src/main/resources/LICENSE.logos).
+
+We maintain a fork of [Advanced Runtime Resource Pack](https://github.com/Devan-Kerman/ARRP) 
+under [Mozilla Public License Version 2.0](arrp/LICENSE)
 
 ## Introduction
 
 A Tech Mod that brings in Science, Etherology, and Magic!
 
+## Acknowledgement
+
+[Lyuuke](https://github.com/Lyuuke) for creating some Assets and Ideas for this Mod. 
+
 ## Dependencies
 
-- Advanced Runtime Resource Pack
 - Cardinal Components API
 - Lib GUI
 - Lib Block Attributes

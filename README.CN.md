@@ -13,20 +13,27 @@
 
 ## 协议
 
-这是一个以 [GNU General Public License Version 3](LICENSE) 授权的Mod。
-除非另有说明，所有的资产都专用于公共领域。
-根据 [ELT 资产许可证](src/main/resources/LICENSE.assets)。
-任何包含 [ELT 徽标](src/main/resources/assets.energyleveltransition/icon.png)的资产或任何一个
-的衍生品按照
-[知识共享署名-非商业4.0国际公共许可证](src/main/resources/LICENSE.logos)进行许可。
+本Mod的所有以 "elt" 开头的模块均采用 [GNU General Public License Version 3](LICENSE) 授权。
+
+除非另有说明，所有的资产
+均根据 [ELT 资产许可证](src/main/resources/LICENSE.assets) 进行许可。
+
+任何包含 [ELT 徽标](src/main/resources/assets.energyleveltransition/icon.png) 的资产或任何衍生品
+均根据 [知识共享署名-非商业4.0国际公共许可证](src/main/resources/LICENSE.logos) 进行许可。
+
+我们维护了一个[Advanced Runtime Resource Pack](https://github.com/Devan-Kerman/ARRP)的分叉，
+采用 [Mozilla Public License Version 2.0](arrp/LICENSE) 授权。
   
 ## 导言
 
 带来科学、以太学和魔法的科技Mod!
 
+## 致谢
+
+[Lyuuke](https://github.com/Lyuuke)，为这个Mod创造部分资产和创意。
+
 ## 依赖
 
-- Advanced Runtime Resource Pack
 - Cardinal Components API
 - Lib GUI
 - Lib Block Attributes
