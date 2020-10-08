@@ -5,7 +5,7 @@
 [![Discord - https://discord.gg/BWn6E94](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
 [![QQ群 - 940209097](https://img.shields.io/badge/QQ%E7%BE%A4-940209097-blue)](https://jq.qq.com/?_wv=1027&k=keVW7jBX)
 
-![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/ELT-logo-300.300.png)
+![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/logo-300-300.png)
 
 这是 Minecraft 模组 - 能级跃迁(Energy Level Transition)的官方仓库，使用于Minecraft 1.16+
 
