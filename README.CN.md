@@ -72,7 +72,7 @@
 
 对于更多的设置说明或遇到的问题，请检查[fabric设置教程](https://fabricmc.net/wiki/tutorial:setup)，涉及到你正在使用的IDE。
 
-##更新Minecraft
+## 更新Minecraft
 
 有时，MC的版本在`gradle.properties`中会发生变化。
 
