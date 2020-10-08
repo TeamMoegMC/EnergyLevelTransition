@@ -1,13 +1,15 @@
 [English](README.md)  [简体中文](README.CN.md)
 
-# 能级跃迁 
-![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/ELT%20Snapshot%20Build/badge.svg) [![Join our Discord!](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
+# 能 级 跃 迁
+![构建状态](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
+[![Discord - https://discord.gg/BWn6E94](https://img.shields.io/badge/Discord-Join%20Us-blue)](https://discord.gg/BWn6E94)
+[![QQ群 - 940209097](https://img.shields.io/badge/QQ%E7%BE%A4-940209097-blue)](https://jq.qq.com/?_wv=1027&k=keVW7jBX)
 
 这是 Minecraft 模组 - 能级跃迁(Energy Level Transition)的官方仓库，使用于Minecraft 1.16+
 
-[LOGO](src/main/resources/logos/ELT-logo-600.800.png)
+![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/ELT-logo-600.800.png)
 
-- [能级跃迁](#能级跃迁)
+- [能级跃迁](#能-级-跃-迁)
 - [协议](#协议)
 - [导言](#导言)
 - [致谢](#致谢)
