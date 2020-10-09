@@ -65,7 +65,7 @@ public class Handler_Items {
         BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)), ELTCORE_Main.PROTON);
     }
 
-    /** Oredict */
+    /** Register with Tag */
     private static ItemBase create(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item, ELTTag... aTags) {
         ItemBase rItem = register(path, enName, cnName, enTooltip, cnTooltip, item);
         if (aTags.length > 0) {

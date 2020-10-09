@@ -28,12 +28,12 @@ public class MT {
 
     public static final HashSetNoNulls<TagMaterial> ALL_MATERIALS_REGISTERED_HERE = new HashSetNoNulls<>();
 
-    protected static TagMaterial create (int aID, String aNameTag) {
-        TagMaterial rMaterial = TagMaterial.createMaterial(aID, aNameTag, aNameTag);
+    protected static TagMaterial create (String aNameTag) {
+        TagMaterial rMaterial = TagMaterial.createMaterial(aNameTag, aNameTag);
         ALL_MATERIALS_REGISTERED_HERE.add(rMaterial);
         return rMaterial;
     }
 
-    public static final TagMaterial HYDROGEN = create(100, "Hydrogen");
+    public static final TagMaterial HYDROGEN = create("Hydrogen");
 
 }

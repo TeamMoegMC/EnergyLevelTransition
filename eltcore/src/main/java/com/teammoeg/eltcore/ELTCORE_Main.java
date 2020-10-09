@@ -18,22 +18,15 @@
 
 package com.teammoeg.eltcore;
 
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.Maps;
 import com.teammoeg.eltcore.handlers.*;
+import com.teammoeg.eltcore.world.biome.ELTBiome;
+import com.teammoeg.eltcore.world.type.ELTGeneratorType;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.block.Blocks;
-import net.minecraft.client.world.GeneratorType;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.BiomeKeys;
-import net.minecraft.world.gen.chunk.*;
-import net.minecraft.world.gen.feature.StructureFeature;
-import com.teammoeg.eltcore.code.ArrayListNoNulls;
 import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
 import com.teammoeg.eltcore.tag.ELTTag;
 import org.apache.logging.log4j.Level;
@@ -42,9 +35,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.Optional;
 
-import static com.teammoeg.eltcore.data.CS.F;
 import static com.teammoeg.eltcore.tag.ELTTag.createTag;
 
 public class ELTCORE_Main implements ModInitializer {
@@ -57,25 +48,6 @@ public class ELTCORE_Main implements ModInitializer {
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
     public static final Handler_ItemGroups ITEM_GROUPS_ELT = new Handler_ItemGroups();
 
-    public static FlatChunkGeneratorConfig getDefaultConfig(Registry<Biome> biomeRegistry) {
-        StructuresConfig structuresConfig = new StructuresConfig(Optional.of(StructuresConfig.DEFAULT_STRONGHOLD), Maps.newHashMap(ImmutableMap.of(StructureFeature.VILLAGE, StructuresConfig.DEFAULT_STRUCTURES.get(StructureFeature.VILLAGE))));
-        FlatChunkGeneratorConfig flatChunkGeneratorConfig = new FlatChunkGeneratorConfig(structuresConfig, biomeRegistry);
-        flatChunkGeneratorConfig.biome = () -> {
-            return (Biome)biomeRegistry.getOrThrow(BiomeKeys.PLAINS);
-        };
-        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(1, Blocks.BEDROCK));
-        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(2, Blocks.DIRT));
-        flatChunkGeneratorConfig.getLayers().add(new FlatChunkGeneratorLayer(1, Blocks.BONE_BLOCK));
-        flatChunkGeneratorConfig.updateLayerBlocks();
-        return flatChunkGeneratorConfig;
-    }
-
-    private static final GeneratorType ELTREALISTIC = new GeneratorType("elt_realistic") {
-        protected ChunkGenerator getChunkGenerator(Registry<Biome> biomeRegistry, Registry<ChunkGeneratorSettings> chunkGeneratorSettingsRegistry, long seed) {
-            return new FlatChunkGenerator(ELTCORE_Main.getDefaultConfig(biomeRegistry));
-        }
-    };
-
     public static ELTTag PROTON = createTag(1, "protest", "Proton");
 
     @Override
@@ -84,27 +56,20 @@ public class ELTCORE_Main implements ModInitializer {
         LOGGER.info("~~~~~~~~~~~~~ ELT Core Created by TeamMoeg ~~~~~~~~~~~~");
         LOGGER.info("~~~~~~~~~ https://github.com/MoegTech/ELTCore ~~~~~~~~~");
 
-        ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
-                new Handler_WorldTypes()
-        );
-        for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
+//        ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
+//                new Object()
+//        );
+//        for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
 
-        GeneratorTypeAccessor.getValues().add(ELTREALISTIC);
-        Handler_Worldgen Handler_WORLDGEN = new Handler_Worldgen();
+        GeneratorTypeAccessor.getValues().add(ELTGeneratorType.ELT_NORMAL);
+        ELTBiome ELTBiome = new ELTBiome();
         Handler_Components Handler_COMPONENTS = new Handler_Components();
-        Handler_WORLDGEN.setBiomesRidge(new ArrayList<Biome>());
+        ELTBiome.setBiomesRidge(new ArrayList<Biome>());
         Handler_COMPONENTS.registerComponents();
 
         // Register all item and blocks
         new Handler_Items();
         new Handler_Blocks();
-
-//        ELTCORE_Main.PROTON.getTag().values.clear();
-//
-//        ELTCORE_Main.PROTON.getTag().add(new Identifier("eltcore:oak_branch"));
-
-//        ELTRESOURCE.addTag(new Identifier("c", "items/" + ELTCORE_Main.PROTON.mNameInternal), ELTCORE_Main.PROTON.getTag());
-
 
         // Register all the tags to RRP
         for (Map.Entry<String, ELTTag> entry : ELTTag.TAG_MAP.entrySet()) {
@@ -116,6 +81,12 @@ public class ELTCORE_Main implements ModInitializer {
 
         LOGGER.info("---Energy Level Transition Initialized!---");
     }
+
+    public void onModPreinit() {}
+
+    public void aModInit() {}
+
+    public void onModPostinit() {}
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);

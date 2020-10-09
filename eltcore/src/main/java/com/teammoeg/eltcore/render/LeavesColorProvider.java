@@ -28,7 +28,7 @@ import net.minecraft.world.BlockRenderView;
 
 import javax.annotation.Nullable;
 
-import static com.teammoeg.eltcore.data.CS.WHITE;
+import static com.teammoeg.eltcore.data.CS.*;
 
 @Environment(EnvType.CLIENT)
 public class LeavesColorProvider implements BlockColorProvider {
@@ -38,7 +38,7 @@ public class LeavesColorProvider implements BlockColorProvider {
     @Override
     public int getColor(BlockState state, @Nullable BlockRenderView world, @Nullable BlockPos pos, int tintIndex) {
 
-        int color = WHITE;
+        int color = RED;
         int biomecolor;
 
         if (world != null) {

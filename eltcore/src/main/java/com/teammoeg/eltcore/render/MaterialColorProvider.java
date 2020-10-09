@@ -16,15 +16,25 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.world.type;
+package com.teammoeg.eltcore.render;
 
-import net.minecraft.client.world.GeneratorType;
+import net.minecraft.client.color.item.ItemColorProvider;
+import net.minecraft.client.color.world.BiomeColors;
+import net.minecraft.item.ItemStack;
+
+import static com.teammoeg.eltcore.data.CS.*;
 
 /**
- * @author: Linguardium
+ * @author YueSha (GitHub @yuesha-yc)
  */
-public abstract class CustomGeneratorType extends GeneratorType {
-    public CustomGeneratorType(String translationKey) {
-        super(translationKey);
+public class MaterialColorProvider implements ItemColorProvider {
+
+    public static final MaterialColorProvider INSTANCE = new MaterialColorProvider();
+
+    @Override
+    public int getColor(ItemStack stack, int tintIndex) {
+        int color;
+        return 0;
     }
+
 }

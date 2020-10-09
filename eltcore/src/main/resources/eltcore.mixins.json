@@ -4,7 +4,6 @@
   "package": "com.teammoeg.eltcore.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-    "MixinGeneratorOptions",
     "MixinIngredient",
     "MixinPlayerEntity",
     "GeneratorTypeAccessor"

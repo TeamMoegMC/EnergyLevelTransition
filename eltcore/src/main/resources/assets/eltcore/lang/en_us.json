@@ -2,5 +2,5 @@
   "itemGroup.eltcore.material": "ELT: Materials",
   "itemGroup.eltcore.fluid": "ELT: Fluids",
   "itemGroup.eltcore.block": "ELT: Blocks",
-  "generator.elt_realistic": "ELT Realistic"
+  "generator.elt_normal": "ELT: Normal"
 }

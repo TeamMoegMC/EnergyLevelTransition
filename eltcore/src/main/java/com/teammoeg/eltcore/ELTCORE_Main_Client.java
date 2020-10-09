@@ -29,7 +29,6 @@ public class ELTCORE_Main_Client implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-//        WorldTypeRegistry.registerWorldType("eltcore.realistic.type", GeneratorTypeELT::new);
         HudRenderCallback.EVENT.register(hud_eltCore::render);
     }
 }

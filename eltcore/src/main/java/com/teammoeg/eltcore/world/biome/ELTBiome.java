@@ -16,13 +16,13 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.handlers;
+package com.teammoeg.eltcore.world.biome;
 
 import net.minecraft.world.biome.Biome;
 
 import java.util.ArrayList;
 
-public class Handler_Worldgen {
+public class ELTBiome {
 
 //    private static final Feature<DefaultFeatureConfig> RIDGE = Registry.register(
 //            Registry.FEATURE,

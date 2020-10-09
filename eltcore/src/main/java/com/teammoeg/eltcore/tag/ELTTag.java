@@ -31,8 +31,6 @@ import java.util.Map;
 public class ELTTag {
     public static final Map<String, ELTTag> TAG_MAP = new HashMap<>();
 
-
-
     public static ELTTag createTag(int aID, String aNameTag, String aLocalName) {
         ELTTag rMaterial1 = TAG_MAP.get(aNameTag);
         ELTTag rMaterial2 = new ELTTag((short)aID, aNameTag, aLocalName);
@@ -54,9 +52,6 @@ public class ELTTag {
     /** The Colors of this Material in its 4 different states. Any change to these 4 final Arrays will be reflected in the Color of the Material at that state. */
     public final short[] mRGBaSolid = new short[] {255,255,255,255}, mRGBaLiquid = new short[] {255,255,255,255}, mRGBaGas = new short[] {255,255,255,255}, mRGBaPlasma = new short[] {255,255,255,255};
     public final short[][] mRGBa = new short[][] {mRGBaSolid, mRGBaLiquid, mRGBaGas, mRGBaPlasma};
-    /** Do not modify these Colors for effects! They are supposed to be final! */
-    public final short[] fRGBaSolid = new short[] {255,255,255,255}, fRGBaLiquid = new short[] {255,255,255,255}, fRGBaGas = new short[] {255,255,255,255}, fRGBaPlasma = new short[] {255,255,255,255};
-    public final short[][] fRGBa = new short[][] {fRGBaSolid, fRGBaLiquid, fRGBaGas, fRGBaPlasma};
 
     private ELTTag(short aID, String aNameInternal, String aNameLocal) {
         mID = aID;
@@ -76,6 +71,14 @@ public class ELTTag {
     public byte mOreMultiplier = 1, mOreProcessingMultiplier = 1;
     /** The time 1 Unit of this Material takes to burn in a vanilla Furnace. */
     public long mFurnaceBurnTime = 0;
+
+    /** g/cm^3 of this Material at Room Temperature. 0 Means that it is not determined. */
+    public double mGramPerCubicCentimeter = 1.0;
+    /** The energetic boundaries of this Material, with somewhat reasonable Defaults for a Solid. Data in Kelvin. */
+    public long mMeltingPoint = 1000, mBoilingPoint = 3000, mPlasmaPoint = 10000;
+    /** The Atomic Values of one Molecule of this Naterial, Defaults to Technetium. If the Element is Antimatter, then mProtons means Antiprotons and mElectrons means Positrons */
+    public long mNeutrons = 55, mProtons = 43, mElectrons = 43, mMass = mNeutrons + mProtons;
+
     /** The Types Tools allowed, 0 = No Tools, 1 = Flint/Stone/Wood Tools, 2 = Early Tools, 3 = Advanced Tools */
     public byte mToolTypes = 0;
     /** The Quality of the Material as Tool Material (ranges from 0 to 15) */
@@ -85,13 +88,6 @@ public class ELTTag {
     /** The Speed of the Material as mining Material */
     public float mToolSpeed = 1.0F;
     public float mHeatDamage = 0.0F;
-    /** g/cm^3 of this Material at Room Temperature. 0 Means that it is not determined. */
-    public double mGramPerCubicCentimeter = 1.0;
-
-    /** The energetic boundaries of this Material, with somewhat reasonable Defaults for a Solid. Data in Kelvin. */
-    public long mMeltingPoint = 1000, mBoilingPoint = 3000, mPlasmaPoint = 10000;
-    /** The Atomic Values of one Molecule of this Naterial, Defaults to Technetium. If the Element is Antimatter, then mProtons means Antiprotons and mElectrons means Positrons */
-    public long mNeutrons = 55, mProtons = 43, mElectrons = 43, mMass = mNeutrons + mProtons;
 
 
 }
