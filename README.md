@@ -76,12 +76,23 @@ For more setup instructions or questions encountered please check the [fabric se
 
 ## Updating Minecraft
 
-Sometimes, MC version changes in `gradle.properties`. 
+When we update the environment for a newer MC version, we need to follow the steps below.
 
-Run `gradlew migrateMappings <version>` before building with the new version to get `remappedSrc` folder. Use the remapped source to replace the existing `src` folder. 
- 
-Run `gradlew --refresh-dependencies` to refresh dependencies if anything went wrong.
+Firstly, change the version variables in `gradle.properties`. For example:
 
-Run `gradlew cleanLoom` to clean Loom cache. 
+```
+# Fabric Properties: see updates here: https://modmuss50.me/fabric.html
+ minecraft_version=1.16.4
+ yarn_mappings=1.16.4+build.6
+ loader_version=0.10.6+build.214
+ fabric_version=0.25.1+build.416-1.16
+```
 
-Delete the `{%USER-HOME%}/.gradle/caches/fabric-loom` folder if the you really screwed up.
+Secondly, run `gradlew :elt:migrateMappings <yarn_mappings>` and `gradlew :eltcore:migrateMappings <yarn_mappings>` 
+You will get `remappedSrc` directory under `:elt` and `:eltcore`. Use the `remappedSrc/com` to replace the existing `src/main/java/com` directory in both `:elt` and `:eltcore`
+
+Thirdly, run `gradlew build` and `gradlew :elt:runClient` normally to see if it works well. 
+
+If you encounter problems, try
+Run `gradlew --refresh-dependencies` to refresh dependencies or
+run `gradlew cleanLoom` to clean Loom cache. Delete the `{%USER-HOME%}/.gradle/caches/fabric-loom` folder if the you really screwed up.

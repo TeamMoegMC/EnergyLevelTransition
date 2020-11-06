@@ -690,13 +690,13 @@ public class UT {
         public static byte getSideForPlayerPlacing(Entity aPlayer) {
             if (aPlayer.pitch >=  65) return SIDE_UP;
             if (aPlayer.pitch <= -65) return SIDE_DOWN;
-            return COMPASS_DIRECTIONS[UT.Code.roundDown(4*aPlayer.yaw/360+0.5)&3];
+            return COMPASS_DIRECTIONS[Code.roundDown(4*aPlayer.yaw/360+0.5)&3];
         }
 
         public static byte getSideForPlayerPlacing(Entity aPlayer, byte aDefaultFacing, boolean[] aAllowedFacings) {
             if (aPlayer.pitch >=  65 && aAllowedFacings[SIDE_UP]) return SIDE_UP;
             if (aPlayer.pitch <= -65 && aAllowedFacings[SIDE_DOWN]) return SIDE_DOWN;
-            byte rFacing = COMPASS_DIRECTIONS[UT.Code.roundDown(0.5+4*aPlayer.yaw/360)&3];
+            byte rFacing = COMPASS_DIRECTIONS[Code.roundDown(0.5+4*aPlayer.yaw/360)&3];
             if (aAllowedFacings[rFacing]) return rFacing;
             for (byte tSide : ALL_SIDES_VALID) if (aAllowedFacings[tSide]) return tSide;
             return aDefaultFacing;
@@ -705,7 +705,7 @@ public class UT {
         public static byte getOppositeSideForPlayerPlacing(Entity aPlayer, byte aDefaultFacing, boolean[] aAllowedFacings) {
             if (aPlayer.pitch >=  65 && aAllowedFacings[SIDE_DOWN]) return SIDE_DOWN;
             if (aPlayer.pitch <= -65 && aAllowedFacings[SIDE_UP]) return SIDE_UP;
-            byte rFacing = OPPOSITES[COMPASS_DIRECTIONS[UT.Code.roundDown(0.5+4*aPlayer.yaw/360)&3]];
+            byte rFacing = OPPOSITES[COMPASS_DIRECTIONS[Code.roundDown(0.5+4*aPlayer.yaw/360)&3]];
             if (aAllowedFacings[rFacing]) return rFacing;
             for (byte tSide : ALL_SIDES_VALID) if (aAllowedFacings[tSide]) return tSide;
             return aDefaultFacing;
