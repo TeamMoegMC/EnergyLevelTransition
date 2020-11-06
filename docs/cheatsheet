@@ -1,0 +1,2 @@
+dot -Tpng docs/elt.dot > docs/elt.png
+dot -Tsvg docs/elt.dot > docs/elt.svg
