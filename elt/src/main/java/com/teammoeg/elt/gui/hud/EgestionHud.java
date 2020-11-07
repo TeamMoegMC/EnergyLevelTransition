@@ -16,10 +16,10 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.gui;
+package com.teammoeg.elt.gui.hud;
 
-import com.teammoeg.eltcore.component.IComponentPlayerEgestion;
-import com.teammoeg.eltcore.handlers.Handler_Components;
+import com.teammoeg.elt.component.ComponentEgestion;
+import com.teammoeg.elt.component.ELTComponents;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -31,13 +31,13 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 
 @Environment(EnvType.CLIENT)
-public class HudEgestion extends DrawableHelper {
+public class EgestionHud extends DrawableHelper {
 
     private final MinecraftClient client;
     private int scaledWidth;
     private int scaledHeight;
 
-    public HudEgestion(MinecraftClient client) {
+    public EgestionHud(MinecraftClient client) {
         this.client = client;
     }
 
@@ -61,8 +61,8 @@ public class HudEgestion extends DrawableHelper {
             float general_max_health = (float) playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH);
             int p = MathHelper.ceil(playerEntity.getAbsorptionAmount());
             int q = MathHelper.ceil((general_max_health + (float) p) / 2.0F / 10.0F);
-            IComponentPlayerEgestion iComponentPlayerEgestion = Handler_Components.PLAYER_EGESTION_COMPONENT_TYPE.get(playerEntity);
-            int egestionLevel = (int) iComponentPlayerEgestion.getEgestionLevel();
+            ComponentEgestion componentEgestion = ELTComponents.EGESTION.get(playerEntity);
+            int egestionLevel = (int) componentEgestion.getEgestionLevel();
 
             int r = Math.max(10 - (q - 2), 3);
             int s = barHeight - (q - 1) * r - 10 - 10;

@@ -16,17 +16,19 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.component;
+package com.teammoeg.elt.component;
 
+import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
-import nerdhub.cardinal.components.api.util.sync.EntitySyncedComponent;
 import net.minecraft.entity.player.PlayerEntity;
 
-public interface IComponentPlayerEgestion extends EntitySyncedComponent, PlayerComponent {
+/**
+ * @author YueSha (GitHub @yuesha-yc)
+ */
+public interface ComponentEgestion extends PlayerComponent {
     float getEgestionLevel();
 
     boolean doEgest(PlayerEntity playerEntity);
 
     void update(PlayerEntity playerEntity);
-
 }

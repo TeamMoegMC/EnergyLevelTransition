@@ -56,16 +56,9 @@ public class ELTCORE_Main implements ModInitializer {
         LOGGER.info("~~~~~~~~~~~~~ ELT Core Created by TeamMoeg ~~~~~~~~~~~~");
         LOGGER.info("~~~~~~~~~ https://github.com/MoegTech/ELTCore ~~~~~~~~~");
 
-//        ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
-//                new Object()
-//        );
-//        for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
-
         GeneratorTypeAccessor.getValues().add(ELTGeneratorType.ELT_NORMAL);
         ELTBiome ELTBiome = new ELTBiome();
-        Handler_Components Handler_COMPONENTS = new Handler_Components();
         ELTBiome.setBiomesRidge(new ArrayList<Biome>());
-        Handler_COMPONENTS.registerComponents();
 
         // Register all item and blocks
         new Handler_Items();

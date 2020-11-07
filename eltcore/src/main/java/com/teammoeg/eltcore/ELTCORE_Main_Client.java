@@ -19,16 +19,11 @@
 package com.teammoeg.eltcore;
 
 import net.fabricmc.api.ClientModInitializer;
-import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
-import net.minecraft.client.MinecraftClient;
-import com.teammoeg.eltcore.gui.HudEltCore;
 
 public class ELTCORE_Main_Client implements ClientModInitializer {
 
-    public final HudEltCore hud_eltCore = new HudEltCore(MinecraftClient.getInstance());
-
     @Override
     public void onInitializeClient() {
-        HudRenderCallback.EVENT.register(hud_eltCore::render);
+
     }
 }

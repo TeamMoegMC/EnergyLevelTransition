@@ -16,7 +16,7 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.gui;
+package com.teammoeg.elt.gui.hud;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -24,19 +24,19 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
 
 @Environment(EnvType.CLIENT)
-public class HudEltCore {
+public class ELTHud {
 
     private final MinecraftClient client;
-    private final HudEgestion hudEgestion;
+    private final EgestionHud egestionHud;
 
-    public HudEltCore(MinecraftClient client) {
-        this.hudEgestion = new HudEgestion(client);
+    public ELTHud(MinecraftClient client) {
+        this.egestionHud = new EgestionHud(client);
         this.client = client;
     }
 
     public void render(MatrixStack matrixStack, float f) {
         if (!this.client.options.hudHidden) {
-            this.hudEgestion.render(matrixStack);
+            this.egestionHud.render(matrixStack);
         }
     }
 }

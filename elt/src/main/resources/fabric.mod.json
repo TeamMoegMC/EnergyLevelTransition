@@ -27,10 +27,18 @@
     ],
     "client": [
       "com.teammoeg.elt.ELT_Main_Client"
+    ],
+    "cardinal-components-entity": [
+      "com.teammoeg.elt.component.ELTComponents"
     ]
   },
   "mixins": [
     "elt.mixins.json"
   ],
+  "custom": {
+    "cardinal-components": [
+      "elt:egestion"
+    ]
+  },
   "description": "Main module of Energy Level Transition"
 }

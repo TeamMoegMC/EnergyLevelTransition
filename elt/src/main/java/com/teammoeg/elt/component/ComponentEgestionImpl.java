@@ -16,26 +16,30 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.component;
+package com.teammoeg.elt.component;
 
-import net.minecraft.entity.Entity;
+import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
-import org.jetbrains.annotations.NotNull;
+import net.minecraft.network.PacketByteBuf;
+import net.minecraft.server.network.ServerPlayerEntity;
 
 import static net.minecraft.entity.effect.StatusEffects.*;
 
-public class ComponentPlayerEgestion implements IComponentPlayerEgestion {
+/**
+ * @author YueSha (GitHub @yuesha-yc)
+ */
+public class ComponentEgestionImpl implements ComponentEgestion, AutoSyncedComponent {
 
     private float egestionLevel;
-    private final PlayerEntity playerEntity;
     private float noEgestionTimer;
     private float afterEgestionTimer;
+    private final Object provider;
 
-    public ComponentPlayerEgestion(PlayerEntity playerEntity) {
-        this.playerEntity = playerEntity;
+    public ComponentEgestionImpl(Object provider) {
         this.egestionLevel = 10.0F;
+        this.provider = provider;
     }
 
     @Override
@@ -73,27 +77,21 @@ public class ComponentPlayerEgestion implements IComponentPlayerEgestion {
                     }
                 }
             }
-            this.sync();
+            ELTComponents.EGESTION.sync(this.provider);
         }
     }
 
     @Override
-    public void fromTag(CompoundTag tag) {
+    public void readFromNbt(CompoundTag tag) {
         this.egestionLevel = tag.getFloat("egestionLevel");
         this.noEgestionTimer = tag.getFloat("noEgestionTimer");
         this.afterEgestionTimer = tag.getFloat("afterEgestionTimer");
     }
 
     @Override
-    public @NotNull CompoundTag toTag(CompoundTag tag) {
+    public void writeToNbt(CompoundTag tag) {
         tag.putFloat("egestionLevel", this.egestionLevel);
         tag.putFloat("noEgestionTimer", this.noEgestionTimer);
         tag.putFloat("afterEgestionTimer", this.afterEgestionTimer);
-        return tag;
-    }
-
-    @Override
-    public Entity getEntity() {
-        return this.playerEntity;
     }
 }

@@ -120,9 +120,9 @@ subprojects {
 		compileOnly group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
 		// Used Libraries
 //		modImplementation(group: 'net.devtech', name: 'arrp', version: '0.2.4') {exclude module: 'fabric-api'}
-		modImplementation("io.github.cottonmc:LibGui:3.0.0-beta.1+1.16.2-rc2") {exclude module: 'fabric-api'}
-		modImplementation("io.github.onyxstudios:Cardinal-Components-API:2.6.0") {exclude module: 'fabric-api'}
-		modImplementation("alexiil.mc.lib:libblockattributes-all:0.8.1") {exclude module: 'fabric-api'}
+		modImplementation("io.github.cottonmc:LibGui:3.2.1+1.16.3") {exclude module: 'fabric-api'}
+		modImplementation("io.github.onyxstudios:Cardinal-Components-API:2.7.3") {exclude module: 'fabric-api'}
+		modImplementation("alexiil.mc.lib:libblockattributes-all:0.8.4") {exclude module: 'fabric-api'}
 		// Implementation
 		modImplementation("me.shedaniel:RoughlyEnoughItems:5.2.3") {exclude module: 'fabric-api'}
 		modImplementation("io.github.prospector:modmenu:1.14.6+build.31") {exclude module: 'fabric-api'}

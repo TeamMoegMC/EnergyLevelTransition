@@ -16,10 +16,10 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.mixin;
+package com.teammoeg.elt.mixin;
 
-import com.teammoeg.eltcore.component.IComponentPlayerEgestion;
-import com.teammoeg.eltcore.handlers.Handler_Components;
+import com.teammoeg.elt.component.ComponentEgestion;
+import com.teammoeg.elt.component.ELTComponents;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +30,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class MixinPlayerEntity {
     @Inject(method = "tick()V", at = @At(value = "INVOKE", target = "net/minecraft/entity/player/HungerManager.update(Lnet/minecraft/entity/player/PlayerEntity;)V"))
     public void update(CallbackInfo em) {
-        IComponentPlayerEgestion iComponentPlayerEgestion = Handler_Components.PLAYER_EGESTION_COMPONENT_TYPE.get((Object) this);
-        iComponentPlayerEgestion.update((PlayerEntity) (Object) this);
+        ComponentEgestion componentEgestion = ELTComponents.EGESTION.get(this);
+        componentEgestion.update((PlayerEntity) (Object) this);
     }
 }

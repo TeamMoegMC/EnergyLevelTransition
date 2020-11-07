@@ -5,11 +5,9 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "MixinIngredient",
-    "MixinPlayerEntity",
     "GeneratorTypeAccessor"
   ],
   "client": [
-    "MixinPlayerEntity",
     "client.MixinEltCoreClient"
   ],
   "injectors": {

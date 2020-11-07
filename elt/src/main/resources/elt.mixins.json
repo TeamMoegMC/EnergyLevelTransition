@@ -4,8 +4,10 @@
   "package": "com.teammoeg.elt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "MixinPlayerEntity"
   ],
   "client": [
+    "MixinPlayerEntity",
     "client.MixinEltClient"
   ],
   "injectors": {
