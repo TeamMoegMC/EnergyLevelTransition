@@ -20,7 +20,9 @@ package com.teammoeg.elt.recipe;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.teammoeg.elt.ELT_Main;
 import com.teammoeg.elt.blockentity.WoodCutterBlockEntity;
+import com.teammoeg.eltcore.util.ItemStackUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
@@ -31,8 +33,6 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
-import com.teammoeg.elt.ELT_Main;
-import com.teammoeg.eltcore.util.ItemStackUtil;
 
 public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
     public static RecipeType<WoodCutterRecipe> WOOD_CUTTER = Registry.register(Registry.RECIPE_TYPE, new Identifier("elt:woofcutter"), new RecipeType<WoodCutterRecipe>() {

@@ -18,9 +18,9 @@
 
 package com.teammoeg.elt.items.tools;
 
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 
 public class ToolHarpoon extends ToolItem {
     public ToolHarpoon(ToolMaterial material, Settings settings) {

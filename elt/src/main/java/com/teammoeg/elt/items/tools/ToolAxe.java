@@ -18,8 +18,8 @@
 
 package com.teammoeg.elt.items.tools;
 
-import net.minecraft.item.ToolMaterial;
 import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import net.minecraft.item.ToolMaterial;
 
 public class ToolAxe extends ToolAdze {
     public ToolAxe(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {

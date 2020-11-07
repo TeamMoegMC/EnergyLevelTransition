@@ -22,11 +22,11 @@ import com.teammoeg.elt.gui.WoodCutterScreen;
 import com.teammoeg.elt.gui.hud.ELTHud;
 import com.teammoeg.elt.handlers.BlocksELT;
 import com.teammoeg.elt.handlers.ScreenHandlerTypeELT;
+import com.teammoeg.eltcore.render.LeavesColorProvider;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.rendering.v1.ColorProviderRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.fabricmc.fabric.api.client.screenhandler.v1.ScreenRegistry;
-import com.teammoeg.eltcore.render.LeavesColorProvider;
 import net.minecraft.client.MinecraftClient;
 
 public class ELT_Main_Client implements ClientModInitializer {

@@ -18,6 +18,8 @@
 
 package com.teammoeg.elt.blockentity;
 
+import com.teammoeg.elt.ELT_Main;
+import com.teammoeg.elt.gui.WoodCutterScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ExtendedScreenHandlerFactory;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.LootableContainerBlockEntity;
@@ -32,8 +34,6 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.Text;
 import net.minecraft.text.TranslatableText;
 import net.minecraft.util.collection.DefaultedList;
-import com.teammoeg.elt.ELT_Main;
-import com.teammoeg.elt.gui.WoodCutterScreenHandler;
 
 public class WoodCutterBlockEntity extends LootableContainerBlockEntity implements ExtendedScreenHandlerFactory {
 

@@ -18,9 +18,9 @@
 
 package com.teammoeg.elt.items.tools;
 
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import net.minecraft.item.ShovelItem;
 import net.minecraft.item.ToolMaterial;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 
 public class ToolShovel extends ShovelItem {
     public ToolShovel(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {

@@ -22,22 +22,20 @@ import dev.onyxstudios.cca.api.v3.component.sync.AutoSyncedComponent;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.PacketByteBuf;
-import net.minecraft.server.network.ServerPlayerEntity;
 
 import static net.minecraft.entity.effect.StatusEffects.*;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class ComponentEgestionImpl implements ComponentEgestion, AutoSyncedComponent {
+public class EgestionComponentImpl implements EgestionComponent, AutoSyncedComponent {
 
     private float egestionLevel;
     private float noEgestionTimer;
     private float afterEgestionTimer;
     private final Object provider;
 
-    public ComponentEgestionImpl(Object provider) {
+    public EgestionComponentImpl(Object provider) {
         this.egestionLevel = 10.0F;
         this.provider = provider;
     }

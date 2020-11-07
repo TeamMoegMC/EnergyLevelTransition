@@ -18,8 +18,8 @@
 
 package com.teammoeg.elt.gui.hud;
 
-import com.teammoeg.elt.component.ComponentEgestion;
 import com.teammoeg.elt.component.ELTComponents;
+import com.teammoeg.elt.component.EgestionComponent;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.MinecraftClient;
@@ -61,8 +61,8 @@ public class EgestionHud extends DrawableHelper {
             float general_max_health = (float) playerEntity.getAttributeValue(EntityAttributes.GENERIC_MAX_HEALTH);
             int p = MathHelper.ceil(playerEntity.getAbsorptionAmount());
             int q = MathHelper.ceil((general_max_health + (float) p) / 2.0F / 10.0F);
-            ComponentEgestion componentEgestion = ELTComponents.EGESTION.get(playerEntity);
-            int egestionLevel = (int) componentEgestion.getEgestionLevel();
+            EgestionComponent egestionComponent = ELTComponents.EGESTION.get(playerEntity);
+            int egestionLevel = (int) egestionComponent.getEgestionLevel();
 
             int r = Math.max(10 - (q - 2), 3);
             int s = barHeight - (q - 1) * r - 10 - 10;

@@ -18,6 +18,7 @@
 
 package com.teammoeg.elt.handlers;
 
+import com.teammoeg.elt.gui.WoodCutterScreenHandler;
 import net.fabricmc.fabric.api.screenhandler.v1.ScreenHandlerRegistry;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.screen.ScreenHandlerContext;
@@ -25,7 +26,6 @@ import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
-import com.teammoeg.elt.gui.WoodCutterScreenHandler;
 
 public class ScreenHandlerTypeELT {
 

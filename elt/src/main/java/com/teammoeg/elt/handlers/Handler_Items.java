@@ -19,6 +19,9 @@
 package com.teammoeg.elt.handlers;
 
 import com.teammoeg.elt.items.tools.*;
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ItemBase;
+import com.teammoeg.eltcore.items.ItemTooltip;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;
@@ -27,9 +30,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
-import com.teammoeg.eltcore.items.ItemBase;
-import com.teammoeg.eltcore.items.ItemTooltip;
 
 import static com.teammoeg.elt.ELT_Main.*;
 

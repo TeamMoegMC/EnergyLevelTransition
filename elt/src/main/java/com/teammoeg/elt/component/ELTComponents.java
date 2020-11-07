@@ -30,11 +30,11 @@ import net.minecraft.util.Identifier;
  */
 public class ELTComponents implements EntityComponentInitializer {
     // retrieving a type for my component or for a required dependency's
-    public static final ComponentKey<ComponentEgestion> EGESTION =
-            ComponentRegistry.getOrCreate(new Identifier("elt", "egestion"), ComponentEgestion.class);
+    public static final ComponentKey<EgestionComponent> EGESTION =
+            ComponentRegistry.getOrCreate(new Identifier("elt", "egestion"), EgestionComponent.class);
 
     @Override
     public void registerEntityComponentFactories(EntityComponentFactoryRegistry registry) {
-        registry.registerForPlayers(EGESTION, ComponentEgestionImpl::new, RespawnCopyStrategy.ALWAYS_COPY);
+        registry.registerForPlayers(EGESTION, EgestionComponentImpl::new, RespawnCopyStrategy.ALWAYS_COPY);
     }
 }

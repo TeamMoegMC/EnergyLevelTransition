@@ -18,6 +18,7 @@
 
 package com.teammoeg.elt.handlers;
 
+import com.teammoeg.elt.blocks.ExampleBlock;
 import com.teammoeg.elt.blocks.WoodCutterBlock;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.blockstate.JState;
@@ -27,7 +28,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import com.teammoeg.elt.blocks.ExampleBlock;
 
 import static com.teammoeg.elt.ELT_Main.*;
 import static com.teammoeg.eltcore.data.CS.F;

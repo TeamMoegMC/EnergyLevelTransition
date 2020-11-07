@@ -18,9 +18,9 @@
 
 package com.teammoeg.elt.items.tools;
 
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 
 //刮刀
 public class ToolHammer extends ToolItem {

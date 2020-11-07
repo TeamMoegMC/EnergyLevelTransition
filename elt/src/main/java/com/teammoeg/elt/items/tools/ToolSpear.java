@@ -18,9 +18,9 @@
 
 package com.teammoeg.elt.items.tools;
 
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 
 public class ToolSpear extends SwordItem {
     public ToolSpear(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {

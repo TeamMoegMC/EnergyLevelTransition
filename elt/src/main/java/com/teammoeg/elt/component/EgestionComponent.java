@@ -18,14 +18,13 @@
 
 package com.teammoeg.elt.component;
 
-import dev.onyxstudios.cca.api.v3.component.Component;
 import dev.onyxstudios.cca.api.v3.entity.PlayerComponent;
 import net.minecraft.entity.player.PlayerEntity;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public interface ComponentEgestion extends PlayerComponent {
+public interface EgestionComponent extends PlayerComponent {
     float getEgestionLevel();
 
     boolean doEgest(PlayerEntity playerEntity);
