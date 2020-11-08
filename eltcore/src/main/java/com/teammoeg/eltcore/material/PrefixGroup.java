@@ -36,13 +36,17 @@ public class PrefixGroup {
     public final SimpleMat[] mMaterialList;
 
     public PrefixGroup(ModData aMod, String aNameInternal) {
-        this(aMod.mID, aMod.mID, aNameInternal);
+        this(aMod.mID, aMod.mID, aNameInternal, MatFactory.ALL_MATERIALS_REGISTERED_HERE.toArray(new SimpleMat[0]));
     }
 
-    public PrefixGroup(String aModIDOwner, String aModIDTextures, String aPrefixName) {
+    public PrefixGroup(String aModIDOwner, String aModIDTextures, String aPrefixName, SimpleMat... aMaterialList) {
         mPrefixName = aPrefixName;
         mModIDTextures = aModIDTextures;
-        mMaterialList = MatFactory.ALL_MATERIALS_REGISTERED_HERE.toArray(new SimpleMat[0]);
+        if (aMaterialList.length > 0) {
+            mMaterialList = aMaterialList;
+        } else {
+            mMaterialList = MatFactory.ALL_MATERIALS_REGISTERED_HERE.toArray(new SimpleMat[0]);
+        }
         for (SimpleMat rMaterial : mMaterialList) {
             ELTCORE_Main.LOGGER.info("Mat:"+rMaterial.mNameLocal);
             if (aPrefixName.equals("dust") && rMaterial.contains(TD.ItemGenerator.DUSTS)) Registry.register(Registry.ITEM, new Identifier(aModIDOwner, aPrefixName + "." + rMaterial.mNameInternal), new ItemBase(new Item.Settings().group(Handler_ItemGroups.ELT_MATERIAL)));
