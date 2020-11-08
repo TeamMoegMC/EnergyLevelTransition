@@ -16,11 +16,26 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.loader;
+package com.teammoeg.elt.loader;
+
+import com.teammoeg.eltcore.data.MD;
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ItemBase;
+import com.teammoeg.eltcore.material.PrefixGroup;
+import net.minecraft.item.Item;
+import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class ItemLoader {
+public class ItemLoader implements Runnable {
 
+    @Override
+    public void run() {
+        new PrefixGroup(MD.ELT, "plate");
+        new PrefixGroup(MD.ELT, "ingot");
+        new PrefixGroup(MD.ELT, "dust");
+        Registry.register(Registry.ITEM, new Identifier(MD.ELT.mID, "duckegg"), new ItemBase(new Item.Settings().group(Handler_ItemGroups.ELT_MATERIAL)));
+    }
 }

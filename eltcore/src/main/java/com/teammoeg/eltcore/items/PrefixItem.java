@@ -18,10 +18,10 @@
 
 package com.teammoeg.eltcore.items;
 
+import com.teammoeg.eltcore.code.ModData;
 import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
-import com.teammoeg.eltcore.tag.TagMaterial;
-import com.teammoeg.eltcore.tag.TagPrefix;
-import com.teammoeg.eltcore.util.RU;
+import com.teammoeg.eltcore.material.MatFactory;
+import com.teammoeg.eltcore.material.SimpleMat;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
@@ -31,21 +31,25 @@ import net.minecraft.util.registry.Registry;
  */
 public class PrefixItem extends Item {
     public final String mNameInternal;
-    public final TagMaterial[] mMaterialList;
-    public final TagPrefix mTagPrefix;
+    public final String mModIDTextures;
+    public final SimpleMat[] mMaterialList;
 
-    /**
-     * @param aModIDOwner the ID of the owning Mod. DO NOT INSERT ANY GREGTECH MODID!!!
-     * @param aModIDTextures the ID of the Texture providing Mod (for the "ModID:TextureName" thing)
-     * @param aNameInternal the internal Name of this Item. DO NOT START YOUR UNLOCALISED NAME WITH "gt."!!!
-     * @param aPrefix the OreDictPrefix corresponding to this Item.
-     */
-    public PrefixItem(String aModIDOwner, String aModIDTextures, String aNameInternal, TagPrefix aPrefix, Settings aSettings, TagMaterial... aMaterialList) {
+    public PrefixItem(ModData aMod, String aNameInternal) {
+        this(aMod.mID, aMod.mID, aNameInternal, new Item.Settings(), (SimpleMat[]) MatFactory.ALL_MATERIALS_REGISTERED_HERE.toArray());
+    }
+
+    public PrefixItem(String aModIDOwner, String aModIDTextures, String aNameInternal, Settings aSettings, SimpleMat... aMaterialList) {
         super(aSettings);
-        mTagPrefix = aPrefix;
         mNameInternal = aNameInternal;
-        mMaterialList = (aMaterialList.length > 0 ? aMaterialList : new TagMaterial[32767]);
-        Registry.register(Registry.ITEM, new Identifier(aModIDOwner, aNameInternal), this);
+        mModIDTextures = aModIDTextures;
+        if (aMaterialList.length > 0) {
+            mMaterialList = aMaterialList;
+        } else {
+            mMaterialList = (SimpleMat[]) MatFactory.ALL_MATERIALS_REGISTERED_HERE.toArray();
+        }
+        for (SimpleMat rMaterial : mMaterialList) {
+            Registry.register(Registry.ITEM, new Identifier(aModIDOwner, aNameInternal + "." + rMaterial.mNameInternal), this);
+        }
         aSettings.group(Handler_ItemGroups.ELT_MATERIAL);
     }
 

@@ -22,13 +22,9 @@ package com.teammoeg.eltcore.data;
 import com.teammoeg.eltcore.code.HashSetNoNulls;
 import com.teammoeg.eltcore.items.ItemELT;
 import com.teammoeg.eltcore.util.UT;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemStack;
 
 import java.io.File;
-import java.io.PrintStream;
 import java.util.*;
 
 public class CS {
@@ -1711,6 +1707,9 @@ public class CS {
         @SuppressWarnings("hiding")
         public static final String
                 MC                = "minecraft"
+
+                , ELT                = "elt"
+                , ELTCORE            = "eltcore"
 
                 , GT                = "gregtech"
                 , GAPI              = "gregapi"

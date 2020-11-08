@@ -121,7 +121,7 @@ public class Handler_Items {
         return register(new Identifier(namespace, path), item);
     }
 
-    private static Item register(Identifier id, Item item) {
+    public static Item register(Identifier id, Item item) {
         if (item instanceof BlockItem) {
             ((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
         }

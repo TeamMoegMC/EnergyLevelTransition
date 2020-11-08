@@ -23,7 +23,9 @@ import com.teammoeg.elt.blockentity.WoodCutterBlockEntity;
 import com.teammoeg.elt.handlers.BlocksELT;
 import com.teammoeg.elt.handlers.Handler_Items;
 import com.teammoeg.elt.handlers.ScreenHandlerTypeELT;
+import com.teammoeg.elt.loader.ItemLoader;
 import com.teammoeg.elt.recipe.WoodCutterRecipe;
+import com.teammoeg.eltcore.code.ArrayListNoNulls;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
@@ -34,8 +36,7 @@ import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static net.devtech.arrp.api.RuntimeResourcePack.id;
-import static net.devtech.arrp.json.loot.JLootTable.*;
+import static com.teammoeg.eltcore.data.CS.F;
 
 public class ELT_Main implements ModInitializer {
 
@@ -63,15 +64,10 @@ public class ELT_Main implements ModInitializer {
         BlocksELT Handler_BLOCKS = new BlocksELT();
         ScreenHandlerTypeELT SHTELT = new ScreenHandlerTypeELT();
 
-        RESOURCE_PACK.addLootTable(id("minecraft:blocks/acacia_fence"),
-                loot("minecraft:block")
-                        .pool(pool()
-                                .rolls(1)
-                                .entry(entry()
-                                        .type("minecraft:item")
-                                        .name("minecraft:diamond"))
-                                .condition(condition("minecraft:survives_explosion")))
+        ArrayListNoNulls<Runnable> tList = new ArrayListNoNulls<>(F,
+                new ItemLoader()
         );
+        for (Runnable tRunnable : tList) try {tRunnable.run();} catch(Throwable e) {e.printStackTrace();}
 
         RRPCallback.EVENT.register(a -> a.add(RESOURCE_PACK)); // register arrp resourcepack
 

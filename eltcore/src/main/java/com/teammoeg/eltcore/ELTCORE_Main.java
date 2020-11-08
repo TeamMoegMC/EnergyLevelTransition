@@ -18,7 +18,11 @@
 
 package com.teammoeg.eltcore;
 
-import com.teammoeg.eltcore.handlers.*;
+import com.teammoeg.eltcore.handlers.Handler_Blocks;
+import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.handlers.Handler_Items;
+import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
+import com.teammoeg.eltcore.tag.ELTTag;
 import com.teammoeg.eltcore.world.biome.ELTBiome;
 import com.teammoeg.eltcore.world.type.ELTGeneratorType;
 import net.devtech.arrp.api.RRPCallback;
@@ -27,8 +31,6 @@ import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.biome.Biome;
-import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
-import com.teammoeg.eltcore.tag.ELTTag;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
