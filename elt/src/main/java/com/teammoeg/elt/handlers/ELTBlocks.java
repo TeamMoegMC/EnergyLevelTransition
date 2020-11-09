@@ -47,7 +47,7 @@ import static com.teammoeg.eltcore.data.CS.T;
  * }
  */
 
-public class BlocksELT {
+public class ELTBlocks {
 
     public static final Block EXAMPLE_BLOCK;
     public static final Block MANUAL_WOOD_CUTTER;

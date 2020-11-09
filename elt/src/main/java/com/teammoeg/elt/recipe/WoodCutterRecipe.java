@@ -22,7 +22,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.teammoeg.elt.ELT_Main;
 import com.teammoeg.elt.blockentity.WoodCutterBlockEntity;
-import com.teammoeg.eltcore.util.ItemStackUtil;
+import com.teammoeg.eltcore.util.RecipeUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.recipe.Ingredient;
@@ -155,8 +155,8 @@ public class WoodCutterRecipe implements Recipe<WoodCutterBlockEntity> {
 
         public WoodCutterRecipe read(Identifier identifier, JsonObject jsonObject) {
             return new WoodCutterRecipe(identifier,
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output")),
-                    ItemStackUtil.loadStackFromJson(jsonObject.get("output2")),
+                    RecipeUtil.loadStackFromJson(jsonObject.get("output")),
+                    RecipeUtil.loadStackFromJson(jsonObject.get("output2")),
                     Ingredient.fromJson(jsonObject.get("input")),
                     getIngredients(jsonObject.get("tools").getAsJsonArray())
             );

@@ -19,7 +19,7 @@
 package com.teammoeg.eltcore.mixin;
 
 import com.teammoeg.eltcore.data.MD;
-import com.teammoeg.eltcore.util.GenJson;
+import com.teammoeg.eltcore.util.JsonUtil;
 import net.minecraft.client.render.model.ModelLoader;
 import net.minecraft.client.render.model.json.JsonUnbakedModel;
 import net.minecraft.util.Identifier;
@@ -43,13 +43,13 @@ public class ModelLoaderMixin {
         if (id.getPath().startsWith("block/")) return;
         // Material Prefix Items
         if (id.getPath().startsWith("item/mat.plate")) {
-            modelJson = GenJson.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/plate"), "generated");
+            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/plate"), "generated");
         } else if (id.getPath().startsWith("item/mat.ingot")) {
-            modelJson = GenJson.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/ingot"), "generated");
+            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/ingot"), "generated");
         } else if (id.getPath().startsWith("item/mat.dust")) {
-            modelJson = GenJson.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/dust"), "generated");
+            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/dust"), "generated");
         } else {
-            modelJson = GenJson.createItemModelJson(id, "generated");
+            modelJson = JsonUtil.createItemModelJson(id, "generated");
         }
         System.out.println(modelJson);
         if ("".equals(modelJson)) return;

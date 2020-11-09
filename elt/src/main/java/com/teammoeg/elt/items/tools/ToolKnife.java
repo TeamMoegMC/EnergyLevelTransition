@@ -18,12 +18,12 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.item.ELTItemGroups;
+import com.teammoeg.eltcore.item.ELTGroups;
 import net.minecraft.item.SwordItem;
 import net.minecraft.item.ToolMaterial;
 
 public class ToolKnife extends SwordItem {
     public ToolKnife(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings.group(ELTItemGroups.TOOLS));
+        super(material, attackDamage, attackSpeed, settings.group(ELTGroups.TOOLS));
     }
 }

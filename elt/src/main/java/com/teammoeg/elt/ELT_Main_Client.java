@@ -20,10 +20,10 @@ package com.teammoeg.elt;
 
 import com.teammoeg.elt.gui.WoodCutterScreen;
 import com.teammoeg.elt.gui.hud.ELTHud;
-import com.teammoeg.elt.handlers.BlocksELT;
-import com.teammoeg.elt.handlers.ScreenHandlerTypeELT;
-import com.teammoeg.eltcore.data.MP;
-import com.teammoeg.eltcore.material.MatFactory;
+import com.teammoeg.elt.handlers.ELTBlocks;
+import com.teammoeg.elt.handlers.ELTScreenHandlerTypes;
+import com.teammoeg.eltcore.material.MP;
+import com.teammoeg.eltcore.material.MT;
 import com.teammoeg.eltcore.render.LeavesColorProvider;
 import com.teammoeg.eltcore.render.MaterialColorProvider;
 import net.fabricmc.api.ClientModInitializer;
@@ -38,9 +38,9 @@ public class ELT_Main_Client implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
-        ColorProviderRegistry.BLOCK.register(LeavesColorProvider.INSTANCE, BlocksELT.EXAMPLE_BLOCK);
-        ScreenRegistry.register(ScreenHandlerTypeELT.WOOD_CUTTER, WoodCutterScreen::new);
+        ColorProviderRegistry.BLOCK.register(LeavesColorProvider.INSTANCE, ELTBlocks.EXAMPLE_BLOCK);
+        ScreenRegistry.register(ELTScreenHandlerTypes.WOOD_CUTTER, WoodCutterScreen::new);
         HudRenderCallback.EVENT.register(eltHud::render);
-        ColorProviderRegistry.ITEM.register(MaterialColorProvider.INSTANCE, MP.dust.mat(MatFactory.Cu));
+        ColorProviderRegistry.ITEM.register(MaterialColorProvider.INSTANCE, MP.dust.mat(MT.Cu));
     }
 }

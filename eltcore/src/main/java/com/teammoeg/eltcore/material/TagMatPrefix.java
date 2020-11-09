@@ -16,24 +16,28 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.data;
+package com.teammoeg.eltcore.material;
 
-import com.teammoeg.eltcore.tag.TagMaterial;
-import com.teammoeg.eltcore.code.HashSetNoNulls;
+import net.minecraft.item.Item;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class MT {
+public class TagMatPrefix {
+    public final Map<TagMat, Item> mRegisteredItems = new HashMap<>();
 
-    public static final HashSetNoNulls<TagMaterial> ALL_MATERIALS_REGISTERED_HERE = new HashSetNoNulls<>();
+    public final String mPrefixName;
 
-    protected static TagMaterial create (String aNameTag) {
-        TagMaterial rMaterial = TagMaterial.createMaterial(aNameTag, aNameTag);
-        ALL_MATERIALS_REGISTERED_HERE.add(rMaterial);
-        return rMaterial;
+    public TagMatPrefix(String aPrefixName){
+        mPrefixName = aPrefixName;
     }
 
-    public static final TagMaterial HYDROGEN = create("Hydrogen");
+    public Item mat(TagMat tagMat) {
+        if (!mRegisteredItems.isEmpty()) return mRegisteredItems.get(tagMat);
+        else return null;
+    }
 
 }

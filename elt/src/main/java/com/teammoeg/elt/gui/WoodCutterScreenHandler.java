@@ -19,7 +19,7 @@
 package com.teammoeg.elt.gui;
 
 import com.teammoeg.elt.blockentity.WoodCutterBlockEntity;
-import com.teammoeg.elt.handlers.ScreenHandlerTypeELT;
+import com.teammoeg.elt.handlers.ELTScreenHandlerTypes;
 import com.teammoeg.elt.recipe.WoodCutterRecipe;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -51,7 +51,7 @@ public class WoodCutterScreenHandler extends ScreenHandler implements NamedScree
     }
 
     public WoodCutterScreenHandler(int syncId, PlayerInventory playerInventory, Inventory inv, ScreenHandlerContext context) {
-        super(ScreenHandlerTypeELT.WOOD_CUTTER, syncId);
+        super(ELTScreenHandlerTypes.WOOD_CUTTER, syncId);
         this.context = context;
         this.inv = inv;
         inv.onOpen(playerInventory.player);

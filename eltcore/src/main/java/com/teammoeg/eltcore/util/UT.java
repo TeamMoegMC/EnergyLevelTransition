@@ -19,13 +19,8 @@
 package com.teammoeg.eltcore.util;
 
 import com.teammoeg.eltcore.code.ArrayListNoNulls;
-import net.fabricmc.api.EnvType;
-import net.fabricmc.api.Environment;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.*;
 
@@ -33,6 +28,7 @@ import static com.teammoeg.eltcore.data.CS.*;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
+ * Common Utils
  */
 public class UT {
     public static byte side(int aSide) {

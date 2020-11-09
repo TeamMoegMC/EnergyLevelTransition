@@ -27,7 +27,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ScreenHandlerTypeELT {
+public class ELTScreenHandlerTypes {
 
     public static final ScreenHandlerType<WoodCutterScreenHandler> WOOD_CUTTER = ScreenHandlerRegistry.registerExtended(new Identifier("elt", "wood_cutter_screenhandler"), (syncId, inventory, buf) -> {
         BlockPos pos = buf.readBlockPos();

@@ -20,7 +20,7 @@ package com.teammoeg.eltcore;
 
 import com.teammoeg.eltcore.handlers.Handler_Blocks;
 import com.teammoeg.eltcore.handlers.Handler_Items;
-import com.teammoeg.eltcore.item.ELTItemGroups;
+import com.teammoeg.eltcore.item.ELTGroups;
 import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
 import com.teammoeg.eltcore.tag.ELTTag;
 import com.teammoeg.eltcore.world.biome.ELTBiome;
@@ -48,15 +48,13 @@ public class ELTCORE_Main implements ModInitializer {
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
-    public static final ELTItemGroups ITEM_GROUPS_ELT = new ELTItemGroups();
+    public static final ELTGroups ITEM_GROUPS_ELT = new ELTGroups();
 
     public static ELTTag PROTON = createTag(1, "protest", "Proton");
 
     @Override
     public void onInitialize() {
-
-        LOGGER.info("~~~~~~~~~~~~~ ELT Core Created by TeamMoeg ~~~~~~~~~~~~");
-        LOGGER.info("~~~~~~~~~ https://github.com/MoegTech/ELTCore ~~~~~~~~~");
+        LOGGER.info("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
 
         GeneratorTypeAccessor.getValues().add(ELTGeneratorType.ELT_NORMAL);
         ELTBiome ELTBiome = new ELTBiome();
@@ -74,14 +72,8 @@ public class ELTCORE_Main implements ModInitializer {
         // Init RRP
         RRPCallback.EVENT.register(a -> a.add(ELTRESOURCE));
 
-        LOGGER.info("---Energy Level Transition Initialized!---");
+        LOGGER.info("ELT Core initialized");
     }
-
-    public void onModPreinit() {}
-
-    public void aModInit() {}
-
-    public void onModPostinit() {}
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);

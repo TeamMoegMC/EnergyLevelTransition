@@ -32,12 +32,6 @@ public class MD {
 
     , ELT               = new ModData(ModIDs.ELT                , "Energy Level Transition")
     , ELTCORE           = new ModData(ModIDs.ELTCORE            , "ELT Core")
-    , GT                = new ModData(ModIDs.GT                 , "GregTech")
-    , GAPI              = new ModData(ModIDs.GAPI               , "Greg-API")
-    , GAPI_POST         = new ModData(ModIDs.GAPI_POST          , "Greg-API-Post")
-    , GT5U              = new ModData(ModIDs.GT                 , "GregTech 5 Unofficial")
-
-    , QT                = new ModData(ModIDs.QT                 , "QwerTech")
 
     , IC2               = new ModData(ModIDs.IC2                , "IndustrialCraft 2")
     , IC2C              = new ModData(ModIDs.IC2C               , "IndustrialCraft 2 Classic")

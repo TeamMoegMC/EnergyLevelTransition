@@ -16,18 +16,16 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.data;
-
-import com.teammoeg.eltcore.material.MatPrefix;
+package com.teammoeg.eltcore.material;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  * Material Prefix
  */
 public class MP {
-    private static MatPrefix create(String aPrefixName) {return new MatPrefix(aPrefixName);}
+    private static TagMatPrefix create(String aPrefixName) {return new TagMatPrefix(aPrefixName);}
 
-    public static final MatPrefix
+    public static final TagMatPrefix
             ingot = create("mat.ingot"),
             plate = create("mat.plate"),
             dust = create("mat.dust");

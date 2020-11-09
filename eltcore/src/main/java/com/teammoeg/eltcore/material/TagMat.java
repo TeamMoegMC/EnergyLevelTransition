@@ -31,12 +31,12 @@ import static com.teammoeg.eltcore.data.CS.T;
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class SimpleMat implements ITagDataContainer<SimpleMat> {
-    public static final Map<String, SimpleMat> TAG_MAP = new HashMap<>();
+public class TagMat implements ITagDataContainer<TagMat> {
+    public static final Map<String, TagMat> TAG_MAP = new HashMap<>();
 
-    public static SimpleMat createMat(String aNameTag, String aLocalName) {
-        SimpleMat rMaterial1 = TAG_MAP.get(aNameTag);
-        SimpleMat rMaterial2 = new SimpleMat(aNameTag.toLowerCase().replace(" ", "_"), aLocalName);
+    public static TagMat createMat(String aNameTag, String aLocalName) {
+        TagMat rMaterial1 = TAG_MAP.get(aNameTag);
+        TagMat rMaterial2 = new TagMat(aNameTag.toLowerCase().replace(" ", "_"), aLocalName);
         if (rMaterial1 == null) {
             return rMaterial2;
         }
@@ -53,9 +53,9 @@ public class SimpleMat implements ITagDataContainer<SimpleMat> {
     public String mNameLocal;
 
     /** The Colors of this Material */
-    public final short[] mRGBa = new short[] {255,255,255,255};
+    public final short[] mRGBaSimple = new short[] {255,255,255,255};
 
-    private SimpleMat(String aNameInternal, String aNameLocal) {
+    private TagMat(String aNameInternal, String aNameLocal) {
         mNameInternal = aNameInternal;
         mNameLocal = aNameLocal;
         mTag = new JTag();
@@ -65,6 +65,8 @@ public class SimpleMat implements ITagDataContainer<SimpleMat> {
     public JTag getTag() {
         return this.mTag;
     }
+
+    public TagMat put(TagData... aObjects) {return add(aObjects);}
 
     @Override
     public boolean contains(TagData aTag) {
@@ -87,7 +89,7 @@ public class SimpleMat implements ITagDataContainer<SimpleMat> {
     }
 
     @Override
-    public SimpleMat add(TagData... aTags) {
+    public TagMat add(TagData... aTags) {
         if (aTags != null) for (TagData aTag : aTags) mTags.add(aTag);
         return this;
     }
@@ -97,6 +99,33 @@ public class SimpleMat implements ITagDataContainer<SimpleMat> {
         return mTags.remove(aTag);
     }
 
+    // The following are not used yet...
 
-    public SimpleMat put(TagData... aObjects) {return add(aObjects);}
+    /** The Colors of this Material in its 4 different states. Any change to these 4 final Arrays will be reflected in the Color of the Material at that state. */
+    public final short[] mRGBaSolid = new short[] {255,255,255,255}, mRGBaLiquid = new short[] {255,255,255,255}, mRGBaGas = new short[] {255,255,255,255}, mRGBaPlasma = new short[] {255,255,255,255};
+    public final short[][] mRGBa = new short[][] {mRGBaSolid, mRGBaLiquid, mRGBaGas, mRGBaPlasma};
+
+    /** The Description inside the Material Dictionaries. */
+    public String mDescription[] = null, mTooltipChemical = null;
+    /** The amount of crushed Ores you get from an Ore Block. */
+    public byte mOreMultiplier = 1, mOreProcessingMultiplier = 1;
+    /** The time 1 Unit of this Material takes to burn in a vanilla Furnace. */
+    public long mFurnaceBurnTime = 0;
+
+    /** g/cm^3 of this Material at Room Temperature. 0 Means that it is not determined. */
+    public double mGramPerCubicCentimeter = 1.0;
+    /** The energetic boundaries of this Material, with somewhat reasonable Defaults for a Solid. Data in Kelvin. */
+    public long mMeltingPoint = 1000, mBoilingPoint = 3000, mPlasmaPoint = 10000;
+    /** The Atomic Values of one Molecule of this Naterial, Defaults to Technetium. If the Element is Antimatter, then mProtons means Antiprotons and mElectrons means Positrons */
+    public long mNeutrons = 55, mProtons = 43, mElectrons = 43, mMass = mNeutrons + mProtons;
+
+    /** The Types Tools allowed, 0 = No Tools, 1 = Flint/Stone/Wood Tools, 2 = Early Tools, 3 = Advanced Tools */
+    public byte mToolTypes = 0;
+    /** The Quality of the Material as Tool Material (ranges from 0 to 15) */
+    public byte mToolQuality = 0;
+    /** The Durability of the Material in Tool Form */
+    public long mToolDurability = 0;
+    /** The Speed of the Material as mining Material */
+    public float mToolSpeed = 1.0F;
+    public float mHeatDamage = 0.0F;
 }

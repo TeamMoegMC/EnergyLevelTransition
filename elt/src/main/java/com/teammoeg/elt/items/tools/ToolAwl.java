@@ -18,13 +18,13 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.item.ELTItemGroups;
+import com.teammoeg.eltcore.item.ELTGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 
 //锥
 public class ToolAwl extends ToolItem {
     public ToolAwl(ToolMaterial material, Settings settings) {
-        super(material, settings.group(ELTItemGroups.TOOLS));
+        super(material, settings.group(ELTGroups.TOOLS));
     }
 }

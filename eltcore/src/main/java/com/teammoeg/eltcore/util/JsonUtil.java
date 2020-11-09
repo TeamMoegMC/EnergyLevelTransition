@@ -24,8 +24,9 @@ import net.minecraft.util.Identifier;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
+ * Json Utils
  */
-public class GenJson {
+public class JsonUtil {
     public static String createItemModelJson(Identifier id, String type) {
         return createItemModelJson(MD.ELT, id, type);
     }

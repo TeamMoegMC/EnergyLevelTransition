@@ -28,12 +28,11 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import static com.teammoeg.eltcore.ELTCORE_Main.*;
-import static com.teammoeg.eltcore.ELTCORE_Main.ELTRESOURCE;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class ST {
+public class RegUtil {
 
 
 

@@ -24,7 +24,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class ELTItemGroups {
+public class ELTGroups {
 
     public static ItemGroup MATERIAL = FabricItemGroupBuilder.create(
             new Identifier("elt", "material"))

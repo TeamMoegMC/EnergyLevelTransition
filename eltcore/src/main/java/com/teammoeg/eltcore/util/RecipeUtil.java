@@ -43,7 +43,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.StringJoiner;
 
-public class ItemStackUtil {
+/**
+ * @author YueSha (GitHub @yuesha-yc)
+ * Recipe Util
+ */
+public class RecipeUtil {
     private static final Gson GSON = new GsonBuilder().create();
 
     public static String serializeStack(ItemStack stack) {

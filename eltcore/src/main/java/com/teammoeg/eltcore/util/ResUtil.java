@@ -27,7 +27,7 @@ import net.minecraft.util.Identifier;
  * @author YueSha (GitHub @yuesha-yc)
  * Resource Utils
  */
-public class RU {
+public class ResUtil {
     
     public static void addAssets(String aModID, String aPath, String aEnglish, String aTooltipEnglish) {
         addModel(aModID, aPath);
