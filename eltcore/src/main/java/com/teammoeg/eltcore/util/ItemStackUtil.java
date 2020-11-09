@@ -25,6 +25,7 @@ import com.google.gson.JsonObject;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.serialization.Dynamic;
 import com.mojang.serialization.JsonOps;
+import com.teammoeg.eltcore.mixin.IngredientMixin;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundTag;
@@ -36,7 +37,6 @@ import net.minecraft.tag.Tag;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.JsonHelper;
 import net.minecraft.util.registry.Registry;
-import com.teammoeg.eltcore.mixin.MixinIngredient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,8 +106,8 @@ public class ItemStackUtil {
     }
 
     public static String serializeIngredient(Ingredient ingredient) {
-        ((MixinIngredient) (Object) ingredient).callCacheMatchingStacks();
-        ItemStack[] stacks = ((MixinIngredient) (Object) ingredient).getMatchingStacks();
+        ((IngredientMixin) (Object) ingredient).callCacheMatchingStacks();
+        ItemStack[] stacks = ((IngredientMixin) (Object) ingredient).getMatchingStacks();
         String[] stacksSerialized = new String[stacks.length];
         for (int i = 0; i < stacks.length; i++) {
             stacksSerialized[i] = serializeStack(stacks[i]);

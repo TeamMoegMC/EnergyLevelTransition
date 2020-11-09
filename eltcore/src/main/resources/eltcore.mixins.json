@@ -5,11 +5,10 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "GeneratorTypeAccessor",
-    "MixinIngredient",
+    "IngredientMixin",
     "ModelLoaderMixin"
   ],
   "client": [
-    "client.MixinEltCoreClient"
   ],
   "injectors": {
     "defaultRequire": 1

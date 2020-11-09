@@ -20,7 +20,7 @@ package com.teammoeg.eltcore;
 
 import com.teammoeg.eltcore.handlers.Handler_Blocks;
 import com.teammoeg.eltcore.handlers.Handler_Items;
-import com.teammoeg.eltcore.items.ELTItemGroups;
+import com.teammoeg.eltcore.item.ELTItemGroups;
 import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
 import com.teammoeg.eltcore.tag.ELTTag;
 import com.teammoeg.eltcore.world.biome.ELTBiome;

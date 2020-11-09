@@ -18,7 +18,7 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.items.ELTItemGroups;
+import com.teammoeg.eltcore.item.ELTItemGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 

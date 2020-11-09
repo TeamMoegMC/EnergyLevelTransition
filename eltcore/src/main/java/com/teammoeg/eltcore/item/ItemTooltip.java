@@ -16,18 +16,25 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.items;
+package com.teammoeg.eltcore.item;
 
-/**
- * @author YueSha (GitHub @yuesha-yc)
- */
-public class ItemTech extends ItemELT {
-    public ItemTech(Settings settings) {
+import net.minecraft.client.item.TooltipContext;
+import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
+import net.minecraft.text.TranslatableText;
+import net.minecraft.world.World;
+
+import java.util.List;
+
+public class ItemTooltip extends ItemBase {
+
+    public ItemTooltip(Settings settings) {
         super(settings);
     }
 
     @Override
-    public void addItems() {
+    public void appendTooltip(ItemStack itemStack, World world, List<Text> tooltip, TooltipContext tooltipContext) {
+        tooltip.add(new TranslatableText(this.getTranslationKey() + ".tooltip"));
 
     }
 

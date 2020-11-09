@@ -16,19 +16,14 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.mixin;
+package com.teammoeg.eltcore.item;
 
-import net.minecraft.item.ItemStack;
-import net.minecraft.recipe.Ingredient;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.gen.Accessor;
-import org.spongepowered.asm.mixin.gen.Invoker;
+import net.minecraft.item.Item;
 
-@Mixin(Ingredient.class)
-public interface MixinIngredient {
-    @Invoker
-    void callCacheMatchingStacks();
+public class ItemBase extends Item {
 
-    @Accessor
-    ItemStack[] getMatchingStacks();
+    public ItemBase(Settings settings) {
+        super(settings);
+    }
+
 }

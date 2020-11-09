@@ -16,7 +16,7 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.items;
+package com.teammoeg.eltcore.item;
 
 import com.teammoeg.eltcore.handlers.Handler_Items;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;

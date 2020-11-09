@@ -19,9 +19,9 @@
 package com.teammoeg.elt.handlers;
 
 import com.teammoeg.elt.items.tools.*;
-import com.teammoeg.eltcore.items.ELTItemGroups;
-import com.teammoeg.eltcore.items.ItemBase;
-import com.teammoeg.eltcore.items.ItemTooltip;
+import com.teammoeg.eltcore.item.ELTItemGroups;
+import com.teammoeg.eltcore.item.ItemBase;
+import com.teammoeg.eltcore.item.ItemTooltip;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;

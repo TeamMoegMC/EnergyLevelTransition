@@ -20,8 +20,8 @@ package com.teammoeg.elt.loader;
 
 import com.teammoeg.eltcore.data.MD;
 import com.teammoeg.eltcore.data.MP;
-import com.teammoeg.eltcore.items.ELTItemGroups;
-import com.teammoeg.eltcore.items.ItemBase;
+import com.teammoeg.eltcore.item.ELTItemGroups;
+import com.teammoeg.eltcore.item.ItemBase;
 import com.teammoeg.eltcore.material.PrefixGroup;
 import net.minecraft.item.Item;
 import net.minecraft.util.Identifier;

@@ -20,7 +20,7 @@ package com.teammoeg.eltcore.data;
 
 
 import com.teammoeg.eltcore.code.HashSetNoNulls;
-import com.teammoeg.eltcore.items.ItemELT;
+import com.teammoeg.eltcore.item.ItemBase;
 import com.teammoeg.eltcore.util.UT;
 import net.minecraft.item.ItemStack;
 
@@ -30,8 +30,8 @@ import java.util.*;
 public class CS {
     public static class ItemsELT {
         /** The MultiItems */
-        public static ItemELT TECH, FOOD, TOOLS;
-        public static ItemELT[] ALL_MULTI_ITEMS = new ItemELT[] {TECH, TOOLS, FOOD};
+        public static ItemBase TECH, FOOD, TOOLS;
+        public static ItemBase[] ALL_MULTI_ITEMS = new ItemBase[] {TECH, TOOLS, FOOD};
     }
 
     /**
