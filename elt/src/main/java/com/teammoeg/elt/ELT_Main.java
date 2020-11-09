@@ -37,7 +37,7 @@ import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import static com.teammoeg.eltcore.ELTCORE_Main.MOD_NAME;
+import static com.teammoeg.eltcore.ELT_Core.MOD_NAME;
 import static com.teammoeg.eltcore.data.CS.F;
 
 public class ELT_Main implements ModInitializer {

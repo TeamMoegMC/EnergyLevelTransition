@@ -27,7 +27,7 @@ import net.minecraft.block.Material;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static com.teammoeg.eltcore.ELTCORE_Main.*;
+import static com.teammoeg.eltcore.ELT_Core.*;
 import static com.teammoeg.eltcore.data.CS.F;
 
 /**

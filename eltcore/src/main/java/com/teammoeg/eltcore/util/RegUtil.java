@@ -27,7 +27,7 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
-import static com.teammoeg.eltcore.ELTCORE_Main.*;
+import static com.teammoeg.eltcore.ELT_Core.*;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)

@@ -20,7 +20,7 @@ package com.teammoeg.eltcore;
 
 import net.fabricmc.api.ClientModInitializer;
 
-public class ELTCORE_Main_Client implements ClientModInitializer {
+public class ELT_Core_Client implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {

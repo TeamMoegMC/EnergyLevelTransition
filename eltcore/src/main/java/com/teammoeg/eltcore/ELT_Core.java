@@ -40,7 +40,7 @@ import java.util.Map;
 
 import static com.teammoeg.eltcore.tag.ELTTag.createTag;
 
-public class ELTCORE_Main implements ModInitializer {
+public class ELT_Core implements ModInitializer {
 
     public static final String MOD_ID = "eltcore";
     public static final String MOD_NAME = "ELT Core";

@@ -18,7 +18,7 @@
 
 package com.teammoeg.eltcore.handlers;
 
-import com.teammoeg.eltcore.ELTCORE_Main;
+import com.teammoeg.eltcore.ELT_Core;
 import com.teammoeg.eltcore.item.ELTGroups;
 import com.teammoeg.eltcore.item.ItemBase;
 import com.teammoeg.eltcore.item.ItemTooltip;
@@ -62,8 +62,8 @@ public class Handler_Items {
         ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
         ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
 
-        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELTCORE_Main.PROTON);
-        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELTCORE_Main.PROTON);
+        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELT_Core.PROTON);
+        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELT_Core.PROTON);
     }
 
     /** Register with Tag */
@@ -190,12 +190,12 @@ public class Handler_Items {
      */
     private static void registerModel(String path, String parent) {
         Identifier resourceId = new Identifier("eltcore", "item/" + path);
-        ELTCORE_Main.ELTRESOURCE.addModel(JModel.model(parent).textures(JModel.textures().layer0("eltcore:item/" + path)), resourceId);
+        ELT_Core.ELTRESOURCE.addModel(JModel.model(parent).textures(JModel.textures().layer0("eltcore:item/" + path)), resourceId);
     }
 
     private static void registerModel(String path) {
         Identifier resourceId = new Identifier("eltcore", "item/" + path);
-        ELTCORE_Main.ELTRESOURCE.addModel(JModel.model("item/generated").textures(JModel.textures().layer0("eltcore:item/" + path)), resourceId);
+        ELT_Core.ELTRESOURCE.addModel(JModel.model("item/generated").textures(JModel.textures().layer0("eltcore:item/" + path)), resourceId);
     }
 
     // With specified tooltip
@@ -204,20 +204,20 @@ public class Handler_Items {
         if (path.contains("/")) {
             unlocalizedPath = path.replace("/", ".");
             if (language.equalsIgnoreCase("en_us"))
-                ELTCORE_Main.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELTCORE_Main.EN_US.translate("item.eltcore." + unlocalizedPath, name).translate("item.eltcore." + unlocalizedPath + ".tooltip", tooltip));
+                ELT_Core.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELT_Core.EN_US.translate("item.eltcore." + unlocalizedPath, name).translate("item.eltcore." + unlocalizedPath + ".tooltip", tooltip));
             if (language.equalsIgnoreCase("zh_cn"))
-                ELTCORE_Main.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELTCORE_Main.ZH_CN.translate("item.eltcore." + unlocalizedPath, name).translate("item.eltcore." + unlocalizedPath + ".tooltip", tooltip));
+                ELT_Core.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELT_Core.ZH_CN.translate("item.eltcore." + unlocalizedPath, name).translate("item.eltcore." + unlocalizedPath + ".tooltip", tooltip));
         } else {
             if (language.equalsIgnoreCase("en_us"))
-                ELTCORE_Main.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELTCORE_Main.EN_US.translate("item.eltcore." + path, name).translate("item.eltcore." + path + ".tooltip", tooltip));
+                ELT_Core.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELT_Core.EN_US.translate("item.eltcore." + path, name).translate("item.eltcore." + path + ".tooltip", tooltip));
             if (language.equalsIgnoreCase("zh_cn"))
-                ELTCORE_Main.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELTCORE_Main.ZH_CN.translate("item.eltcore." + path, name).translate("item.eltcore." + path + ".tooltip", tooltip));
+                ELT_Core.ELTRESOURCE.addLang(new Identifier("eltcore", language), ELT_Core.ZH_CN.translate("item.eltcore." + path, name).translate("item.eltcore." + path + ".tooltip", tooltip));
         }
     }
 
     private static void registerAnimation(String path, int frametime) {
         Identifier aniID = new Identifier("eltcore", "item/" + path);
-        ELTCORE_Main.ELTRESOURCE.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
+        ELT_Core.ELTRESOURCE.addAnimation(aniID, JAnimation.animation().frameTime(frametime));
     }
 
 }

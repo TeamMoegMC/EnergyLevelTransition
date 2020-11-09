@@ -22,10 +22,10 @@
   "accessWidener": "energyleveltransition.aw",
   "entrypoints": {
     "main": [
-      "com.teammoeg.eltcore.ELTCORE_Main"
+      "com.teammoeg.eltcore.ELT_Core"
     ],
     "client": [
-      "com.teammoeg.eltcore.ELTCORE_Main_Client"
+      "com.teammoeg.eltcore.ELT_Core_Client"
     ]
   },
   "mixins": [
