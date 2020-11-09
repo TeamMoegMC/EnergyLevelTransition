@@ -16,14 +16,28 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.items.tools;
+package com.teammoeg.eltcore.material;
 
-import com.teammoeg.eltcore.items.ELTItemGroups;
-import net.minecraft.item.SwordItem;
-import net.minecraft.item.ToolMaterial;
+import net.minecraft.item.Item;
 
-public class ToolSpear extends SwordItem {
-    public ToolSpear(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings.group(ELTItemGroups.TOOLS));
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * @author YueSha (GitHub @yuesha-yc)
+ */
+public class MatPrefix {
+    public final Map<SimpleMat, Item> mRegisteredItems = new HashMap<>();
+
+    public final String mPrefixName;
+
+    public MatPrefix(String aPrefixName){
+        mPrefixName = aPrefixName;
     }
+
+    public Item mat(SimpleMat simpleMat) {
+        if (!mRegisteredItems.isEmpty()) return mRegisteredItems.get(simpleMat);
+        else return null;
+    }
+
 }

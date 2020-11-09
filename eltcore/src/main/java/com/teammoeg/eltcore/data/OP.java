@@ -31,7 +31,6 @@ public class OP {
     private static TagPrefix create(String aName, String aCategory) {return TagPrefix.createPrefix(aName).setCategoryName(aCategory).setLocalPrefixName(aCategory);}
 //    private static TagPrefix unused(String aName) {return TagPrefix.createPrefix(aName).add(PREFIX_UNUSED);}
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
     public static final TagPrefix
     ore                         = create("ore"                          , "Ores"                            , ""                                , " Ore"                            )                             .setCondition(ORES)                                                                                         .add(ORE, UNIFICATABLE_RECIPES, BLOCK_BASED, STANDARD_ORE).setTextureSetName("ore"); // Regular Ore Prefix. Ore -> Material is a One-Way Operation! Introduced by Eloraam
 

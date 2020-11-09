@@ -18,13 +18,13 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 
 //刮刀
 public class ToolHammer extends ToolItem {
     public ToolHammer(ToolMaterial material, Settings settings) {
-        super(material, settings.group(Handler_ItemGroups.ELT_TOOLS));
+        super(material, settings.group(ELTItemGroups.TOOLS));
     }
 }

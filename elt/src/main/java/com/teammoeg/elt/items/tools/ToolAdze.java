@@ -18,12 +18,12 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import net.minecraft.item.AxeItem;
 import net.minecraft.item.ToolMaterial;
 
 public class ToolAdze extends AxeItem {
     public ToolAdze(ToolMaterial material, int attackDamage, float attackSpeed, Settings settings) {
-        super(material, attackDamage, attackSpeed, settings.group(Handler_ItemGroups.ELT_TOOLS));
+        super(material, attackDamage, attackSpeed, settings.group(ELTItemGroups.TOOLS));
     }
 }

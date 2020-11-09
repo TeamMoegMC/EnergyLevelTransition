@@ -19,6 +19,10 @@
 package com.teammoeg.eltcore.handlers;
 
 import com.teammoeg.eltcore.ELTCORE_Main;
+import com.teammoeg.eltcore.items.ELTItemGroups;
+import com.teammoeg.eltcore.items.ItemBase;
+import com.teammoeg.eltcore.items.ItemTooltip;
+import com.teammoeg.eltcore.tag.ELTTag;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;
@@ -27,9 +31,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
-import com.teammoeg.eltcore.items.ItemBase;
-import com.teammoeg.eltcore.items.ItemTooltip;
-import com.teammoeg.eltcore.tag.ELTTag;
 
 /**
  * 这是一个用来注册物品和方块的物品形态的类
@@ -58,11 +59,11 @@ public class Handler_Items {
             OAK_BRANCH, BRICH_BRANCH;
 
     static {
-        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
-        ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
+        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MISC)));
+        ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MISC)));
 
-        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)), ELTCORE_Main.PROTON);
-        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)), ELTCORE_Main.PROTON);
+        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MATERIAL)), ELTCORE_Main.PROTON);
+        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MATERIAL)), ELTCORE_Main.PROTON);
     }
 
     /** Register with Tag */

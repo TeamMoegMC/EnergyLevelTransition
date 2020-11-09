@@ -19,10 +19,9 @@
 package com.teammoeg.eltcore.render;
 
 import net.minecraft.client.color.item.ItemColorProvider;
-import net.minecraft.client.color.world.BiomeColors;
 import net.minecraft.item.ItemStack;
 
-import static com.teammoeg.eltcore.data.CS.*;
+import static com.teammoeg.eltcore.data.CS.RED;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
@@ -33,8 +32,8 @@ public class MaterialColorProvider implements ItemColorProvider {
 
     @Override
     public int getColor(ItemStack stack, int tintIndex) {
-        int color;
-        return 0;
+        int color = RED;
+        return color;
     }
 
 }

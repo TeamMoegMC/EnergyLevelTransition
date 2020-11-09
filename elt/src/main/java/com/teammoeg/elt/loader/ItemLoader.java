@@ -19,7 +19,8 @@
 package com.teammoeg.elt.loader;
 
 import com.teammoeg.eltcore.data.MD;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.data.MP;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import com.teammoeg.eltcore.items.ItemBase;
 import com.teammoeg.eltcore.material.PrefixGroup;
 import net.minecraft.item.Item;
@@ -33,9 +34,9 @@ public class ItemLoader implements Runnable {
 
     @Override
     public void run() {
-        new PrefixGroup(MD.ELT, "plate");
-        new PrefixGroup(MD.ELT, "ingot");
-        new PrefixGroup(MD.ELT, "dust");
-        Registry.register(Registry.ITEM, new Identifier(MD.ELT.mID, "duckegg"), new ItemBase(new Item.Settings().group(Handler_ItemGroups.ELT_MATERIAL)));
+        new PrefixGroup(MD.ELT, MP.dust);
+        new PrefixGroup(MD.ELT, MP.plate);
+        new PrefixGroup(MD.ELT, MP.ingot);
+        Registry.register(Registry.ITEM, new Identifier(MD.ELT.mID, "duckegg"), new ItemBase(new Item.Settings().group(ELTItemGroups.MATERIAL)));
     }
 }

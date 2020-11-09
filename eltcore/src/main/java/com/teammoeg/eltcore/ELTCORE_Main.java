@@ -19,8 +19,8 @@
 package com.teammoeg.eltcore;
 
 import com.teammoeg.eltcore.handlers.Handler_Blocks;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import com.teammoeg.eltcore.handlers.Handler_Items;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
 import com.teammoeg.eltcore.tag.ELTTag;
 import com.teammoeg.eltcore.world.biome.ELTBiome;
@@ -48,7 +48,7 @@ public class ELTCORE_Main implements ModInitializer {
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
-    public static final Handler_ItemGroups ITEM_GROUPS_ELT = new Handler_ItemGroups();
+    public static final ELTItemGroups ITEM_GROUPS_ELT = new ELTItemGroups();
 
     public static ELTTag PROTON = createTag(1, "protest", "Proton");
 

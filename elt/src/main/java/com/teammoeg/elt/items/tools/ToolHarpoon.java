@@ -18,12 +18,12 @@
 
 package com.teammoeg.elt.items.tools;
 
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import net.minecraft.item.ToolItem;
 import net.minecraft.item.ToolMaterial;
 
 public class ToolHarpoon extends ToolItem {
     public ToolHarpoon(ToolMaterial material, Settings settings) {
-        super(material, settings.group(Handler_ItemGroups.ELT_TOOLS));
+        super(material, settings.group(ELTItemGroups.TOOLS));
     }
 }

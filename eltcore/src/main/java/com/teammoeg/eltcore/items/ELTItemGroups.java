@@ -16,42 +16,58 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.handlers;
+package com.teammoeg.eltcore.items;
 
+import com.teammoeg.eltcore.handlers.Handler_Items;
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Identifier;
 
-public class Handler_ItemGroups {
+public class ELTItemGroups {
 
-    public static ItemGroup ELT_MATERIAL = FabricItemGroupBuilder.create(
+    public static ItemGroup MATERIAL = FabricItemGroupBuilder.create(
             new Identifier("elt", "material"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 
-    public static ItemGroup ELT_MACHINE = FabricItemGroupBuilder.create(
+    public static ItemGroup MACHINE = FabricItemGroupBuilder.create(
             new Identifier("elt", "machine"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 
-    public static ItemGroup ELT_TOOLS = FabricItemGroupBuilder.create(
+    public static ItemGroup TOOLS = FabricItemGroupBuilder.create(
             new Identifier("elt", "tools"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 
-    public static ItemGroup ELT_FOOD = FabricItemGroupBuilder.create(
+    public static ItemGroup FOOD = FabricItemGroupBuilder.create(
             new Identifier("elt", "food"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 
-    public static ItemGroup ELT_FLUID = FabricItemGroupBuilder.create(
+    public static ItemGroup FLUID = FabricItemGroupBuilder.create(
             new Identifier("elt", "fluid"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 
-    public static ItemGroup ELT_MISC = FabricItemGroupBuilder.create(
+    public static ItemGroup MISC = FabricItemGroupBuilder.create(
             new Identifier("elt", "misc"))
+            .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
+            .build();
+
+    public static ItemGroup DUST = FabricItemGroupBuilder.create(
+            new Identifier("elt", "dust"))
+            .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
+            .build();
+
+    public static ItemGroup PLATE = FabricItemGroupBuilder.create(
+            new Identifier("elt", "plate"))
+            .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
+            .build();
+
+    public static ItemGroup INGOT = FabricItemGroupBuilder.create(
+            new Identifier("elt", "ingot"))
             .icon(() -> new ItemStack(Handler_Items.ELT_SYMBOL))
             .build();
 

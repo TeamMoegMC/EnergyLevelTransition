@@ -19,7 +19,6 @@
 package com.teammoeg.eltcore.items;
 
 import com.teammoeg.eltcore.code.ModData;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
 import com.teammoeg.eltcore.material.MatFactory;
 import com.teammoeg.eltcore.material.SimpleMat;
 import net.minecraft.item.Item;
@@ -50,7 +49,7 @@ public class PrefixItem extends Item {
         for (SimpleMat rMaterial : mMaterialList) {
             Registry.register(Registry.ITEM, new Identifier(aModIDOwner, aNameInternal + "." + rMaterial.mNameInternal), this);
         }
-        aSettings.group(Handler_ItemGroups.ELT_MATERIAL);
+        aSettings.group(ELTItemGroups.MATERIAL);
     }
 
 }

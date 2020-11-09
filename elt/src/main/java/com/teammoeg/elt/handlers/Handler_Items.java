@@ -19,7 +19,7 @@
 package com.teammoeg.elt.handlers;
 
 import com.teammoeg.elt.items.tools.*;
-import com.teammoeg.eltcore.handlers.Handler_ItemGroups;
+import com.teammoeg.eltcore.items.ELTItemGroups;
 import com.teammoeg.eltcore.items.ItemBase;
 import com.teammoeg.eltcore.items.ItemTooltip;
 import net.devtech.arrp.json.animation.JAnimation;
@@ -65,16 +65,16 @@ public class Handler_Items {
     EXAMPLE_BLOCK, MANUAL_WOOD_CUTTER, EXAMPLE_2;
 
     static {
-        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MISC)));
-        OAK_BRANCH = register("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        BRICH_BRANCH = register("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
+        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MISC)));
+        OAK_BRANCH = register("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        BRICH_BRANCH = register("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
 
-        Head_Flint_Shovel = register("tool/flint_shovel_head", "Flint Shovel Head", "燧石铲头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        Head_Flint_Axe = register("tool/flint_axe_head", "Flint Axe Head", "燧石斧头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        Head_Flint_Knife = register("tool/flint_knife_head", "Flint Knife Head", "燧石匕首头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        Head_Flint_Spear = register("tool/flint_spear_head", "Flint Spear Head", "燧石矛头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        Head_Flint_Harpoon = register("tool/flint_harpoon_head", "Flint Harpoon Head", "燧石鱼叉头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
-        Head_Flint_Hammer = register("tool/flint_hammer_head", "Flint Hammer Head", "燧石锤头", new ItemBase((new Item.Settings()).group(Handler_ItemGroups.ELT_MATERIAL)));
+        Head_Flint_Shovel = register("tool/flint_shovel_head", "Flint Shovel Head", "燧石铲头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        Head_Flint_Axe = register("tool/flint_axe_head", "Flint Axe Head", "燧石斧头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        Head_Flint_Knife = register("tool/flint_knife_head", "Flint Knife Head", "燧石匕首头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        Head_Flint_Spear = register("tool/flint_spear_head", "Flint Spear Head", "燧石矛头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        Head_Flint_Harpoon = register("tool/flint_harpoon_head", "Flint Harpoon Head", "燧石鱼叉头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
+        Head_Flint_Hammer = register("tool/flint_hammer_head", "Flint Hammer Head", "燧石锤头", new ItemBase((new Item.Settings()).group(ELTItemGroups.MATERIAL)));
 
         //tools
         Flint_Adze = register("tool/flint_adze", "Flint Adze", "燧石锛", new ToolAdze(ToolMaterials_ELT.CHIPPED_FLINT, 2, -3.2F, (new Item.Settings())));
@@ -88,9 +88,9 @@ public class Handler_Items {
         Flint_Hammer = register("tool/flint_hammer", "Flint Hammer", "燧石锤", new ToolHarpoon(ToolMaterials_ELT.CHIPPED_FLINT, (new Item.Settings())));
 
         //blockitems
-        EXAMPLE_BLOCK = register(BlocksELT.EXAMPLE_BLOCK, Handler_ItemGroups.ELT_MACHINE);
-        MANUAL_WOOD_CUTTER = register(BlocksELT.MANUAL_WOOD_CUTTER, Handler_ItemGroups.ELT_MACHINE);
-        EXAMPLE_2 = register(BlocksELT.EXAMPLE_2, Handler_ItemGroups.ELT_MACHINE);
+        EXAMPLE_BLOCK = register(BlocksELT.EXAMPLE_BLOCK, ELTItemGroups.MACHINE);
+        MANUAL_WOOD_CUTTER = register(BlocksELT.MANUAL_WOOD_CUTTER, ELTItemGroups.MACHINE);
+        EXAMPLE_2 = register(BlocksELT.EXAMPLE_2, ELTItemGroups.MACHINE);
 
     }
 
