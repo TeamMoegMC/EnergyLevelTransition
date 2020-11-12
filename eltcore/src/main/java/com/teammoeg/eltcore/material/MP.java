@@ -18,15 +18,24 @@
 
 package com.teammoeg.eltcore.material;
 
+import com.teammoeg.eltcore.code.ArrayListNoNulls;
+
 /**
  * @author YueSha (GitHub @yuesha-yc)
  * Material Prefix
  */
 public class MP {
-    private static TagMatPrefix create(String aPrefixName) {return new TagMatPrefix(aPrefixName);}
+
+    public static final ArrayListNoNulls<TagMatPrefix> MAT_PREFIX_ARRAY = new ArrayListNoNulls<>();
+
+    private static TagMatPrefix create(String aPrefixName) {
+        TagMatPrefix tagMatPrefix = new TagMatPrefix(aPrefixName);
+        MAT_PREFIX_ARRAY.add(tagMatPrefix);
+        return tagMatPrefix;
+    }
 
     public static final TagMatPrefix
-            ingot = create("mat.ingot"),
-            plate = create("mat.plate"),
-            dust = create("mat.dust");
+            ingot = create("prefix.ingot"),
+            plate = create("prefix.plate"),
+            dust = create("prefix.dust");
 }

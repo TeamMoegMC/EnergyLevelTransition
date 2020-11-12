@@ -21,7 +21,7 @@ package com.teammoeg.eltcore.material;
 import com.teammoeg.eltcore.code.ModData;
 import com.teammoeg.eltcore.data.TD;
 import com.teammoeg.eltcore.item.ELTGroups;
-import com.teammoeg.eltcore.item.ItemBase;
+import com.teammoeg.eltcore.item.ItemMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.util.Identifier;
@@ -55,7 +55,7 @@ public class PrefixGroup {
     }
 
     private static Item reg(String modId, TagMatPrefix tagMatPrefix, TagMat tagMat, ItemGroup itemGroup) {
-        Item item = Registry.register(Registry.ITEM, new Identifier(modId, tagMatPrefix.mPrefixName + "." + tagMat.mNameInternal), new ItemBase(new Item.Settings().group(itemGroup)));
+        Item item = Registry.register(Registry.ITEM, new Identifier(modId, tagMatPrefix.mPrefixName + "." + tagMat.mNameInternal), new ItemMaterial(new Item.Settings().group(itemGroup), tagMat, tagMatPrefix));
         tagMatPrefix.mRegisteredItems.put(tagMat, item);
         return item;
     }

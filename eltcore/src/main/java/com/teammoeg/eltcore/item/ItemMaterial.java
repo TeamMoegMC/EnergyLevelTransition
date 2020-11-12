@@ -16,31 +16,32 @@
  * along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.eltcore.render;
+package com.teammoeg.eltcore.item;
 
-import com.teammoeg.eltcore.item.ItemMaterial;
-import com.teammoeg.eltcore.material.MT;
 import com.teammoeg.eltcore.material.TagMat;
-import com.teammoeg.eltcore.util.UT;
-import net.minecraft.client.color.item.ItemColorProvider;
+import com.teammoeg.eltcore.material.TagMatPrefix;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public class MaterialColorProvider implements ItemColorProvider {
+public class ItemMaterial extends Item {
 
-    public static final MaterialColorProvider INSTANCE = new MaterialColorProvider();
+    public final TagMat material;
 
-    @Override
-    public int getColor(ItemStack stack, int tintIndex) {
-        Item item = stack.getItem();
-        TagMat tagMat = MT.EMPTY;
-        if (item instanceof ItemMaterial) {
-            tagMat = ((ItemMaterial) item).getMaterial();
-        }
-        return UT.Code.getRGBInt(tagMat.mRGBa[0]);
+    public final TagMatPrefix matPrefix;
+
+    public ItemMaterial(Settings settings, TagMat material, TagMatPrefix matPrefix) {
+        super(settings);
+        this.material = material;
+        this.matPrefix = matPrefix;
     }
 
+    public TagMat getMaterial () {
+        return material;
+    }
+
+    public TagMatPrefix getMatPrefix() {
+        return matPrefix;
+    }
 }

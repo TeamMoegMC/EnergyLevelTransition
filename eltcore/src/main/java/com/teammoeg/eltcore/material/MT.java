@@ -30,16 +30,29 @@ public class MT {
     public static final HashSetNoNulls<TagMat> ALL_MATERIALS_REGISTERED_HERE = new HashSetNoNulls<>();
     public static final ArrayListNoNulls<TagMat> MAT_ARRAY = new ArrayListNoNulls<>();
 
-    protected static TagMat create (String aNameTag) {
+    protected static TagMat create(String aNameTag) {
         TagMat rMaterial = TagMat.createMat(aNameTag, aNameTag);
         ALL_MATERIALS_REGISTERED_HERE.add(rMaterial);
         MAT_ARRAY.add(rMaterial);
         return rMaterial;
     }
-    public static final TagMat EMPTY = create("Empty");
-    public static final TagMat Cu = create("Copper").put(INGOTS, PLATES, DUSTS);
-    public static final TagMat H = create("Hydrogen").put(GASSES);
-    public static final TagMat He = create("Helium").put(GASSES);
-    public static final TagMat Li = create("Lithium").put(INGOTS, PLATES);
-    public static final TagMat Be = create("Beryllium").put(INGOTS, PLATES);
+
+    protected static TagMat create(String aNameTag, long aR, long aG, long aB, long aA) {
+        TagMat rMaterial = TagMat.createMat(aNameTag, aNameTag).setRGBa(aR, aG, aB, aA);
+        ALL_MATERIALS_REGISTERED_HERE.add(rMaterial);
+        MAT_ARRAY.add(rMaterial);
+        return rMaterial;
+    }
+
+
+    public static final TagMat
+    EMPTY = create("Empty", 0, 0, 0, 0),
+    H = create("Hydrogen", 0, 0, 255, 255).put(GASSES),
+    Br = create("Bromine", 80, 10, 10, 100).put(LIQUID, INGOTS),
+    Sn = create("Tin", 220, 220, 220, 255).put(INGOTS, PLATES, DUSTS),
+    Cu = create("Copper", 243, 156, 18, 255).put(INGOTS, PLATES, DUSTS),
+    Cu3Sn = create("Bronze", 247, 220, 111, 255).put(INGOTS, PLATES, DUSTS);
+
+
+
 }

@@ -40,16 +40,19 @@ public class ModelLoaderMixin {
         // First, we check if the current item model that is being registered is from our mod. If it isn't, we continue.
         if (!"elt".equals(id.getNamespace())) return;
         // Ignore the blocks for now
-        if (id.getPath().startsWith("block/")) return;
-        // Material Prefix Items
-        if (id.getPath().startsWith("item/mat.plate")) {
-            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/plate"), "generated");
-        } else if (id.getPath().startsWith("item/mat.ingot")) {
-            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/ingot"), "generated");
-        } else if (id.getPath().startsWith("item/mat.dust")) {
-            modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/dust"), "generated");
+        if (!id.getPath().startsWith("block/")) {
+            // Material Prefix Items
+            if (id.getPath().startsWith("item/prefix.plate")) {
+                modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/plate"), "generated");
+            } else if (id.getPath().startsWith("item/prefix.ingot")) {
+                modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/ingot"), "generated");
+            } else if (id.getPath().startsWith("item/prefix.dust")) {
+                modelJson = JsonUtil.createItemModelJson(new Identifier(MD.ELT.mID, "item/materialicons/dust"), "generated");
+            } else {
+                modelJson = JsonUtil.createItemModelJson(id, "generated");
+            }
         } else {
-            modelJson = JsonUtil.createItemModelJson(id, "generated");
+            return;
         }
         System.out.println(modelJson);
         if ("".equals(modelJson)) return;

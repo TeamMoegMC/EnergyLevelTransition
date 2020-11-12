@@ -55,15 +55,10 @@ import net.minecraft.util.registry.Registry;
 public class Handler_Items {
 
     public static final ItemBase
-            ELT_SYMBOL, ELT_SYMBOL2,
-            OAK_BRANCH, BRICH_BRANCH;
+            ELT_SYMBOL;
 
     static {
         ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
-        ELT_SYMBOL2 = register("symbol2", "Symbol 2", "能级跃迁 2", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
-
-        OAK_BRANCH = create("oak_branch", "Oak Branch", "橡木树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELT_Core.PROTON);
-        BRICH_BRANCH = create("birch_branch", "Birch Branch", "白桦树枝", "A branch", "一根树枝", new ItemTooltip((new Item.Settings()).group(ELTGroups.MATERIAL)), ELT_Core.PROTON);
     }
 
     /** Register with Tag */

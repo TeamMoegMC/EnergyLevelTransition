@@ -21,6 +21,7 @@ package com.teammoeg.eltcore.material;
 import com.teammoeg.eltcore.code.HashSetNoNulls;
 import com.teammoeg.eltcore.code.ITagDataContainer;
 import com.teammoeg.eltcore.code.TagData;
+import com.teammoeg.eltcore.util.UT;
 import net.devtech.arrp.json.tags.JTag;
 
 import java.util.*;
@@ -52,14 +53,20 @@ public class TagMat implements ITagDataContainer<TagMat> {
     /** The localised Name for this Material including Spaces and Stuff. It Defaults to the internal Name (if you have Spaces inside the Internal Name then those will be included in the Local Name but not in the final internal Name). */
     public String mNameLocal;
 
-    /** The Colors of this Material */
-    public final short[] mRGBaSimple = new short[] {255,255,255,255};
-
     private TagMat(String aNameInternal, String aNameLocal) {
         mNameInternal = aNameInternal;
         mNameLocal = aNameLocal;
         mTag = new JTag();
         TAG_MAP.put(mNameInternal, this);
+    }
+
+    /** Sets the Color of this Material. Note: Whenever I use 256 as Parameter it of course goes back to 255 via bindByte, this is just a marker for me if I did not assign a Color to a Material. */
+    public TagMat setRGBa(long aR, long aG, long aB, long aA) {
+        mRGBaSolid[0] = mRGBaLiquid[0] = mRGBaGas[0] = mRGBaPlasma[0] = UT.Code.bind8(aR);
+        mRGBaSolid[1] = mRGBaLiquid[1] = mRGBaGas[1] = mRGBaPlasma[1] = UT.Code.bind8(aG);
+        mRGBaSolid[2] = mRGBaLiquid[2] = mRGBaGas[2] = mRGBaPlasma[2] = UT.Code.bind8(aB);
+        mRGBaSolid[3] = mRGBaLiquid[3] = mRGBaGas[3] = mRGBaPlasma[3] = UT.Code.bind8(aA);
+        return this;
     }
 
     public JTag getTag() {
