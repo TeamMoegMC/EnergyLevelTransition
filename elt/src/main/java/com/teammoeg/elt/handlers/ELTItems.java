@@ -62,7 +62,7 @@ public class ELTItems {
             Head_Flint_Shovel, Head_Flint_Axe, Head_Flint_Knife, Head_Flint_Spear, Head_Flint_Harpoon, Head_Flint_Hammer,
 
     //Blockitems
-    EXAMPLE_BLOCK, MANUAL_WOOD_CUTTER, EXAMPLE_2;
+    EXAMPLE_BLOCK, MANUAL_WOOD_CUTTER, TEST;
 
     static {
         ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
@@ -90,7 +90,7 @@ public class ELTItems {
         //blockitems
         EXAMPLE_BLOCK = register(ELTBlocks.EXAMPLE_BLOCK, ELTGroups.MACHINE);
         MANUAL_WOOD_CUTTER = register(ELTBlocks.MANUAL_WOOD_CUTTER, ELTGroups.MACHINE);
-        EXAMPLE_2 = register(ELTBlocks.EXAMPLE_2, ELTGroups.MACHINE);
+        TEST = register(ELTBlocks.TEST, ELTGroups.MACHINE);
 
     }
 

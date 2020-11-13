@@ -49,15 +49,13 @@ import static com.teammoeg.eltcore.data.CS.T;
 
 public class ELTBlocks {
 
-    public static final Block EXAMPLE_BLOCK;
+    public static final Block EXAMPLE_BLOCK,TEST;
     public static final Block MANUAL_WOOD_CUTTER;
-    public static final Block EXAMPLE_2;
 
     static {
-
-        EXAMPLE_BLOCK = register(T, T, "example_block", "Example Block", "一个例子方块", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
-        MANUAL_WOOD_CUTTER = register(T, F, "wood_cutter", "Manual Wood Cutter", "原木切割案", new WoodCutterBlock(FabricBlockSettings.of(Material.WOOD)));
-        EXAMPLE_2 = register(F, F, "example2", "An Example", "第二个例子方块", new Block(FabricBlockSettings.of(Material.WOOD)));
+        TEST = register(T, T, "simple/test", "Example Block", "一个例子方块", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
+        EXAMPLE_BLOCK = register(T, T, "complex/example_block", "Example Block", "一个例子方块", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
+        MANUAL_WOOD_CUTTER = register(T, F, "complex/wood_cutter", "Manual Wood Cutter", "原木切割案", new WoodCutterBlock(FabricBlockSettings.of(Material.WOOD)));
     }
 
     // No Model is registered
