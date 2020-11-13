@@ -9,7 +9,8 @@
 
 This is the official repository of the Minecraft Mod - Energy Level Transition on Minecraft 1.16 and beyond
 
-Requires: [Fabric API](https://github.com/FabricMC/fabric)
+Requires: [Fabric API](https://github.com/FabricMC/fabric) 
+and Fabric Tutorial: https://fabricmc.net/wiki/tutorial:setup
 
 - [Energy Level Transition](#energy-level-transition)
 - [License](#license)
@@ -18,6 +19,11 @@ Requires: [Fabric API](https://github.com/FabricMC/fabric)
 - [Dependencies](#dependencies)
 - [Setup Dev Environment](#setup-dev-environment)
 - [Updating Minecraft](#updating-minecraft)
+
+## Original Setting
+- ELT II: https://tieba.baidu.com/p/3491285047
+- ELT IIS: https://tieba.baidu.com/p/5858060400
+- ELT Wiki: https://energy-level-transition.fandom.com/zh/wiki/Fraxinus_In_A_Gale
 
 ## License
 
