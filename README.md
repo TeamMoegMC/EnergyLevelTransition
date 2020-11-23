@@ -1,4 +1,4 @@
-[English](README.md)  [简体中文](README.CN.md)
+[English](README.md) [Русский](README.RU.md)  [简体中文](README.CN.md)
 
 # Energy Level Transition 
 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
