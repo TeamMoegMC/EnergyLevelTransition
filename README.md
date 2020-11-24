@@ -16,6 +16,7 @@ and Fabric Tutorial: https://fabricmc.net/wiki/tutorial:setup
 - [License](#license)
 - [Introduction](#introduction)
 - [Acknowledgement](#acknowledgement)
+- [Usage](#usage)
 - [Dependencies](#dependencies)
 - [Setup Dev Environment](#setup-dev-environment)
 - [Updating Minecraft](#updating-minecraft)
@@ -45,6 +46,23 @@ A Tech Mod that brings in Science, Etherology, and Magic!
 ## Acknowledgement
 
 [Lyuuke](https://github.com/Lyuuke) for creating some Assets and Ideas for this Mod. 
+
+## Usage
+
+Add this to your build.gradle to use ELT as dependency
+### Use as Bundle...
+```
+dependencies {
+	modImplementation("com.teammoeg:Energy-Level-Transition:0.02.05") {exclude module: "log4j-core"}
+ }
+ ```
+### ...or separately
+```
+dependencies {
+	modImplementation("com.teammoeg:elt:0.02.05") {exclude module: "log4j-core"}
+	modImplementation("com.teammoeg:eltcore:0.02.05") {exclude module: "log4j-core"}
+}
+```
 
 ## Dependencies
 
@@ -89,9 +107,9 @@ Firstly, change the version variables in `gradle.properties`. For example:
 ```
 # Fabric Properties: see updates here: https://modmuss50.me/fabric.html
  minecraft_version=1.16.4
- yarn_mappings=1.16.4+build.6
- loader_version=0.10.6+build.214
- fabric_version=0.25.1+build.416-1.16
+ yarn_mappings=1.16.4+build.7
+ loader_version=0.10.8
+ fabric_version=0.26.2+1.16
 ```
 
 Secondly, run `gradlew :elt:migrateMappings <yarn_mappings>` and `gradlew :eltcore:migrateMappings <yarn_mappings>` 
