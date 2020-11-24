@@ -16,6 +16,7 @@
 - [Лицензия](#лицензия)
 - [Введение](#введение)
 - [Благодарности](#благодарности)
+- [Использование](#использование)
 - [Зависимости](#зависимости)
 - [Настройка среды разработки](#настройка-среды-видеокарты)
 - [Обновление Minecraft](#обновление-minecraft)
@@ -45,6 +46,23 @@
 ## Благодарности
 
 [Lyuuke](https://github.com/Lyuuke) за создание некоторых ресурсов и идеи для этого мода.
+
+## Использование
+
+Добавьте это в ваш `build.gradle` для использования мода ELT как зависимости
+### Используйте всё вместе...
+```
+dependencies {
+	modImplementation("com.teammoeg:Energy-Level-Transition:0.02.05") {exclude module: "log4j-core"}
+ }
+ ```
+### ...или по отдельности
+```
+dependencies {
+	modImplementation("com.teammoeg:elt:0.02.05") {exclude module: "log4j-core"}
+	modImplementation("com.teammoeg:eltcore:0.02.05") {exclude module: "log4j-core"}
+}
+```
 
 ## Зависимости
 
@@ -87,11 +105,11 @@
 Во–первых, измените переменную с версией в `gradle.properties`. Например:
 
 ```
-# Fabric Properties: see updates here: https://modmuss50.me/fabric.html
+# Fabric Properties: обновления здесь: https://modmuss50.me/fabric.html
  minecraft_version=1.16.4
- yarn_mappings=1.16.4+build.6
- loader_version=0.10.6+build.214
- fabric_version=0.25.1+build.416-1.16
+ yarn_mappings=1.16.4+build.7
+ loader_version=0.10.8
+ fabric_version=0.26.2+1.16
 ```
 
 Во–вторых, запустите `gradlew :elt:migrateMappings <yarn_mappings>` и `gradlew :eltcore:migrateMappings <yarn_mappings>` 
