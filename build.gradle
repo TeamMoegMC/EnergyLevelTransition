@@ -215,15 +215,3 @@ publishing {
 		}
 	}
 }
-
-/* Add this to your build.gradle to use ELT as dependency */
-/*
-dependencies {
-	// use as bundle
-	modImplementation("com.teammoeg:Energy-Level-Transition:0.02.05") {exclude module: "log4j-core"}
-	// or separately
-	modImplementation("com.teammoeg:elt:0.02.05") {exclude module: "log4j-core"}
-	modImplementation("com.teammoeg:eltcore:0.02.05") {exclude module: "log4j-core"}
-}
-*/
-
