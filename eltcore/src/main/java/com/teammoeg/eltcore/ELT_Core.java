@@ -47,6 +47,7 @@ public class ELT_Core implements ModInitializer {
     public static final Logger LOGGER = LogManager.getFormatterLogger(MOD_NAME);
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();
+    public static JLang RU_RU = JLang.lang();
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
     public static final ELTGroups ITEM_GROUPS_ELT = new ELTGroups();
 
