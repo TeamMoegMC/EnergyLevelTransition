@@ -2,7 +2,7 @@
 name: Development Goal in ELT
 about: Suggest a Development Goal in ELT
 title: ''
-labels: ''
+labels: development goal
 assignees: yuesha-yc
 
 ---

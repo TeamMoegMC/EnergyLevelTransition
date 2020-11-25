@@ -2,7 +2,7 @@
 name: 'Bug: Crash'
 about: Report a bug that crashes the game
 title: ''
-labels: ''
+labels: bug
 assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---

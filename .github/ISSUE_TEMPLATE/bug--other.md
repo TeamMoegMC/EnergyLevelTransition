@@ -2,7 +2,7 @@
 name: 'Bug: Other'
 about: If the bug is not a gameplay issue or crash, report it here
 title: ''
-labels: ''
+labels: bug
 assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---

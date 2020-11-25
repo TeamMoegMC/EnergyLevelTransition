@@ -2,7 +2,7 @@
 name: 'Bug: Gameplay'
 about: Report a bug that affects gameplay
 title: ''
-labels: ''
+labels: bug
 assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
