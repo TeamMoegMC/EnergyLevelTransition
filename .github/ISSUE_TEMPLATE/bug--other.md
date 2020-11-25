@@ -3,7 +3,7 @@ name: 'Bug: Other'
 about: If the bug is not a gameplay issue or crash, report it here
 title: ''
 labels: ''
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
 

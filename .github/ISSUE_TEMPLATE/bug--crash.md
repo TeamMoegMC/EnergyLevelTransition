@@ -2,8 +2,8 @@
 name: 'Bug: Crash'
 about: Report a bug that crashes the game
 title: ''
-labels: 'Bug: Crash'
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+labels: ''
+assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
 

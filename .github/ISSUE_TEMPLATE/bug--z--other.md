@@ -3,7 +3,7 @@ name: Other
 about: Other issues
 title: ''
 labels: ''
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
 

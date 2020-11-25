@@ -2,8 +2,8 @@
 name: 'Bug: Gameplay'
 about: Report a bug that affects gameplay
 title: ''
-labels: 'Bug: Game Play'
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+labels: ''
+assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
 

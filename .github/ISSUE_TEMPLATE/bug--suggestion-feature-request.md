@@ -2,8 +2,8 @@
 name: Suggestion/Feature Request
 about: Suggest an idea for this project
 title: ''
-labels: Suggestion
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+labels: ''
+assignees: dashuaibia, duckegg128, Evanenir, yuesha-yc
 
 ---
 
