@@ -1,14 +1,11 @@
 ---
-name: Other
-about: Other issues
+name: Feature
+about: Feature in ELT
 title: ''
 labels: ''
-assignees: yuesha-yc, duckegg128, dashuaibia, Evanenir
+assignees: yuesha-yc
 
 ---
-
-**Version**
-Version of the mod you are using [e.g. 1.x.x]
 
 **Description**
 A clear and concise description of what the issue is.

@@ -8,7 +8,7 @@ assignees: yuesha-yc
 ---
 
 **Version**
-Version of the modpack you are using [e.g. 3.1.x.x]
+Version of the mod you are using [e.g. 1.x.x]
 
 **Description**
 A clear and concise description of what the localization issue is.
