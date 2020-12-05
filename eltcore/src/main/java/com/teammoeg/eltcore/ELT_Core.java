@@ -20,25 +20,21 @@ package com.teammoeg.eltcore;
 
 import com.teammoeg.eltcore.handlers.Handler_Blocks;
 import com.teammoeg.eltcore.handlers.Handler_Items;
-import com.teammoeg.eltcore.item.ELTGroups;
 import com.teammoeg.eltcore.mixin.GeneratorTypeAccessor;
 import com.teammoeg.eltcore.tag.ELTTag;
-import com.teammoeg.eltcore.world.biome.ELTBiome;
+import com.teammoeg.eltcore.world.ELTBiomeSource;
 import com.teammoeg.eltcore.world.type.ELTGeneratorType;
 import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
 import net.minecraft.util.Identifier;
-import net.minecraft.world.biome.Biome;
+import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
 import java.util.Map;
-
-import static com.teammoeg.eltcore.tag.ELTTag.createTag;
 
 public class ELT_Core implements ModInitializer {
 
@@ -48,17 +44,15 @@ public class ELT_Core implements ModInitializer {
     public static JLang EN_US = JLang.lang();
     public static JLang ZH_CN = JLang.lang();
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
-    public static final ELTGroups ITEM_GROUPS_ELT = new ELTGroups();
-
-    public static ELTTag PROTON = createTag(1, "protest", "Proton");
 
     @Override
     public void onInitialize() {
         LOGGER.info("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
 
+
+        Registry.register(Registry.BIOME_SOURCE, "elt", ELTBiomeSource.CODEC);
         GeneratorTypeAccessor.getValues().add(ELTGeneratorType.ELT_NORMAL);
-        ELTBiome ELTBiome = new ELTBiome();
-        ELTBiome.setBiomesRidge(new ArrayList<Biome>());
+
 
         // Register all item and blocks
         new Handler_Items();

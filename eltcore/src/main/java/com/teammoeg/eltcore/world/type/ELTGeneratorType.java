@@ -20,6 +20,7 @@ package com.teammoeg.eltcore.world.type;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
+import com.teammoeg.eltcore.world.ELTBiomeSource;
 import net.minecraft.block.Blocks;
 import net.minecraft.client.world.GeneratorType;
 import net.minecraft.util.registry.Registry;
@@ -37,7 +38,9 @@ public abstract class ELTGeneratorType {
 
     public static final GeneratorType ELT_NORMAL = new GeneratorType("elt_normal") {
         protected ChunkGenerator getChunkGenerator(Registry<Biome> biomeRegistry, Registry<ChunkGeneratorSettings> chunkGeneratorSettingsRegistry, long seed) {
-            return new FlatChunkGenerator(getEltConfig(biomeRegistry));
+            return new NoiseChunkGenerator(new ELTBiomeSource(seed, biomeRegistry), seed, () -> {
+                return chunkGeneratorSettingsRegistry.getOrThrow(ChunkGeneratorSettings.OVERWORLD);
+            });
         }
     };
 
