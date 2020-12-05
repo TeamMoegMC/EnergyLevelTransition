@@ -2,7 +2,7 @@
 name: Localization
 about: 'Issues regarding localization, like a lack of English text, etc. '
 title: ''
-labels: Localization
+labels: ''
 assignees: yuesha-yc
 
 ---
