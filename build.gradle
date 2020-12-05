@@ -24,10 +24,6 @@ allprojects {
 			url = "https://maven.fabricmc.net"
 		}
 		maven {
-			name = "Jihuayu"
-			url = "http://maven2.jihuayu.site/releases"
-		}
-		maven {
 			name = "CottonMC"
 			url = "https://server.bbkr.space/artifactory/libs-release"
 		}

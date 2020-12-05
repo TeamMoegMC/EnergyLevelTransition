@@ -23,6 +23,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.RegistryLookupCodec;
@@ -77,8 +78,21 @@ public class ELTBiomeSource extends BiomeSource {
      * @return The Biome where noise generation takes place.
      */
     public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
-//        return BuiltinBiomes.PLAINS;
-        return this.biomeSampler.sample(this.biomeRegistry, biomeX, biomeZ);
+        BlockPos oceanPos = getOceanCenterPos();
+        int oceanPosX = oceanPos.getX();
+        int oceanPosZ = oceanPos.getZ();
+        double distance = Math.sqrt((biomeX-oceanPosX)*(biomeX-oceanPosX) + (biomeZ-oceanPosZ)*(biomeZ-oceanPosZ));
+        if (distance > 16) {
+            return biomeRegistry.getOrThrow(BiomeKeys.OCEAN);
+        }
+        else {
+            return biomeRegistry.getOrThrow(BiomeKeys.ICE_SPIKES);
+        }
+    }
+
+    private static BlockPos getOceanCenterPos() {
+        BlockPos blockPos = new BlockPos(0, 0, 0);
+        return blockPos;
     }
 
     static {
