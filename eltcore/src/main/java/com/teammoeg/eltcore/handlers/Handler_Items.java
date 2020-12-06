@@ -20,8 +20,8 @@ package com.teammoeg.eltcore.handlers;
 
 import com.teammoeg.eltcore.ELT_Core;
 import com.teammoeg.eltcore.item.ELTGroups;
-import com.teammoeg.eltcore.item.ItemBase;
 import com.teammoeg.eltcore.item.ItemTooltip;
+import com.teammoeg.eltcore.item.WorldGenDebugger;
 import com.teammoeg.eltcore.tag.ELTTag;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.models.JModel;
@@ -54,16 +54,12 @@ import net.minecraft.util.registry.Registry;
  */
 public class Handler_Items {
 
-    public static final ItemBase
-            ELT_SYMBOL;
-
-    static {
-        ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
-    }
+    public static final Item ELT_SYMBOL = register("symbol", "Symbol", "能级跃迁", "", "", new ItemTooltip((new Item.Settings()).group(ELTGroups.MISC)));
+    public static final Item WORLD_GEN_DEBUGGER = register("world_gen_debugger", "Worldgen Debugger", "世界生成调试工具", "Clear 5x5 Chunks", "清理5x5的区块", new WorldGenDebugger(new Item.Settings().group(ELTGroups.TOOLS)));
 
     /** Register with Tag */
-    private static ItemBase create(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item, ELTTag... aTags) {
-        ItemBase rItem = register(path, enName, cnName, enTooltip, cnTooltip, item);
+    private static Item create(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item, ELTTag... aTags) {
+        Item rItem = register(path, enName, cnName, enTooltip, cnTooltip, item);
         if (aTags.length > 0) {
             for (ELTTag tTag : aTags) {
                 tTag.mTag.values.remove("minecraft:air");
@@ -134,13 +130,13 @@ public class Handler_Items {
     }
 
     // No animation is registered
-    private static ItemBase register(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item) {
+    private static Item register(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item) {
 
         Identifier itemId = new Identifier("eltcore", path);
         registerModel(path);
         registerLang(path, "en_us", enName, enTooltip);
         registerLang(path, "zh_cn", cnName, cnTooltip);
-        return (ItemBase)register(itemId, item);
+        return register(itemId, item);
     }
 
     private static Item register(String path, String enName, String cnName, Item item) {

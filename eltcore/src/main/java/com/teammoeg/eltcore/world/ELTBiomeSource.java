@@ -72,13 +72,14 @@ public class ELTBiomeSource extends BiomeSource {
     /**
      * Get the Biome for noise generation.
      * Normally we get random sample from a group of Biomes.
-     * @param biomeX
-     * @param biomeY
-     * @param biomeZ
      * @return The Biome where noise generation takes place.
      */
     public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
-        BlockPos oceanPos = getOceanCenterPos();
+        return getBiomeForCentralRiver(biomeX, biomeY, biomeZ);
+    }
+
+    private Biome getBiomeGenForCentralIsland(int biomeX, int biomeY, int biomeZ) {
+        BlockPos oceanPos = new BlockPos(0, 0, 0);
         int oceanPosX = oceanPos.getX();
         int oceanPosZ = oceanPos.getZ();
         double distance = Math.sqrt((biomeX-oceanPosX)*(biomeX-oceanPosX) + (biomeZ-oceanPosZ)*(biomeZ-oceanPosZ));
@@ -90,9 +91,14 @@ public class ELTBiomeSource extends BiomeSource {
         }
     }
 
-    private static BlockPos getOceanCenterPos() {
-        BlockPos blockPos = new BlockPos(0, 0, 0);
-        return blockPos;
+    private Biome getBiomeForCentralRiver(int biomeX, int biomeY, int biomeZ) {
+        int riverWidth = 16;
+        if (Math.abs(biomeZ) < riverWidth) {
+            return biomeRegistry.getOrThrow(BiomeKeys.OCEAN);
+        }
+        else {
+            return biomeRegistry.getOrThrow(BiomeKeys.PLAINS);
+        }
     }
 
     static {
