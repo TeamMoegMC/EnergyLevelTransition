@@ -77,7 +77,6 @@ public class ELTBiomeSource extends BiomeSource {
      */
     public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
         double avgTemp = Temperature.getAvgTemp(biomeX, biomeY, biomeZ);
-//        if (avgTemp < 10) System.out.println("Z " + biomeZ + " Y " + biomeY + " T " + avgTemp);
 
         if (avgTemp >= 0 && avgTemp < 8) {
             for (Biome biome : biomeRegistry.stream().collect(Collectors.toList())) {
