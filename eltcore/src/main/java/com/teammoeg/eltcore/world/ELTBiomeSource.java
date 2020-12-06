@@ -34,6 +34,7 @@ import net.minecraft.world.biome.source.BiomeLayerSampler;
 import net.minecraft.world.biome.source.BiomeSource;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
@@ -75,7 +76,37 @@ public class ELTBiomeSource extends BiomeSource {
      * @return The Biome where noise generation takes place.
      */
     public Biome getBiomeForNoiseGen(int biomeX, int biomeY, int biomeZ) {
-        return getBiomeForCentralRiver(biomeX, biomeY, biomeZ);
+        double avgTemp = Temperature.getAvgTemp(biomeX, biomeY, biomeZ);
+//        if (avgTemp < 10) System.out.println("Z " + biomeZ + " Y " + biomeY + " T " + avgTemp);
+
+        if (avgTemp >= 0 && avgTemp < 8) {
+            for (Biome biome : biomeRegistry.stream().collect(Collectors.toList())) {
+                if (biome.getTemperature() >= 0 && biome.getTemperature() < 0.2) {
+                    return biome;
+                }
+            }
+        } else if (avgTemp >= 8 && avgTemp < 16) {
+            for (Biome biome : biomeRegistry.stream().collect(Collectors.toList())) {
+                if (biome.getTemperature() >= 0.2 && biome.getTemperature() < 0.5) {
+                    return biome;
+                }
+            }
+        } else if (avgTemp >= 16 && avgTemp < 24) {
+            for (Biome biome : biomeRegistry.stream().collect(Collectors.toList())) {
+                if (biome.getTemperature() >= 0.5 && biome.getTemperature() < 0.8) {
+                    return biome;
+                }
+            }
+        } else if (avgTemp >= 24 && avgTemp < 32) {
+            for (Biome biome : biomeRegistry.stream().collect(Collectors.toList())) {
+                if (biome.getTemperature() >= 0.8 && biome.getTemperature() < 2.0) {
+                    return biome;
+                }
+            }
+        } else {
+            return biomeRegistry.getOrThrow(BiomeKeys.SAVANNA);
+        }
+        return biomeRegistry.getOrThrow(BiomeKeys.OCEAN);
     }
 
     private Biome getBiomeGenForCentralIsland(int biomeX, int biomeY, int biomeZ) {
