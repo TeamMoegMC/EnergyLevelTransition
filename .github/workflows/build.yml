@@ -1,0 +1,48 @@
+# Last update: Sep 29 2020
+name: Build
+on:
+  push:
+    branches: 
+      - '1.16'
+  pull_request:
+    branches: 
+      - '1.16'
+  workflow_dispatch:
+  
+jobs:
+  build:
+    strategy:
+      matrix:
+        java-version: [1.8, 11, 14]
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/cache@v2
+      with:
+        path: |
+          ~/.gradle/caches
+          **/.gradle
+          !**/.gradle/libs
+        key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
+    - name: Setup JDK
+      uses: actions/setup-java@v1
+      with:
+        java-version: ${{ matrix.java-version }}
+    - uses: burrunan/gradle-cache-action@v1
+      name: Cache .gradle
+      with:
+        job-id: elt
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
+    - name: Build with Gradle
+      run: ./gradlew build
+    - name: Upload Main Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: Artifacts
+        path: build/libs/
+    - name: Upload Sub Artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Artifacts
+        path: ./*/build/libs/

@@ -1,0 +1,14 @@
+# This is the Changelog for Minecraft Mod - Energy Level Transition (1.16)
+# [ADDED] = Added a feature, [REMOVED] = Removed a feature, [CHANGED] = Changed a feature, [NOTE] = Other
+
+0.5.0:
+[NOTE] Changed to Forge API
+
+0.4.0:
+[NOTE] Update MC and libs to 1.16.4
+
+0.2.0:
+[ADD] Setup the multi-project structure of the mod.
+
+0.1.0:
+[ADD] Wood Cutter and some flint tools are added.
