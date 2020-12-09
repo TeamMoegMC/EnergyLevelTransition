@@ -20,6 +20,7 @@ package com.teammoeg.eltcore.handlers;
 
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.blockstate.JState;
+import net.devtech.arrp.json.lang.JLang;
 import net.devtech.arrp.json.models.JModel;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -58,42 +59,43 @@ public class Handler_Blocks {
     }
 
     @Deprecated
-    private static Block registerNoEN(boolean isCustomModel, boolean isCustomBlockState, String path, Block block) {
+    private static Block registerNoLang(boolean isCustomModel, boolean isCustomBlockState, String path, Block block) {
         registerModel(isCustomModel, path);
         registerBlockItemModel(path);
         registerBlockState(isCustomBlockState, path);
-        return Registry.register(Registry.BLOCK, new Identifier("eltcore", path), block);
+        return register(path, block);
     }
 
     @Deprecated
-    private static Block registerNoCN(boolean isCustomModel, boolean isCustomBlockState, String path, String en, Block block) {
+    private static Block registerEN(boolean isCustomModel, boolean isCustomBlockState, String path, String en, Block block) {
         registerModel(isCustomModel, path);
         registerBlockItemModel(path);
         registerBlockState(isCustomBlockState, path);
-        registerLang(path, "en_us", en);
-        return Registry.register(Registry.BLOCK, new Identifier("eltcore", path), block);
+        registerLang(path, EN_US, en);
+        return register(path, block);
     }
 
     // no custom model nor blockstate
-    private static Block register(String path, String en, String cn, Block block) {
-        return register(F, path, en, cn, block);
+    private static Block register(String path, String en, String cn, String ru, Block block) {
+        return register(F, path, en, cn, ru, block);
     }
 
     // no custom blockstate
-    private static Block register(boolean isCustomModel, String path, String en, String cn, Block block) {
-        return register(isCustomModel, F, path, en, cn, block);
+    private static Block register(boolean isCustomModel, String path, String en, String cn, String ru, Block block) {
+        return register(isCustomModel, F, path, en, cn, ru, block);
     }
 
     /**
      * THe recommended method to register a block.
      */
-    private static Block register(boolean isCustomModel, boolean isCustomBlockState, String path, String en, String cn, Block block) {
+    private static Block register(boolean isCustomModel, boolean isCustomBlockState, String path, String en, String cn, String ru, Block block) {
         registerModel(isCustomModel, path);
         registerBlockItemModel(path);
         registerBlockState(isCustomBlockState, path);
-        registerLang(path, "en_us", en);
-        registerLang(path, "zh_cn", cn);
-        return Registry.register(Registry.BLOCK, new Identifier("eltcore", path), block);
+        registerLang(path, EN_US, en);
+        registerLang(path, ZH_CN, cn);
+        registerLang(path, RU_RU, ru);
+        return register(path, block);
     }
 
     /**
@@ -125,11 +127,11 @@ public class Handler_Blocks {
         }
     }
 
-    private static void registerLang(String path, String language, String name) {
-        if (language.equalsIgnoreCase("en_us"))
-            ELTRESOURCE.addLang(new Identifier("eltcore", language), EN_US.translate("block.eltcore." + path, name));
-        if (language.equalsIgnoreCase("zh_cn"))
-            ELTRESOURCE.addLang(new Identifier("eltcore", language), ZH_CN.translate("block.eltcore." + path, name));
+    private static void registerLang(String path, JLang lang, String name) {
+        if (path.contains("/"))
+            path = path.replace("/", ".");
+        ELTRESOURCE.addLang(new Identifier("eltcore", lang.getName()), lang
+                .translate("block.eltcore." + path, name));
     }
 
     private static void registerAnimation(String path, int frametime) {

@@ -47,14 +47,15 @@ public class ELT_Main implements ModInitializer {
     public static final Logger LOGGER = LogManager.getFormatterLogger("Energy Level Transition");
 
     public static RecipeSerializer<WoodCutterRecipe> WOOD_CUTTER_RECIPE = Registry.register(Registry.RECIPE_SERIALIZER, "elt:woodcutter", new WoodCutterRecipe.Serializer());
-    public static JLang EN_US = JLang.lang();
-    public static JLang ZH_CN = JLang.lang();
+    public static JLang EN_US = JLang.lang("en_us");
+    public static JLang ZH_CN = JLang.lang("zh_cn");
+    public static JLang RU_RU = JLang.lang("ru_ru");
     public static BlockEntityType<DemoBlockEntity> DEMO_BLOCK_ENTITY;
     public static BlockEntityType<WoodCutterBlockEntity> BlockEntityWoodCutter;
 
     @Override
     public void onInitialize() {
-        LOGGER.info("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
+        log("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
 
         new ELTItems();
         new ELTBlocks();
@@ -70,10 +71,13 @@ public class ELT_Main implements ModInitializer {
         DEMO_BLOCK_ENTITY = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:demo", BlockEntityType.Builder.create(DemoBlockEntity::new, ELTBlocks.EXAMPLE_BLOCK).build(null));
         BlockEntityWoodCutter = Registry.register(Registry.BLOCK_ENTITY_TYPE, "elt:wood_cutter", BlockEntityType.Builder.create(WoodCutterBlockEntity::new, ELTBlocks.MANUAL_WOOD_CUTTER).build(null));
 
-        LOGGER.info("ELT Nain initialized");
+        log("ELT Nain initialized");
     }
-
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
+    }
+
+    public static void log(String message) {
+        log(Level.INFO, message);
     }
 }

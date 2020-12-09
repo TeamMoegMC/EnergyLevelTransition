@@ -6,15 +6,17 @@ import java.util.Map;
 import net.minecraft.util.Identifier;
 
 public class JLang implements Cloneable {
+	private final String name;
 	private Map<String, String> lang = new HashMap<>();
 
 	/**
-	 * @see #lang()
+	 * @see #lang(String name)
 	 */
-	public JLang() {}
+	public JLang(String name) { this.name = name;
+	}
 
-	public static JLang lang() {
-		return new JLang();
+	public static JLang lang(String name) {
+		return new JLang(name);
 	}
 
 	public JLang translate(String in, String out) {
@@ -69,6 +71,10 @@ public class JLang implements Cloneable {
 
 	public Map<String, String> getLang() {
 		return this.lang;
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	@Override

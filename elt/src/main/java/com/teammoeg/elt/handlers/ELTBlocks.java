@@ -20,8 +20,10 @@ package com.teammoeg.elt.handlers;
 
 import com.teammoeg.elt.blocks.ExampleBlock;
 import com.teammoeg.elt.blocks.WoodCutterBlock;
+import com.teammoeg.eltcore.ELT_Core;
 import net.devtech.arrp.json.animation.JAnimation;
 import net.devtech.arrp.json.blockstate.JState;
+import net.devtech.arrp.json.lang.JLang;
 import net.devtech.arrp.json.models.JModel;
 import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.Block;
@@ -30,6 +32,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 
 import static com.teammoeg.elt.ELT_Main.*;
+import static com.teammoeg.eltcore.ELT_Core.ELTRESOURCE;
 import static com.teammoeg.eltcore.data.CS.F;
 import static com.teammoeg.eltcore.data.CS.T;
 
@@ -53,9 +56,9 @@ public class ELTBlocks {
     public static final Block MANUAL_WOOD_CUTTER;
 
     static {
-        TEST = register(T, T, "simple/test", "Example Block", "一个例子方块", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
-        EXAMPLE_BLOCK = register(T, T, "complex/example_block", "Example Block", "一个例子方块", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
-        MANUAL_WOOD_CUTTER = register(T, F, "complex/wood_cutter", "Manual Wood Cutter", "原木切割案", new WoodCutterBlock(FabricBlockSettings.of(Material.WOOD)));
+        TEST = register(T, T, "simple/test", "Example Block", "一个例子方块", "Блок-пустышка", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
+        EXAMPLE_BLOCK = register(T, T, "complex/example_block", "Example Block", "一个例子方块", "Блок-пустышка", new ExampleBlock(FabricBlockSettings.of(Material.STONE)));
+        MANUAL_WOOD_CUTTER = register(T, F, "complex/wood_cutter", "Manual Wood Cutter", "原木切割案", "Ручная лесопилка", new WoodCutterBlock(FabricBlockSettings.of(Material.WOOD)));
     }
 
     // No Model is registered
@@ -76,29 +79,30 @@ public class ELTBlocks {
         registerModel(isCustomModel, path);
         registerBlockItemModel(path);
         registerBlockState(isCustomBlockState, path);
-        registerLang(path, "en_us", en);
+        registerLang(path, EN_US, en);
         return Registry.register(Registry.BLOCK, new Identifier("elt", path), block);
     }
 
     // no custom model nor blockstate
-    private static Block register(String path, String en, String cn, Block block) {
-        return register(F, path, en, cn, block);
+    private static Block register(String path, String en, String cn, String ru, Block block) {
+        return register(F, path, en, cn, ru, block);
     }
 
     // no custom blockstate
-    private static Block register(boolean isCustomModel, String path, String en, String cn, Block block) {
-        return register(isCustomModel, F, path, en, cn, block);
+    private static Block register(boolean isCustomModel, String path, String en, String cn, String ru, Block block) {
+        return register(isCustomModel, F, path, en, cn, ru, block);
     }
 
     /**
      * THe recommended method to register a block.
      */
-    private static Block register(boolean isCustomModel, boolean isCustomBlockState, String path, String en, String cn, Block block) {
+    private static Block register(boolean isCustomModel, boolean isCustomBlockState, String path, String en, String cn, String ru, Block block) {
         registerModel(isCustomModel, path);
         registerBlockItemModel(path);
         registerBlockState(isCustomBlockState, path);
-        registerLang(path, "en_us", en);
-        registerLang(path, "zh_cn", cn);
+        registerLang(path, EN_US, en);
+        registerLang(path, ZH_CN, cn);
+        registerLang(path, RU_RU, ru);
         return Registry.register(Registry.BLOCK, new Identifier("elt", path), block);
     }
 
@@ -131,11 +135,10 @@ public class ELTBlocks {
         }
     }
 
-    private static void registerLang(String path, String language, String name) {
-        if (language.equalsIgnoreCase("en_us"))
-            RESOURCE_PACK.addLang(new Identifier("elt", language), EN_US.translate("block.elt." + path, name));
-        if (language.equalsIgnoreCase("zh_cn"))
-            RESOURCE_PACK.addLang(new Identifier("elt", language), ZH_CN.translate("block.elt." + path, name));
+    private static void registerLang(String path, JLang lang, String name) {
+        if (path.contains("/"))
+            path = path.replace("/", ".");
+        RESOURCE_PACK.addLang(new Identifier("elt", lang.getName()), lang.translate("block.elt." + path, name));
     }
 
     private static void registerAnimation(String path, int frametime) {

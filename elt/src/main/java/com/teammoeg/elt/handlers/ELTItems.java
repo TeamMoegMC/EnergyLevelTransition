@@ -23,6 +23,7 @@ import com.teammoeg.eltcore.item.ELTGroups;
 import com.teammoeg.eltcore.item.ItemBase;
 import com.teammoeg.eltcore.item.ItemTooltip;
 import net.devtech.arrp.json.animation.JAnimation;
+import net.devtech.arrp.json.lang.JLang;
 import net.devtech.arrp.json.models.JModel;
 import net.minecraft.block.Block;
 import net.minecraft.item.BlockItem;
@@ -111,22 +112,28 @@ public class ELTItems {
     }
 
     protected static Item register(Block block, Item item) {
-        return register(Registry.BLOCK.getId(block), item);
+        return register(Registry.BLOCK.getId(block).getPath(), item);
     }
 
     /**
      * Methods with Item.
      */
     private static Item register(String namespace, String path, Item item) {
-        return register(new Identifier(namespace, path), item);
-    }
-
-    public static Item register(Identifier id, Item item) {
+        Identifier itemId = new Identifier(namespace, path);
         if (item instanceof BlockItem) {
             ((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
         }
 
-        return Registry.register(Registry.ITEM, id, item);
+        return Registry.register(Registry.ITEM, itemId, item);
+    }
+
+    public static Item register(String path, Item item) {
+        Identifier itemId = new Identifier("elt", path);
+        if (item instanceof BlockItem) {
+            ((BlockItem) item).appendBlocks(Item.BLOCK_ITEMS, item);
+        }
+
+        return Registry.register(Registry.ITEM, itemId, item);
     }
 
     /**
@@ -135,71 +142,56 @@ public class ELTItems {
     // Everything is registered
     private static Item register(String path, String enName, String cnName, String enTooltip, String cnTooltip, int frametime, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
-        registerLang(path, "en_us", enName, enTooltip);
-        registerLang(path, "zh_cn", cnName, cnTooltip);
+        registerLang(path, EN_US, enName, enTooltip);
+        registerLang(path, ZH_CN, cnName, cnTooltip);
         registerAnimation(path, frametime);
 
-        return register(itemId, item);
+        return register(path, item);
     }
 
-    private static Item register(String path, String enName, String cnName, int frametime, Item item) {
+    private static Item register(String path, String en, String cn, int frametime, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
-        registerLang(path, "en_us", enName, "");
-        registerLang(path, "zh_cn", cnName, "");
+        registerLang(path, EN_US, en, "");
+        registerLang(path, ZH_CN, cn, "");
         registerAnimation(path, frametime);
 
-        return register(itemId, item);
+        return register(path, item);
     }
 
     // No animation is registered
     private static Item register(String path, String enName, String cnName, String enTooltip, String cnTooltip, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
-        registerLang(path, "en_us", enName, enTooltip);
-        registerLang(path, "zh_cn", cnName, cnTooltip);
-        return register(itemId, item);
+        registerLang(path, EN_US, enName, enTooltip);
+        registerLang(path, ZH_CN, cnName, cnTooltip);
+        return register(path, item);
     }
 
-    private static Item register(String path, String enName, String cnName, Item item) {
+    private static Item register(String path, String en, String cn, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
-        registerLang(path, "en_us", enName, "");
-        registerLang(path, "zh_cn", cnName, "");
-        return register(itemId, item);
+        registerLang(path, EN_US, en, "");
+        registerLang(path, ZH_CN, cn, "");
+        return register(path, item);
     }
 
     // No Chinese localization is registered, not recommended to use this.
     private static Item registerNoCN(String path, String en, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
-        registerLang(path, "en_us", en, "");
-        registerLang(path, "zh_cn", en, "");
+        registerLang(path, EN_US, en, "");
 
-        return register(itemId, item);
+        return register(path, item);
     }
 
     // No English nor Chinese localization is registered
     private static Item registerNoEN(String path, Item item) {
 
-        Identifier itemId = new Identifier("elt", path);
         registerModel(path);
 
-        return register(itemId, item);
-    }
-
-    // No model is registered
-    private static Item register(String path, Item item) {
-
-        Identifier itemId = new Identifier("elt", path);
-
-        return register(itemId, item);
+        return register(path, item);
     }
 
     /**
@@ -216,20 +208,10 @@ public class ELTItems {
     }
 
     // With specified tooltip
-    private static void registerLang(String path, String language, String name, String tooltip) {
-        String unlocalizedPath;
-        if (path.contains("/")) {
-            unlocalizedPath = path.replace("/", ".");
-            if (language.equalsIgnoreCase("en_us"))
-                RESOURCE_PACK.addLang(new Identifier("elt", language), EN_US.translate("item.elt." + unlocalizedPath, name).translate("item.elt." + unlocalizedPath + ".tooltip", tooltip));
-            if (language.equalsIgnoreCase("zh_cn"))
-                RESOURCE_PACK.addLang(new Identifier("elt", language), ZH_CN.translate("item.elt." + unlocalizedPath, name).translate("item.elt." + unlocalizedPath + ".tooltip", tooltip));
-        } else {
-            if (language.equalsIgnoreCase("en_us"))
-                RESOURCE_PACK.addLang(new Identifier("elt", language), EN_US.translate("item.elt." + path, name).translate("item.elt." + path + ".tooltip", tooltip));
-            if (language.equalsIgnoreCase("zh_cn"))
-                RESOURCE_PACK.addLang(new Identifier("elt", language), ZH_CN.translate("item.elt." + path, name).translate("item.elt." + path + ".tooltip", tooltip));
-        }
+    private static void registerLang(String path, JLang lang, String name, String tooltip) {
+        if (path.contains("/"))
+            path = path.replace("/", ".");
+        RESOURCE_PACK.addLang(new Identifier("elt", lang.getName()), lang.translate("item.elt." + path, name).translate("item.elt." + path + ".tooltip", tooltip));
     }
 
     private static void registerAnimation(String path, int frametime) {

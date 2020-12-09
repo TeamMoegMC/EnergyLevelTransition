@@ -29,7 +29,7 @@ import net.minecraft.util.Identifier;
 
 @Environment(EnvType.CLIENT)
 public class WoodCutterScreen extends HandledScreen<WoodCutterScreenHandler> {
-    private static final Identifier TEXTURE = new Identifier("elt:textures/gui/wood_cutter.png");
+    private static final Identifier TEXTURE = new Identifier("elt", "textures/gui/wood_cutter.png");
     private float scrollAmount;
 
 

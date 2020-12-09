@@ -28,7 +28,7 @@ import net.devtech.arrp.api.RRPCallback;
 import net.devtech.arrp.api.RuntimeResourcePack;
 import net.devtech.arrp.json.lang.JLang;
 import net.fabricmc.api.ModInitializer;
-import net.minecraft.client.world.GeneratorType;
+import net.minecraft.client.world.GeneratorType
 import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import org.apache.logging.log4j.Level;
@@ -42,13 +42,14 @@ public class ELT_Core implements ModInitializer {
     public static final String MOD_ID = "eltcore";
     public static final String MOD_NAME = "ELT Core";
     public static final Logger LOGGER = LogManager.getFormatterLogger(MOD_NAME);
-    public static JLang EN_US = JLang.lang();
-    public static JLang ZH_CN = JLang.lang();
+    public static JLang EN_US = JLang.lang("en_us");
+    public static JLang ZH_CN = JLang.lang("zh_cn");
+    public static JLang RU_RU = JLang.lang("ru_ru");
     public static final RuntimeResourcePack ELTRESOURCE = RuntimeResourcePack.create(MOD_ID + ":main");
 
     @Override
     public void onInitialize() {
-        LOGGER.info("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
+        log("ELT is Open Source: https://github.com/MoegTech/EnergyLevelTransition");
 
 
         Registry.register(Registry.BIOME_SOURCE, "elt", ELTBiomeSource.CODEC);
@@ -67,10 +68,14 @@ public class ELT_Core implements ModInitializer {
         // Init RRP
         RRPCallback.EVENT.register(a -> a.add(ELTRESOURCE));
 
-        LOGGER.info("ELT Core initialized");
+        log("ELT Core initialized");
     }
 
     public static void log(Level level, String message) {
         LOGGER.log(level, "[" + MOD_NAME + "] " + message);
+    }
+
+    public static void log(String message) {
+        log(Level.INFO, message);
     }
 }

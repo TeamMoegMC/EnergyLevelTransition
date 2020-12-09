@@ -27,12 +27,14 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class ELTScreenHandlerTypes {
 
     public static final ScreenHandlerType<WoodCutterScreenHandler> WOOD_CUTTER = ScreenHandlerRegistry.registerExtended(new Identifier("elt", "wood_cutter_screenhandler"), (syncId, inventory, buf) -> {
         BlockPos pos = buf.readBlockPos();
         World world = inventory.player.world;
-        return new WoodCutterScreenHandler(syncId, inventory, (Inventory) world.getBlockEntity(pos), ScreenHandlerContext.create(inventory.player.world, pos));
+        return new WoodCutterScreenHandler(syncId, inventory, (Inventory) Objects.requireNonNull(world.getBlockEntity(pos)), ScreenHandlerContext.create(inventory.player.world, pos));
     });
 
 }
