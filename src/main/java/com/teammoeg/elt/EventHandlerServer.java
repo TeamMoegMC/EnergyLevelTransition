@@ -25,12 +25,12 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandlerServer {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
 
     @SubscribeEvent
-    public void onServerStarting(FMLServerStartingEvent event) {
+    public static void onServerStarting(FMLServerStartingEvent event) {
         LOGGER.info("ELT Server Starting");
     }
 }

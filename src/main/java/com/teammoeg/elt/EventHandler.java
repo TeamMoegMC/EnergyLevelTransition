@@ -25,13 +25,13 @@ import net.minecraftforge.fml.common.Mod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class EventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
 
     @SubscribeEvent
     public static void onCreateWorldSpawn(WorldEvent.CreateSpawnPosition event) {
-
+        LOGGER.info("ELT on create world spawn event");
     }
 
 }

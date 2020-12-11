@@ -34,14 +34,14 @@ public class EventHandlerIMC {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
 
     @SubscribeEvent
-    private void enqueueIMC(final InterModEnqueueEvent event)
+    public static void enqueueIMC(final InterModEnqueueEvent event)
     {
         // some example code to dispatch IMC to another mod
         InterModComms.sendTo("examplemod", "helloworld", () -> { LOGGER.info("Hello world from the MDK"); return "Hello world";});
     }
 
     @SubscribeEvent
-    private void processIMC(final InterModProcessEvent event)
+    public static void processIMC(final InterModProcessEvent event)
     {
         // some example code to receive and process InterModComms from other mods
         LOGGER.info("Got IMC {}", event.getIMCStream().

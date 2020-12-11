@@ -16,9 +16,8 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt;
+package com.teammoeg.gravitation;
 
-import com.teammoeg.elt.config.ELTConfig;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -30,25 +29,19 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
-@Mod("elt")
-public class ELT
+@Mod("gravitation")
+public class Gravitation
 {
-    // Directly reference a log4j logger.
-    private static final Logger LOGGER = LogManager.getLogger("ELT");
+    private static final Logger LOGGER = LogManager.getLogger("Gravitation");
 
-    public ELT() {
+    public Gravitation() {
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(EventHandler.class);
-        MinecraftForge.EVENT_BUS.register(EventHandlerClient.class);
-        MinecraftForge.EVENT_BUS.register(EventHandlerServer.class);
-        MinecraftForge.EVENT_BUS.register(EventHandlerIMC.class);
-        ELTConfig.init();
     }
 
     private void setup(final FMLCommonSetupEvent event)
     {
-        LOGGER.info("ELT Common Setup");
+        LOGGER.info("Gravitation Common Setup");
     }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)

@@ -4,27 +4,54 @@ license="GPL-3.0"
 issueTrackerURL="http://github.com/MoegTech/EnergyLevelTransition/issues" #optional
 # A list of mods - how many allowed here is determined by the individual mod loader
 [[mods]] #mandatory
-modId="elt" #mandatory
-version="${file.jarVersion}" #mandatory
-displayName="Energy Level Transition" #mandatory
-updateJSONURL="http://www.teammoeg.com/" #optional
-displayURL="http://www.teammoeg.com/" #optional
-logoFile="pack.png" #optional
-credits="All Contributors" #optional
-authors="TeamMoeg" #optional
-description='''
-Athwart the Gehlon roars a squall, Beneath the tree do roamers stall. When to becrawl, a windfall.
-骤风穿行于知识之槲，迷茫者在树下彷徨驻足。将要攀登之际，果实落下。
-'''
-# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-[[dependencies.elt]] #optional
+    modId="elt" #mandatory
+    version="${file.jarVersion}" #mandatory
+    displayName="Energy Level Transition" #mandatory
+    updateJSONURL="http://www.teammoeg.com/" #optional
+    displayURL="http://www.teammoeg.com/" #optional
+    logoFile="pack.png" #optional
+    credits="All Contributors" #optional
+    authors="TeamMoeg" #optional
+    description='''
+    Athwart the Gehlon roars a squall, Beneath the tree do roamers stall. When to becrawl, a windfall.
+    骤风穿行于知识之槲，迷茫者在树下彷徨驻足。将要攀登之际，果实落下。
+    '''
+    # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+    [[dependencies.elt]] #optional
+        modId="forge" #mandatory
+        mandatory=true #mandatory
+        versionRange="[35,)" #mandatory
+        ordering="NONE" # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+        side="BOTH" # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    # Here's another dependency
+    [[dependencies.elt]]
+        modId="minecraft"
+        mandatory=true
+        versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
+        ordering="NONE"
+        side="BOTH"
+
+[[mods]] #mandatory
+    modId="gravitation" #mandatory
+    version="${file.jarVersion}" #mandatory
+    displayName="Gravitation" #mandatory
+    updateJSONURL="http://www.teammoeg.com/" #optional
+    displayURL="http://www.teammoeg.com/" #optional
+    logoFile="pack.png" #optional
+    credits="All Contributors" #optional
+    authors="TeamMoeg" #optional
+    description='''
+    The Real Science Space Mod
+    '''
+    # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+    [[dependencies.gravitation]] #optional
     modId="forge" #mandatory
     mandatory=true #mandatory
     versionRange="[35,)" #mandatory
     ordering="NONE" # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
     side="BOTH" # Side this dependency is applied on - BOTH, CLIENT or SERVER
-# Here's another dependency
-[[dependencies.elt]]
+    # Here's another dependency
+    [[dependencies.gravitation]]
     modId="minecraft"
     mandatory=true
     versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
