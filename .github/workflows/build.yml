@@ -1,13 +1,6 @@
 # Last update: Sep 29 2020
 name: Build
-on:
-  push:
-    branches: 
-      - '1.16'
-  pull_request:
-    branches: 
-      - '1.16'
-  workflow_dispatch:
+on: [push, pull_request]
   
 jobs:
   build:
