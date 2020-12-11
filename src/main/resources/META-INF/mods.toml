@@ -30,30 +30,3 @@ issueTrackerURL="http://github.com/MoegTech/EnergyLevelTransition/issues" #optio
         versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
         ordering="NONE"
         side="BOTH"
-
-[[mods]] #mandatory
-    modId="gravitation" #mandatory
-    version="${file.jarVersion}" #mandatory
-    displayName="Gravitation" #mandatory
-    updateJSONURL="http://www.teammoeg.com/" #optional
-    displayURL="http://www.teammoeg.com/" #optional
-    logoFile="pack.png" #optional
-    credits="All Contributors" #optional
-    authors="TeamMoeg" #optional
-    description='''
-    The Real Science Space Mod
-    '''
-    # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
-    [[dependencies.gravitation]] #optional
-    modId="forge" #mandatory
-    mandatory=true #mandatory
-    versionRange="[35,)" #mandatory
-    ordering="NONE" # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
-    side="BOTH" # Side this dependency is applied on - BOTH, CLIENT or SERVER
-    # Here's another dependency
-    [[dependencies.gravitation]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    ordering="NONE"
-    side="BOTH"
