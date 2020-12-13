@@ -18,9 +18,7 @@
 
 package com.teammoeg.the_seed.api;
 
-import com.teammoeg.the_seed.code.ModData;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
@@ -29,19 +27,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 
-/**
- * @author Your Name Here, also might be worth replacing that automatically generated Copyright notice with your GPL compatible License/Name instead of mine.
- *
- * An example implementation for a Client Mod using my System. Copy and rename this File into your source Directory.
- *
- * If you have ANY Problems with the examples here, then you can contact me on the Forums or Discord.
- *
- * Note: it is important to load after "elt".
- *
- * Note: There are NO TEXTURES contained in ELT that correspond to the Examples. Those you will have to do or copy them yourself.
- *
- * uncomment the @Mod-Annotation for actual usage.
- */
 //@Mod(ExampleMod.MOD_ID)
 public final class ExampleClientMod extends AbstractClientMod {
 

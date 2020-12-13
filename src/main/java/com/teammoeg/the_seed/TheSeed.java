@@ -19,7 +19,6 @@
 package com.teammoeg.the_seed;
 
 import com.teammoeg.the_seed.api.AbstractMod;
-import com.teammoeg.the_seed.code.ModData;
 import com.teammoeg.the_seed.data.MD;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraftforge.common.MinecraftForge;

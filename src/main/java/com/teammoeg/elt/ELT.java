@@ -18,7 +18,6 @@
 
 package com.teammoeg.elt;
 
-import com.teammoeg.elt.config.ELTConfig;
 import com.teammoeg.the_seed.api.AbstractMod;
 import com.teammoeg.the_seed.data.MD;
 import com.teammoeg.the_seed.data.legacy.CS;
@@ -35,9 +34,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(ELT.MOD_ID)
 public class ELT extends AbstractMod {

@@ -24,7 +24,7 @@ import com.teammoeg.the_seed.code.TagData;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.teammoeg.the_seed.data.legacy.CS.*;
+import static com.teammoeg.the_seed.data.legacy.CS.F;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
