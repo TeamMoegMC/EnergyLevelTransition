@@ -19,7 +19,6 @@
 package com.teammoeg.the_seed;
 
 import com.teammoeg.the_seed.api.AbstractMod;
-import com.teammoeg.the_seed.data.MD;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,7 +36,7 @@ import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 public class TheSeed extends AbstractMod {
 
     public static final String MOD_ID = CS.ModIDs.SEED;
-    public static final String MOD_NAME = MD.SEED.mName;
+    public static final String MOD_NAME = "The Seed";
 
     public TheSeed() {
         MinecraftForge.EVENT_BUS.register(this);

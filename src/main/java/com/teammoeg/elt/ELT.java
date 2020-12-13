@@ -19,7 +19,6 @@
 package com.teammoeg.elt;
 
 import com.teammoeg.the_seed.api.AbstractMod;
-import com.teammoeg.the_seed.data.MD;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
@@ -38,7 +37,7 @@ import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
 @Mod(ELT.MOD_ID)
 public class ELT extends AbstractMod {
     public static final String MOD_ID = CS.ModIDs.ELT;
-    public static final String MOD_NAME = MD.ELT.mName;
+    public static final String MOD_NAME = "Energy Level Transition";
 
     public ELT() {
         MinecraftForge.EVENT_BUS.register(this);
