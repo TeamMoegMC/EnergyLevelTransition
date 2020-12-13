@@ -16,8 +16,9 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.the_seed.api;
+package com.teammoeg.the_seed.api.example;
 
+import com.teammoeg.the_seed.api.AbstractMod;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
