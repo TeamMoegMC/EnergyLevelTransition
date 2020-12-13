@@ -18,19 +18,13 @@
 
 package com.teammoeg.elt;
 
-import com.teammoeg.elt.data.CS;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
+import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EventHandlerServer {
+public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
 
-    @SubscribeEvent
-    public static void onServerStarting(FMLServerStartingEvent event) {
-        LOGGER.info("ELT Server Starting");
-    }
 }

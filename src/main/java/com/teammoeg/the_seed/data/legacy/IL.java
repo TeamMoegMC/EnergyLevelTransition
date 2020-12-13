@@ -16,22 +16,40 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt;
+package com.teammoeg.the_seed.data.legacy;
 
-import com.teammoeg.elt.data.CS;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.teammoeg.the_seed.code.IItemContainer;
+import net.minecraft.block.Block;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 
-@Mod.EventBusSubscriber(modid = CS.ModIDs.ELT, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class EventHandler {
-    private static final Logger LOGGER = LogManager.getLogger("ELT");
+/**
+ * @author YueSha (GitHub @yuesha-yc)
+ */
+public enum IL implements IItemContainer {
+    Display_Fluid;
 
-    @SubscribeEvent
-    public static void onCreateWorldSpawn(WorldEvent.CreateSpawnPosition event) {
-        LOGGER.info("ELT on create world spawn event");
+    private ItemStack mStack;
+    private boolean mHasNotBeenSet = CS.T;
+
+
+    @Override
+    public Item item() {
+        return mStack.getItem();
     }
 
+    @Override
+    public Block block() {
+        return null;
+    }
+
+    @Override
+    public Item getItem() {
+        return null;
+    }
+
+    @Override
+    public Block getBlock() {
+        return null;
+    }
 }

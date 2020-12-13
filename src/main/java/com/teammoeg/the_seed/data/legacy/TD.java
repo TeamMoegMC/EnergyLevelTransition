@@ -16,15 +16,15 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.data;
+package com.teammoeg.the_seed.data.legacy;
 
-import com.teammoeg.elt.code.ArrayListNoNulls;
-import com.teammoeg.elt.code.TagData;
+import com.teammoeg.the_seed.code.ArrayListNoNulls;
+import com.teammoeg.the_seed.code.TagData;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static com.teammoeg.elt.data.CS.*;
+import static com.teammoeg.the_seed.data.legacy.CS.*;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)

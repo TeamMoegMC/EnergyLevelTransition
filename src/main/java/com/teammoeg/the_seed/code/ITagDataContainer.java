@@ -16,7 +16,7 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.code;
+package com.teammoeg.the_seed.code;
 
 import java.util.Arrays;
 import java.util.Collection;

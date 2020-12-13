@@ -9,6 +9,5 @@
   ],
   "injectors": {
     "defaultRequire": 1
-  },
-  "refmap": "elt.refmap.json"
+  }
 }

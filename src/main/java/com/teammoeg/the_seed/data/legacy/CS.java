@@ -16,14 +16,15 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.data;
+package com.teammoeg.the_seed.data.legacy;
 
 
-import com.teammoeg.elt.code.HashSetNoNulls;
 import com.teammoeg.elt.util.UT;
+import com.teammoeg.the_seed.code.HashSetNoNulls;
 import net.minecraft.item.ItemStack;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.util.*;
 
 public class CS {
@@ -750,7 +751,7 @@ public class CS {
 //    public static final Block NB = Blocks.air;
 
     /** The Logs: Debug, Output, Error, OreDict and Material List. */
-//    public static PrintStream DEB = new LogBuffer(), OUT = new LogBuffer(), ERR = new LogBuffer(), ORD = new LogBuffer(), MAT_LOG = null;
+    public static PrintStream OUT = System.out, ERR = System.err;
 
     /** States of Matter */
     public static final byte STATE_SOLID = 0, STATE_LIQUID = 1, STATE_GASEOUS = 2, STATE_PLASMA = 3;
@@ -1707,14 +1708,8 @@ public class CS {
         public static final String
                 MC                = "minecraft"
 
-                , ELT                = "elt"
-                , ELTCORE            = "eltcore"
-
-                , GT                = "gregtech"
-                , GAPI              = "gregapi"
-                , GAPI_POST         = "gregapi_post"
-
-                , QT                = "qwertech"
+                , ELT               = "elt"
+                , SEED              = "the_seed"
 
                 , WAILA             = "Waila"
 

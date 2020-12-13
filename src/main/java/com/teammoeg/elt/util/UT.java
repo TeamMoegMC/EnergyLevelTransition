@@ -18,13 +18,13 @@
 
 package com.teammoeg.elt.util;
 
-import com.teammoeg.elt.code.ArrayListNoNulls;
+import com.teammoeg.the_seed.code.ArrayListNoNulls;
 import net.minecraft.entity.Entity;
 
 import java.text.DateFormat;
 import java.util.*;
 
-import static com.teammoeg.elt.data.CS.*;
+import static com.teammoeg.the_seed.data.legacy.CS.*;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)

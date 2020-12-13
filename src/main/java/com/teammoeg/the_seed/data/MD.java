@@ -16,12 +16,13 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.data;
+package com.teammoeg.the_seed.data;
 
-import com.teammoeg.elt.code.ModData;
+import com.teammoeg.the_seed.code.ModData;
+import com.teammoeg.the_seed.data.legacy.CS;
 
-import static com.teammoeg.elt.data.CS.ModIDs;
-import static com.teammoeg.elt.data.CS.T;
+import static com.teammoeg.the_seed.data.legacy.CS.ModIDs;
+import static com.teammoeg.the_seed.data.legacy.CS.T;
 
 /**
  * @author YueSha (GitHub @yuesha-yc)
@@ -31,7 +32,7 @@ public class MD {
     public static final ModData MC = new ModData(CS.ModIDs.MC, "Minecraft").setLoaded(T)
 
     , ELT               = new ModData(ModIDs.ELT                , "Energy Level Transition")
-    , ELTCORE           = new ModData(ModIDs.ELTCORE            , "ELT Core")
+    , SEED              = new ModData(ModIDs.SEED               , "The Seed")
 
     , IC2               = new ModData(ModIDs.IC2                , "IndustrialCraft 2")
     , IC2C              = new ModData(ModIDs.IC2C               , "IndustrialCraft 2 Classic")

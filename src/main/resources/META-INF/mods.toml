@@ -30,3 +30,30 @@ issueTrackerURL="http://github.com/MoegTech/EnergyLevelTransition/issues" #optio
         versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
         ordering="NONE"
         side="BOTH"
+
+[[mods]] #mandatory
+    modId="the_seed" #mandatory
+    version="${file.jarVersion}" #mandatory
+    displayName="The Seed" #mandatory
+    updateJSONURL="http://www.teammoeg.com/" #optional
+    displayURL="http://www.teammoeg.com/" #optional
+    logoFile="pack.png" #optional
+    credits="All Contributors" #optional
+    authors="TeamMoeg" #optional
+    description='''
+        An Ultimate Engine for the Magical Realistic Universe...
+        '''
+    # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+    [[dependencies.the_seed]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[35,)" #mandatory
+    ordering="NONE" # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    side="BOTH" # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    # Here's another dependency
+    [[dependencies.the_seed]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    ordering="NONE"
+    side="BOTH"

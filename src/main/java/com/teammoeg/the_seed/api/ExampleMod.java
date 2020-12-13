@@ -16,15 +16,10 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt;
+package com.teammoeg.the_seed.api;
 
-import com.teammoeg.elt.config.ELTConfig;
-import com.teammoeg.the_seed.api.AbstractMod;
-import com.teammoeg.the_seed.data.MD;
-import com.teammoeg.the_seed.data.legacy.CS;
-import net.minecraft.block.Block;
+import com.teammoeg.the_seed.code.ModData;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -35,23 +30,37 @@ import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
 import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
-import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
-@Mod(ELT.MOD_ID)
-public class ELT extends AbstractMod {
-    public static final String MOD_ID = CS.ModIDs.ELT;
-    public static final String MOD_NAME = MD.ELT.mName;
+/**
+ * @author Your Name Here, also might be worth replacing that automatically generated Copyright notice with your GPL compatible License/Name instead of mine.
+ *
+ * An example implementation for a Mod using my System. Copy and rename this File into your source Directory.
+ *
+ * If you have ANY Problems with the examples here, then you can contact me on the Forums or Discord.
+ *
+ * Note: it is important to load after "elt".
+ *
+ * Note: There are NO TEXTURES contained in ELT that correspond to the Examples. Those you will have to do or copy them yourself.
+ *
+ * uncomment the @Mod-Annotation for actual usage.
+ */
+//@Mod(ExampleMod.MOD_ID)
+public final class ExampleMod extends AbstractMod {
 
-    public ELT() {
+    /** Your Mod-ID has to be LOWERCASE and without Spaces. Uppercase Chars and Spaces can create problems with Resource Packs. */
+    public static final String MOD_ID = "insert_your_modid_here"; // <-- TODO: you need to change this to the ID of your own Mod, and then remove this Comment after you did that.
+    /** This is your Mods Name */
+    public static final String MOD_NAME = "Insert_your_Mod_Name_here"; // <-- TODO: you need to change this to the Name of your own Mod, and then remove this Comment after you did that.
+    /** This is your Mods Version */
+    public static final String VERSION = "1.16.4-1.0.0"; // <-- TODO: you need to change this to the Version of your own Mod, and then remove this Comment after you did that.
+
+    public ExampleMod() {
         MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(ForgeEventHandler.class);
     }
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
-        System.out.println("HELLO_WORLD");
+
     }
 
     @Override
@@ -73,7 +82,7 @@ public class ELT extends AbstractMod {
 
     @Override public String getModID() { return MOD_ID; }
     @Override public String getModName() { return MOD_NAME; }
-    @Override public String getModNameForLog() { return MOD_NAME.toUpperCase().replace(' ', '_') + "_Mod"; }
+    @Override public String getModNameForLog() { return MOD_NAME.replace(' ', '_') + "_Mod"; }
 
     @SubscribeEvent public void onCommonSetup    (FMLCommonSetupEvent aEvent)        {onModCommonSetup(aEvent);}
     @SubscribeEvent public void onClientSetup    (FMLClientSetupEvent aEvent)        {onModClientSetup(aEvent);}
@@ -84,11 +93,4 @@ public class ELT extends AbstractMod {
     @SubscribeEvent public void onServerStopping (FMLServerStoppingEvent aEvent)     {onModServerStopping(aEvent);}
     @SubscribeEvent public void onServerStopped  (FMLServerStoppedEvent aEvent)      {onModServerStopped(aEvent);}
 
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-
-        }
-    }
 }

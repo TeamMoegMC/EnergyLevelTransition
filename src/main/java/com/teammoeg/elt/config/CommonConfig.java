@@ -18,7 +18,7 @@
 
 package com.teammoeg.elt.config;
 
-import com.teammoeg.elt.data.MD;
+import com.teammoeg.the_seed.data.MD;
 import net.minecraftforge.common.ForgeConfigSpec;
 
 import java.util.function.Function;

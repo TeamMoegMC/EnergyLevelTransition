@@ -16,7 +16,7 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.data;
+package com.teammoeg.the_seed.data.legacy;
 
 import net.minecraft.util.text.TextFormatting;
 

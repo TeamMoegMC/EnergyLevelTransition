@@ -18,8 +18,8 @@
 
 package com.teammoeg.elt.util;
 
-import com.teammoeg.elt.code.ModData;
-import com.teammoeg.elt.data.MD;
+import com.teammoeg.the_seed.code.ModData;
+import com.teammoeg.the_seed.data.MD;
 import net.minecraft.util.ResourceLocation;
 
 /**
