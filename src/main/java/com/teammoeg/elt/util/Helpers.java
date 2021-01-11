@@ -31,6 +31,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.command.arguments.BlockStateParser;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.fluid.FluidState;
@@ -127,11 +128,11 @@ public class Helpers {
         if (obj.has(path))
         {
             Map<K, V> objects = new HashMap<>();
-            JsonObject objectsJson = JSONUtils.getJsonObject(obj, path);
+            JsonObject objectsJson = JSONUtils.getAsJsonObject(obj, path);
             for (K expectedKey : keyValues)
             {
                 String jsonKey = keyStringMapper.apply(expectedKey);
-                ResourceLocation id = new ResourceLocation(JSONUtils.getString(objectsJson, jsonKey));
+                ResourceLocation id = new ResourceLocation(JSONUtils.getAsString(objectsJson, jsonKey));
                 V registryObject = registry.getValue(id);
                 if (registryObject == null)
                 {
@@ -144,7 +145,7 @@ public class Helpers {
                 String jsonKey = keyStringMapper.apply(optionalKey);
                 if (objectsJson.has(jsonKey))
                 {
-                    ResourceLocation id = new ResourceLocation(JSONUtils.getString(objectsJson, jsonKey));
+                    ResourceLocation id = new ResourceLocation(JSONUtils.getAsString(objectsJson, jsonKey));
                     V registryObject = registry.getValue(id);
                     if (registryObject == null)
                     {
@@ -275,24 +276,24 @@ public class Helpers {
     }
 
     /**
-     * Normally, one would just call {@link IWorld#isRemote()}
+     * Normally, one would just call {@link IWorld#isClientSide()} ()}
      * HOWEVER
      * There exists a BIG HUGE PROBLEM in very specific scenarios with this
      * Since World's isClientSide() actually returns the isClientSide boolean, which is set AT THE END of the World constructor, many things may happen before this is set correctly. Mostly involving world generation.
-     * At this point, THE CLIENT WORLD WILL RETURN {@code false} to {@link IWorld#isRemote()}
+     * At this point, THE CLIENT WORLD WILL RETURN {@code false} to {@link IWorld#isClientSide()}
      *
      * So, this does a roundabout check "is this instanceof ClientWorld or not" without classloading shenanigans.
      */
     public static boolean isClientSide(IWorldReader world)
     {
-        return world instanceof World ? !(world instanceof ServerWorld) : world.isRemote();
+        return world instanceof World ? !(world instanceof ServerWorld) : world.isClientSide();
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
     public static <T extends TileEntity> T getTileEntity(IWorldReader world, BlockPos pos, Class<T> tileEntityClass)
     {
-        TileEntity te = world.getTileEntity(pos);
+        TileEntity te = world.getBlockEntity(pos);
         if (tileEntityClass.isInstance(te))
         {
             return (T) te;
@@ -303,7 +304,7 @@ public class Helpers {
     @SuppressWarnings("unchecked")
     public static <T extends TileEntity> T getTileEntityOrThrow(IWorldReader world, BlockPos pos, Class<T> tileEntityClass)
     {
-        TileEntity te = world.getTileEntity(pos);
+        TileEntity te = world.getBlockEntity(pos);
         if (tileEntityClass.isInstance(te))
         {
             return (T) te;
@@ -342,11 +343,11 @@ public class Helpers {
 
     public static void slowEntityInBlock(Entity entity, float factor, int fallDamageReduction)
     {
-        Vector3d motion = entity.getMotion();
-        entity.setMotion(motion.mul(factor, motion.y < 0 ? factor : 1, factor));
+        Vector3d motion = entity.getDeltaMovement();
+        entity.setDeltaMovement(motion.multiply(factor, motion.y < 0 ? factor : 1, factor));
         if (entity.fallDistance > fallDamageReduction)
         {
-            entity.onLivingFall(entity.fallDistance - fallDamageReduction, 1.0f);
+            entity.causeFallDamage(entity.fallDistance - fallDamageReduction, 1.0f);
         }
         entity.fallDistance = 0;
     }
@@ -366,21 +367,21 @@ public class Helpers {
     {
         final Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
         final BlockPos.Mutable mutablePos = new BlockPos.Mutable();
-        for (int x = chunkPos.getXStart(); x <= chunkPos.getXEnd(); ++x)
+        for (int x = chunkPos.getMinBlockX(); x <= chunkPos.getMaxBlockX(); ++x)
         {
-            for (int z = chunkPos.getZStart(); z <= chunkPos.getZEnd(); ++z)
+            for (int z = chunkPos.getMinBlockZ(); z <= chunkPos.getMaxBlockZ(); ++z)
             {
-                mutablePos.setPos(x, 0, z);
+                mutablePos.set(x, 0, z);
 
                 final Biome biome = world.getBiome(mutablePos);
-                final int motionBlockingHeight = chunk.getTopBlockY(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15);
-                final int worldSurfaceHeight = chunk.getTopBlockY(Heightmap.Type.WORLD_SURFACE, x & 15, z & 15);
-                final int oceanFloorHeight = chunk.getTopBlockY(Heightmap.Type.OCEAN_FLOOR, x & 15, z & 15);
-                if (worldSurfaceHeight >= oceanFloorHeight && biome.getMobSpawnInfo().isValidSpawnBiomeForPlayer())
+                final int motionBlockingHeight = chunk.getHeight(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15);
+                final int worldSurfaceHeight = chunk.getHeight(Heightmap.Type.WORLD_SURFACE, x & 15, z & 15);
+                final int oceanFloorHeight = chunk.getHeight(Heightmap.Type.OCEAN_FLOOR, x & 15, z & 15);
+                if (worldSurfaceHeight >= oceanFloorHeight && biome.getMobSettings().playerSpawnFriendly())
                 {
                     for (int y = 1 + motionBlockingHeight; y >= oceanFloorHeight; y--)
                     {
-                        mutablePos.setPos(x, y, z);
+                        mutablePos.set(x, y, z);
 
                         final BlockState state = world.getBlockState(mutablePos);
                         if (!state.getFluidState().isEmpty())
@@ -390,7 +391,7 @@ public class Helpers {
 
                         if (BlockTags.VALID_SPAWN.contains(state.getBlock()))
                         {
-                            return mutablePos.up().toImmutable();
+                            return mutablePos.above().immutable();
                         }
                     }
                 }
@@ -412,7 +413,7 @@ public class Helpers {
     {
         if (copyTo.hasProperty(property))
         {
-            return copyTo.with(property, copyFrom.get(property));
+            return copyTo.setValue(property, copyFrom.getValue(property));
         }
         return copyTo;
     }
@@ -422,7 +423,7 @@ public class Helpers {
         PlayerEntity player = ForgeHooks.getCraftingPlayer(); // Mods may not set this properly
         if (player != null)
         {
-            stack.damageItem(amount, player, entity -> {});
+            stack.hurtAndBreak(amount, player, entity -> {});
         }
         else
         {
@@ -431,18 +432,18 @@ public class Helpers {
     }
 
     /**
-     * A replacement for {@link ItemStack#damageItem} when an entity is not present
+     * A replacement for {@link ItemStack#hurtAndBreak(int, LivingEntity, Consumer)} when an entity is not present
      */
     public static void damageItem(ItemStack stack, int amount)
     {
-        if (stack.isDamageable())
+        if (stack.isDamageableItem())
         {
             // There's no player here so we can't safely do anything.
             //amount = stack.getItem().damageItem(stack, amount, null, e -> {});
-            if (stack.attemptDamageItem(amount, RANDOM, null))
+            if (stack.hurt(amount, RANDOM, null))
             {
                 stack.shrink(1);
-                stack.setDamage(0);
+                stack.setDamageValue(0);
             }
         }
     }
@@ -460,25 +461,25 @@ public class Helpers {
             FluidState fluidstate = worldIn.getFluidState(pos);
             if (!(state.getBlock() instanceof AbstractFireBlock))
             {
-                worldIn.playEvent(2001, pos, Block.getStateId(state));
+                worldIn.levelEvent(2001, pos, Block.getId(state));
             }
 
             if (worldIn instanceof ServerWorld)
             {
-                TileEntity tileEntity = state.hasTileEntity() ? worldIn.getTileEntity(pos) : null;
+                TileEntity tileEntity = state.hasTileEntity() ? worldIn.getBlockEntity(pos) : null;
 
                 // Copied from Block.getDrops()
                 LootContext.Builder lootContext = new LootContext.Builder((ServerWorld) worldIn)
-                        .withRandom(worldIn.rand)
-                        .withParameter(LootParameters.field_237457_g_, Vector3d.copyCentered(pos))
+                        .withRandom(worldIn.random)
+                        .withParameter(LootParameters.ORIGIN, Vector3d.atCenterOf(pos))
                         .withParameter(LootParameters.TOOL, ItemStack.EMPTY)
-                        .withNullableParameter(LootParameters.THIS_ENTITY, null)
-                        .withNullableParameter(LootParameters.BLOCK_ENTITY, tileEntity);
+                        .withOptionalParameter(LootParameters.THIS_ENTITY, null)
+                        .withOptionalParameter(LootParameters.BLOCK_ENTITY, tileEntity);
                 builder.accept(lootContext);
-                state.getDrops(lootContext).forEach(stackToSpawn -> Block.spawnAsEntity(worldIn, pos, stackToSpawn));
-                state.spawnAdditionalDrops((ServerWorld) worldIn, pos, ItemStack.EMPTY);
+                state.getDrops(lootContext).forEach(stackToSpawn -> Block.popResource(worldIn, pos, stackToSpawn));
+                state.spawnAfterBreak((ServerWorld) worldIn, pos, ItemStack.EMPTY);
             }
-            worldIn.setBlockState(pos, fluidstate.getBlockState(), 3, 512);
+            worldIn.setBlock(pos, fluidstate.createLegacyBlock(), 3, 512);
         }
     }
 }
