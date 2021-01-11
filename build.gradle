@@ -10,6 +10,12 @@ buildscript {
         classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
     }
 }
+
+plugins {
+    // Check https://plugins.gradle.org/plugin/be.vbgn.ci-detect for the latest version
+    id "be.vbgn.ci-detect" version "0.1.0"
+}
+
 apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'idea'
@@ -37,7 +43,14 @@ repositories {
 }
 
 minecraft {
-    mappings channel: 'snapshot', version: project.official_based_mappings_version
+
+    if (ci.isCi()) {
+        mappings channel: 'official', version: minecraft_version
+    } else {
+        mappings channel: 'snapshot', version: official_based_mappings_version
+    }
+
+    mappings channel: 'snapshot', version: official_based_mappings_version
     // makeObfSourceJar = false // an Srg named sources jar is made by default. uncomment this to disable.
     accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
 
