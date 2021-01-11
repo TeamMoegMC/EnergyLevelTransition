@@ -49,26 +49,4 @@ TBA
 
 ## 设置开发环境
 
-如果你在使用 Windows，使用以下命令行运行 Gradle:
-
-```gradlew <task>```
-
-或者你在使用 Linux/Unix/MacOS (Unix like):
-
-```./gradlew <task>```
-
-1. 首先，在根目录下执行`git clone https://github.com/MoegTech/EnergyLevelTransition.git`克隆本项目。
-
-2. 将你的工作目录重命名为`ELT_Workspace`（可以任意命名），我们称之为根目录。
-
-3. 然后，用 IntelliJ IDEA 或 Eclipse 打开根目录下的`build.gradle`文件，选择`import as project`。
-
-4. 如果执行成功, 你就可以继续下一步，恭喜。
-
-5. 在根目录下运行`gradlew genIntellijRuns` 或者 `gradlew genEclipseRuns`，生成必要的文件。
-
-6. 在根目录下运行`gradlew build`，在目录 `./ELT_Workspace/build/libs` 下可以找到构建产物。
-
-7. 运行 `gradlew runClient` 来运行包含有 ELT 的 Minecraft 客户端。
-
-对于更多的设置说明或遇到的问题，请检查 [Forge文档](https://mcforge.readthedocs.io/en/1.16.x/gettingstarted/)，涉及到你正在使用的IDE。
+WIP

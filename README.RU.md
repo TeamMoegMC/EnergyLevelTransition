@@ -45,26 +45,4 @@ TBA
 
 ## Настройка среды разработки
 
-Если вы используете Windows, пишите следующее
-
-```gradlew <задача>```
-
-или если вы используете MacOS или GNU/Linux:
-
-```./gradlew <задача>```
-
-1. Во–первых, склонируйте ELT Project с помощью `git clone https://github.com/MoegTech/EnergyLevelTransition.git` в вашей главной папке. 
-
-2. Переименуйте вашу рабочую папку в `ELT_Workspace` (не любое другое), мы называем её главной папкой. 
-
-3. Затем, используйте IntelliJ или Eclipse для открытия `build.gradle`, и выберите `import as project`. (Пользователи Eclipse также необходимо запустить `gradlew eclipse` после импорта)
-
-4. Как только Gradle будет синхронизирован, вы почти настроили!
-
-5. Запустите `gradlew genIntellijRuns` or `gradlew genEclipseRuns` в главной папке.
-
-6. Запустите `gradlew build` в главной папке для сборки мода в папках `./ELT_Workspace/build/libs`, `./ELT_Workspace/elt/build/libs`, и `./ELT_Workspace/eltcore/build/libs`.
-
-7. Запустите `gradlew :elt:runClient` для запуска Minecraft со всем комплектом ELT.
-
-Если вы хотите больше инструкций или у вас есть вопросы по настройке, проверьте [Forge Docs](https://mcforge.readthedocs.io/en/1.16.x/gettingstarted/).
+WIP

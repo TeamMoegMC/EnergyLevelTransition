@@ -58,18 +58,35 @@ or if you're using MacOSX/Linux/Unix:
 
 ```./gradlew <task>```
 
-1. Firstly, clone ELT Project by executing `git clone https://github.com/MoegTech/EnergyLevelTransition.git` under your root directory. 
+- Get Necessary Files
 
-2. Rename your working directory into `ELT_Workspace` (name is arbitrary), we call it the root directory. 
+    - Firstly, clone ELT Project by executing this under your project directory:
+        ```
+        git clone https://github.com/MoegTech/EnergyLevelTransition.git
+        ```
 
-3. Then, Use IntelliJ or Eclipse to open `build.gradle` file in the root directory, and choose`import as project`.
+- Setup Gradle
 
-4. Once Gradle is synced, you succeed partially!
+    - Then, Use IntelliJ or Eclipse to open `build.gradle` file in the project directory, and choose`import as project`
 
-5. Run `gradlew genIntellijRuns` or `gradlew genEclipseRuns` under root directory to generate necessary files.
+    - Wait for Gradle to sync
 
-6. Run `gradlew build` under root directory to build artifacts in `./ELT_Workspace/build/libs`
+    - Run `gradlew genIntellijRuns` or `gradlew genEclipseRuns` under project directory to generate necessary files
 
-7. Run `gradlew runClient` to run Minecraft Client with the Mod.
+- Setup Mappings
+
+    - We use a mapping based on Mojang's Official Mappings with parameter names from MCP and Yarn. 
+      The [Script](https://github.com/alcatrazEscapee/Mappificator) to create the mappings is made by [AlcatrazEscapee](https://github.com/alcatrazEscapee)
+
+    - You must install [Maven](https://maven.apache.org/). (Python will invoke mvn via command line so it must be on your path.)
+        - To check if Maven is functional, run mvn --version in a console window    
+
+    - To generate the mappings, you need to run `/src/mappificator.py` for only once
+
+- Running and Building
+  
+    - Run `gradlew build` under root directory to build artifacts in `./build/libs`
+
+    - Run `gradlew runClient` to run Minecraft Client with the Mod.
 
 For more setup instructions or questions encountered please check the [Forge Docs](https://mcforge.readthedocs.io/en/1.16.x/gettingstarted/) that relates to the IDE that you are using.
