@@ -45,8 +45,10 @@ repositories {
 minecraft {
 
     if (ci.isCi()) {
+        println("Is CI, using official mappings!\n")
         mappings channel: 'official', version: minecraft_version
     } else {
+        println("Not CI, using complete mappings!\n")
         mappings channel: 'snapshot', version: official_based_mappings_version
     }
 
