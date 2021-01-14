@@ -66,6 +66,16 @@ public class ELT extends AbstractMod {
 
     @Override public void onModServerStopped2(FMLServerStoppedEvent aEvent) {/**/}
 
+    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    public static class RegistryEvents {
+        @SubscribeEvent
+        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
+
+        }
+    }
+
+    // Do not modify the codes below
+
     @Override public String getModID() { return MOD_ID; }
     @Override public String getModName() { return MOD_NAME; }
     @Override public String getModNameForLog() { return MOD_NAME.toUpperCase().replace(' ', '_') + "_Mod"; }
@@ -78,12 +88,4 @@ public class ELT extends AbstractMod {
     @SubscribeEvent public void onServerStarted  (FMLServerStartedEvent aEvent)      {onModServerStarted(aEvent);}
     @SubscribeEvent public void onServerStopping (FMLServerStoppingEvent aEvent)     {onModServerStopping(aEvent);}
     @SubscribeEvent public void onServerStopped  (FMLServerStoppedEvent aEvent)      {onModServerStopped(aEvent);}
-
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        @SubscribeEvent
-        public static void onBlocksRegistry(final RegistryEvent.Register<Block> blockRegistryEvent) {
-
-        }
-    }
 }
