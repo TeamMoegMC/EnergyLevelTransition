@@ -57,3 +57,30 @@ issueTrackerURL="http://github.com/MoegTech/EnergyLevelTransition/issues" #optio
     versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
     ordering="NONE"
     side="BOTH"
+
+[[mods]] #mandatory
+    modId="cuckoolib" #mandatory
+    version="${file.jarVersion}" #mandatory
+    displayName="Cuckoo Lib" #mandatory
+    #updateJSONURL="" #optional
+    #displayURL="" #optional
+    logoFile="pack.png" #optional
+    credits="All Contributors" #optional
+    authors="CuckooDevTeam" #optional
+    description='''
+            Library from CuckooDevTeam
+            '''
+    # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+    [[dependencies.cuckoolib]] #optional
+    modId="forge" #mandatory
+    mandatory=true #mandatory
+    versionRange="[35,)" #mandatory
+    ordering="NONE" # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    side="BOTH" # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    # Here's another dependency
+    [[dependencies.cuckoolib]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.16.4,1.17)" # This version range declares a minimum of the current minecraft version up to but not including the next major version
+    ordering="NONE"
+    side="BOTH"
