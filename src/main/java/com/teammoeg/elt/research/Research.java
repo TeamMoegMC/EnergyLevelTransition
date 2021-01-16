@@ -27,9 +27,11 @@ import java.util.HashSet;
 // 一项研究
 public class Research {
     private ResourceLocation id;
-    private HashSet<Research> parents;
+    private HashSet<Research> parents = new HashSet<>();
+    private HashSet<Quest> containedQuests = new HashSet<>();
     private final TranslationTextComponent name;
     private final TranslationTextComponent desc;
+    private boolean unlocked, completed;
 
     public Research(String path, Research... parents) {
         this(new ResourceLocation(ELT.MOD_ID, path), parents);
@@ -42,12 +44,45 @@ public class Research {
         this.desc = new TranslationTextComponent(id.getNamespace() + "." + id.getPath() + ".desc");
     }
 
+    /**
+     * @return 此研究是否完成
+     * */
+    public boolean isCompleted() {
+        for (Quest quest : containedQuests) {
+            if(!quest.isCompleted()) {
+                return false;
+            }
+        }
+        System.out.println("You have completed Research [" + name + "]");
+        return true;
+    }
+
+
+    /**
+     * @return 此研究是否解锁
+     * 如果所有前置研究已完成，就解锁此研究
+     */
+    public boolean isUnlocked() {
+        if (!this.parents.isEmpty()) {
+            for (Research research : parents) {
+                if(!research.isCompleted()) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public ResourceLocation getId() {
         return id;
     }
 
     public HashSet<Research> getParents() {
         return parents;
+    }
+
+    public HashSet<Quest> getContainedQuests() {
+        return containedQuests;
     }
 
     public void setId(ResourceLocation id) {
@@ -58,5 +93,23 @@ public class Research {
         HashSet<Research> newSet = new HashSet<>();
         for (Research parent : parents) newSet.add(parent);
         this.parents = newSet;
+    }
+
+    public void setContainedQuests(Quest... containedQuests) {
+        HashSet<Quest> newSet = new HashSet<>();
+        for (Quest parent : containedQuests) newSet.add(parent);
+        this.containedQuests = newSet;
+    }
+
+    public void addQuest(Quest quest) {
+        this.containedQuests.add(quest);
+    }
+
+    public void unlock() {
+        this.unlocked = true;
+    }
+
+    public void complete() {
+        this.completed = true;
     }
 }

@@ -18,35 +18,38 @@
 
 package com.teammoeg.elt;
 
-import com.teammoeg.the_seed.api.AbstractMod;
+import com.teammoeg.elt.research.Quest;
+import com.teammoeg.elt.research.Research;
+import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
-import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppedEvent;
-import net.minecraftforge.fml.event.server.FMLServerStoppingEvent;
+import net.minecraftforge.fml.event.lifecycle.*;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(ELT.MOD_ID)
-public class ELT extends AbstractMod {
+public class ELT implements ModInitializer {
     public static final String MOD_ID = CS.ModIDs.ELT;
     public static final String MOD_NAME = "Energy Level Transition";
+    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
     public ELT() {
-        MinecraftForge.EVENT_BUS.register(this);
-        MinecraftForge.EVENT_BUS.register(ForgeEventHandler.class);
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
+        MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
     }
+
+    public static final Quest killzombie = new Quest("killzombie");
+    public static final Research weaponResearch = new Research("weaponresearch");
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
-        System.out.println("HELLO_WORLD");
+        LOGGER.info("Hello from ELT Common");
+        weaponResearch.addQuest(killzombie);
     }
 
     @Override
@@ -54,17 +57,20 @@ public class ELT extends AbstractMod {
 
     }
 
-    @Override public void onModIMCEnqueue2(InterModEnqueueEvent aEvent) {/**/}
+    @Override
+    public void onModServerSetup2(FMLDedicatedServerSetupEvent event) {
 
-    @Override public void onModIMCProcess2(InterModProcessEvent aEvent) {/**/}
+    }
 
-    @Override public void onModServerStarting2(FMLServerStartingEvent aEvent) {/**/}
+    @Override
+    public void onModIMCEnqueue2(InterModEnqueueEvent aEvent) {
 
-    @Override public void onModServerStarted2(FMLServerStartedEvent aEvent) {/**/}
+    }
 
-    @Override public void onModServerStopping2(FMLServerStoppingEvent aEvent) {/**/}
+    @Override
+    public void onModIMCProcess2(InterModProcessEvent aEvent) {
 
-    @Override public void onModServerStopped2(FMLServerStoppedEvent aEvent) {/**/}
+    }
 
     @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
@@ -76,16 +82,44 @@ public class ELT extends AbstractMod {
 
     // Do not modify the codes below
 
-    @Override public String getModID() { return MOD_ID; }
-    @Override public String getModName() { return MOD_NAME; }
-    @Override public String getModNameForLog() { return MOD_NAME.toUpperCase().replace(' ', '_') + "_Mod"; }
+    @Override
+    public String getModID() {
+        return MOD_ID;
+    }
 
-    @SubscribeEvent public void onCommonSetup    (FMLCommonSetupEvent aEvent)        {onModCommonSetup(aEvent);}
-    @SubscribeEvent public void onClientSetup    (FMLClientSetupEvent aEvent)        {onModClientSetup(aEvent);}
-    @SubscribeEvent public void onIMCEnqueue     (InterModEnqueueEvent aEvent)       {onModIMCEnqueue(aEvent);}
-    @SubscribeEvent public void onIMCProcess     (InterModProcessEvent aEvent)       {onModIMCProcess(aEvent);}
-    @SubscribeEvent public void onServerStarting (FMLServerStartingEvent aEvent)     {onModServerStarting(aEvent);}
-    @SubscribeEvent public void onServerStarted  (FMLServerStartedEvent aEvent)      {onModServerStarted(aEvent);}
-    @SubscribeEvent public void onServerStopping (FMLServerStoppingEvent aEvent)     {onModServerStopping(aEvent);}
-    @SubscribeEvent public void onServerStopped  (FMLServerStoppedEvent aEvent)      {onModServerStopped(aEvent);}
+    @Override
+    public String getModName() {
+        return MOD_NAME;
+    }
+
+    @Override
+    public String getModNameForLog() {
+        return MOD_NAME.toUpperCase().replace(' ', '_') + "_Mod";
+    }
+
+    @SubscribeEvent
+    public void onCommonSetup(FMLCommonSetupEvent aEvent) {
+        onModCommonSetup(aEvent);
+    }
+
+    @SubscribeEvent
+    public void onClientSetup(FMLClientSetupEvent aEvent) {
+        onModClientSetup(aEvent);
+    }
+
+    @SubscribeEvent
+    public void onServerSetup(FMLDedicatedServerSetupEvent aEvent) {
+        onModServerSetup(aEvent);
+    }
+
+    @SubscribeEvent
+    public void onIMCEnqueue(InterModEnqueueEvent aEvent) {
+        onModIMCEnqueue(aEvent);
+    }
+
+    @SubscribeEvent
+    public void onIMCProcess(InterModProcessEvent aEvent) {
+        onModIMCProcess(aEvent);
+    }
+
 }

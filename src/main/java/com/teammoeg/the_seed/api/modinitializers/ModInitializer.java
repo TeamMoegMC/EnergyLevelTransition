@@ -16,29 +16,25 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.the_seed.api;
+package com.teammoeg.the_seed.api.modinitializers;
 
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 
-import static com.teammoeg.the_seed.data.legacy.CS.OUT;
-
-public abstract class AbstractMod extends AbstractClientMod {
-    public AbstractMod() {
-
-    }
+/**
+ * For constructing a Common-Side (both Client and Server) Mod, implement this interface
+ */
+public interface ModInitializer extends ClientModInitializer, ServerModInitializer {
 
     /** Called on Common Setup */
     public abstract void onModCommonSetup2(FMLCommonSetupEvent aEvent);
 
-    // Just add Calls to these from within your Mods load phases.
-
-    public void onModCommonSetup(FMLCommonSetupEvent aEvent) {
-        OUT.println(getModNameForLog() + ": ===================");
-        OUT.println(getModNameForLog() + ": Common Setup Started");
+    default void onModCommonSetup(FMLCommonSetupEvent aEvent) {
+        System.out.println(getModNameForLog() + ": ===================");
+        System.out.println(getModNameForLog() + ": Common Setup Started");
 
         onModCommonSetup2(aEvent);
 
-        OUT.println(getModNameForLog() + ": Common Setup Finished");
-        OUT.println(getModNameForLog() + ": ===================");
+        System.out.println(getModNameForLog() + ": Common Setup Finished");
+        System.out.println(getModNameForLog() + ": ===================");
     }
 }

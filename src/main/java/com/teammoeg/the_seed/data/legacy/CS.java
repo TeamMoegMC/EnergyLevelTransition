@@ -24,7 +24,6 @@ import com.teammoeg.the_seed.code.HashSetNoNulls;
 import net.minecraft.item.ItemStack;
 
 import java.io.File;
-import java.io.PrintStream;
 import java.util.*;
 
 public class CS {
@@ -751,7 +750,7 @@ public class CS {
 //    public static final Block NB = Blocks.air;
 
     /** The Logs: Debug, Output, Error, OreDict and Material List. */
-    public static PrintStream OUT = System.out, ERR = System.err;
+//    public static PrintStream OUT = System.out, ERR = System.err;
 
     /** States of Matter */
     public static final byte STATE_SOLID = 0, STATE_LIQUID = 1, STATE_GASEOUS = 2, STATE_PLASMA = 3;
