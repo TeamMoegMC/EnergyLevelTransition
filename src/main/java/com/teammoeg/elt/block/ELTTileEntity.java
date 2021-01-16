@@ -1,4 +1,4 @@
-package com.teammoeg.elt.blocks;
+package com.teammoeg.elt.block;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

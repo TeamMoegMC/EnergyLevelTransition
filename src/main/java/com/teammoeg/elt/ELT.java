@@ -2,11 +2,11 @@
 package com.teammoeg.elt;
 
 
-import com.teammoeg.elt.blocks.ELTbaseBlocks;
+import com.teammoeg.elt.block.ELTBlocks;
+import com.teammoeg.elt.block.researchdesk.ResearchDeskBlock;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
-import com.teammoeg.elt.blocks.ResourceBlock.ResearchDesk;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -32,7 +32,7 @@ public class ELT implements ModInitializer {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
         MinecraftForge.EVENT_BUS.register(RegistryEvents.class);
-        ELTbaseBlocks.ResearchDesk  = new ResearchDesk("researchdesk");
+        ELTBlocks.ResearchDesk  = new ResearchDeskBlock("researchdesk");
     }
 
     public static final Quest killzombie = new Quest("killzombie");
