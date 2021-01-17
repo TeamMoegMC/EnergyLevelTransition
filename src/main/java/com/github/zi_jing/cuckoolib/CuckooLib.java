@@ -1,5 +1,6 @@
 package com.github.zi_jing.cuckoolib;
 
+import com.github.zi_jing.cuckoolib.gui.ItemStackCodec;
 import com.github.zi_jing.cuckoolib.gui.ModularGuiInfo;
 import com.github.zi_jing.cuckoolib.gui.TileEntityCodec;
 import com.github.zi_jing.cuckoolib.material.ModMaterials;
@@ -53,6 +54,7 @@ public class CuckooLib {
 		this.registerMessage(3, MessageCapabilityUpdate.class, MessageCapabilityUpdate::decode,
 				NetworkDirection.PLAY_TO_CLIENT);
 		ModularGuiInfo.registerGuiHolderCodec(TileEntityCodec.INSTANCE);
+		ModularGuiInfo.registerGuiHolderCodec(ItemStackCodec.INSTANCE);
 	}
 
 	public void onServerStarting(FMLServerStartingEvent event) {
