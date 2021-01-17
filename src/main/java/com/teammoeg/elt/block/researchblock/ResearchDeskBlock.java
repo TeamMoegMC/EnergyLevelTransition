@@ -1,4 +1,4 @@
-package com.teammoeg.elt.block.researchdesk;
+package com.teammoeg.elt.block.researchblock;
 
 import com.teammoeg.elt.block.ELTBlockItem;
 import com.teammoeg.elt.block.ELTTileBlock;
@@ -19,5 +19,9 @@ public class ResearchDeskBlock extends ELTTileBlock {
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
         return new ResearchDeskTileEntity();
+    }
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
     }
 }

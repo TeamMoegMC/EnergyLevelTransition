@@ -2,7 +2,7 @@ package com.teammoeg.elt.block;
 
 import com.google.common.collect.ImmutableSet;
 import com.teammoeg.elt.ELT;
-import com.teammoeg.elt.block.researchdesk.ResearchDeskTileEntity;
+import com.teammoeg.elt.block.researchblock.ResearchDeskTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

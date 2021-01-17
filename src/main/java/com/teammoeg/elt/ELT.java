@@ -3,10 +3,14 @@ package com.teammoeg.elt;
 
 
 import com.teammoeg.elt.block.ELTBlocks;
+<<<<<<< Updated upstream
 import com.teammoeg.elt.block.researchdesk.ResearchDeskBlock;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.item.ResearchScroll;
+=======
+import com.teammoeg.elt.block.researchblock.ResearchDeskBlock;
+>>>>>>> Stashed changes
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;

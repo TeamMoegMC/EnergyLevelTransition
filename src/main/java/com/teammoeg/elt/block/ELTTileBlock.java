@@ -10,4 +10,5 @@ public class ELTTileBlock extends ELTBlock {
     public ELTTileBlock(String name, Properties properties, BiFunction<Block, Item.Properties, Item> BlockItem, Property... stateProps) {
         super(name, properties, BlockItem);
     }
+
 }
