@@ -54,21 +54,21 @@ public interface ModLifeCycleEvents {
 
     public default void onFMLContructMod(FMLConstructModEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
-        System.out.println(getModNameForLog() + ": Mod Construct Started");
+        System.out.println(getModNameForLog() + ": FML Construct Mod Started");
 
         onFMLConstructMod2(aEvent);
 
-        System.out.println(getModNameForLog() + ": Mod Construct Finished");
+        System.out.println(getModNameForLog() + ": FML Construct Mod Finished");
         System.out.println(getModNameForLog() + ": ===================");
     }
 
     public default void onFMLLoadComplete(FMLLoadCompleteEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
-        System.out.println(getModNameForLog() + ": Mod Construct Started");
+        System.out.println(getModNameForLog() + ": FML Load Complete Started");
 
         onFMLLoadComplete2(aEvent);
 
-        System.out.println(getModNameForLog() + ": Mod Construct Finished");
+        System.out.println(getModNameForLog() + ": FML Load Complete Finished");
         System.out.println(getModNameForLog() + ": ===================");
     }
 
