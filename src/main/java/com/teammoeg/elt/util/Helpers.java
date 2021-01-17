@@ -47,10 +47,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.JSONUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Unit;
+import net.minecraft.util.Util;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.IWorldReader;
 import net.minecraft.world.World;
@@ -81,11 +83,18 @@ public class Helpers {
     private static final Random RANDOM = new Random();
 
     /**
-     * Default {@link ResourceLocation}, except with a TFC namespace
+     * Default {@link ResourceLocation}, except with a ELT namespace
      */
     public static ResourceLocation identifier(String name)
     {
         return new ResourceLocation(CS.ModIDs.ELT, name);
+    }
+
+    /**
+     * Lazy method to send a message through the player instance
+     */
+    public static void message(PlayerEntity player, String msg) {
+        player.sendMessage(new StringTextComponent(msg), Util.NIL_UUID);
     }
 
     /**
@@ -236,7 +245,7 @@ public class Helpers {
     }
 
     /**
-     * Gets the translation key name for an enum. For instance, Metal.UNKNOWN would map to "tfc.enum.metal.unknown"
+     * Gets the translation key name for an enum. For instance, Metal.UNKNOWN would map to "elt.enum.metal.unknown"
      */
     public static String getEnumTranslationKey(Enum<?> anEnum)
     {

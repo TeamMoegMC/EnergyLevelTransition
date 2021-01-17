@@ -16,22 +16,19 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt;
+package com.teammoeg.elt.client.settings;
 
-import net.minecraft.block.Block;
-import net.minecraftforge.event.RegistryEvent;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraft.client.settings.KeyBinding;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 
-/**
- * Events that fired on ELT Mod Bus
- */
-public class ModEventHandler {
-    @Mod.EventBusSubscriber(modid = ELT.MOD_ID, bus=Mod.EventBusSubscriber.Bus.MOD)
-    public class RegistryEvents {
-        @SubscribeEvent
-        public void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-            ELT.LOGGER.info("Block Registry Start");
-        }
+public class ELTKeyBindings {
+
+    public static KeyBinding openQuests;
+
+    // See InputMappings.java for keyCode and GameSettings.java for category
+    public static void registerKeyBindings()
+    {
+        openQuests = new KeyBinding("key.elt.research", 96, "key.categories.inventory");
+        ClientRegistry.registerKeyBinding(openQuests);
     }
 }

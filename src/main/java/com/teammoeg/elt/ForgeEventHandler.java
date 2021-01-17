@@ -71,4 +71,16 @@ public class ForgeEventHandler {
 
     }
 
+//    @SubscribeEvent
+//    @OnlyIn(Dist.CLIENT)
+//    public void onKey(GuiScreenEvent.KeyboardKeyEvent event)
+//    {
+//        Minecraft mc = Minecraft.getInstance();
+//
+//        if(ELTKeyBindings.openQuests.isDown())
+//        {
+//            ModularGuiInfo.openModularGui(new ResearchModularGui(), (ServerPlayerEntity) mc.player);
+//        }
+//    }
+
 }

@@ -4,6 +4,9 @@ package com.teammoeg.elt;
 
 import com.teammoeg.elt.block.ELTBlocks;
 import com.teammoeg.elt.block.researchdesk.ResearchDeskBlock;
+import com.teammoeg.elt.client.settings.ELTKeyBindings;
+import com.teammoeg.elt.item.ELTItems;
+import com.teammoeg.elt.item.ResearchScroll;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
@@ -33,6 +36,7 @@ public class ELT implements ModInitializer {
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
         MinecraftForge.EVENT_BUS.register(RegistryEvents.class);
         ELTBlocks.ResearchDesk  = new ResearchDeskBlock("researchdesk");
+        ELTItems.ResearchScroll  = new ResearchScroll("researchscroll");
     }
 
     public static final Quest killzombie = new Quest("killzombie");
@@ -40,13 +44,13 @@ public class ELT implements ModInitializer {
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
-        LOGGER.info("Hello from ELT Common");
         weaponResearch.addQuest(killzombie);
     }
 
     @Override
     public void onModClientSetup2(FMLClientSetupEvent aEvent) {
-
+        LOGGER.info("Hello from ELT Client");
+        ELTKeyBindings.registerKeyBindings();
     }
 
     @Override
