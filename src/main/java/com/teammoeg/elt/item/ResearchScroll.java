@@ -19,11 +19,11 @@
 package com.teammoeg.elt.item;
 
 
-import com.github.zi_jing.cuckoolib.client.render.TextureArea;
-import com.github.zi_jing.cuckoolib.gui.IGuiHolderCodec;
-import com.github.zi_jing.cuckoolib.gui.IModularGuiHolder;
-import com.github.zi_jing.cuckoolib.gui.ItemStackCodec;
-import com.github.zi_jing.cuckoolib.gui.ModularGuiInfo;
+import com.teammoeg.cuckoolib.client.render.TextureArea;
+import com.teammoeg.cuckoolib.gui.IGuiHolderCodec;
+import com.teammoeg.cuckoolib.gui.IModularGuiHolder;
+import com.teammoeg.cuckoolib.gui.ModularGuiInfo;
+import com.teammoeg.cuckoolib.gui.codec.ItemStackCodec;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.item.Item;
