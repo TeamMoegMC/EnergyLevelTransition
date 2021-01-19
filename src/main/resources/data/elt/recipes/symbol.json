@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "WWW",
+    "WR ",
+    "WWW"
+  ],
+  "key": {
+    "W": {
+      "tag": "minecraft:logs"
+    },
+    "R": {
+      "item": "minecraft:redstone"
+    }
+  },
+  "result": {
+    "item": "elt:symbol",
+    "count": 1
+  }
+}
