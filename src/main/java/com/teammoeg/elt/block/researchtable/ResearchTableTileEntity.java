@@ -16,10 +16,15 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.item;
+package com.teammoeg.elt.block.researchtable;
 
-import net.minecraft.item.Item;
+import com.teammoeg.elt.block.ELTTileEntity;
+import com.teammoeg.elt.block.ELTTileEntityTypes;
 
-public class ELTItems {
-    public static Item RESEARCH_SCROLL = new ResearchScroll("researchscroll");
+
+public class ResearchTableTileEntity extends ELTTileEntity {
+    public ResearchTableTileEntity() {
+        super(ELTTileEntityTypes.RESEARCH_TABLE.get());
+    }
+
 }

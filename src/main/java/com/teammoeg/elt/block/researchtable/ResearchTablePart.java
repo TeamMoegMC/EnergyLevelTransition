@@ -16,10 +16,26 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.item;
+package com.teammoeg.elt.block.researchtable;
 
-import net.minecraft.item.Item;
+import net.minecraft.util.IStringSerializable;
 
-public class ELTItems {
-    public static Item RESEARCH_SCROLL = new ResearchScroll("researchscroll");
+// 不知道干啥的，大概是分辨1x2的头和脚方块
+public enum ResearchTablePart implements IStringSerializable {
+    HEAD("head"),
+    FOOT("foot");
+
+    private final String name;
+
+    private ResearchTablePart(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return this.name;
+    }
+
+    public String getSerializedName() {
+        return this.name;
+    }
 }

@@ -32,8 +32,8 @@ public class ELTBlock extends Block {
             ELT.RegistryEvents.registeredItems.add(item);
         }
     }
-    protected static Block.Properties setProperties(Properties blockProps, Object[] objects)
-    {
+
+    protected static Block.Properties setProperties(Properties blockProps, Object[] objects) {
         List<Property<?>> propList = new ArrayList<>();
         for(Object o : objects)
         {
@@ -45,15 +45,15 @@ public class ELTBlock extends Block {
         pr = propList.toArray(new Property[0]);
         return blockProps.dynamicShape();
     }
+
     @Override
-    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder)
-    {
+    protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
         if (pr!=null)
         builder.add(pr);
     }
-    protected BlockState getInitDefaultState()
-    {
+
+    protected BlockState getInitDefaultState() {
         BlockState state = this.stateDefinition.any();
         if(state.hasProperty(BlockStateProperties.WATERLOGGED))
             state = state.setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE);

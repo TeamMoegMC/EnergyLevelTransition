@@ -3,10 +3,10 @@ package com.teammoeg.elt;
 
 
 import com.teammoeg.elt.block.ELTBlocks;
-import com.teammoeg.elt.block.researchblock.ResearchDeskBlock;
+import com.teammoeg.elt.block.ELTTileEntityTypes;
+import com.teammoeg.elt.client.renderer.ResearchTableTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
 import com.teammoeg.elt.item.ELTItems;
-import com.teammoeg.elt.item.ResearchScroll;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
@@ -16,6 +16,7 @@ import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
@@ -35,22 +36,23 @@ public class ELT implements ModInitializer {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
         MinecraftForge.EVENT_BUS.register(RegistryEvents.class);
-        ELTBlocks.ResearchDesk  = new ResearchDeskBlock("researchdesk");
-        ELTItems.ResearchScroll  = new ResearchScroll("researchscroll");
+        new ELTItems();
+        new ELTBlocks();
+        ELTTileEntityTypes.TILE_ENTITIES_REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final Quest killzombie = new Quest("killzombie");
-    public static final Research weaponResearch = new Research("weaponresearch");
+    public static final Quest KILL_ZOMBIE = new Quest("killzombie");
+    public static final Research WEAPON_RESEARCH = new Research("weaponresearch");
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
-        weaponResearch.addQuest(killzombie);
+        WEAPON_RESEARCH.addQuest(KILL_ZOMBIE);
     }
 
     @Override
     public void onModClientSetup2(FMLClientSetupEvent aEvent) {
-        LOGGER.info("Hello from ELT Client");
         ELTKeyBindings.registerKeyBindings();
+        ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_TABLE.get(), ResearchTableTileEntityRenderer::new);
     }
 
     @Override

@@ -62,7 +62,7 @@ public class ForgeEventHandler {
         if(event.getSource() == null || !(event.getSource().getDirectEntity() instanceof PlayerEntity) || event.getSource().getDirectEntity().level.isClientSide || event.isCanceled()) return;
 
         if (event.getEntityLiving() instanceof ZombieEntity) {
-            for (Quest quest : ELT.weaponResearch.getContainedQuests()) {
+            for (Quest quest : ELT.WEAPON_RESEARCH.getContainedQuests()) {
                 quest.complete();
                 event.getSource().getDirectEntity().sendMessage(new StringTextComponent("You have completed a Quest: "), Util.NIL_UUID);
                 event.getSource().getDirectEntity().sendMessage(quest.getName(), Util.NIL_UUID);

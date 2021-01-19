@@ -6,13 +6,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "functions": [
-            {
-              "function": "minecraft:copy_name",
-              "source": "block_entity"
-            }
-          ],
-          "name": "elt:wood_cutter"
+          "name": "elt:research_table"
         }
       ],
       "conditions": [

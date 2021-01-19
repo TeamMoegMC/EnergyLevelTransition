@@ -16,10 +16,16 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.item;
+package com.teammoeg.the_seed.api;
 
-import net.minecraft.item.Item;
+import com.teammoeg.elt.block.researchtable.ResearchTablePart;
+import net.minecraft.state.EnumProperty;
 
-public class ELTItems {
-    public static Item RESEARCH_SCROLL = new ResearchScroll("researchscroll");
+
+/**
+ * 用于存储所有的Properties
+ */
+public class ELTBlockStateProperties {
+    public static final EnumProperty<ResearchTablePart> RESEARCH_TABLE_PART = EnumProperty.create("part", ResearchTablePart.class);
+
 }
