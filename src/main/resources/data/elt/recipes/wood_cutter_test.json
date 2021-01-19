@@ -1,0 +1,14 @@
+{
+  "type": "elt:woodcutter",
+  "input":   {
+    "item": "minecraft:oak_log"
+  },
+  "tools": [
+    {
+      "item": "elt:tool/flint_adze"
+    }
+  ],
+  "output": {
+    "item": "minecraft:acacia_planks"
+  }
+}
