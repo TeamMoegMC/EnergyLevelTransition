@@ -10,8 +10,4 @@ public class ELTTileEntity extends TileEntity {
     public ELTTileEntity(TileEntityType<?> tileEntityTypeIn) {
         super(tileEntityTypeIn);
     }
-    public BlockState getState()
-    {
-        return getBlockState();
-    }
 }
