@@ -85,6 +85,21 @@ public class ResearchTableTileEntityRenderer extends TileEntityRenderer<Research
             this.renderPiece(matrixStackIn, bufferIn, true, Direction.SOUTH, rendermaterial, combinedLightIn, combinedOverlayIn, false);
             this.renderPiece(matrixStackIn, bufferIn, false, Direction.SOUTH, rendermaterial, combinedLightIn, combinedOverlayIn, true);
         }
+//
+//        matrixStackIn.pushPose();
+//        matrixStackIn.translate(1, 0, 0);
+//        BlockRendererDispatcher blockRenderer = Minecraft.getInstance().getBlockRenderer();
+//        BlockState state = Blocks.CHEST.defaultBlockState();
+//        blockRenderer.renderBlock(state, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, EmptyModelData.INSTANCE);
+//        matrixStackIn.popPose();
+//
+//        matrixStackIn.pushPose();
+//        matrixStackIn.translate(0, 1, 0);
+//        ItemRenderer itemRenderer = Minecraft.getInstance().getItemRenderer();
+//        ItemStack stack = new ItemStack(Items.DIAMOND);
+//        IBakedModel ibakedmodel = itemRenderer.getModel(stack, tileEntityIn.getLevel(), null);
+//        itemRenderer.render(stack, ItemCameraTransforms.TransformType.FIXED, true, matrixStackIn, bufferIn, combinedLightIn, combinedOverlayIn, ibakedmodel);
+//        matrixStackIn.popPose();
 
     }
 
