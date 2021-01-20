@@ -1,4 +1,4 @@
-package com.teammoeg.elt.block.researchblock;
+package com.teammoeg.elt.block.researchdesk;
 
 import com.teammoeg.elt.block.ELTBlockItem;
 import com.teammoeg.elt.block.ELTTileBlock;
@@ -14,7 +14,6 @@ import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
-import net.minecraft.state.properties.BedPart;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -58,7 +57,6 @@ public class ResearchDeskBlock extends ELTTileBlock {
     }
 }
 
-    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
         Direction direction = context.getHorizontalDirection();
@@ -66,6 +64,8 @@ public class ResearchDeskBlock extends ELTTileBlock {
         BlockPos blockpos1 = blockpos.relative(direction);
         return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, direction) : null;
     }
+
+    @Override
     public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!worldIn.isClientSide && player.isCreative()) {
             boolean block = state.getValue(MULTI);

@@ -1,4 +1,4 @@
-package com.teammoeg.elt.block.researchblock;
+package com.teammoeg.elt.block.researchdesk;
 
 import com.teammoeg.elt.block.ELTTileEntity;
 import net.minecraft.tileentity.TileEntityType;

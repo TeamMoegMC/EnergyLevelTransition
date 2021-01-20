@@ -1,6 +1,6 @@
 package com.teammoeg.elt.block;
 
-import com.teammoeg.elt.block.researchblock.ResearchDeskBlock;
+import com.teammoeg.elt.block.researchdesk.ResearchDeskBlock;
 import com.teammoeg.elt.block.researchtable.ResearchTableBlock;
 import net.minecraft.block.Block;
 
