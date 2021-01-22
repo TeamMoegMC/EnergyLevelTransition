@@ -8,12 +8,14 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
+import net.minecraft.state.properties.BedPart;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
@@ -41,7 +43,7 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
     }
-
+   //如果是主方块返回本身方向 不是主方块返回相反反向找到床的另一部分
     private static Direction getNeighbourDirection(boolean b, Direction directionIn) {
         return b == false ? directionIn : directionIn.getOpposite();
     }
@@ -67,7 +69,7 @@ public class ResearchDeskBlock extends ELTTileBlock {
 
     @Override
     public void playerWillDestroy(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
-        if (!worldIn.isClientSide && player.isCreative()) {
+        if (!worldIn.isClientSide) {
             boolean block = state.getValue(MULTI);
             if (block == false) {
                 BlockPos blockpos = pos.relative(getNeighbourDirection(state.getValue(MULTI), state.getValue(FACING)));
@@ -80,6 +82,19 @@ public class ResearchDeskBlock extends ELTTileBlock {
         }
 
         super.playerWillDestroy(worldIn, pos, state, player);
+    }
+
+    @Override
+    public BlockState updateShape(BlockState stateIn, Direction facing, BlockState facingState, IWorld worldIn, BlockPos currentPos, BlockPos facingPos) {
+        if (facing == getNeighbourDirection(stateIn.getValue(MULTI), stateIn.getValue(FACING)) && facingState.getBlock() !=this) {
+                return Blocks.AIR.defaultBlockState();
+           }else {
+            return super.updateShape(stateIn, facing, facingState, worldIn, currentPos, facingPos);
+        }
+    }
+    @Override
+    public PushReaction getPistonPushReaction(BlockState state) {
+        return PushReaction.DESTROY;
     }
 }
 
