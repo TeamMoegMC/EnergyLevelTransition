@@ -33,7 +33,7 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
 
     public ResearchDeskBlock(String name) {
-        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8), ELTBlockItem::new, MULTI,FACING);
+        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, MULTI,FACING);
     }
 
     @Override

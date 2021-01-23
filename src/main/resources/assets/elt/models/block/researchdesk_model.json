@@ -1,6 +1,5 @@
 {
-  "parent": "block/cube_all",
-  "textures": {
-    "all": "elt:block/venus_block"
-  }
+  "loader": "forge:obj",
+  "model": "elt:models/block/researchdesk.obj",
+  "flip-v": true
 }
