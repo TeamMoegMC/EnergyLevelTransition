@@ -16,10 +16,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
 import net.minecraft.state.properties.BedPart;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Mirror;
 import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
@@ -48,20 +50,10 @@ public class ResearchDeskBlock extends ELTTileBlock {
         return b == false ? directionIn : directionIn.getOpposite();
     }
 
-
-    @Override
-    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
-        if (!worldIn.isClientSide) {
-            BlockPos blockpos = pos.relative(state.getValue(FACING));
-            worldIn.setBlock(blockpos, state.setValue(MULTI, true), 3);
-            worldIn.blockUpdated(pos, Blocks.AIR);
-            state.updateNeighbourShapes(worldIn, pos, 3);
-    }
-}
-
+    @Nullable
     @Override
     public BlockState getStateForPlacement(BlockItemUseContext context) {
-        Direction direction = context.getHorizontalDirection();
+        Direction direction = context.getHorizontalDirection().getCounterClockWise();
         BlockPos blockpos = context.getClickedPos();
         BlockPos blockpos1 = blockpos.relative(direction);
         return context.getLevel().getBlockState(blockpos1).canBeReplaced(context) ? this.defaultBlockState().setValue(FACING, direction) : null;
@@ -80,7 +72,6 @@ public class ResearchDeskBlock extends ELTTileBlock {
                 }
             }
         }
-
         super.playerWillDestroy(worldIn, pos, state, player);
     }
 
@@ -93,8 +84,24 @@ public class ResearchDeskBlock extends ELTTileBlock {
         }
     }
     @Override
+    public void setPlacedBy(World worldIn, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack stack) {
+        if (!worldIn.isClientSide) {
+            BlockPos blockpos = pos.relative(state.getValue(FACING));
+            worldIn.setBlock(blockpos, state.setValue(MULTI, true), 3);
+            worldIn.blockUpdated(pos, Blocks.AIR);
+            state.updateNeighbourShapes(worldIn, pos, 3);
+        }
+    }
+    @Override
     public PushReaction getPistonPushReaction(BlockState state) {
         return PushReaction.DESTROY;
     }
+
+    @Nullable
+    @Override
+    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+        return new ResearchDeskTileEntity();
+    }
+
 }
 

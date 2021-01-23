@@ -16,6 +16,8 @@ import java.util.function.Supplier;
 public class ELTTileEntityTypes {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES_REGISTRY =
             DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ELT.MOD_ID);
+    public static final RegistryObject<TileEntityType<ResearchTableTileEntity>> RESEARCHDESK = TILE_ENTITIES_REGISTRY.register(
+            "research_table", makeType(ResearchTableTileEntity::new, () -> ELTBlocks.RESEARCH_DESK));
 
     public static final RegistryObject<TileEntityType<ResearchTableTileEntity>> RESEARCH_TABLE = TILE_ENTITIES_REGISTRY.register(
             "research_table", makeType(ResearchTableTileEntity::new, () -> ELTBlocks.RESEARCH_TABLE));
