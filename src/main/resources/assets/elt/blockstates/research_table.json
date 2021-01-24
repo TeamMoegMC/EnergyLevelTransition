@@ -1,7 +1,5 @@
 {
   "variants": {
-    "": {
-      "model": "elt:block/research_table"
-    }
+    "": {"model": "elt:block/research_table"}
   }
 }

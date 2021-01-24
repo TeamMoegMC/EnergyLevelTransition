@@ -1,7 +1,7 @@
 {
   "variants": {
       "multiblockslave=false":{"model": "elt:block/researchdesk_model"},
-	  "multiblockslave=true":{"model": "elt:block/researchdesk_model"},
+	  "multiblockslave=true":{"model": "elt:block/empty"}
       }
     }
 
