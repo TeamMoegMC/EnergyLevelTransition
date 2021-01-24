@@ -32,58 +32,119 @@ import static com.teammoeg.the_seed.data.legacy.CS.*;
  */
 public class UT {
     public static byte side(int aSide) {
-        return aSide > 5 || aSide < 0 ? SIDE_INVALID : (byte)aSide;
+        return aSide > 5 || aSide < 0 ? SIDE_INVALID : (byte) aSide;
     }
 
-    /** If this Index exists inside the passed Array and if it is != null */
+    /**
+     * If this Index exists inside the passed Array and if it is != null
+     */
     public static <E> boolean exists(int aIndex, E[] aArray) {
         return aIndex >= 0 && aIndex < aArray.length && aArray[aIndex] != null;
     }
 
-    /** @return a Value for a Scale between 0 and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= 0, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone. */
+    /**
+     * @return a Value for a Scale between 0 and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= 0, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone.
+     */
     public static long scale(long aValue, long aMax, long aScale, boolean aInvert) {
-        long rScale = (aValue <= 0 ? 0 : aValue >= aMax ? aScale : aScale <= 2 ? 1 : 1 + (aValue * (aScale-1)) / aMax);
+        long rScale = (aValue <= 0 ? 0 : aValue >= aMax ? aScale : aScale <= 2 ? 1 : 1 + (aValue * (aScale - 1)) / aMax);
         return aInvert ? aScale - rScale : rScale;
     }
-    /** @return a Value for a Scale between aMin and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= aMin, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone. */
+
+    /**
+     * @return a Value for a Scale between aMin and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= aMin, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone.
+     */
     public static long scale(long aValue, long aMin, long aMax, long aScale, boolean aInvert) {
-        return scale(aValue-aMin, aMax-aMin, aScale, aInvert);
+        return scale(aValue - aMin, aMax - aMin, aScale, aInvert);
     }
 
     public static long bind(long aMin, long aMax, long aBoundValue) {
         return aMin > aMax ? Math.max(aMax, Math.min(aMin, aBoundValue)) : Math.max(aMin, Math.min(aMax, aBoundValue));
     }
+
     public static long bind_(long aMin, long aMax, long aBoundValue) {
         return Math.max(aMin, Math.min(aMax, aBoundValue));
     }
 
-    public static float  bindF    (float  aBoundValue) {return        Math.max(0, Math.min(         1, aBoundValue));}
-    public static double bindD    (double aBoundValue) {return        Math.max(0, Math.min(         1, aBoundValue));}
-    public static byte   bind1    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         1, aBoundValue));}
-    public static byte   bind2    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         3, aBoundValue));}
-    public static byte   bind3    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         7, aBoundValue));}
-    public static byte   bind4    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        15, aBoundValue));}
-    public static byte   bind5    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        31, aBoundValue));}
-    public static byte   bind6    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        63, aBoundValue));}
-    public static byte   bind7    (long   aBoundValue) {return (byte) Math.max(0, Math.min(       127, aBoundValue));}
-    public static short  bind8    (long   aBoundValue) {return (short)Math.max(0, Math.min(       255, aBoundValue));}
-    public static short  bind15   (long   aBoundValue) {return (short)Math.max(0, Math.min(     32767, aBoundValue));}
-    public static int    bind16   (long   aBoundValue) {return (int)  Math.max(0, Math.min(     65535, aBoundValue));}
-    public static int    bind24   (long   aBoundValue) {return (int)  Math.max(0, Math.min(  16777215, aBoundValue));}
-    public static int    bind31   (long   aBoundValue) {return (int)  Math.max(0, Math.min(2147483647, aBoundValue));}
-    public static int    bindInt  (long   aBoundValue) {return (int)  Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, aBoundValue));}
-    public static short  bindShort(long   aBoundValue) {return (short)Math.max(Short.MIN_VALUE, Math.min(Short.MAX_VALUE, aBoundValue));}
-    public static byte   bindByte (long   aBoundValue) {return (byte) Math.max(Byte.MIN_VALUE, Math.min(Byte.MAX_VALUE, aBoundValue));}
-    public static byte   bindStack(long   aBoundValue) {return (byte) Math.max(1, Math.min(64, aBoundValue));}
+    public static float bindF(float aBoundValue) {
+        return Math.max(0, Math.min(1, aBoundValue));
+    }
+
+    public static double bindD(double aBoundValue) {
+        return Math.max(0, Math.min(1, aBoundValue));
+    }
+
+    public static byte bind1(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(1, aBoundValue));
+    }
+
+    public static byte bind2(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(3, aBoundValue));
+    }
+
+    public static byte bind3(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(7, aBoundValue));
+    }
+
+    public static byte bind4(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(15, aBoundValue));
+    }
+
+    public static byte bind5(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(31, aBoundValue));
+    }
+
+    public static byte bind6(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(63, aBoundValue));
+    }
+
+    public static byte bind7(long aBoundValue) {
+        return (byte) Math.max(0, Math.min(127, aBoundValue));
+    }
+
+    public static short bind8(long aBoundValue) {
+        return (short) Math.max(0, Math.min(255, aBoundValue));
+    }
+
+    public static short bind15(long aBoundValue) {
+        return (short) Math.max(0, Math.min(32767, aBoundValue));
+    }
+
+    public static int bind16(long aBoundValue) {
+        return (int) Math.max(0, Math.min(65535, aBoundValue));
+    }
+
+    public static int bind24(long aBoundValue) {
+        return (int) Math.max(0, Math.min(16777215, aBoundValue));
+    }
+
+    public static int bind31(long aBoundValue) {
+        return (int) Math.max(0, Math.min(2147483647, aBoundValue));
+    }
+
+    public static int bindInt(long aBoundValue) {
+        return (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, aBoundValue));
+    }
+
+    public static short bindShort(long aBoundValue) {
+        return (short) Math.max(Short.MIN_VALUE, Math.min(Short.MAX_VALUE, aBoundValue));
+    }
+
+    public static byte bindByte(long aBoundValue) {
+        return (byte) Math.max(Byte.MIN_VALUE, Math.min(Byte.MAX_VALUE, aBoundValue));
+    }
+
+    public static byte bindStack(long aBoundValue) {
+        return (byte) Math.max(1, Math.min(64, aBoundValue));
+    }
 
     public static short[] bindRGBa(short[] aColors) {
-        if (aColors == null) return new short[] {255,255,255,255};
+        if (aColors == null) return new short[]{255, 255, 255, 255};
         for (int i = 0; i < aColors.length; i++) aColors[i] = bind8(aColors[i]);
         return aColors;
     }
 
     public static int mixRGBInt(int aRGB1, int aRGB2) {
-        return getRGBInt(new short[] {(short)((getR(aRGB1) + getR(aRGB2)) >> 1), (short)((getG(aRGB1) + getG(aRGB2)) >> 1), (short)((getB(aRGB1) + getB(aRGB2)) >> 1)});
+        return getRGBInt(new short[]{(short) ((getR(aRGB1) + getR(aRGB2)) >> 1), (short) ((getG(aRGB1) + getG(aRGB2)) >> 1), (short) ((getB(aRGB1) + getB(aRGB2)) >> 1)});
     }
 
     public static int getRGBInt(short[] aColors) {
@@ -103,50 +164,73 @@ public class UT {
     }
 
     public static short[] getRGBaArray(int aColors) {
-        return new short[] {(short)((aColors >>> 16) & 255), (short)((aColors >>> 8) & 255), (short)(aColors & 255), (short)((aColors >>> 24) & 255)};
+        return new short[]{(short) ((aColors >>> 16) & 255), (short) ((aColors >>> 8) & 255), (short) (aColors & 255), (short) ((aColors >>> 24) & 255)};
     }
 
-    public static short getR(int aColors) {return (short)((aColors >>> 16) & 255);}
-    public static short getG(int aColors) {return (short)((aColors >>>  8) & 255);}
-    public static short getB(int aColors) {return (short) (aColors         & 255);}
-    public static short getA(int aColors) {return (short)((aColors >>> 24) & 255);}
+    public static short getR(int aColors) {
+        return (short) ((aColors >>> 16) & 255);
+    }
+
+    public static short getG(int aColors) {
+        return (short) ((aColors >>> 8) & 255);
+    }
+
+    public static short getB(int aColors) {
+        return (short) (aColors & 255);
+    }
+
+    public static short getA(int aColors) {
+        return (short) ((aColors >>> 24) & 255);
+    }
 
     public static class Code {
-        /** Note: Does not work on huge amounts of Bytes. */
+        /**
+         * Note: Does not work on huge amounts of Bytes.
+         */
         public static byte averageBytes(byte... aBytes) {
             if (aBytes == null || aBytes.length <= 0) return 0;
-            return (byte)(sum(aBytes) / aBytes.length);
+            return (byte) (sum(aBytes) / aBytes.length);
         }
 
-        /** Note: Does not work on huge amounts of Bytes. */
+        /**
+         * Note: Does not work on huge amounts of Bytes.
+         */
         public static byte averageUnsignedBytes(byte... aBytes) {
             if (aBytes == null || aBytes.length <= 0) return 0;
             long rValue = 0;
             for (byte aByte : aBytes) rValue += unsignB(aByte);
-            return (byte)(rValue / aBytes.length);
+            return (byte) (rValue / aBytes.length);
         }
 
-        /** Note: Does not work on huge amounts of Bytes. */
+        /**
+         * Note: Does not work on huge amounts of Bytes.
+         */
         public static short averageShorts(short... aShorts) {
             if (aShorts == null || aShorts.length <= 0) return 0;
-            return (short)(sum(aShorts) / aShorts.length);
+            return (short) (sum(aShorts) / aShorts.length);
         }
 
-        /** Note: Does not work on huge amounts of Shorts. */
+        /**
+         * Note: Does not work on huge amounts of Shorts.
+         */
         public static short averageUnsignedShorts(short... aShorts) {
             if (aShorts == null || aShorts.length <= 0) return 0;
             long rValue = 0;
             for (short aShort : aShorts) rValue += unsignS(aShort);
-            return (short)(rValue / aShorts.length);
+            return (short) (rValue / aShorts.length);
         }
 
-        /** Note: Does not work on huge amounts of Integers. */
+        /**
+         * Note: Does not work on huge amounts of Integers.
+         */
         public static int averageInts(int... aInts) {
             if (aInts == null || aInts.length <= 0) return 0;
             return bindInt(sum(aInts) / aInts.length);
         }
 
-        /** Note: Does not work on huge amounts of Integers. */
+        /**
+         * Note: Does not work on huge amounts of Integers.
+         */
         public static int averageUnsignedInts(int... aInts) {
             if (aInts == null || aInts.length <= 0) return 0;
             long rValue = 0;
@@ -154,43 +238,68 @@ public class UT {
             return bindInt(rValue / aInts.length);
         }
 
-        /** Note: Does not work on huge amounts of Longs. */
+        /**
+         * Note: Does not work on huge amounts of Longs.
+         */
         public static long averageLongs(long... aLongs) {
             if (aLongs == null || aLongs.length <= 0) return 0;
             return sum(aLongs) / aLongs.length;
         }
 
         public static int roundDown(double aNumber) {
-            int rRounded = (int)aNumber;
-            return rRounded > aNumber ? rRounded-1 : rRounded;
+            int rRounded = (int) aNumber;
+            return rRounded > aNumber ? rRounded - 1 : rRounded;
         }
+
         public static int roundUp(double aNumber) {
-            int rRounded = (int)aNumber;
-            return rRounded < aNumber ? rRounded+1 : rRounded;
+            int rRounded = (int) aNumber;
+            return rRounded < aNumber ? rRounded + 1 : rRounded;
         }
 
-        /** @return an unsigned representation of this Byte. */
+        /**
+         * @return an unsigned representation of this Byte.
+         */
         public static short unsignB(byte aByte) {
-            return aByte < 0 ? (short)(aByte + 256) : aByte;
+            return aByte < 0 ? (short) (aByte + 256) : aByte;
         }
 
-        /** @return an unsigned representation of this Short. */
+        /**
+         * @return an unsigned representation of this Short.
+         */
         public static int unsignS(short aShort) {
             return aShort < 0 ? aShort + 65536 : aShort;
         }
 
-        /** @return an unsigned representation of this Integer. */
+        /**
+         * @return an unsigned representation of this Integer.
+         */
         public static long unsignI(int aInteger) {
             return aInteger < 0 ? aInteger + 4294967296L : aInteger;
         }
 
-        public static byte toByteS(short aValue, int aIndex) {return (byte)(aValue >> (aIndex<<3));}
-        public static byte toByteI(int   aValue, int aIndex) {return (byte)(aValue >> (aIndex<<3));}
-        public static byte toByteL(long  aValue, int aIndex) {return (byte)(aValue >> (aIndex<<3));}
+        public static byte toByteS(short aValue, int aIndex) {
+            return (byte) (aValue >> (aIndex << 3));
+        }
 
-        public static short combine(byte aValue1, byte aValue2)                                                                                     {return (short) ((0xff & aValue1) | aValue2 << 8);}
-        public static int   combine(byte aValue1, byte aValue2, byte aValue3, byte aValue4)                                                         {return          (0xff & aValue1) | (0xff & aValue2) << 8 | (0xff & aValue3) << 16 | aValue4 << 24;}
-        public static long  combine(byte aValue1, byte aValue2, byte aValue3, byte aValue4, byte aValue5, byte aValue6, byte aValue7, byte aValue8) {return ((long)aValue1 & 0xff) | ((long)aValue2 & 0xff) << 8 | ((long)aValue3 & 0xff) << 16 | ((long)aValue4 & 0xff) << 24 | ((long)aValue5 & 0xff) << 32 | ((long)aValue6 & 0xff) << 40 | ((long)aValue7 & 0xff) << 48 | (long)aValue8 << 56;}
+        public static byte toByteI(int aValue, int aIndex) {
+            return (byte) (aValue >> (aIndex << 3));
+        }
+
+        public static byte toByteL(long aValue, int aIndex) {
+            return (byte) (aValue >> (aIndex << 3));
+        }
+
+        public static short combine(byte aValue1, byte aValue2) {
+            return (short) ((0xff & aValue1) | aValue2 << 8);
+        }
+
+        public static int combine(byte aValue1, byte aValue2, byte aValue3, byte aValue4) {
+            return (0xff & aValue1) | (0xff & aValue2) << 8 | (0xff & aValue3) << 16 | aValue4 << 24;
+        }
+
+        public static long combine(byte aValue1, byte aValue2, byte aValue3, byte aValue4, byte aValue5, byte aValue6, byte aValue7, byte aValue8) {
+            return ((long) aValue1 & 0xff) | ((long) aValue2 & 0xff) << 8 | ((long) aValue3 & 0xff) << 16 | ((long) aValue4 & 0xff) << 24 | ((long) aValue5 & 0xff) << 32 | ((long) aValue6 & 0xff) << 40 | ((long) aValue7 & 0xff) << 48 | (long) aValue8 << 56;
+        }
 
         public static long getBits(boolean... aBits) {
             long rBits = 0;
@@ -229,32 +338,34 @@ public class UT {
 //        }
 
         public static UUID getUUID(byte[] aData, int aOffset) {
-            return aData.length - aOffset < 16 ? null : new UUID(combine(aData[aOffset], aData[aOffset+1], aData[aOffset+2], aData[aOffset+3], aData[aOffset+4], aData[aOffset+5], aData[aOffset+6], aData[aOffset+7]), combine(aData[aOffset+8], aData[aOffset+9], aData[aOffset+10], aData[aOffset+11], aData[aOffset+12], aData[aOffset+13], aData[aOffset+14], aData[aOffset+15]));
+            return aData.length - aOffset < 16 ? null : new UUID(combine(aData[aOffset], aData[aOffset + 1], aData[aOffset + 2], aData[aOffset + 3], aData[aOffset + 4], aData[aOffset + 5], aData[aOffset + 6], aData[aOffset + 7]), combine(aData[aOffset + 8], aData[aOffset + 9], aData[aOffset + 10], aData[aOffset + 11], aData[aOffset + 12], aData[aOffset + 13], aData[aOffset + 14], aData[aOffset + 15]));
         }
 
         public static byte[] getBytes(UUID aData, int aOffset) {
             if (aData == null) return new byte[aOffset];
-            byte[] rData = new byte[aOffset+16];
+            byte[] rData = new byte[aOffset + 16];
             for (int i = 0; i < 8; i++) {
-                rData[aOffset+  i] = toByteL(aData.getMostSignificantBits(), i);
-                rData[aOffset+8+i] = toByteL(aData.getLeastSignificantBits(), i);
+                rData[aOffset + i] = toByteL(aData.getMostSignificantBits(), i);
+                rData[aOffset + 8 + i] = toByteL(aData.getLeastSignificantBits(), i);
             }
             return rData;
         }
 
-        /** Converts a Number to a String */
+        /**
+         * Converts a Number to a String
+         */
         public static String makeString(long aNumber) {
             String tString = "";
             boolean temp = T, negative = F;
 
-            if (aNumber<0) {
+            if (aNumber < 0) {
                 aNumber *= -1;
                 negative = T;
             }
 
             for (long i = 1000000000000000000L; i > 0; i /= 10) {
-                long tDigit = (aNumber/i)%10;
-                if ( temp && tDigit != 0) temp = F;
+                long tDigit = (aNumber / i) % 10;
+                if (temp && tDigit != 0) temp = F;
                 if (!temp) {
                     tString += tDigit;
                     if (i != 1) for (long j = i; j > 0; j /= 1000) if (j == 1) tString += ",";
@@ -263,12 +374,13 @@ public class UT {
 
             if (tString.equals("")) tString = "0";
 
-            return negative?"-"+tString:tString;
+            return negative ? "-" + tString : tString;
         }
 
         @SafeVarargs
         public static <E> boolean contains(E aTarget, E... aArray) {
-            if (aArray != null) for (E tValue : aArray) if (tValue == aTarget || (tValue != null && aTarget != null && tValue.equals(aTarget))) return T;
+            if (aArray != null) for (E tValue : aArray)
+                if (tValue == aTarget || (tValue != null && aTarget != null && tValue.equals(aTarget))) return T;
             return F;
         }
 
@@ -312,7 +424,7 @@ public class UT {
         public static <E> ArrayList<E> getWithoutTrailingNulls(E... aArray) {
             if (aArray == null) return new ArrayList<>(1);
             ArrayList<E> rList = new ArrayList<>(Arrays.asList(aArray));
-            for (int i = rList.size() - 1; i >= 0 && rList.get(i) == null;) rList.remove(i--);
+            for (int i = rList.size() - 1; i >= 0 && rList.get(i) == null; ) rList.remove(i--);
             return rList;
         }
 
@@ -323,6 +435,7 @@ public class UT {
         }
 
         private static final DateFormat sDateFormat = DateFormat.getInstance();
+
         public static String dateAndTime() {
             return sDateFormat.format(new Date());
         }
@@ -341,20 +454,20 @@ public class UT {
         public static byte tierMin(long aSize) {
             byte i = -1;
             aSize = Math.abs(aSize);
-            while (++i < V.length) if (aSize < V[i]) return (byte)Math.max(0, i-1);
+            while (++i < V.length) if (aSize < V[i]) return (byte) Math.max(0, i - 1);
             return --i;
         }
 
         public static long voltMax(long aSize) {
             aSize = Math.abs(aSize);
             for (int i = 0; i < VMAX.length; i++) if (aSize < VMAX[i]) return VMAX[i];
-            return VMAX[VMAX.length-1];
+            return VMAX[VMAX.length - 1];
         }
 
         public static long voltMin(long aSize) {
             aSize = Math.abs(aSize);
             for (int i = 0; i < VMAX.length; i++) if (aSize < VMAX[i]) return VMIN[i];
-            return VMIN[VMIN.length-1];
+            return VMIN[VMIN.length - 1];
         }
 
         public static boolean haveOneCommonElement(Iterable<?> aCollection1, Collection<?> aCollection2) {
@@ -363,7 +476,9 @@ public class UT {
             return F;
         }
 
-        /** re-maps all Keys of a Map after the Keys were weakened. */
+        /**
+         * re-maps all Keys of a Map after the Keys were weakened.
+         */
         public static <X, Y> Map<X, Y> reMap(Map<X, Y> aMap) {
             Map<X, Y> tMap = new HashMap<>();
             tMap.putAll(aMap);
@@ -372,23 +487,39 @@ public class UT {
             return aMap;
         }
 
-        /** Why the fuck do neither Java nor Guava have a Function to do this? */
+        /**
+         * Why the fuck do neither Java nor Guava have a Function to do this?
+         */
         @SuppressWarnings("rawtypes")
-        public static <X, Y extends Comparable> LinkedHashMap<X,Y> sortByValuesAcending(Map<X,Y> aMap) {
-            List<Map.Entry<X,Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
-            Collections.sort(tEntrySet, new Comparator<Map.Entry<X,Y>>() {@SuppressWarnings("unchecked") @Override public int compare(Map.Entry<X, Y> aValue1, Map.Entry<X, Y> aValue2) {return aValue1.getValue().compareTo(aValue2.getValue());}});
-            LinkedHashMap<X,Y> rMap = new LinkedHashMap<>();
-            for (Map.Entry<X,Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
+        public static <X, Y extends Comparable> LinkedHashMap<X, Y> sortByValuesAcending(Map<X, Y> aMap) {
+            List<Map.Entry<X, Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
+            Collections.sort(tEntrySet, new Comparator<Map.Entry<X, Y>>() {
+                @SuppressWarnings("unchecked")
+                @Override
+                public int compare(Map.Entry<X, Y> aValue1, Map.Entry<X, Y> aValue2) {
+                    return aValue1.getValue().compareTo(aValue2.getValue());
+                }
+            });
+            LinkedHashMap<X, Y> rMap = new LinkedHashMap<>();
+            for (Map.Entry<X, Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
             return rMap;
         }
 
-        /** Why the fuck do neither Java nor Guava have a Function to do this? */
+        /**
+         * Why the fuck do neither Java nor Guava have a Function to do this?
+         */
         @SuppressWarnings("rawtypes")
-        public static <X, Y extends Comparable> LinkedHashMap<X,Y> sortByValuesDescending(Map<X,Y> aMap) {
-            List<Map.Entry<X,Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
-            Collections.sort(tEntrySet, new Comparator<Map.Entry<X,Y>>() {@SuppressWarnings("unchecked") @Override public int compare(Map.Entry<X, Y> aValue1, Map.Entry<X, Y> aValue2) {return -aValue1.getValue().compareTo(aValue2.getValue());}});
-            LinkedHashMap<X,Y> rMap = new LinkedHashMap<>();
-            for (Map.Entry<X,Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
+        public static <X, Y extends Comparable> LinkedHashMap<X, Y> sortByValuesDescending(Map<X, Y> aMap) {
+            List<Map.Entry<X, Y>> tEntrySet = new LinkedList<>(aMap.entrySet());
+            Collections.sort(tEntrySet, new Comparator<Map.Entry<X, Y>>() {
+                @SuppressWarnings("unchecked")
+                @Override
+                public int compare(Map.Entry<X, Y> aValue1, Map.Entry<X, Y> aValue2) {
+                    return -aValue1.getValue().compareTo(aValue2.getValue());
+                }
+            });
+            LinkedHashMap<X, Y> rMap = new LinkedHashMap<>();
+            for (Map.Entry<X, Y> tEntry : tEntrySet) rMap.put(tEntry.getKey(), tEntry.getValue());
             return rMap;
         }
 
@@ -396,7 +527,7 @@ public class UT {
             if (aList == null || aList.isEmpty()) return aReplacement;
             if (aList.size() <= aIndex) return aList.get(aList.size() - 1);
             if (aIndex < 0) return aList.get(0);
-            return aList.get((int)aIndex);
+            return aList.get((int) aIndex);
         }
 
         public static <E> E select(E aReplacement, List<E> aList) {
@@ -409,7 +540,7 @@ public class UT {
             if (aArray == null || aArray.length <= 0) return aReplacement;
             if (aArray.length <= aIndex) return aArray[aArray.length - 1];
             if (aIndex < 0) return aArray[0];
-            return aArray[(int)aIndex];
+            return aArray[(int) aIndex];
         }
 
         @SafeVarargs
@@ -462,59 +593,119 @@ public class UT {
 //        }
 
         public static byte side(int aSide) {
-            return aSide > 5 || aSide < 0 ? SIDE_INVALID : (byte)aSide;
+            return aSide > 5 || aSide < 0 ? SIDE_INVALID : (byte) aSide;
         }
 
-        /** If this Index exists inside the passed Array and if it is != null */
+        /**
+         * If this Index exists inside the passed Array and if it is != null
+         */
         public static <E> boolean exists(int aIndex, E[] aArray) {
             return aIndex >= 0 && aIndex < aArray.length && aArray[aIndex] != null;
         }
 
-        /** @return a Value for a Scale between 0 and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= 0, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone. */
+        /**
+         * @return a Value for a Scale between 0 and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= 0, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone.
+         */
         public static long scale(long aValue, long aMax, long aScale, boolean aInvert) {
-            long rScale = (aValue <= 0 ? 0 : aValue >= aMax ? aScale : aScale <= 2 ? 1 : 1 + (aValue * (aScale-1)) / aMax);
+            long rScale = (aValue <= 0 ? 0 : aValue >= aMax ? aScale : aScale <= 2 ? 1 : 1 + (aValue * (aScale - 1)) / aMax);
             return aInvert ? aScale - rScale : rScale;
         }
 
-        /** @return a Value for a Scale between aMin and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= aMin, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone. */
+        /**
+         * @return a Value for a Scale between aMin and aMax with aScale+1 possible Steps. 0 is only returned if the aValue is <= aMin, aScale is only returned if the Value is >= aMax. The remaining values between ]0:aScale[ are returned for each Step of the Scale. This Function finds use in Displays such as the Barometer, but also in Redstone.
+         */
         public static long scale(long aValue, long aMin, long aMax, long aScale, boolean aInvert) {
-            return scale(aValue-aMin, aMax-aMin, aScale, aInvert);
+            return scale(aValue - aMin, aMax - aMin, aScale, aInvert);
         }
 
         public static long bind(long aMin, long aMax, long aBoundValue) {
             return aMin > aMax ? Math.max(aMax, Math.min(aMin, aBoundValue)) : Math.max(aMin, Math.min(aMax, aBoundValue));
         }
+
         public static long bind_(long aMin, long aMax, long aBoundValue) {
             return Math.max(aMin, Math.min(aMax, aBoundValue));
         }
 
-        public static float  bindF    (float  aBoundValue) {return        Math.max(0, Math.min(         1, aBoundValue));}
-        public static double bindD    (double aBoundValue) {return        Math.max(0, Math.min(         1, aBoundValue));}
-        public static byte   bind1    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         1, aBoundValue));}
-        public static byte   bind2    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         3, aBoundValue));}
-        public static byte   bind3    (long   aBoundValue) {return (byte) Math.max(0, Math.min(         7, aBoundValue));}
-        public static byte   bind4    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        15, aBoundValue));}
-        public static byte   bind5    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        31, aBoundValue));}
-        public static byte   bind6    (long   aBoundValue) {return (byte) Math.max(0, Math.min(        63, aBoundValue));}
-        public static byte   bind7    (long   aBoundValue) {return (byte) Math.max(0, Math.min(       127, aBoundValue));}
-        public static short  bind8    (long   aBoundValue) {return (short)Math.max(0, Math.min(       255, aBoundValue));}
-        public static short  bind15   (long   aBoundValue) {return (short)Math.max(0, Math.min(     32767, aBoundValue));}
-        public static int    bind16   (long   aBoundValue) {return (int)  Math.max(0, Math.min(     65535, aBoundValue));}
-        public static int    bind24   (long   aBoundValue) {return (int)  Math.max(0, Math.min(  16777215, aBoundValue));}
-        public static int    bind31   (long   aBoundValue) {return (int)  Math.max(0, Math.min(2147483647, aBoundValue));}
-        public static int    bindInt  (long   aBoundValue) {return (int)  Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, aBoundValue));}
-        public static short  bindShort(long   aBoundValue) {return (short)Math.max(Short.MIN_VALUE, Math.min(Short.MAX_VALUE, aBoundValue));}
-        public static byte   bindByte (long   aBoundValue) {return (byte) Math.max(Byte.MIN_VALUE, Math.min(Byte.MAX_VALUE, aBoundValue));}
-        public static byte   bindStack(long   aBoundValue) {return (byte) Math.max(1, Math.min(64, aBoundValue));}
+        public static float bindF(float aBoundValue) {
+            return Math.max(0, Math.min(1, aBoundValue));
+        }
+
+        public static double bindD(double aBoundValue) {
+            return Math.max(0, Math.min(1, aBoundValue));
+        }
+
+        public static byte bind1(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(1, aBoundValue));
+        }
+
+        public static byte bind2(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(3, aBoundValue));
+        }
+
+        public static byte bind3(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(7, aBoundValue));
+        }
+
+        public static byte bind4(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(15, aBoundValue));
+        }
+
+        public static byte bind5(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(31, aBoundValue));
+        }
+
+        public static byte bind6(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(63, aBoundValue));
+        }
+
+        public static byte bind7(long aBoundValue) {
+            return (byte) Math.max(0, Math.min(127, aBoundValue));
+        }
+
+        public static short bind8(long aBoundValue) {
+            return (short) Math.max(0, Math.min(255, aBoundValue));
+        }
+
+        public static short bind15(long aBoundValue) {
+            return (short) Math.max(0, Math.min(32767, aBoundValue));
+        }
+
+        public static int bind16(long aBoundValue) {
+            return (int) Math.max(0, Math.min(65535, aBoundValue));
+        }
+
+        public static int bind24(long aBoundValue) {
+            return (int) Math.max(0, Math.min(16777215, aBoundValue));
+        }
+
+        public static int bind31(long aBoundValue) {
+            return (int) Math.max(0, Math.min(2147483647, aBoundValue));
+        }
+
+        public static int bindInt(long aBoundValue) {
+            return (int) Math.max(Integer.MIN_VALUE, Math.min(Integer.MAX_VALUE, aBoundValue));
+        }
+
+        public static short bindShort(long aBoundValue) {
+            return (short) Math.max(Short.MIN_VALUE, Math.min(Short.MAX_VALUE, aBoundValue));
+        }
+
+        public static byte bindByte(long aBoundValue) {
+            return (byte) Math.max(Byte.MIN_VALUE, Math.min(Byte.MAX_VALUE, aBoundValue));
+        }
+
+        public static byte bindStack(long aBoundValue) {
+            return (byte) Math.max(1, Math.min(64, aBoundValue));
+        }
 
         public static short[] bindRGBa(short[] aColors) {
-            if (aColors == null) return new short[] {255,255,255,255};
+            if (aColors == null) return new short[]{255, 255, 255, 255};
             for (int i = 0; i < aColors.length; i++) aColors[i] = bind8(aColors[i]);
             return aColors;
         }
 
         public static int mixRGBInt(int aRGB1, int aRGB2) {
-            return getRGBInt(new short[] {(short)((getR(aRGB1) + getR(aRGB2)) >> 1), (short)((getG(aRGB1) + getG(aRGB2)) >> 1), (short)((getB(aRGB1) + getB(aRGB2)) >> 1)});
+            return getRGBInt(new short[]{(short) ((getR(aRGB1) + getR(aRGB2)) >> 1), (short) ((getG(aRGB1) + getG(aRGB2)) >> 1), (short) ((getB(aRGB1) + getB(aRGB2)) >> 1)});
         }
 
         public static int getRGBInt(short[] aColors) {
@@ -534,13 +725,24 @@ public class UT {
         }
 
         public static short[] getRGBaArray(int aColors) {
-            return new short[] {(short)((aColors >>> 16) & 255), (short)((aColors >>> 8) & 255), (short)(aColors & 255), (short)((aColors >>> 24) & 255)};
+            return new short[]{(short) ((aColors >>> 16) & 255), (short) ((aColors >>> 8) & 255), (short) (aColors & 255), (short) ((aColors >>> 24) & 255)};
         }
 
-        public static short getR(int aColors) {return (short)((aColors >>> 16) & 255);}
-        public static short getG(int aColors) {return (short)((aColors >>>  8) & 255);}
-        public static short getB(int aColors) {return (short) (aColors         & 255);}
-        public static short getA(int aColors) {return (short)((aColors >>> 24) & 255);}
+        public static short getR(int aColors) {
+            return (short) ((aColors >>> 16) & 255);
+        }
+
+        public static short getG(int aColors) {
+            return (short) ((aColors >>> 8) & 255);
+        }
+
+        public static short getB(int aColors) {
+            return (short) (aColors & 255);
+        }
+
+        public static short getA(int aColors) {
+            return (short) ((aColors >>> 24) & 255);
+        }
 
 //        @Environment(EnvType.CLIENT)
 //        /** estebes helped with the code for this one, and yes that cast down there is fucking necessary... */
@@ -589,51 +791,83 @@ public class UT {
 //            return new short[] {(short)(tR / tPixels), (short)(tG / tPixels), (short)(tB / tPixels)};
 //        }
 
-        /** toUpperCases the first Character of the String and returns it */
+        /**
+         * toUpperCases the first Character of the String and returns it
+         */
         public static String capitalise(String aString) {
             return aString == null ? "" : aString.length() <= 1 ? aString.toUpperCase() : aString.substring(0, 1).toUpperCase() + aString.substring(1);
         }
 
-        /** toUpperCases the first Character of each Word in the String and returns it */
+        /**
+         * toUpperCases the first Character of each Word in the String and returns it
+         */
         public static String capitaliseWords(String aString) {
             StringBuilder rString = new StringBuilder();
-            for (String tString : aString.split(" ")) if (!tString.isEmpty()) rString.append(capitalise(tString)).append(" ");
+            for (String tString : aString.split(" "))
+                if (!tString.isEmpty()) rString.append(capitalise(tString)).append(" ");
             return rString.toString().trim();
         }
 
-        /** @return the opposite facing of this Side of a Block, with a boundary check. */
+        /**
+         * @return the opposite facing of this Side of a Block, with a boundary check.
+         */
         public static byte opposite(int aSide) {
             return aSide < OPPOSITES.length && aSide >= 0 ? OPPOSITES[aSide] : 6;
         }
 
-        /** Turns the Amount of Stuff into a more readable String. */
+        /**
+         * Turns the Amount of Stuff into a more readable String.
+         */
         public static String displayUnits(long aAmount) {
             if (aAmount < 0) return "?.???";
             long tDigits = ((aAmount % U) * 1000) / U;
-            return (aAmount / U) + "." + (tDigits<1?"000":tDigits<10?"00"+tDigits:tDigits<100?"0"+tDigits:tDigits);
+            return (aAmount / U) + "." + (tDigits < 1 ? "000" : tDigits < 10 ? "00" + tDigits : tDigits < 100 ? "0" + tDigits : tDigits);
         }
 
-        /** Translates Amount of aUnit1 to Amount of aUnit2. */
+        /**
+         * Translates Amount of aUnit1 to Amount of aUnit2.
+         */
         public static long units(long aAmount, long aOriginalUnit, long aTargetUnit, boolean aRoundUp) {
             if (aTargetUnit == 0) return 0;
             if (aOriginalUnit == aTargetUnit || aOriginalUnit == 0) return aAmount;
-            if (aOriginalUnit %   aTargetUnit == 0) {aOriginalUnit /=   aTargetUnit;   aTargetUnit = 1;} else
-            if (aTargetUnit   % aOriginalUnit == 0) {  aTargetUnit /= aOriginalUnit; aOriginalUnit = 1;}
+            if (aOriginalUnit % aTargetUnit == 0) {
+                aOriginalUnit /= aTargetUnit;
+                aTargetUnit = 1;
+            } else if (aTargetUnit % aOriginalUnit == 0) {
+                aTargetUnit /= aOriginalUnit;
+                aOriginalUnit = 1;
+            }
             return Math.max(0, ((aAmount * aTargetUnit) / aOriginalUnit) + (aRoundUp && (aAmount * aTargetUnit) % aOriginalUnit > 0 ? 1 : 0));
         }
 
-        /** Translates Amount of aUnit1 to Amount of aUnit2. With additional checks to avoid 64 Bit Overflow. */
+        /**
+         * Translates Amount of aUnit1 to Amount of aUnit2. With additional checks to avoid 64 Bit Overflow.
+         */
         public static long units_(long aAmount, long aOriginalUnit, long aTargetUnit, boolean aRoundUp) {
             if (aTargetUnit == 0) return 0;
             if (aOriginalUnit == aTargetUnit || aOriginalUnit == 0) return aAmount;
-            if (aOriginalUnit %   aTargetUnit == 0) {aOriginalUnit /=   aTargetUnit;   aTargetUnit = 1;} else
-            if (aTargetUnit   % aOriginalUnit == 0) {  aTargetUnit /= aOriginalUnit; aOriginalUnit = 1;} else {
-                if (aOriginalUnit %  648 == 0 && aTargetUnit %  648 == 0) {aOriginalUnit /=  648; aTargetUnit /=  648;}
-                if (aOriginalUnit % 1000 == 0 && aTargetUnit % 1000 == 0) {aOriginalUnit /= 1000; aTargetUnit /= 1000;}}
+            if (aOriginalUnit % aTargetUnit == 0) {
+                aOriginalUnit /= aTargetUnit;
+                aTargetUnit = 1;
+            } else if (aTargetUnit % aOriginalUnit == 0) {
+                aTargetUnit /= aOriginalUnit;
+                aOriginalUnit = 1;
+            } else {
+                if (aOriginalUnit % 648 == 0 && aTargetUnit % 648 == 0) {
+                    aOriginalUnit /= 648;
+                    aTargetUnit /= 648;
+                }
+                if (aOriginalUnit % 1000 == 0 && aTargetUnit % 1000 == 0) {
+                    aOriginalUnit /= 1000;
+                    aTargetUnit /= 1000;
+                }
+            }
             return Math.max(0, ((aAmount * aTargetUnit) / aOriginalUnit) + (aRoundUp && (aAmount * aTargetUnit) % aOriginalUnit > 0 ? 1 : 0));
         }
 
-        /** Divides but rounds up. */
+        /**
+         * Divides but rounds up.
+         */
         public static long divup(long aNumber, long aDivider) {
             return aNumber / aDivider + (aNumber % aDivider == 0 ? 0 : 1);
         }
@@ -662,46 +896,71 @@ public class UT {
             return rAmount;
         }
 
-        public static boolean abs_greater(long aAmount1, long aAmount2) {return Math.abs(aAmount1) > Math.abs(aAmount2);}
-        public static boolean abs_smaller(long aAmount1, long aAmount2) {return Math.abs(aAmount1) < Math.abs(aAmount2);}
-        public static boolean abs_greater_equal(long aAmount1, long aAmount2) {return Math.abs(aAmount1) >= Math.abs(aAmount2);}
-        public static boolean abs_smaller_equal(long aAmount1, long aAmount2) {return Math.abs(aAmount1) <= Math.abs(aAmount2);}
+        public static boolean abs_greater(long aAmount1, long aAmount2) {
+            return Math.abs(aAmount1) > Math.abs(aAmount2);
+        }
 
-        public static boolean inside(long aMin, long aMax, long aNumber) {return aMin < aMax ? aMin <= aNumber && aNumber <= aMax : aMax <= aNumber && aNumber <= aMin;}
-        public static boolean inside_(double aMin, double aMax, double aNumber) {return aMin < aMax ? aMin <= aNumber && aNumber <= aMax : aMax <= aNumber && aNumber <= aMin;}
+        public static boolean abs_smaller(long aAmount1, long aAmount2) {
+            return Math.abs(aAmount1) < Math.abs(aAmount2);
+        }
 
-        /** @return an Array containing the X and the Y Coordinate of the clicked Point, with the top left Corner as Origin, like on the Texture Sheet. return values should always be between [0.0F and 0.99F]. */
+        public static boolean abs_greater_equal(long aAmount1, long aAmount2) {
+            return Math.abs(aAmount1) >= Math.abs(aAmount2);
+        }
+
+        public static boolean abs_smaller_equal(long aAmount1, long aAmount2) {
+            return Math.abs(aAmount1) <= Math.abs(aAmount2);
+        }
+
+        public static boolean inside(long aMin, long aMax, long aNumber) {
+            return aMin < aMax ? aMin <= aNumber && aNumber <= aMax : aMax <= aNumber && aNumber <= aMin;
+        }
+
+        public static boolean inside_(double aMin, double aMax, double aNumber) {
+            return aMin < aMax ? aMin <= aNumber && aNumber <= aMax : aMax <= aNumber && aNumber <= aMin;
+        }
+
+        /**
+         * @return an Array containing the X and the Y Coordinate of the clicked Point, with the top left Corner as Origin, like on the Texture Sheet. return values should always be between [0.0F and 0.99F].
+         */
         public static float[] getFacingCoordsClicked(byte aSide, float aHitX, float aHitY, float aHitZ) {
             switch (aSide) {
-                case  0: return new float[] {Math.min(0.99F, Math.max(0,  aHitX)), Math.min(0.99F, Math.max(0,1-aHitZ))};
-                case  1: return new float[] {Math.min(0.99F, Math.max(0,  aHitX)), Math.min(0.99F, Math.max(0,  aHitZ))};
-                case  2: return new float[] {Math.min(0.99F, Math.max(0,1-aHitX)), Math.min(0.99F, Math.max(0,1-aHitY))};
-                case  3: return new float[] {Math.min(0.99F, Math.max(0,  aHitX)), Math.min(0.99F, Math.max(0,1-aHitY))};
-                case  4: return new float[] {Math.min(0.99F, Math.max(0,  aHitZ)), Math.min(0.99F, Math.max(0,1-aHitY))};
-                case  5: return new float[] {Math.min(0.99F, Math.max(0,1-aHitZ)), Math.min(0.99F, Math.max(0,1-aHitY))};
-                default: return new float[] {0.5F, 0.5F};
+                case 0:
+                    return new float[]{Math.min(0.99F, Math.max(0, aHitX)), Math.min(0.99F, Math.max(0, 1 - aHitZ))};
+                case 1:
+                    return new float[]{Math.min(0.99F, Math.max(0, aHitX)), Math.min(0.99F, Math.max(0, aHitZ))};
+                case 2:
+                    return new float[]{Math.min(0.99F, Math.max(0, 1 - aHitX)), Math.min(0.99F, Math.max(0, 1 - aHitY))};
+                case 3:
+                    return new float[]{Math.min(0.99F, Math.max(0, aHitX)), Math.min(0.99F, Math.max(0, 1 - aHitY))};
+                case 4:
+                    return new float[]{Math.min(0.99F, Math.max(0, aHitZ)), Math.min(0.99F, Math.max(0, 1 - aHitY))};
+                case 5:
+                    return new float[]{Math.min(0.99F, Math.max(0, 1 - aHitZ)), Math.min(0.99F, Math.max(0, 1 - aHitY))};
+                default:
+                    return new float[]{0.5F, 0.5F};
             }
         }
 
         public static byte getSideForPlayerPlacing(Entity aPlayer) {
-            if (aPlayer.yRot >=  65) return SIDE_UP;
+            if (aPlayer.yRot >= 65) return SIDE_UP;
             if (aPlayer.yRot <= -65) return SIDE_DOWN;
-            return COMPASS_DIRECTIONS[Code.roundDown(4*aPlayer.xRot/360+0.5)&3];
+            return COMPASS_DIRECTIONS[Code.roundDown(4 * aPlayer.xRot / 360 + 0.5) & 3];
         }
 
         public static byte getSideForPlayerPlacing(Entity aPlayer, byte aDefaultFacing, boolean[] aAllowedFacings) {
-            if (aPlayer.yRot >=  65 && aAllowedFacings[SIDE_UP]) return SIDE_UP;
+            if (aPlayer.yRot >= 65 && aAllowedFacings[SIDE_UP]) return SIDE_UP;
             if (aPlayer.yRot <= -65 && aAllowedFacings[SIDE_DOWN]) return SIDE_DOWN;
-            byte rFacing = COMPASS_DIRECTIONS[Code.roundDown(0.5+4*aPlayer.xRot/360)&3];
+            byte rFacing = COMPASS_DIRECTIONS[Code.roundDown(0.5 + 4 * aPlayer.xRot / 360) & 3];
             if (aAllowedFacings[rFacing]) return rFacing;
             for (byte tSide : ALL_SIDES_VALID) if (aAllowedFacings[tSide]) return tSide;
             return aDefaultFacing;
         }
 
         public static byte getOppositeSideForPlayerPlacing(Entity aPlayer, byte aDefaultFacing, boolean[] aAllowedFacings) {
-            if (aPlayer.yRot >=  65 && aAllowedFacings[SIDE_DOWN]) return SIDE_DOWN;
+            if (aPlayer.yRot >= 65 && aAllowedFacings[SIDE_DOWN]) return SIDE_DOWN;
             if (aPlayer.yRot <= -65 && aAllowedFacings[SIDE_UP]) return SIDE_UP;
-            byte rFacing = OPPOSITES[COMPASS_DIRECTIONS[Code.roundDown(0.5+4*aPlayer.xRot/360)&3]];
+            byte rFacing = OPPOSITES[COMPASS_DIRECTIONS[Code.roundDown(0.5 + 4 * aPlayer.xRot / 360) & 3]];
             if (aAllowedFacings[rFacing]) return rFacing;
             for (byte tSide : ALL_SIDES_VALID) if (aAllowedFacings[tSide]) return tSide;
             return aDefaultFacing;
@@ -712,19 +971,22 @@ public class UT {
          */
         public static byte getSideWrenching(byte aSide, float aHitX, float aHitY, float aHitZ) {
             switch (aSide) {
-                case  0: case  1:
+                case 0:
+                case 1:
                     if (aHitX < 0.25) return aHitZ < 0.25 || aHitZ > 0.75 ? OPPOSITES[aSide] : 4;
                     if (aHitX > 0.75) return aHitZ < 0.25 || aHitZ > 0.75 ? OPPOSITES[aSide] : 5;
                     if (aHitZ < 0.25) return 2;
                     if (aHitZ > 0.75) return 3;
                     return aSide;
-                case  2: case  3:
+                case 2:
+                case 3:
                     if (aHitX < 0.25) return aHitY < 0.25 || aHitY > 0.75 ? OPPOSITES[aSide] : 4;
                     if (aHitX > 0.75) return aHitY < 0.25 || aHitY > 0.75 ? OPPOSITES[aSide] : 5;
                     if (aHitY < 0.25) return 0;
                     if (aHitY > 0.75) return 1;
                     return aSide;
-                case  4: case  5:
+                case 4:
+                case 5:
                     if (aHitZ < 0.25) return aHitY < 0.25 || aHitY > 0.75 ? OPPOSITES[aSide] : 2;
                     if (aHitZ > 0.75) return aHitY < 0.25 || aHitY > 0.75 ? OPPOSITES[aSide] : 3;
                     if (aHitY < 0.25) return 0;

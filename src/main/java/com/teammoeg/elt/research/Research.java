@@ -46,10 +46,10 @@ public class Research {
 
     /**
      * @return 此研究是否完成
-     * */
+     */
     public boolean isCompleted() {
         for (Quest quest : containedQuests) {
-            if(!quest.isCompleted()) {
+            if (!quest.isCompleted()) {
                 return false;
             }
         }
@@ -65,7 +65,7 @@ public class Research {
     public boolean isUnlocked() {
         if (!this.parents.isEmpty()) {
             for (Research research : parents) {
-                if(!research.isCompleted()) {
+                if (!research.isCompleted()) {
                     return false;
                 }
             }

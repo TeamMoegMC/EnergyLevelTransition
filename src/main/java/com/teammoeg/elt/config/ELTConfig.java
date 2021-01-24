@@ -31,16 +31,15 @@ import java.util.function.Function;
  * - Server is used for generic mechanics options, stuff which is synchronized but server priority, etc.
  * - Client is used for purely graphical or client side only options
  */
-public final class ELTConfig
-{
+public final class ELTConfig {
     public static final CommonConfig COMMON = register(ModConfig.Type.COMMON, CommonConfig::new);
     public static final ClientConfig CLIENT = register(ModConfig.Type.CLIENT, ClientConfig::new);
     public static final ServerConfig SERVER = register(ModConfig.Type.SERVER, ServerConfig::new);
 
-    public static void init() {}
+    public static void init() {
+    }
 
-    private static <C> C register(ModConfig.Type type, Function<ForgeConfigSpec.Builder, C> factory)
-    {
+    private static <C> C register(ModConfig.Type type, Function<ForgeConfigSpec.Builder, C> factory) {
         Pair<C, ForgeConfigSpec> specPair = new ForgeConfigSpec.Builder().configure(factory);
         ModLoadingContext.get().registerConfig(type, specPair.getRight());
         return specPair.getLeft();

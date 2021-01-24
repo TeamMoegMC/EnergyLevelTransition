@@ -19,7 +19,6 @@
 package com.teammoeg.elt.util.function;
 
 @FunctionalInterface
-public interface ToFloatFunction<T>
-{
+public interface ToFloatFunction<T> {
     float applyAsFloat(T t);
 }

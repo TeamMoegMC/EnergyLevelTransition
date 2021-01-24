@@ -1,3 +1,21 @@
+/*
+ *  Copyright (c) 2020. TeamMoeg
+ *
+ *  This file is part of Energy Level Transition.
+ *
+ *  Energy Level Transition is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  Energy Level Transition is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.teammoeg.elt.block;
 
 import com.teammoeg.elt.ELT;
@@ -18,12 +36,13 @@ public class ELTBlock extends Block {
     public static Property[] pr;
     public final Property[] properties;
     public String name;
-    public ELTBlock(String name, Properties properties, BiFunction<Block, Item.Properties, Item> BlockItem,Property... property) {
-        super(setProperties(properties,property));
+
+    public ELTBlock(String name, Properties properties, BiFunction<Block, Item.Properties, Item> BlockItem, Property... property) {
+        super(setProperties(properties, property));
         this.name = name;
         this.setRegistryName(name);
         this.registerDefaultState(getInitDefaultState());
-        this.properties= Arrays.copyOf(pr, pr.length);
+        this.properties = Arrays.copyOf(pr, pr.length);
         ELT.RegistryEvents.registeredBlocks.add(this);
 
         Item item = BlockItem.apply(this, new Item.Properties().tab(ItemGroup.TAB_MATERIALS));
@@ -35,12 +54,11 @@ public class ELTBlock extends Block {
 
     protected static Block.Properties setProperties(Properties blockProps, Object[] objects) {
         List<Property<?>> propList = new ArrayList<>();
-        for(Object o : objects)
-        {
-            if(o instanceof Property)
-                propList.add((Property<?>)o);
-            if(o instanceof Property[])
-                propList.addAll(Arrays.asList(((Property<?>[])o)));
+        for (Object o : objects) {
+            if (o instanceof Property)
+                propList.add((Property<?>) o);
+            if (o instanceof Property[])
+                propList.addAll(Arrays.asList(((Property<?>[]) o)));
         }
         pr = propList.toArray(new Property[0]);
         return blockProps.dynamicShape();
@@ -49,13 +67,13 @@ public class ELTBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateContainer.Builder<Block, BlockState> builder) {
         super.createBlockStateDefinition(builder);
-        if (pr!=null)
-        builder.add(pr);
+        if (pr != null)
+            builder.add(pr);
     }
 
     protected BlockState getInitDefaultState() {
         BlockState state = this.stateDefinition.any();
-        if(state.hasProperty(BlockStateProperties.WATERLOGGED))
+        if (state.hasProperty(BlockStateProperties.WATERLOGGED))
             state = state.setValue(BlockStateProperties.WATERLOGGED, Boolean.FALSE);
         return state;
     }

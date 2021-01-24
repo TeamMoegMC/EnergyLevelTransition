@@ -41,25 +41,30 @@ import org.apache.logging.log4j.Logger;
 public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
 
-    @SubscribeEvent public void onServerStarting (FMLServerStartingEvent aEvent) {
+    @SubscribeEvent
+    public void onServerStarting(FMLServerStartingEvent aEvent) {
 
     }
 
-    @SubscribeEvent public void onServerStarted  (FMLServerStartedEvent aEvent) {
+    @SubscribeEvent
+    public void onServerStarted(FMLServerStartedEvent aEvent) {
 
     }
 
-    @SubscribeEvent public void onServerStopping (FMLServerStoppingEvent aEvent) {
+    @SubscribeEvent
+    public void onServerStopping(FMLServerStoppingEvent aEvent) {
 
     }
 
-    @SubscribeEvent public void onServerStopped  (FMLServerStoppedEvent aEvent)  {
+    @SubscribeEvent
+    public void onServerStopped(FMLServerStoppedEvent aEvent) {
 
     }
 
     @SubscribeEvent
     public void onEntityKilled(LivingDeathEvent event) {
-        if(event.getSource() == null || !(event.getSource().getDirectEntity() instanceof PlayerEntity) || event.getSource().getDirectEntity().level.isClientSide || event.isCanceled()) return;
+        if (event.getSource() == null || !(event.getSource().getDirectEntity() instanceof PlayerEntity) || event.getSource().getDirectEntity().level.isClientSide || event.isCanceled())
+            return;
 
         if (event.getEntityLiving() instanceof ZombieEntity) {
             for (Quest quest : ELT.WEAPON_RESEARCH.getContainedQuests()) {

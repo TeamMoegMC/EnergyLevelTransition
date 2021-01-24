@@ -85,8 +85,7 @@ public class Helpers {
     /**
      * Default {@link ResourceLocation}, except with a ELT namespace
      */
-    public static ResourceLocation identifier(String name)
-    {
+    public static ResourceLocation identifier(String name) {
         return new ResourceLocation(CS.ModIDs.ELT, name);
     }
 
@@ -104,60 +103,47 @@ public class Helpers {
      */
     @Nonnull
     @SuppressWarnings("ConstantConditions")
-    public static <T> T notNull()
-    {
+    public static <T> T notNull() {
         return null;
     }
 
-    public static <T> byte[] createByteArray(T[] array, ToByteFunction<T> byteConverter)
-    {
+    public static <T> byte[] createByteArray(T[] array, ToByteFunction<T> byteConverter) {
         byte[] bytes = new byte[array.length];
-        for (int i = 0; i < array.length; i++)
-        {
+        for (int i = 0; i < array.length; i++) {
             bytes[i] = byteConverter.get(array[i]);
         }
         return bytes;
     }
 
-    public static <T> void createArrayFromBytes(byte[] byteArray, T[] array, FromByteFunction<T> byteConverter)
-    {
-        for (int i = 0; i < byteArray.length; i++)
-        {
+    public static <T> void createArrayFromBytes(byte[] byteArray, T[] array, FromByteFunction<T> byteConverter) {
+        for (int i = 0; i < byteArray.length; i++) {
             array[i] = byteConverter.get(byteArray[i]);
         }
     }
 
-    public static <K, V extends IForgeRegistryEntry<V>> Map<K, V> findRegistryObjects(JsonObject obj, String path, IForgeRegistry<V> registry, Collection<K> keyValues, NonNullFunction<K, String> keyStringMapper)
-    {
+    public static <K, V extends IForgeRegistryEntry<V>> Map<K, V> findRegistryObjects(JsonObject obj, String path, IForgeRegistry<V> registry, Collection<K> keyValues, NonNullFunction<K, String> keyStringMapper) {
         return findRegistryObjects(obj, path, registry, keyValues, Collections.emptyList(), keyStringMapper);
     }
 
-    public static <K, V extends IForgeRegistryEntry<V>> Map<K, V> findRegistryObjects(JsonObject obj, String path, IForgeRegistry<V> registry, Collection<K> keyValues, Collection<K> optionalKeyValues, NonNullFunction<K, String> keyStringMapper)
-    {
-        if (obj.has(path))
-        {
+    public static <K, V extends IForgeRegistryEntry<V>> Map<K, V> findRegistryObjects(JsonObject obj, String path, IForgeRegistry<V> registry, Collection<K> keyValues, Collection<K> optionalKeyValues, NonNullFunction<K, String> keyStringMapper) {
+        if (obj.has(path)) {
             Map<K, V> objects = new HashMap<>();
             JsonObject objectsJson = JSONUtils.getAsJsonObject(obj, path);
-            for (K expectedKey : keyValues)
-            {
+            for (K expectedKey : keyValues) {
                 String jsonKey = keyStringMapper.apply(expectedKey);
                 ResourceLocation id = new ResourceLocation(JSONUtils.getAsString(objectsJson, jsonKey));
                 V registryObject = registry.getValue(id);
-                if (registryObject == null)
-                {
+                if (registryObject == null) {
                     throw new JsonParseException("Unknown registry object: " + id);
                 }
                 objects.put(expectedKey, registryObject);
             }
-            for (K optionalKey : optionalKeyValues)
-            {
+            for (K optionalKey : optionalKeyValues) {
                 String jsonKey = keyStringMapper.apply(optionalKey);
-                if (objectsJson.has(jsonKey))
-                {
+                if (objectsJson.has(jsonKey)) {
                     ResourceLocation id = new ResourceLocation(JSONUtils.getAsString(objectsJson, jsonKey));
                     V registryObject = registry.getValue(id);
-                    if (registryObject == null)
-                    {
+                    if (registryObject == null) {
                         throw new JsonParseException("Unknown registry object: " + id);
                     }
                     objects.put(optionalKey, registryObject);
@@ -168,25 +154,19 @@ public class Helpers {
         return Collections.emptyMap();
     }
 
-    public static BlockState readBlockState(String block) throws JsonParseException
-    {
+    public static BlockState readBlockState(String block) throws JsonParseException {
         BlockStateParser parser = parseBlockState(block, false);
-        if (parser.getState() != null)
-        {
+        if (parser.getState() != null) {
             return parser.getState();
         }
         throw new JsonParseException("Weird result, valid parse but not a block state: " + block);
     }
 
-    public static BlockStateParser parseBlockState(String block, boolean allowTags) throws JsonParseException
-    {
+    public static BlockStateParser parseBlockState(String block, boolean allowTags) throws JsonParseException {
         StringReader reader = new StringReader(block);
-        try
-        {
+        try {
             return new BlockStateParser(reader, allowTags).parse(false);
-        }
-        catch (CommandSyntaxException e)
-        {
+        } catch (CommandSyntaxException e) {
             throw new JsonParseException(e.getMessage());
         }
     }
@@ -194,14 +174,10 @@ public class Helpers {
     /**
      * Maps a {@link Supplier} to an {@link Optional} by swallowing any runtime exceptions.
      */
-    public static <T> Optional<T> mapSafeOptional(Supplier<T> unsafeSupplier)
-    {
-        try
-        {
+    public static <T> Optional<T> mapSafeOptional(Supplier<T> unsafeSupplier) {
+        try {
             return Optional.of(unsafeSupplier.get());
-        }
-        catch (RuntimeException e)
-        {
+        } catch (RuntimeException e) {
             return Optional.empty();
         }
     }
@@ -209,16 +185,14 @@ public class Helpers {
     /**
      * Like {@link Optional#map(Function)} but for suppliers. Does not unbox the provided supplier
      */
-    public static <T, R> Supplier<R> mapSupplier(Supplier<T> supplier, Function<T, R> mapper)
-    {
+    public static <T, R> Supplier<R> mapSupplier(Supplier<T> supplier, Function<T, R> mapper) {
         return () -> mapper.apply(supplier.get());
     }
 
     /**
      * Applies two possible consumers of a given lazy optional
      */
-    public static <T> void ifPresentOrElse(LazyOptional<T> lazyOptional, Consumer<T> ifPresent, Runnable orElse)
-    {
+    public static <T> void ifPresentOrElse(LazyOptional<T> lazyOptional, Consumer<T> ifPresent, Runnable orElse) {
         lazyOptional.map(t -> {
             ifPresent.accept(t);
             return Unit.INSTANCE;
@@ -231,32 +205,28 @@ public class Helpers {
     /**
      * Creates a map of each enum constant to the value as provided by the value mapper.
      */
-    public static <E extends Enum<E>, V> EnumMap<E, V> mapOfKeys(Class<E> enumClass, Function<E, V> valueMapper)
-    {
+    public static <E extends Enum<E>, V> EnumMap<E, V> mapOfKeys(Class<E> enumClass, Function<E, V> valueMapper) {
         return mapOfKeys(enumClass, key -> true, valueMapper);
     }
 
     /**
      * Creates a map of each enum constant to the value as provided by the value mapper, only using enum constants that match the provided predicate.
      */
-    public static <E extends Enum<E>, V> EnumMap<E, V> mapOfKeys(Class<E> enumClass, Predicate<E> keyPredicate, Function<E, V> valueMapper)
-    {
+    public static <E extends Enum<E>, V> EnumMap<E, V> mapOfKeys(Class<E> enumClass, Predicate<E> keyPredicate, Function<E, V> valueMapper) {
         return Arrays.stream(enumClass.getEnumConstants()).filter(keyPredicate).collect(Collectors.toMap(Function.identity(), valueMapper, (v, v2) -> v, () -> new EnumMap<>(enumClass)));
     }
 
     /**
      * Gets the translation key name for an enum. For instance, Metal.UNKNOWN would map to "elt.enum.metal.unknown"
      */
-    public static String getEnumTranslationKey(Enum<?> anEnum)
-    {
+    public static String getEnumTranslationKey(Enum<?> anEnum) {
         return getEnumTranslationKey(anEnum, anEnum.getDeclaringClass().getSimpleName());
     }
 
     /**
      * Gets the translation key name for an enum, using a custom name instead of the enum class name
      */
-    public static String getEnumTranslationKey(Enum<?> anEnum, String enumName)
-    {
+    public static String getEnumTranslationKey(Enum<?> anEnum, String enumName) {
         return String.join(".", CS.ModIDs.ELT, "enum", enumName, anEnum.name()).toLowerCase();
     }
 
@@ -265,20 +235,16 @@ public class Helpers {
      *
      * @return a singleton container provider
      */
-    public static INamedContainerProvider createNamedContainerProvider(ITextComponent name, IContainerProvider provider)
-    {
-        return new INamedContainerProvider()
-        {
+    public static INamedContainerProvider createNamedContainerProvider(ITextComponent name, IContainerProvider provider) {
+        return new INamedContainerProvider() {
             @Override
-            public ITextComponent getDisplayName()
-            {
+            public ITextComponent getDisplayName() {
                 return name;
             }
 
             @Nullable
             @Override
-            public Container createMenu(int windowId, PlayerInventory inv, PlayerEntity player)
-            {
+            public Container createMenu(int windowId, PlayerInventory inv, PlayerEntity player) {
                 return provider.createMenu(windowId, inv, player);
             }
         };
@@ -290,32 +256,27 @@ public class Helpers {
      * There exists a BIG HUGE PROBLEM in very specific scenarios with this
      * Since World's isClientSide() actually returns the isClientSide boolean, which is set AT THE END of the World constructor, many things may happen before this is set correctly. Mostly involving world generation.
      * At this point, THE CLIENT WORLD WILL RETURN {@code false} to {@link IWorld#isClientSide()}
-     *
+     * <p>
      * So, this does a roundabout check "is this instanceof ClientWorld or not" without classloading shenanigans.
      */
-    public static boolean isClientSide(IWorldReader world)
-    {
+    public static boolean isClientSide(IWorldReader world) {
         return world instanceof World ? !(world instanceof ServerWorld) : world.isClientSide();
     }
 
     @Nullable
     @SuppressWarnings("unchecked")
-    public static <T extends TileEntity> T getTileEntity(IWorldReader world, BlockPos pos, Class<T> tileEntityClass)
-    {
+    public static <T extends TileEntity> T getTileEntity(IWorldReader world, BlockPos pos, Class<T> tileEntityClass) {
         TileEntity te = world.getBlockEntity(pos);
-        if (tileEntityClass.isInstance(te))
-        {
+        if (tileEntityClass.isInstance(te)) {
             return (T) te;
         }
         return null;
     }
 
     @SuppressWarnings("unchecked")
-    public static <T extends TileEntity> T getTileEntityOrThrow(IWorldReader world, BlockPos pos, Class<T> tileEntityClass)
-    {
+    public static <T extends TileEntity> T getTileEntityOrThrow(IWorldReader world, BlockPos pos, Class<T> tileEntityClass) {
         TileEntity te = world.getBlockEntity(pos);
-        if (tileEntityClass.isInstance(te))
-        {
+        if (tileEntityClass.isInstance(te)) {
             return (T) te;
         }
         throw new IllegalStateException("Expected a tile entity at " + pos + " of class " + tileEntityClass.getSimpleName());
@@ -324,15 +285,13 @@ public class Helpers {
     /**
      * This returns the previous result of {@link ServerWorld#getBlockRandomPos(int, int, int, int)}.
      */
-    public static BlockPos getPreviousRandomPos(int x, int y, int z, int yMask, int randValue)
-    {
+    public static BlockPos getPreviousRandomPos(int x, int y, int z, int yMask, int randValue) {
         int i = randValue >> 2;
         return new BlockPos(x + (i & 15), y + (i >> 16 & yMask), z + (i >> 8 & 15));
     }
 
     @Deprecated
-    public static BlockState getStateForPlacementWithFluid(IWorldReader world, BlockPos pos, BlockState state)
-    {
+    public static BlockState getStateForPlacementWithFluid(IWorldReader world, BlockPos pos, BlockState state) {
         FluidState fluid = world.getFluidState(pos);
         // todo: do the fluid module and fix it
 //        if (state.getBlock() instanceof IFluidLoggable)
@@ -345,24 +304,20 @@ public class Helpers {
     /**
      * You know this will work, and I know this will work, but this compiler looks pretty stupid.
      */
-    public static <E> E resolveEither(Either<E, E> either)
-    {
+    public static <E> E resolveEither(Either<E, E> either) {
         return either.map(e -> e, e -> e);
     }
 
-    public static void slowEntityInBlock(Entity entity, float factor, int fallDamageReduction)
-    {
+    public static void slowEntityInBlock(Entity entity, float factor, int fallDamageReduction) {
         Vector3d motion = entity.getDeltaMovement();
         entity.setDeltaMovement(motion.multiply(factor, motion.y < 0 ? factor : 1, factor));
-        if (entity.fallDistance > fallDamageReduction)
-        {
+        if (entity.fallDistance > fallDamageReduction) {
             entity.causeFallDamage(entity.fallDistance - fallDamageReduction, 1.0f);
         }
         entity.fallDistance = 0;
     }
 
-    public static void registerSimpleCapability(Class<?> clazz)
-    {
+    public static void registerSimpleCapability(Class<?> clazz) {
         CapabilityManager.INSTANCE.register(clazz, new NoopStorage<>(), () -> {
             throw new UnsupportedOperationException("Creating default instances is not supported. Why would you ever do this");
         });
@@ -372,34 +327,27 @@ public class Helpers {
      * Copy pasta from {@link net.minecraft.entity.player.SpawnLocationHelper} except one that doesn't require the spawn block be equal to the surface builder config top block
      */
     @Nullable
-    public static BlockPos findValidSpawnLocation(ServerWorld world, ChunkPos chunkPos)
-    {
+    public static BlockPos findValidSpawnLocation(ServerWorld world, ChunkPos chunkPos) {
         final Chunk chunk = world.getChunk(chunkPos.x, chunkPos.z);
         final BlockPos.Mutable mutablePos = new BlockPos.Mutable();
-        for (int x = chunkPos.getMinBlockX(); x <= chunkPos.getMaxBlockX(); ++x)
-        {
-            for (int z = chunkPos.getMinBlockZ(); z <= chunkPos.getMaxBlockZ(); ++z)
-            {
+        for (int x = chunkPos.getMinBlockX(); x <= chunkPos.getMaxBlockX(); ++x) {
+            for (int z = chunkPos.getMinBlockZ(); z <= chunkPos.getMaxBlockZ(); ++z) {
                 mutablePos.set(x, 0, z);
 
                 final Biome biome = world.getBiome(mutablePos);
                 final int motionBlockingHeight = chunk.getHeight(Heightmap.Type.MOTION_BLOCKING, x & 15, z & 15);
                 final int worldSurfaceHeight = chunk.getHeight(Heightmap.Type.WORLD_SURFACE, x & 15, z & 15);
                 final int oceanFloorHeight = chunk.getHeight(Heightmap.Type.OCEAN_FLOOR, x & 15, z & 15);
-                if (worldSurfaceHeight >= oceanFloorHeight && biome.getMobSettings().playerSpawnFriendly())
-                {
-                    for (int y = 1 + motionBlockingHeight; y >= oceanFloorHeight; y--)
-                    {
+                if (worldSurfaceHeight >= oceanFloorHeight && biome.getMobSettings().playerSpawnFriendly()) {
+                    for (int y = 1 + motionBlockingHeight; y >= oceanFloorHeight; y--) {
                         mutablePos.set(x, y, z);
 
                         final BlockState state = world.getBlockState(mutablePos);
-                        if (!state.getFluidState().isEmpty())
-                        {
+                        if (!state.getFluidState().isEmpty()) {
                             break;
                         }
 
-                        if (BlockTags.VALID_SPAWN.contains(state.getBlock()))
-                        {
+                        if (BlockTags.VALID_SPAWN.contains(state.getBlock())) {
                             return mutablePos.above().immutable();
                         }
                     }
@@ -409,33 +357,26 @@ public class Helpers {
         return null;
     }
 
-    public static BlockState copyProperties(BlockState copyTo, BlockState copyFrom)
-    {
-        for (Property<?> property : copyFrom.getProperties())
-        {
+    public static BlockState copyProperties(BlockState copyTo, BlockState copyFrom) {
+        for (Property<?> property : copyFrom.getProperties()) {
             copyTo = copyProperty(copyTo, copyFrom, property);
         }
         return copyTo;
     }
 
-    public static <T extends Comparable<T>> BlockState copyProperty(BlockState copyTo, BlockState copyFrom, Property<T> property)
-    {
-        if (copyTo.hasProperty(property))
-        {
+    public static <T extends Comparable<T>> BlockState copyProperty(BlockState copyTo, BlockState copyFrom, Property<T> property) {
+        if (copyTo.hasProperty(property)) {
             return copyTo.setValue(property, copyFrom.getValue(property));
         }
         return copyTo;
     }
 
-    public static void damageCraftingItem(ItemStack stack, int amount)
-    {
+    public static void damageCraftingItem(ItemStack stack, int amount) {
         PlayerEntity player = ForgeHooks.getCraftingPlayer(); // Mods may not set this properly
-        if (player != null)
-        {
-            stack.hurtAndBreak(amount, player, entity -> {});
-        }
-        else
-        {
+        if (player != null) {
+            stack.hurtAndBreak(amount, player, entity -> {
+            });
+        } else {
             damageItem(stack, amount);
         }
     }
@@ -443,14 +384,11 @@ public class Helpers {
     /**
      * A replacement for {@link ItemStack#hurtAndBreak(int, LivingEntity, Consumer)} when an entity is not present
      */
-    public static void damageItem(ItemStack stack, int amount)
-    {
-        if (stack.isDamageableItem())
-        {
+    public static void damageItem(ItemStack stack, int amount) {
+        if (stack.isDamageableItem()) {
             // There's no player here so we can't safely do anything.
             //amount = stack.getItem().damageItem(stack, amount, null, e -> {});
-            if (stack.hurt(amount, RANDOM, null))
-            {
+            if (stack.hurt(amount, RANDOM, null)) {
                 stack.shrink(1);
                 stack.setDamageValue(0);
             }
@@ -462,19 +400,15 @@ public class Helpers {
      * Allows the loot context to be modified
      */
     @SuppressWarnings("deprecation")
-    public static void destroyBlockAndDropBlocksManually(World worldIn, BlockPos pos, Consumer<LootContext.Builder> builder)
-    {
+    public static void destroyBlockAndDropBlocksManually(World worldIn, BlockPos pos, Consumer<LootContext.Builder> builder) {
         BlockState state = worldIn.getBlockState(pos);
-        if (!state.isAir())
-        {
+        if (!state.isAir()) {
             FluidState fluidstate = worldIn.getFluidState(pos);
-            if (!(state.getBlock() instanceof AbstractFireBlock))
-            {
+            if (!(state.getBlock() instanceof AbstractFireBlock)) {
                 worldIn.levelEvent(2001, pos, Block.getId(state));
             }
 
-            if (worldIn instanceof ServerWorld)
-            {
+            if (worldIn instanceof ServerWorld) {
                 TileEntity tileEntity = state.hasTileEntity() ? worldIn.getBlockEntity(pos) : null;
 
                 // Copied from Block.getDrops()

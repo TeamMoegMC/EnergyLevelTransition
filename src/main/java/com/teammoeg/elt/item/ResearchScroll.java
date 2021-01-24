@@ -36,7 +36,7 @@ import net.minecraft.world.World;
 /**
  * 右键打开研究界面
  */
-public class ResearchScroll extends ELTItem implements IModularGuiHolder {
+public class ResearchScroll extends ELTItemBase implements IModularGuiHolder {
 
     public ResearchScroll(String name) {
         super(name, new Item.Properties());

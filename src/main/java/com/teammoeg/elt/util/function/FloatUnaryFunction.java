@@ -19,7 +19,6 @@
 package com.teammoeg.elt.util.function;
 
 @FunctionalInterface
-public interface FloatUnaryFunction
-{
+public interface FloatUnaryFunction {
     float applyAsFloat(float f);
 }

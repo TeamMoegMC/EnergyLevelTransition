@@ -25,8 +25,10 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
  */
 public interface ModInitializer extends ClientModInitializer, ServerModInitializer {
 
-    /** Called on Common Setup */
-    public abstract void onModCommonSetup2(FMLCommonSetupEvent aEvent);
+    /**
+     * Called on Common Setup
+     */
+    void onModCommonSetup2(FMLCommonSetupEvent aEvent);
 
     default void onModCommonSetup(FMLCommonSetupEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");

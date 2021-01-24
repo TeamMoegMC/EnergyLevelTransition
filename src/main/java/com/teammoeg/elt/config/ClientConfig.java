@@ -28,12 +28,10 @@ import java.util.function.Function;
  * - not synced, only loaded client side
  * - only use for PURELY AESTHETIC options
  */
-public class ClientConfig
-{
+public class ClientConfig {
     public final ForgeConfigSpec.BooleanValue ignoreExperimentalWorldGenWarning;
 
-    ClientConfig(ForgeConfigSpec.Builder innerBuilder)
-    {
+    ClientConfig(ForgeConfigSpec.Builder innerBuilder) {
         // Standardization for translation keys
         Function<String, ForgeConfigSpec.Builder> builder = name -> innerBuilder.translation(MD.ELT.mID + ".config.client." + name);
 

@@ -1,3 +1,20 @@
+/*
+ *  Copyright (c) 2020. TeamMoeg
+ *
+ *  This file is part of Energy Level Transition.
+ *
+ *  Energy Level Transition is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  Energy Level Transition is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
+ */
 
 package com.teammoeg.elt;
 
@@ -32,6 +49,7 @@ public class ELT implements ModInitializer {
     public static final String MOD_ID = CS.ModIDs.ELT;
     public static final String MOD_NAME = "Energy Level Transition";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+
     public ELT() {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
@@ -70,20 +88,21 @@ public class ELT implements ModInitializer {
 
     }
 
-    @Mod.EventBusSubscriber(bus=Mod.EventBusSubscriber.Bus.MOD)
+    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
     public static class RegistryEvents {
         public static List<Item> registeredItems = new ArrayList<>();
         public static List<Block> registeredBlocks = new ArrayList<>();
+
         @SubscribeEvent
         public static void onBlocksRegistry(RegistryEvent.Register<Block> blockRegistryEvent) {
-            for(Block block : registeredBlocks) {
+            for (Block block : registeredBlocks) {
                 blockRegistryEvent.getRegistry().register(block);
             }
         }
+
         @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> itemRegistryEvent)
-        {
-            for(Item item : registeredItems) {
+        public static void registerItems(RegistryEvent.Register<Item> itemRegistryEvent) {
+            for (Item item : registeredItems) {
                 itemRegistryEvent.getRegistry().register(item);
             }
         }

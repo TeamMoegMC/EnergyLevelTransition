@@ -16,27 +16,20 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.block;
+package com.teammoeg.elt.item;
 
-import com.teammoeg.elt.ELT;
 import net.minecraft.block.Block;
+import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 
-import java.util.function.BiFunction;
+public class ELTBlockItem extends BlockItem {
+    public ELTBlockItem(Block blockIn, Properties Properties) {
+        super(blockIn, Properties);
+    }
 
-public class ELTBaseBlock extends Block {
-    public String name;
-    public ELTBaseBlock(String name, Properties properties, BiFunction<Block, Item.Properties, Item> blockItem) {
-        super(properties);
-        this.name = name;
-        this.setRegistryName(name);
-        ELT.RegistryEvents.registeredBlocks.add(this);
-
-        Item item = blockItem.apply(this, new Item.Properties().tab(ItemGroup.TAB_MATERIALS));
-        if (item != null) {
-            item.setRegistryName(name);
-            ELT.RegistryEvents.registeredItems.add(item);
-        }
+    public ELTBlockItem(Block blockIn) {
+        this(blockIn, new Item.Properties().tab(ItemGroup.TAB_MATERIALS));
+        setRegistryName(blockIn.getRegistryName())
     }
 }

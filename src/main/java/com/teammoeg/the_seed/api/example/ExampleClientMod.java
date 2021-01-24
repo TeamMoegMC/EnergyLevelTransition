@@ -28,11 +28,17 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
 //@Mod(ExampleMod.MOD_ID) //TODO: you need to uncomment this line to make it as your own mod
 public final class ExampleClientMod implements ClientModInitializer {
 
-    /** Your Mod-ID has to be LOWERCASE and without Spaces. Uppercase Chars and Spaces can create problems with Resource Packs. */
+    /**
+     * Your Mod-ID has to be LOWERCASE and without Spaces. Uppercase Chars and Spaces can create problems with Resource Packs.
+     */
     public static final String MOD_ID = "insert_your_modid_here"; // <-- TODO: you need to change this to the ID of your own Mod, and then remove this Comment after you did that.
-    /** This is your Mods Name */
+    /**
+     * This is your Mods Name
+     */
     public static final String MOD_NAME = "Insert_your_Mod_Name_here"; // <-- TODO: you need to change this to the Name of your own Mod, and then remove this Comment after you did that.
-    /** This is your Mods Version */
+    /**
+     * This is your Mods Version
+     */
     public static final String VERSION = "1.16.4-1.0.0"; // <-- TODO: you need to change this to the Version of your own Mod, and then remove this Comment after you did that.
 
     public ExampleClientMod() {

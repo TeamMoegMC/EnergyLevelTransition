@@ -21,10 +21,10 @@ package com.teammoeg.elt.item;
 import com.teammoeg.elt.ELT;
 import net.minecraft.item.Item;
 
-public class ELTItem extends Item {
+public class ELTItemBase extends Item {
     public String name;
 
-    public ELTItem(String name, Properties properties) {
+    public ELTItemBase(String name, Properties properties) {
         super(properties);
         this.name = name;
         this.setRegistryName(name);

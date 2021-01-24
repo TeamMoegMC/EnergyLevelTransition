@@ -19,7 +19,6 @@
 package com.teammoeg.elt.util.function;
 
 @FunctionalInterface
-public interface FromByteFunction<T>
-{
+public interface FromByteFunction<T> {
     T get(byte b);
 }

@@ -28,26 +28,45 @@ import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
  * You should NOT implement this interface for your Mod!
  */
 public interface ModLifeCycleEvents {
-    /** Return the Mod ID */
+    /**
+     * Return the Mod ID
+     */
     String getModID();
-    /** Return the Mod Name */
+
+    /**
+     * Return the Mod Name
+     */
     String getModName();
-    /** Used for logging purposes. */
+
+    /**
+     * Used for logging purposes.
+     */
     String getModNameForLog();
 
-    /** Called on Inter Mod Enqueue */
+    /**
+     * Called on Inter Mod Enqueue
+     */
     default void onModIMCEnqueue2(InterModEnqueueEvent aEvent) {
 
     }
-    /** Called on Inter Mod Process */
+
+    /**
+     * Called on Inter Mod Process
+     */
     default void onModIMCProcess2(InterModProcessEvent aEvent) {
 
     }
-    /** Called on Mod Construct */
+
+    /**
+     * Called on Mod Construct
+     */
     default void onFMLConstructMod2(FMLConstructModEvent aEvent) {
 
     }
-    /** Called on Load Complete */
+
+    /**
+     * Called on Load Complete
+     */
     default void onFMLLoadComplete2(FMLLoadCompleteEvent aEvent) {
 
     }

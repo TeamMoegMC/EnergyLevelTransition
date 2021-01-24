@@ -26,8 +26,7 @@ public class ELTKeyBindings {
     public static KeyBinding openQuests;
 
     // See InputMappings.java for keyCode and GameSettings.java for category
-    public static void registerKeyBindings()
-    {
+    public static void registerKeyBindings() {
         openQuests = new KeyBinding("key.elt.research", 96, "key.categories.inventory");
         ClientRegistry.registerKeyBinding(openQuests);
     }

@@ -45,8 +45,7 @@ public class JsonUtil {
             return "{\n" +
                     "  \"parent\": \"" + aModData.mID + ":" + id.getPath() + "\"\n" +
                     "}";
-        }
-        else {
+        } else {
             //If the type is invalid, return an empty json string.
             return "";
         }
@@ -66,8 +65,7 @@ public class JsonUtil {
             return "{\n" +
                     "  \"parent\": \"" + aModData.mID + ":" + id.getPath() + "\"\n" +
                     "}";
-        }
-        else {
+        } else {
             //If the type is invalid, return an empty json string.
             return "";
         }

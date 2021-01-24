@@ -28,8 +28,7 @@ import java.util.function.Function;
  * - synced, stored per world, can be shipped per instance with default configs
  * - use for the majority of config options, or any that need to be present on both sides
  */
-public class ServerConfig
-{
+public class ServerConfig {
     // General
     public final ForgeConfigSpec.BooleanValue enableNetherPortals;
     // Climate
@@ -37,8 +36,7 @@ public class ServerConfig
     public final ForgeConfigSpec.IntValue rainfallScale;
 
 
-    ServerConfig(ForgeConfigSpec.Builder innerBuilder)
-    {
+    ServerConfig(ForgeConfigSpec.Builder innerBuilder) {
         Function<String, ForgeConfigSpec.Builder> builder = name -> innerBuilder.translation(MD.ELT.mID + ".config.server." + name);
 
         innerBuilder.push("general");
