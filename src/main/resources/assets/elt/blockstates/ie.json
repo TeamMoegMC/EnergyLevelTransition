@@ -2,7 +2,7 @@
   "forge_marker": 1,
   "defaults": {
     "transform": "forge:default-block",
-    "model": "elt:block/research_desk.obj",
+    "model": "immersiveengineering:block/wooden_device/workbench.obj.ie",
     "custom": {
       "flip-v": true
     }
@@ -89,9 +89,9 @@
     "_0multiblockslave": {
       "false": {},
       "true": {
-        "model": "minecraft:block/air",
+        "model": "immersiveengineering:block/ie_empty",
         "textures": {
-          "particle": "minecraft:block/dark_oak_planks"
+          "particle": "immersiveengineering:block/treated_wood_horizontal"
         }
       }
     }
