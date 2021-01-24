@@ -9,13 +9,13 @@
 		    "conditions": [
             {
               "condition": "minecraft:block_state_property",
-              "block": "elt:researchdesk",
+              "block": "elt:research_desk",
               "properties": {
                 "multiblockslave": "false"
               }
             }
           ],
-          "name": "elt:researchdesk"
+          "name": "elt:research_desk"
         }
       ],
       "conditions": [

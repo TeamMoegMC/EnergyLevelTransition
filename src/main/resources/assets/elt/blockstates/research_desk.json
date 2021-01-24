@@ -1,6 +1,6 @@
 {
   "variants": {
-      "multiblockslave=false":{"model": "elt:block/researchdesk_model"},
+      "multiblockslave=false":{"model": "elt:block/research_desk"},
 	  "multiblockslave=true":{"model": "minecraft:block/air"}
       }
     }
