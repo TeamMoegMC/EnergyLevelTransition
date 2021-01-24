@@ -2,7 +2,7 @@ package com.teammoeg.elt.block;
 
 import com.google.common.collect.ImmutableSet;
 import com.teammoeg.elt.ELT;
-import com.teammoeg.elt.block.researchtable.ResearchTableTileEntity;
+import com.teammoeg.elt.block.researchdesk.ResearchDeskTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;
@@ -16,11 +16,8 @@ import java.util.function.Supplier;
 public class ELTTileEntityTypes {
     public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES_REGISTRY =
             DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ELT.MOD_ID);
-    public static final RegistryObject<TileEntityType<ResearchTableTileEntity>> RESEARCHDESK = TILE_ENTITIES_REGISTRY.register(
-            "researchdesk", makeType(ResearchTableTileEntity::new, () -> ELTBlocks.RESEARCH_DESK));
-
-    public static final RegistryObject<TileEntityType<ResearchTableTileEntity>> RESEARCH_TABLE = TILE_ENTITIES_REGISTRY.register(
-            "research_table", makeType(ResearchTableTileEntity::new, () -> ELTBlocks.RESEARCH_TABLE));
+    public static final RegistryObject<TileEntityType<ResearchDeskTileEntity>> RESEARCH_DESK = TILE_ENTITIES_REGISTRY.register(
+            "research_desk", makeType(ResearchDeskTileEntity::new, () -> ELTBlocks.RESEARCH_DESK));
 
     private static <T extends TileEntity> Supplier<TileEntityType<T>> makeType(Supplier<T> create, Supplier<Block> valid) {
         return makeTypeMultipleBlocks(create, () -> ImmutableSet.of(valid.get()));

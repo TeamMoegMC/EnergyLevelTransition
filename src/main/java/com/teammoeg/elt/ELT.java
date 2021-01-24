@@ -4,7 +4,7 @@ package com.teammoeg.elt;
 
 import com.teammoeg.elt.block.ELTBlocks;
 import com.teammoeg.elt.block.ELTTileEntityTypes;
-import com.teammoeg.elt.client.renderer.ResearchTableTileEntityRenderer;
+import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
@@ -52,7 +52,7 @@ public class ELT implements ModInitializer {
     @Override
     public void onModClientSetup2(FMLClientSetupEvent aEvent) {
         ELTKeyBindings.registerKeyBindings();
-        ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_TABLE.get(), ResearchTableTileEntityRenderer::new);
+        ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_DESK.get(), ResearchDeskTileEntityRenderer::new);
     }
 
     @Override

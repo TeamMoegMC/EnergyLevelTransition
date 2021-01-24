@@ -2,7 +2,6 @@ package com.teammoeg.elt.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teammoeg.elt.block.researchdesk.ResearchDeskTileEntity;
-import com.teammoeg.elt.block.researchtable.ResearchTableTileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
