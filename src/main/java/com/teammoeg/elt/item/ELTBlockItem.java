@@ -30,6 +30,8 @@ public class ELTBlockItem extends BlockItem {
 
     public ELTBlockItem(Block blockIn) {
         this(blockIn, new Item.Properties().tab(ItemGroup.TAB_MATERIALS));
-        setRegistryName(blockIn.getRegistryName())
+        if (blockIn.getRegistryName() != null) {
+            setRegistryName(blockIn.getRegistryName());
+        }
     }
 }
