@@ -20,12 +20,12 @@ package com.teammoeg.elt;
 
 
 import com.teammoeg.elt.block.ELTBlocks;
-import com.teammoeg.elt.block.ELTTileEntityTypes;
 import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
+import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.block.Block;

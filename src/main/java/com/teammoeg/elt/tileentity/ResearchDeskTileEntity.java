@@ -16,13 +16,11 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.block;
+package com.teammoeg.elt.tileentity;
 
-import net.minecraft.block.Block;
+public class ResearchDeskTileEntity extends ELTTileEntity {
 
-public class ELTBlocks {
-    public static
-    Block
-            RESEARCH_DESK = new ResearchDeskBlock("research_desk");
-
+    public ResearchDeskTileEntity() {
+        super(ELTTileEntityTypes.RESEARCH_DESK.get());
+    }
 }

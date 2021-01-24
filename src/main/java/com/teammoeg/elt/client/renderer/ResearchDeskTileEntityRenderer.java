@@ -19,7 +19,7 @@
 package com.teammoeg.elt.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.teammoeg.elt.block.researchdesk.ResearchDeskTileEntity;
+import com.teammoeg.elt.tileentity.ResearchDeskTileEntity;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;

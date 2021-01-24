@@ -16,11 +16,11 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.block;
+package com.teammoeg.elt.tileentity;
 
 import com.google.common.collect.ImmutableSet;
 import com.teammoeg.elt.ELT;
-import com.teammoeg.elt.block.researchdesk.ResearchDeskTileEntity;
+import com.teammoeg.elt.block.ELTBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.tileentity.TileEntityType;

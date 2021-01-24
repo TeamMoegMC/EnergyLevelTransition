@@ -16,10 +16,10 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.block.researchdesk;
+package com.teammoeg.elt.block;
 
-import com.teammoeg.elt.block.ELTTileBlock;
 import com.teammoeg.elt.item.ELTBlockItem;
+import com.teammoeg.elt.tileentity.ResearchDeskTileEntity;
 import com.teammoeg.the_seed.api.SeedProperties;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
