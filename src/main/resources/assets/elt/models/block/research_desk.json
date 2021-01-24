@@ -1,5 +1,0 @@
-{
-  "loader": "forge:obj",
-  "model": "elt:models/block/research_desk.obj",
-  "flip-v": true
-}

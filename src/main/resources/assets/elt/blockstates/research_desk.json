@@ -1,7 +1,32 @@
 {
+  "defaults":{
+  "loader": "forge:default-block",
+  "model": "elt:block/research_desk.obj",
+  "custom": {"flip-v": true}
+  },
   "variants": {
-      "multiblockslave=false":{"model": "elt:block/research_desk"},
-	  "multiblockslave=true":{"model": "minecraft:block/air"}
-      }
+      "multiblockslave=false":{},
+	  "multiblockslave=true":{"model": "minecraft:block/air"},
+	 "facing":
+		{
+			"down": { "loader": {
+				"rotation": {"x": -90 }
+			}},
+			"up": { "loader": {
+				"rotation": {"x": 90 }
+			}},
+			"north": { "loader": {
+				"rotation": {"y": 0 }
+			}},
+			"south": { "loader": {
+				"rotation": {"y": 180 }
+			}},
+			"west": { "loader": {
+				"rotation": {"y": 90 }
+			}},
+			"east": { "loader": {
+				"rotation": {"y": -90 }
+			}}
+		}
     }
-
+}
