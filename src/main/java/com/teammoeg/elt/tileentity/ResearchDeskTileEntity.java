@@ -23,4 +23,6 @@ public class ResearchDeskTileEntity extends ELTTileEntity {
     public ResearchDeskTileEntity() {
         super(ELTTileEntityTypes.RESEARCH_DESK.get());
     }
+
+
 }
