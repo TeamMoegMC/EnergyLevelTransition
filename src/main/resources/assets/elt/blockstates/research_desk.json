@@ -4,29 +4,9 @@
     "not_multi_main=false,facing=south": { "model": "elt:block/research_desk", "y": 180 },
     "not_multi_main=false,facing=west": { "model": "elt:block/research_desk", "y": 270 },
     "not_multi_main=false,facing=north": { "model": "elt:block/research_desk", "y": 0 },
-    "not_multi_main=true,facing=east": {
-      "model": "minecraft:block/air",
-      "textures": {
-        "particle": "block/dark_oak_planks"
-      }
-    },
-    "not_multi_main=true,facing=south": {
-      "model": "minecraft:block/air",
-      "textures": {
-        "particle": "block/dark_oak_planks"
-      }
-    },
-    "not_multi_main=true,facing=west": {
-      "model": "minecraft:block/air",
-      "textures": {
-        "particle": "block/dark_oak_planks"
-      }
-    },
-    "not_multi_main=true,facing=north": {
-      "model": "minecraft:block/air",
-      "textures": {
-        "particle": "block/dark_oak_planks"
-      }
-    }
+    "not_multi_main=true,facing=east": { "model": "elt:block/research_desk_part", "y": 90 },
+    "not_multi_main=true,facing=south": { "model": "elt:block/research_desk_part", "y": 180 },
+    "not_multi_main=true,facing=west": { "model": "elt:block/research_desk_part", "y": 270 },
+    "not_multi_main=true,facing=north": { "model": "elt:block/research_desk_part", "y": 0 }
   }
 }
