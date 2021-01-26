@@ -20,8 +20,11 @@ package com.teammoeg.elt;
 
 
 import com.teammoeg.elt.block.ELTBlocks;
+import com.teammoeg.elt.client.gui.ResearchDeskScreen;
 import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
+import com.teammoeg.elt.container.ELTContainerType;
+import com.teammoeg.elt.container.ResearchDeskContainer;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
@@ -29,7 +32,10 @@ import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.Item;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -51,12 +57,13 @@ public class ELT implements ModInitializer {
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
     public ELT() {
-        FMLJavaModLoadingContext.get().getModEventBus().register(this);
+       //FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
         MinecraftForge.EVENT_BUS.register(RegistryEvents.class);
         new ELTItems();
         new ELTBlocks();
         ELTTileEntityTypes.TILE_ENTITIES_REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTContainerType.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     public static final Quest KILL_ZOMBIE = new Quest("killzombie");
@@ -71,6 +78,7 @@ public class ELT implements ModInitializer {
     public void onModClientSetup2(FMLClientSetupEvent aEvent) {
         ELTKeyBindings.registerKeyBindings();
         ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_DESK.get(), ResearchDeskTileEntityRenderer::new);
+        ScreenManager.register(ELTContainerType.RESEARCHDESKCONTAINER.get(), ResearchDeskScreen::new);
     }
 
     @Override

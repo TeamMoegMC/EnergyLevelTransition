@@ -18,11 +18,36 @@
 
 package com.teammoeg.elt.tileentity;
 
-public class ResearchDeskTileEntity extends ELTTileEntity {
+import com.teammoeg.elt.container.ResearchDeskContainer;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.container.Container;
+import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 
+import javax.annotation.Nullable;
+
+public class ResearchDeskTileEntity extends ELTContainerTileEntity implements INamedContainerProvider{
     public ResearchDeskTileEntity() {
         super(ELTTileEntityTypes.RESEARCH_DESK.get());
     }
 
 
+    @Override
+    public int getContainerSize() {
+        return 1;
+    }
+
+    @Override
+    public ITextComponent getDisplayName() {
+        return new StringTextComponent("Container");
+    }
+
+    @Nullable
+    @Override
+    public Container createMenu(int ID, PlayerInventory inventory, PlayerEntity player) {
+        return ResearchDeskContainer.create(ID, inventory,this,player);
+    }
 }
