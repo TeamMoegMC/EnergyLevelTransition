@@ -35,8 +35,8 @@ public class ResearchDeskContainer extends Container {
             public void setChanged() {
                 ItemStack stack= this.getItem();
                 if (stack.getItem() == Items.BOOK){
-                      tileEntity.getBlockState().setValue(ResearchDeskBlock.BOOK,true);
-                }else tileEntity.getBlockState().setValue(ResearchDeskBlock.BOOK,false);
+                    ResearchDeskBlock.setBlockhasbook(level,pos,tileEntity.getBlockState(),true);
+                }else ResearchDeskBlock.setBlockhasbook(level,pos,tileEntity.getBlockState(),false);
                 super.setChanged();
             }
 

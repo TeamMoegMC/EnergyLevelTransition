@@ -19,18 +19,38 @@
 package com.teammoeg.elt.client.renderer;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.vertex.IVertexBuilder;
+import com.teammoeg.elt.block.ResearchDeskBlock;
 import com.teammoeg.elt.tileentity.ResearchDeskTileEntity;
+import net.minecraft.block.BlockState;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.entity.model.BookModel;
+import net.minecraft.client.renderer.tileentity.EnchantmentTableTileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
+import net.minecraft.util.math.vector.Vector3f;
 
 public class ResearchDeskTileEntityRenderer extends TileEntityRenderer<ResearchDeskTileEntity> {
+    private final BookModel bookModel = new BookModel();
     public ResearchDeskTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
 
     @Override
     public void render(ResearchDeskTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-
+        BlockState blockstate = tileEntityIn.getBlockState();
+        if (blockstate.getValue(ResearchDeskBlock.BOOK)){
+            matrixStackIn.pushPose();
+            matrixStackIn.translate(0.5D, 1.04, 0.5D);
+            float f = blockstate.getValue(ResearchDeskBlock.FACING).getCounterClockWise().toYRot();
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f+90));
+            matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90F));
+            matrixStackIn.translate(0.0D, -0.125D, 0.0D);
+            this.bookModel.setupAnim(0.0F, 0F, 1F, 1.3F);
+            IVertexBuilder ivertexbuilder = EnchantmentTableTileEntityRenderer.BOOK_LOCATION.buffer(bufferIn, RenderType::entitySolid);
+            this.bookModel.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
+            matrixStackIn.popPose();
+        }
     }
 }

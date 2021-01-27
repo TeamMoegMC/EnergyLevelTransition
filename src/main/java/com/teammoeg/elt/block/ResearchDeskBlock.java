@@ -152,5 +152,8 @@ public class ResearchDeskBlock extends ELTTileBlock {
         }
         return ActionResultType.SUCCESS;
     }
+    public static void setBlockhasbook(World worldIn, BlockPos pos, BlockState state, boolean hasBook) {
+        worldIn.setBlock(pos, state.setValue(BOOK, hasBook), 3);
+    }
 }
 
