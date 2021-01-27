@@ -8,6 +8,7 @@ import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.ObjectHolder;
 
 
@@ -38,5 +39,10 @@ public class ResearchDeskContainer extends Container {
     @Override
     public boolean stillValid(PlayerEntity playerIn) {
         return true;
+    }
+
+    @Override
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+        return ItemStack.EMPTY;
     }
 }

@@ -125,19 +125,27 @@ public class ResearchDeskBlock extends ELTTileBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-            return new ResearchDeskTileEntity();
+            if(!state.getValue(IS_NOT_MAIN))
+        return new ResearchDeskTileEntity();
+            else return null;
     }
     @Override
     public boolean hasTileEntity(BlockState state) {
-        return true;
+        if(!state.getValue(IS_NOT_MAIN))
+            return true;
+        else return false;
     }
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isClientSide && handIn==Hand.MAIN_HAND) {
+            if (state.getValue(IS_NOT_MAIN)){
+                pos = pos.relative(getNeighbourDirection(state.getValue(IS_NOT_MAIN), state.getValue(FACING)));
+            }
             ResearchDeskTileEntity TileEntity = (ResearchDeskTileEntity) worldIn.getBlockEntity(pos);
             NetworkHooks.openGui((ServerPlayerEntity) player, TileEntity, (PacketBuffer packerBuffer) -> {
                 packerBuffer.writeBlockPos(TileEntity.getBlockPos());
             });
+
         }
         return ActionResultType.SUCCESS;
     }
