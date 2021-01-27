@@ -56,7 +56,7 @@ public class ResearchDeskBlock extends ELTTileBlock {
     // 代表朝向
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
     // 是否有书
-    public static final BooleanProperty BOOK = BlockStateProperties.HAS_BOOK;
+    public static final Property<Boolean> BOOK = SeedProperties.HASBOOK;
     public ResearchDeskBlock(String name) {
         super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING,BOOK);
     }
