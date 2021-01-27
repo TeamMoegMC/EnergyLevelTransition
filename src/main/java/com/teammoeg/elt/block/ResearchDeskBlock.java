@@ -127,7 +127,10 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
             return new ResearchDeskTileEntity();
     }
-
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
         if (!worldIn.isClientSide && handIn==Hand.MAIN_HAND) {

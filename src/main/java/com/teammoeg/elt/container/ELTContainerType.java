@@ -12,10 +12,5 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ELTContainerType{
     public static final DeferredRegister<ContainerType<?>> CONTAINERS = DeferredRegister.create(ForgeRegistries.CONTAINERS, ELT.MOD_ID);
-    public static RegistryObject<ContainerType<ResearchDeskContainer>> RESEARCHDESKCONTAINER = CONTAINERS.register("researchdesk_container", () -> {
-        return IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) -> {
-            BlockPos blockPos =data.readBlockPos();
-            return ResearchDeskContainer.create(windowId,inv,inv.player);
-        });
-    });
+    public static RegistryObject<ContainerType<ResearchDeskContainer>> RESEARCHDESKCONTAINER = CONTAINERS.register("researchdesk_container", () -> IForgeContainerType.create((int windowId, PlayerInventory inv, PacketBuffer data) -> ResearchDeskContainer.create(windowId,inv,inv.player)));
 }
