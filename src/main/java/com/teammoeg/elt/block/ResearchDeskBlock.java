@@ -34,8 +34,10 @@ import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
+import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -53,9 +55,10 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public static final Property<Boolean> IS_NOT_MAIN = SeedProperties.NOT_MULTI_MAIN;
     // 代表朝向
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
-
+    // 是否有书
+    public static final BooleanProperty BOOK = BlockStateProperties.HAS_BOOK;
     public ResearchDeskBlock(String name) {
-        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING);
+        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING,BOOK);
     }
 
     @Override

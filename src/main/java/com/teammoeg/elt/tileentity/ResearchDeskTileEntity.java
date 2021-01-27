@@ -18,19 +18,25 @@
 
 package com.teammoeg.elt.tileentity;
 
+import com.teammoeg.elt.block.ResearchDeskBlock;
 import com.teammoeg.elt.container.ResearchDeskContainer;
+import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.INamedContainerProvider;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.LecternTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 
 import javax.annotation.Nullable;
 
-public class ResearchDeskTileEntity extends ELTContainerTileEntity implements INamedContainerProvider{
+public class ResearchDeskTileEntity extends ELTContainerTileEntity implements ITickableTileEntity {
+
     public ResearchDeskTileEntity() {
         super(ELTTileEntityTypes.RESEARCH_DESK.get());
     }
@@ -49,5 +55,9 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IN
     @Override
     public Container createMenu(int ID, PlayerInventory inventory, PlayerEntity player) {
         return ResearchDeskContainer.create(ID, inventory,this,player);
+    }
+
+    @Override
+    public void tick() {
     }
 }

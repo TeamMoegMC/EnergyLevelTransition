@@ -1,15 +1,14 @@
 package com.teammoeg.elt.container;
 
+import com.teammoeg.elt.container.Slot.BookSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.inventory.container.ChestContainer;
 import net.minecraft.inventory.container.Container;
 import net.minecraft.inventory.container.ContainerType;
 import net.minecraft.inventory.container.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.registries.ObjectHolder;
 
 
 public class ResearchDeskContainer extends Container {
@@ -24,7 +23,7 @@ public class ResearchDeskContainer extends Container {
     }
     public ResearchDeskContainer(ContainerType<?> type,int windowsid, PlayerInventory playerinventory, IInventory inventory,PlayerEntity player) {
         super(type, windowsid);
-        addSlot(new Slot(inventory, 0, 10, 10));
+        addSlot(new BookSlot(inventory, 0, 10, 10));
         for(int l = 0; l < 3; ++l) {
             for(int j1 = 0; j1 < 9; ++j1) {
                 this.addSlot(new Slot(playerinventory, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18));
