@@ -33,6 +33,7 @@ import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
 import net.minecraft.tileentity.TileEntity;
@@ -124,22 +125,18 @@ public class ResearchDeskBlock extends ELTTileBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        if (!state.getValue(IS_NOT_MAIN)) {
             return new ResearchDeskTileEntity();
-        }
-        else return null;
     }
 
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide) {
-            TileEntity TileEntity =worldIn.getBlockEntity(pos);
-            if (TileEntity instanceof INamedContainerProvider){
-            NetworkHooks.openGui((ServerPlayerEntity) player, (INamedContainerProvider) TileEntity,TileEntity.getBlockPos());
-            }
-            return ActionResultType.SUCCESS;
+        if (!worldIn.isClientSide && handIn==Hand.MAIN_HAND) {
+            ResearchDeskTileEntity TileEntity = (ResearchDeskTileEntity) worldIn.getBlockEntity(pos);
+            NetworkHooks.openGui((ServerPlayerEntity) player, TileEntity, (PacketBuffer packerBuffer) -> {
+                packerBuffer.writeBlockPos(TileEntity.getBlockPos());
+            });
         }
-        return super.use(state, worldIn, pos, player, handIn, hit);
+        return ActionResultType.SUCCESS;
     }
 }
 
