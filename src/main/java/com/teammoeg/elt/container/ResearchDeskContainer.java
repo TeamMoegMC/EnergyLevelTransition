@@ -35,33 +35,22 @@ import net.minecraft.world.World;
 
 
 public class ResearchDeskContainer extends Container {
-<<<<<<< HEAD
     private final IInventory container;
-    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) {
-        this(type, id, playerInventory, new Inventory(1),pos);
-=======
-    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory, BlockPos pos) {
-        this(type, id, playerInventory, new Inventory(1), pos);
->>>>>>> cd9fdce97d367854fc70c52eed5e8453dd976935
+    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) { this(type, id, playerInventory, new Inventory(1), pos);
     }
 
-    public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, BlockPos pos) {
+    public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, BlockPos pos){
         return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, pos);
     }
 
-    public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, IInventory blockEntity, BlockPos pos) {
+    public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, IInventory blockEntity, BlockPos pos){
         return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, blockEntity, pos);
     }
-
-    public ResearchDeskContainer(ContainerType<?> type, int windowsid, PlayerInventory playerinventory, IInventory inventory, BlockPos pos) {
+    public ResearchDeskContainer(ContainerType < ? > type,int windowsid, PlayerInventory playerinventory, IInventory inventory, BlockPos pos){
         super(type, windowsid);
-<<<<<<< HEAD
         this.container = inventory;
-        World level=playerinventory.player.level;
-        inventory.startOpen(playerinventory.player);
-=======
         World level = playerinventory.player.level;
->>>>>>> cd9fdce97d367854fc70c52eed5e8453dd976935
+        inventory.startOpen(playerinventory.player);
         TileEntity tileEntity = level.getBlockEntity(pos);
         addSlot(new BookSlot(inventory, 0, 10, 10) {
             @Override
@@ -70,7 +59,6 @@ public class ResearchDeskContainer extends Container {
                 ResearchDeskBlock.setBlockhasbook(level, pos, tileEntity.getBlockState(), stack.getItem() == Items.BOOK);
                 super.setChanged();
             }
-
         });
 
         for (int l = 0; l < 3; ++l) {
@@ -85,20 +73,18 @@ public class ResearchDeskContainer extends Container {
     }
 
     @Override
-    public boolean stillValid(PlayerEntity playerIn) {
-        return true;
-    }
-
-    @Override
-    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
+    public boolean stillValid (PlayerEntity playerIn){
+                return true;
+            }
+            @Override
+    public ItemStack quickMoveStack (PlayerEntity playerIn,int index){
         return ItemStack.EMPTY;
-    }
-
-    public IInventory getContainer() {
+            }
+    public IInventory getContainer () {
         return this.container;
     }
 
-    public void removed(PlayerEntity playerIn) {
+    public void removed (PlayerEntity playerIn){
         super.removed(playerIn);
         this.container.stopOpen(playerIn);
     }

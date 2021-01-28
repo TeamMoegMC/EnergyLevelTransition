@@ -40,36 +40,26 @@ public class ResearchDeskTileEntityRenderer extends TileEntityRenderer<ResearchD
     }
 
     @Override
-<<<<<<< HEAD
     public void render(ResearchDeskTileEntity te, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         BlockState blockstate = te.getBlockState();
         int i = 0;
-        if (blockstate.getValue(ResearchDeskBlock.BOOK)){
-=======
-    public void render(ResearchDeskTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
-        BlockState blockstate = tileEntityIn.getBlockState();
         if (blockstate.getValue(ResearchDeskBlock.BOOK)) {
->>>>>>> cd9fdce97d367854fc70c52eed5e8453dd976935
-            matrixStackIn.pushPose();
-            
-            matrixStackIn.translate(0.5D, 1.04, 0.5D);
-<<<<<<< HEAD
-            Direction d = blockstate.getValue(ResearchDeskBlock.FACING);
-            if (d == Direction.WEST || d==Direction.EAST)
-                 i = -180;
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(d.toYRot()+i));
-=======
-            float f = blockstate.getValue(ResearchDeskBlock.FACING).getCounterClockWise().toYRot();
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f + 90));
->>>>>>> cd9fdce97d367854fc70c52eed5e8453dd976935
-            matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90F));
-            matrixStackIn.translate(0.0D, -0.125D, 0.0D);
-            this.bookModel.setupAnim(0.0F, 0F,te.leftPages, 1.3F);
-            IVertexBuilder ivertexbuilder = EnchantmentTableTileEntityRenderer.BOOK_LOCATION.buffer(bufferIn, RenderType::entitySolid);
-            this.bookModel.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
+        matrixStackIn.pushPose();
 
+        matrixStackIn.translate(0.5D, 1.04, 0.5D);
+        Direction d = blockstate.getValue(ResearchDeskBlock.FACING);
+        if (d == Direction.WEST || d == Direction.EAST)
+            i = -180;
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(d.toYRot() + i));
+        float f = blockstate.getValue(ResearchDeskBlock.FACING).getCounterClockWise().toYRot();
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f + 90));
+        matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90F));
+        matrixStackIn.translate(0.0D, -0.125D, 0.0D);
+        this.bookModel.setupAnim(0.0F, 0F, te.leftPages, 1.3F);
+        IVertexBuilder ivertexbuilder = EnchantmentTableTileEntityRenderer.BOOK_LOCATION.buffer(bufferIn, RenderType::entitySolid);
+        this.bookModel.render(matrixStackIn, ivertexbuilder, combinedLightIn, combinedOverlayIn, 1.0F, 1.0F, 1.0F, 1.0F);
 
-            matrixStackIn.popPose();
+        matrixStackIn.popPose();
         }
     }
 }
