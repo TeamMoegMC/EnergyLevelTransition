@@ -44,12 +44,12 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
 
     @Override
     public int getContainerSize() {
-        return 1;
+        return 3;
     }
 
     @Override
     public ITextComponent getDisplayName() {
-        return new StringTextComponent("Container");
+        return new StringTextComponent("Research Container");
     }
 
     @Nullable

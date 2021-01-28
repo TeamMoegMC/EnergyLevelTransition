@@ -20,6 +20,8 @@ package com.teammoeg.elt.container;
 
 import com.teammoeg.elt.block.ResearchDeskBlock;
 import com.teammoeg.elt.container.Slot.BookSlot;
+import com.teammoeg.elt.container.Slot.InkSlot;
+import com.teammoeg.elt.container.Slot.SolidInspirationSlot;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.IInventory;
@@ -46,13 +48,18 @@ public class ResearchDeskContainer extends Container {
     public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, IInventory blockEntity, BlockPos pos){
         return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, blockEntity, pos);
     }
+
+    public static int SIDE = 9, TOP = 4, SUB_SLOT_SIDE = 227;
+
     public ResearchDeskContainer(ContainerType < ? > type,int windowsid, PlayerInventory playerinventory, IInventory inventory, BlockPos pos){
         super(type, windowsid);
         this.container = inventory;
         World level = playerinventory.player.level;
         inventory.startOpen(playerinventory.player);
         TileEntity tileEntity = level.getBlockEntity(pos);
-        addSlot(new BookSlot(inventory, 0, 226, 123) {
+
+        // Book Slot
+        addSlot(new BookSlot(inventory, 0, SUB_SLOT_SIDE, TOP) {
             @Override
             public void setChanged() {
                 ItemStack stack = this.getItem();
@@ -61,14 +68,36 @@ public class ResearchDeskContainer extends Container {
             }
         });
 
-        for (int l = 0; l < 3; ++l) {
-            for (int j1 = 0; j1 < 9; ++j1) {
-                this.addSlot(new Slot(playerinventory, j1 + l * 9 + 9, 9 + j1 * 18, 145 + l * 18));
+        // Ink
+        addSlot(new InkSlot(inventory, 1, SUB_SLOT_SIDE, TOP + 29) {
+            @Override
+            public void setChanged() {
+                ItemStack stack = this.getItem();
+//                ResearchDeskBlock.setBlockhasbook(level, pos, tileEntity.getBlockState(), stack.getItem() == Items.BOOK);
+                super.setChanged();
+            }
+        });
+
+        // 实体灵感消化曹
+        addSlot(new SolidInspirationSlot(inventory, 2, SUB_SLOT_SIDE, TOP  + 29  + 28) {
+            @Override
+            public void setChanged() {
+                ItemStack stack = this.getItem();
+//                ResearchDeskBlock.setBlockhasbook(level, pos, tileEntity.getBlockState(), stack.getItem() == Items.BOOK);
+                super.setChanged();
+            }
+        });
+
+        // Player Inventory
+        for (int k = 0; k < 3; ++k) {
+            for (int j = 0; j < 9; ++j) {
+                this.addSlot(new Slot(playerinventory, j + k * 9 + 9,  SIDE + j * 18, TOP + k * 18));
             }
         }
 
-        for (int i1 = 0; i1 < 9; ++i1) {
-            this.addSlot(new Slot(playerinventory, i1, 9 + i1 * 18, 203));
+        // Player Inventory Hotbar
+        for (int i = 0; i < 9; ++i) {
+            this.addSlot(new Slot(playerinventory, i, SIDE + i * 18, TOP + 58));
         }
     }
 

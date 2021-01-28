@@ -25,21 +25,23 @@ import com.teammoeg.elt.container.ResearchDeskContainer;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 
 public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
-    private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30;
-    private static final int SIDE = 30, TOP = 40, BOTTOM = 30, PADDING = 9;
+    private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30, INV_WIDTH = WIDTH, INV_HEIGHT = 87;
+    private static final int SIDE = 10, TOP = 10, BOTTOM = 87, PADDING = 9;
     private static final float MIN_ZOOM = 1, MAX_ZOOM = 2, ZOOM_STEP = 0.2F;
 
-    private final ResourceLocation WINDOW = new ResourceLocation("minecraft", "textures/gui/advancements/window.png");
-    private final ResourceLocation GUI = new ResourceLocation(ELT.MOD_ID, "textures/gui/default_title.png");
+    private final ResourceLocation WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png");
+    private final ResourceLocation INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png");
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
     private final ResourceLocation FRAMES = new ResourceLocation(ELT.MOD_ID, "textures/gui/research_frames.png");
     private final PlayerEntity player;
+    private boolean isScrolling;
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -49,6 +51,10 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     @Override
     protected void init() {
         super.init();
+        this.imageWidth = INV_WIDTH;
+        this.imageHeight = INV_HEIGHT;
+        this.leftPos = (width - INV_WIDTH) / 2;
+        this.topPos = height - BOTTOM;
     }
 
     @Override
@@ -56,18 +62,20 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         int left = SIDE;
         int top = TOP;
         int right = width - SIDE;
-        int bottom = height - SIDE;
+        int bottom = height - BOTTOM;
 
-        renderWindow(matrixStack, left, top, right, bottom);
-        renderResearchContent(matrixStack, left + 10, top + 10);
+        this.renderWindow(matrixStack, left, top, right, bottom);
+        this.renderResearchExperienceBar(matrixStack, left, top, right, bottom);
+        if (this.menu.getSlot(0).hasItem()) {
+            this.renderResearchContent(matrixStack, left, top, right, bottom);
+        }
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
-        this.renderResearchExperienceBar(matrixStack);
     }
 
     @Override
     protected void renderLabels(MatrixStack matrixStack, int x, int y) {
-        this.font.draw(matrixStack, this.title, SIDE, TOP, 4210752);
+
     }
 
     @Override
@@ -97,24 +105,29 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // Bottom right corner
         this.blit(matrixStack, right - CORNER_SIZE, bottom - CORNER_SIZE, WIDTH - CORNER_SIZE, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
 
+        String windowTitle = I18n.get("elt.gui.research");
+        this.font.draw(matrixStack, windowTitle, left + 8, top + 6, 4210752);
+
+        this.minecraft.getTextureManager().bind(INVENTORY);
+        this.blit(matrixStack, (width - INV_WIDTH) / 2, bottom, 0, 141, INV_WIDTH, INV_HEIGHT);
+
     }
 
     /**
-     * @param matrixStack
-     * @param bgX
-     * @param bgY
      * 渲染研究内容
      */
-    public void renderResearchContent(MatrixStack matrixStack, int bgX, int bgY) {
+    public void renderResearchContent(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         this.minecraft.getTextureManager().bind(FRAMES);
-        this.blit(matrixStack, bgX+20, bgY+20, 0, 0, 24, 24);
+        this.blit(matrixStack, left + 20, top + 20, 0, 0, 24, 24);
+        this.blit(matrixStack, left + 20, top + 60, 0, 0, 24, 24);
+        this.blit(matrixStack, left + 60, top + 20, 0, 0, 24, 24);
     }
 
     /**
      * @param matrixStack
      * 渲染团队研究经验条
      */
-    public void renderResearchExperienceBar(MatrixStack matrixStack) {
+    public void renderResearchExperienceBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
 
             this.minecraft.getTextureManager().bind(BARS);
@@ -122,13 +135,13 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             this.minecraft.getProfiler().push("research");
 
             // 重点：获取研究经验值
-            int researchExpAmt = 182;
+            int researchExpAmt = WIDTH - CORNER_SIZE - CORNER_SIZE;
 
             // 经验条
-            this.blit(matrixStack, (this.width - 182) / 2, 3, 0, 0, researchExpAmt, 9);
+            this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, WIDTH - CORNER_SIZE * 2, 9);
 
             // 数值文字
-            this.font.draw(matrixStack, ""+researchExpAmt, 88, 5, 0);
+            this.font.draw(matrixStack, "Research Experience: "+researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
 
             this.minecraft.getProfiler().pop();
         }
@@ -146,4 +159,55 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             }
         }
     }
+
+//    @Override
+//    public boolean mouseDragged(double mouseX, double mouseY, int button, double mouseDeltaX, double mouseDeltaY) {
+//        int left = SIDE;
+//        int top = TOP;
+//
+//        if (button != 0) {
+//            this.isScrolling = false;
+//            return false;
+//        }
+//
+//        if (!this.isScrolling) {
+//            if (this.advConnectedToMouse == null) {
+//                boolean inGui = mouseX < left + width - 2*SIDE - PADDING && mouseX > left + PADDING && mouseY < top + height - TOP + 1 && mouseY > top + 2*PADDING;
+//                if (this.selectedTab != null && inGui) {
+//                    for (BetterAdvancementEntryGui betterAdvancementEntryGui : this.selectedTab.guis.values()) {
+//                        if (betterAdvancementEntryGui.isMouseOver(this.selectedTab.scrollX, this.selectedTab.scrollY, mouseX - left - PADDING, mouseY - top - 2*PADDING)) {
+//
+//                            if (betterAdvancementEntryGui.betterDisplayInfo.allowDragging())
+//                            {
+//                                this.advConnectedToMouse = betterAdvancementEntryGui;
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//            else {
+//                this.advConnectedToMouse.x = (int)Math.round(this.advConnectedToMouse.x + mouseDeltaX);
+//                this.advConnectedToMouse.y = (int)Math.round(this.advConnectedToMouse.y + mouseDeltaY);
+//            }
+//        }
+//        else {
+//            if (this.advConnectedToMouse != null) {
+//                //Create and post event for the advancement movement
+//                final AdvancementMovedEvent event = new AdvancementMovedEvent(advConnectedToMouse);
+//                MinecraftForge.EVENT_BUS.post(event);
+//            }
+//            this.advConnectedToMouse = null;
+//        }
+//
+//        if (this.advConnectedToMouse == null) {
+//            if (!this.isScrolling) {
+//                this.isScrolling = true;
+//            } else if (this.selectedTab != null) {
+//                this.selectedTab.scroll(mouseDeltaX , mouseDeltaY, internalWidth - 2 * SIDE - 3 * PADDING, internalHeight - TOP - BOTTOM - 3 * PADDING);
+//            }
+//        }
+//
+//        return true;
+//    }
 }
