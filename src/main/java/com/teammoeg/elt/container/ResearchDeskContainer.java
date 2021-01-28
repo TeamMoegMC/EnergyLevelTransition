@@ -52,7 +52,7 @@ public class ResearchDeskContainer extends Container {
         World level = playerinventory.player.level;
         inventory.startOpen(playerinventory.player);
         TileEntity tileEntity = level.getBlockEntity(pos);
-        addSlot(new BookSlot(inventory, 0, 10, 10) {
+        addSlot(new BookSlot(inventory, 0, 226, 123) {
             @Override
             public void setChanged() {
                 ItemStack stack = this.getItem();
@@ -63,12 +63,12 @@ public class ResearchDeskContainer extends Container {
 
         for (int l = 0; l < 3; ++l) {
             for (int j1 = 0; j1 < 9; ++j1) {
-                this.addSlot(new Slot(playerinventory, j1 + l * 9 + 9, 8 + j1 * 18, 103 + l * 18));
+                this.addSlot(new Slot(playerinventory, j1 + l * 9 + 9, 9 + j1 * 18, 145 + l * 18));
             }
         }
 
         for (int i1 = 0; i1 < 9; ++i1) {
-            this.addSlot(new Slot(playerinventory, i1, 8 + i1 * 18, 161));
+            this.addSlot(new Slot(playerinventory, i1, 9 + i1 * 18, 203));
         }
     }
 
