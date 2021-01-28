@@ -71,7 +71,7 @@ public interface ModLifeCycleEvents {
 
     }
 
-    public default void onFMLContructMod(FMLConstructModEvent aEvent) {
+    default void onFMLContructMod(FMLConstructModEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
         System.out.println(getModNameForLog() + ": FML Construct Mod Started");
 
@@ -81,7 +81,7 @@ public interface ModLifeCycleEvents {
         System.out.println(getModNameForLog() + ": ===================");
     }
 
-    public default void onFMLLoadComplete(FMLLoadCompleteEvent aEvent) {
+    default void onFMLLoadComplete(FMLLoadCompleteEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
         System.out.println(getModNameForLog() + ": FML Load Complete Started");
 
@@ -91,7 +91,7 @@ public interface ModLifeCycleEvents {
         System.out.println(getModNameForLog() + ": ===================");
     }
 
-    public default void onModIMCEnqueue(InterModEnqueueEvent aEvent) {
+    default void onModIMCEnqueue(InterModEnqueueEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
         System.out.println(getModNameForLog() + ": Inter Mod Enqueue Started");
 
@@ -101,7 +101,7 @@ public interface ModLifeCycleEvents {
         System.out.println(getModNameForLog() + ": ===================");
     }
 
-    public default void onModIMCProcess(InterModProcessEvent aEvent) {
+    default void onModIMCProcess(InterModProcessEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
         System.out.println(getModNameForLog() + ": Inter Mod Process Started");
 

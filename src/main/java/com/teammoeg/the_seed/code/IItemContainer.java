@@ -25,8 +25,9 @@ import net.minecraft.item.Item;
  * @author YueSha (GitHub @yuesha-yc)
  */
 public interface IItemContainer {
-    public Item item();
-    public Block block();
+    Item item();
+
+    Block block();
 //    public boolean equal(Object aStack);
 //    public boolean equal(Object aStack, boolean aWildcard, boolean aIgnoreNBT);
 //    public ItemStack get(long aAmount, Object... aReplacements);
@@ -46,7 +47,10 @@ public interface IItemContainer {
 //    public boolean hasBeenSet();
 //    public boolean exists();
 
-    @Deprecated public Item getItem();
-    @Deprecated public Block getBlock();
+    @Deprecated
+    Item getItem();
+
+    @Deprecated
+    Block getBlock();
 //    @Deprecated public ItemStack getWildcard(long aAmount, Object... aReplacements);
 }

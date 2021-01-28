@@ -19,11 +19,11 @@
 package com.teammoeg.cuckoolib.material.type;
 
 public class DustMaterial extends Material {
-	public DustMaterial(String name, int color) {
-		super(name, color);
-	}
+    public DustMaterial(String name, int color) {
+        super(name, color);
+    }
 
-	static {
-		registerDefaultFlags(DustMaterial.class, GENERATE_DUST);
-	}
+    static {
+        registerDefaultFlags(DustMaterial.class, GENERATE_DUST);
+    }
 }

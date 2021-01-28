@@ -22,5 +22,5 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 
 @FunctionalInterface
 public interface IWidgetRenderer {
-	void draw(MatrixStack transform, int x, int y, int width, int height);
+    void draw(MatrixStack transform, int x, int y, int width, int height);
 }

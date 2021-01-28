@@ -24,7 +24,7 @@ import java.util.*;
  * @author Gregorius Techneticies
  */
 public class HashSetNoNulls<E> extends AbstractSet<E> {
-    private transient HashMap<E, Object> map;
+    private final transient HashMap<E, Object> map;
     private static final Object OBJECT = new Object();
 
     public HashSetNoNulls() {
@@ -32,7 +32,7 @@ public class HashSetNoNulls<E> extends AbstractSet<E> {
     }
 
     public HashSetNoNulls(Collection<? extends E> c) {
-        map = new HashMap<>(Math.max((int) (c.size()/.75f) + 1, 16));
+        map = new HashMap<>(Math.max((int) (c.size() / .75f) + 1, 16));
         addAll(c);
     }
 
@@ -75,12 +75,12 @@ public class HashSetNoNulls<E> extends AbstractSet<E> {
 
     @Override
     public boolean add(E e) {
-        return e!=null&&map.put(e, OBJECT)==null;
+        return e != null && map.put(e, OBJECT) == null;
     }
 
     @Override
     public boolean remove(Object o) {
-        return map.remove(o)==OBJECT;
+        return map.remove(o) == OBJECT;
     }
 
     @Override

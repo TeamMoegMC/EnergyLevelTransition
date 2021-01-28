@@ -29,32 +29,32 @@ public interface ITagDataContainer<C> {
     /**
      * @return if the Tag is inside the List.
      */
-    public boolean contains(TagData aTag);
+    boolean contains(TagData aTag);
 
     /**
      * @return if all those Tags are inside the List.
      */
-    public boolean containsAll(TagData... aTags);
+    boolean containsAll(TagData... aTags);
 
     /**
      * @return if all those Tags are inside the List.
      */
-    public boolean containsAll(Collection<TagData> aTags);
+    boolean containsAll(Collection<TagData> aTags);
 
     /**
      * @return The ISubTagContainer you called this Function on, for convenience.
      */
-    public C add(TagData... aTags);
+    C add(TagData... aTags);
 
     /**
      * @return if the Tag was there before it has been removed.
      */
-    public boolean remove(TagData aTag);
+    boolean remove(TagData aTag);
 
     /**
      * This simple Class is an example on how to implement the Functions of this Interface
      */
-    public static final class BasicTagDataContainer implements ITagDataContainer<BasicTagDataContainer> {
+    final class BasicTagDataContainer implements ITagDataContainer<BasicTagDataContainer> {
         private final Set<TagData> mTags = new HashSetNoNulls<>();
 
         @Override

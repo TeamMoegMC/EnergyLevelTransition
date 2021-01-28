@@ -30,48 +30,48 @@ import net.minecraftforge.fml.network.NetworkEvent.Context;
 import java.util.function.Supplier;
 
 public class MessageGuiToClient implements IMessage {
-	private PacketBuffer data;
-	private int window;
+    private PacketBuffer data;
+    private int window;
 
-	public MessageGuiToClient() {
+    public MessageGuiToClient() {
 
-	}
+    }
 
-	public MessageGuiToClient(PacketBuffer data, int window) {
-		this.data = data;
-		this.window = window;
-	}
+    public MessageGuiToClient(PacketBuffer data, int window) {
+        this.data = data;
+        this.window = window;
+    }
 
-	public static MessageGuiToClient decode(PacketBuffer buf) {
-		return new MessageGuiToClient(new PacketBuffer(Unpooled.copiedBuffer((buf.readBytes(buf.readInt())))),
-				buf.readInt());
-	}
+    public static MessageGuiToClient decode(PacketBuffer buf) {
+        return new MessageGuiToClient(new PacketBuffer(Unpooled.copiedBuffer((buf.readBytes(buf.readInt())))),
+                buf.readInt());
+    }
 
-	@Override
-	public void encode(PacketBuffer buf) {
-		buf.writeInt(this.data.readableBytes());
-		buf.writeBytes(this.data);
-		buf.writeInt(this.window);
-	}
+    @Override
+    public void encode(PacketBuffer buf) {
+        buf.writeInt(this.data.readableBytes());
+        buf.writeBytes(this.data);
+        buf.writeInt(this.window);
+    }
 
-	@Override
-	public void process(Supplier<Context> ctx) {
-		ctx.get().enqueueWork(() -> {
-			PlayerEntity player = Minecraft.getInstance().player;
-			Container container;
-			if (player != null) {
-				if (this.window == 0) {
-					container = player.inventoryMenu;
-				} else if (this.window == player.containerMenu.containerId) {
-					container = player.containerMenu;
-				} else {
-					return;
-				}
-				if (container instanceof ModularContainer) {
-					IWidget widget = ((ModularContainer) container).getGuiInfo().getWidget(this.data.readInt());
-					widget.receiveMessageFromServer(this.data);
-				}
-			}
-		});
-	}
+    @Override
+    public void process(Supplier<Context> ctx) {
+        ctx.get().enqueueWork(() -> {
+            PlayerEntity player = Minecraft.getInstance().player;
+            Container container;
+            if (player != null) {
+                if (this.window == 0) {
+                    container = player.inventoryMenu;
+                } else if (this.window == player.containerMenu.containerId) {
+                    container = player.containerMenu;
+                } else {
+                    return;
+                }
+                if (container instanceof ModularContainer) {
+                    IWidget widget = ((ModularContainer) container).getGuiInfo().getWidget(this.data.readInt());
+                    widget.receiveMessageFromServer(this.data);
+                }
+            }
+        });
+    }
 }

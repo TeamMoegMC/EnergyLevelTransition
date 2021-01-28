@@ -25,7 +25,7 @@ import java.util.Random;
 
 /**
  * @author Gregorius Techneticies
- *
+ * <p>
  * An ArrayList which does not permit null Values.
  */
 public class ArrayListNoNulls<E> extends ArrayList<E> {

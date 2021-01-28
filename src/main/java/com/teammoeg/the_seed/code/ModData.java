@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * @author YueSha (GitHub @yuesha-yc)
  */
-public final class ModData implements ICondition<ITagDataContainer<?>>  {
+public final class ModData implements ICondition<ITagDataContainer<?>> {
     public static final Map<String, ModData> MODS = new HashMap<>();
 
     public boolean mLoaded;
@@ -57,7 +57,7 @@ public final class ModData implements ICondition<ITagDataContainer<?>>  {
 
     @Override
     public boolean equals(Object aObject) {
-        return aObject instanceof ModData && ((ModData)aObject).mID.equals(mID);
+        return aObject instanceof ModData && ((ModData) aObject).mID.equals(mID);
     }
 
     @Override

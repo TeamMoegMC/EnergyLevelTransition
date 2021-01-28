@@ -25,11 +25,11 @@ import net.minecraft.network.PacketBuffer;
 import java.util.function.Consumer;
 
 public interface ISyncedWidgetList {
-	void writeToClient(int widgetId, Consumer<PacketBuffer> data);
+    void writeToClient(int widgetId, Consumer<PacketBuffer> data);
 
-	void writeToServer(int widgetId, Consumer<PacketBuffer> data);
+    void writeToServer(int widgetId, Consumer<PacketBuffer> data);
 
-	void notifySlotChange(ISlotWidget widget, boolean isEnable);
+    void notifySlotChange(ISlotWidget widget, boolean isEnable);
 
-	ItemStack notifyTransferStack(ItemStack stack, boolean simulate);
+    ItemStack notifyTransferStack(ItemStack stack, boolean simulate);
 }

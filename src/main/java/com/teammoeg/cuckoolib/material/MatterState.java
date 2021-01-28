@@ -19,5 +19,5 @@
 package com.teammoeg.cuckoolib.material;
 
 public enum MatterState {
-	SOLID, LIQUID, GAS, PLASMA;
+    SOLID, LIQUID, GAS, PLASMA
 }

@@ -30,7 +30,7 @@ public enum IL implements IItemContainer {
     Display_Fluid;
 
     private ItemStack mStack;
-    private boolean mHasNotBeenSet = CS.T;
+    private final boolean mHasNotBeenSet = CS.T;
 
 
     @Override

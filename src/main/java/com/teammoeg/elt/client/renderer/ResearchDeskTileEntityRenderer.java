@@ -33,6 +33,7 @@ import net.minecraft.util.math.vector.Vector3f;
 
 public class ResearchDeskTileEntityRenderer extends TileEntityRenderer<ResearchDeskTileEntity> {
     private final BookModel bookModel = new BookModel();
+
     public ResearchDeskTileEntityRenderer(TileEntityRendererDispatcher rendererDispatcherIn) {
         super(rendererDispatcherIn);
     }
@@ -40,11 +41,11 @@ public class ResearchDeskTileEntityRenderer extends TileEntityRenderer<ResearchD
     @Override
     public void render(ResearchDeskTileEntity tileEntityIn, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int combinedLightIn, int combinedOverlayIn) {
         BlockState blockstate = tileEntityIn.getBlockState();
-        if (blockstate.getValue(ResearchDeskBlock.BOOK)){
+        if (blockstate.getValue(ResearchDeskBlock.BOOK)) {
             matrixStackIn.pushPose();
             matrixStackIn.translate(0.5D, 1.04, 0.5D);
             float f = blockstate.getValue(ResearchDeskBlock.FACING).getCounterClockWise().toYRot();
-            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f+90));
+            matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f + 90));
             matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90F));
             matrixStackIn.translate(0.0D, -0.125D, 0.0D);
             this.bookModel.setupAnim(0.0F, 0F, 1F, 1.3F);
