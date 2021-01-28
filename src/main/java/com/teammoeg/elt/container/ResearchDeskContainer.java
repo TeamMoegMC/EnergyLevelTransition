@@ -74,12 +74,12 @@ public class ResearchDeskContainer extends Container {
 
     @Override
     public boolean stillValid (PlayerEntity playerIn){
-                return true;
-            }
+        return true;
+    }
             @Override
     public ItemStack quickMoveStack (PlayerEntity playerIn,int index){
         return ItemStack.EMPTY;
-            }
+    }
     public IInventory getContainer () {
         return this.container;
     }

@@ -51,8 +51,6 @@ public class ResearchDeskTileEntityRenderer extends TileEntityRenderer<ResearchD
         if (d == Direction.WEST || d == Direction.EAST)
             i = -180;
         matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(d.toYRot() + i));
-        float f = blockstate.getValue(ResearchDeskBlock.FACING).getCounterClockWise().toYRot();
-        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(f + 90));
         matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(90F));
         matrixStackIn.translate(0.0D, -0.125D, 0.0D);
         this.bookModel.setupAnim(0.0F, 0F, te.leftPages, 1.3F);
