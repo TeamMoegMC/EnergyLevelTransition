@@ -55,8 +55,9 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
     @Nullable
     @Override
     public Container createMenu(int ID, PlayerInventory inventory, PlayerEntity player) {
-        return ResearchDeskContainer.create(ID, inventory,this,this.getBlockPos());
+        return ResearchDeskContainer.create(ID, inventory, this, this.getBlockPos());
     }
+
     @Override
     public void tick() {
         if (++this.tickInterval % 20 * 4 == 0) {

@@ -21,7 +21,7 @@ package com.teammoeg.cuckoolib.gui;
 import net.minecraft.entity.player.PlayerEntity;
 
 public interface IModularGuiHolder {
-	IGuiHolderCodec getCodec();
+    IGuiHolderCodec getCodec();
 
-	ModularGuiInfo createGuiInfo(PlayerEntity player);
+    ModularGuiInfo createGuiInfo(PlayerEntity player);
 }

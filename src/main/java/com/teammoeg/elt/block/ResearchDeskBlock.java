@@ -30,14 +30,11 @@ import net.minecraft.block.material.PushReaction;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.inventory.container.INamedContainerProvider;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.PacketBuffer;
-import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.Property;
-import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
@@ -57,8 +54,9 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public static final DirectionProperty FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
     // 是否有书
     public static final Property<Boolean> BOOK = SeedProperties.HASBOOK;
+
     public ResearchDeskBlock(String name) {
-        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING,BOOK);
+        super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING, BOOK);
     }
 
     @Override
@@ -128,20 +126,20 @@ public class ResearchDeskBlock extends ELTTileBlock {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-            if(!state.getValue(IS_NOT_MAIN))
-        return new ResearchDeskTileEntity();
-            else return null;
+        if (!state.getValue(IS_NOT_MAIN))
+            return new ResearchDeskTileEntity();
+        else return null;
     }
+
     @Override
     public boolean hasTileEntity(BlockState state) {
-        if(!state.getValue(IS_NOT_MAIN))
-            return true;
-        else return false;
+        return !state.getValue(IS_NOT_MAIN);
     }
+
     @Override
     public ActionResultType use(BlockState state, World worldIn, BlockPos pos, PlayerEntity player, Hand handIn, BlockRayTraceResult hit) {
-        if (!worldIn.isClientSide && handIn==Hand.MAIN_HAND) {
-            if (state.getValue(IS_NOT_MAIN)){
+        if (!worldIn.isClientSide && handIn == Hand.MAIN_HAND) {
+            if (state.getValue(IS_NOT_MAIN)) {
                 pos = pos.relative(getNeighbourDirection(state.getValue(IS_NOT_MAIN), state.getValue(FACING)));
             }
             ResearchDeskTileEntity TileEntity = (ResearchDeskTileEntity) worldIn.getBlockEntity(pos);
@@ -152,6 +150,7 @@ public class ResearchDeskBlock extends ELTTileBlock {
         }
         return ActionResultType.SUCCESS;
     }
+
     public static void setBlockhasbook(World worldIn, BlockPos pos, BlockState state, boolean hasBook) {
         worldIn.setBlock(pos, state.setValue(BOOK, hasBook), 3);
     }

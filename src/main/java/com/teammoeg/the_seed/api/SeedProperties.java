@@ -30,6 +30,7 @@ public class SeedProperties {
     public static final DirectionProperty FACING_HORIZONTAL = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
     public static final PropertyBoolInverted NOT_MULTI_MAIN = PropertyBoolInverted.create("not_multi_main"); // not_multi_main: 非主方块 用于表示之前的multiblockslave
     public static final PropertyBoolInverted HASBOOK = PropertyBoolInverted.create("hasbook");
+
     public static class PropertyBoolInverted extends Property<Boolean> {
         private static final ImmutableList<Boolean> ALLOWED_VALUES = ImmutableList.of(false, true);
 

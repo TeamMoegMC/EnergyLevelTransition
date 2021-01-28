@@ -22,20 +22,20 @@ package com.teammoeg.the_seed.code;
  * @author YueSha (GitHub @yuesha-yc)
  */
 public interface ICondition<O> {
-    public static final ICondition<?> TRUE = new True<>();
-    public static final ICondition<?> FALSE = new False<>();
-    public static final ICondition<?> NULL = new Null<>();
-    public static final ICondition<?> NOTNULL = new NotNull<>();
+    ICondition<?> TRUE = new True<>();
+    ICondition<?> FALSE = new False<>();
+    ICondition<?> NULL = new Null<>();
+    ICondition<?> NOTNULL = new NotNull<>();
 
     /**
      * @param aObject the Object to check the Condition on
      * @return if the Condition matches
      */
-    public boolean isTrue(O aObject);
+    boolean isTrue(O aObject);
 
     // Utility Classes for adding relations between Conditions.
 
-    public static class Not<O> implements ICondition<O> {
+    class Not<O> implements ICondition<O> {
         private final ICondition<O> mCondition;
 
         public Not(ICondition<O> aCondition) {
@@ -48,7 +48,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class Or<O> implements ICondition<O> {
+    class Or<O> implements ICondition<O> {
         private final ICondition<O>[] mConditions;
 
         @SafeVarargs
@@ -63,7 +63,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class Nor<O> implements ICondition<O> {
+    class Nor<O> implements ICondition<O> {
         private final ICondition<O>[] mConditions;
 
         @SafeVarargs
@@ -78,7 +78,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class And<O> implements ICondition<O> {
+    class And<O> implements ICondition<O> {
         private final ICondition<O>[] mConditions;
 
         @SafeVarargs
@@ -93,7 +93,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class Nand<O> implements ICondition<O> {
+    class Nand<O> implements ICondition<O> {
         private final ICondition<O>[] mConditions;
 
         @SafeVarargs
@@ -108,7 +108,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class Xor<O> implements ICondition<O> {
+    class Xor<O> implements ICondition<O> {
         private final ICondition<O> mCondition1, mCondition2;
 
         public Xor(ICondition<O> aCondition1, ICondition<O> aCondition2) {
@@ -122,7 +122,7 @@ public interface ICondition<O> {
         }
     }
 
-    public static class Equal<O> implements ICondition<O> {
+    class Equal<O> implements ICondition<O> {
         private final ICondition<O> mCondition1, mCondition2;
 
         public Equal(ICondition<O> aCondition1, ICondition<O> aCondition2) {
@@ -136,9 +136,40 @@ public interface ICondition<O> {
         }
     }
 
-    static class True <O>   implements ICondition<O> {True ()   {/**/} @Override public boolean isTrue(O aObject) {return true ;}}
-    static class False<O>   implements ICondition<O> {False()   {/**/} @Override public boolean isTrue(O aObject) {return false;}}
-    static class Null <O>   implements ICondition<O> {Null()    {/**/} @Override public boolean isTrue(O aObject) {return aObject == null;}}
-    static class NotNull<O> implements ICondition<O> {NotNull() {/**/} @Override public boolean isTrue(O aObject) {return aObject != null;}}
+    class True<O> implements ICondition<O> {
+        True() {/**/}
+
+        @Override
+        public boolean isTrue(O aObject) {
+            return true;
+        }
+    }
+
+    class False<O> implements ICondition<O> {
+        False() {/**/}
+
+        @Override
+        public boolean isTrue(O aObject) {
+            return false;
+        }
+    }
+
+    class Null<O> implements ICondition<O> {
+        Null() {/**/}
+
+        @Override
+        public boolean isTrue(O aObject) {
+            return aObject == null;
+        }
+    }
+
+    class NotNull<O> implements ICondition<O> {
+        NotNull() {/**/}
+
+        @Override
+        public boolean isTrue(O aObject) {
+            return aObject != null;
+        }
+    }
 }
 

@@ -36,36 +36,36 @@ import java.util.List;
 import java.util.Map;
 
 public interface IToolInfo {
-	ResourceLocation getRegistryName();
+    ResourceLocation getRegistryName();
 
-	boolean validateMaterial(Material material);
+    boolean validateMaterial(Material material);
 
-	int getMaxDamage(ItemStack stack);
+    int getMaxDamage(ItemStack stack);
 
-	int getBlockBreakDamage();
+    int getBlockBreakDamage();
 
-	int getInteractionDamage();
+    int getInteractionDamage();
 
-	int getContainerCraftDamage();
+    int getContainerCraftDamage();
 
-	int getEntityHitDamage();
+    int getEntityHitDamage();
 
-	int getHarvestLevel(ItemStack stack, ToolType tool, PlayerEntity player, BlockState blockState);
+    int getHarvestLevel(ItemStack stack, ToolType tool, PlayerEntity player, BlockState blockState);
 
-	boolean canHarvestBlock(BlockState state);
+    boolean canHarvestBlock(BlockState state);
 
-	float getDestroySpeed(ItemStack stack);
+    float getDestroySpeed(ItemStack stack);
 
-	default Map<Integer, Pair<String, Material>> getDefaultMaterial() {
-		return Collections.emptyMap();
-	}
+    default Map<Integer, Pair<String, Material>> getDefaultMaterial() {
+        return Collections.emptyMap();
+    }
 
-	@OnlyIn(Dist.CLIENT)
-	default void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
+    @OnlyIn(Dist.CLIENT)
+    default void addInformation(ItemStack stack, World world, List<ITextComponent> tooltip, ITooltipFlag flag) {
 
-	}
+    }
 
-	default ItemStack getBrokenItemStack(ItemStack stack) {
-		return ItemStack.EMPTY;
-	}
+    default ItemStack getBrokenItemStack(ItemStack stack) {
+        return ItemStack.EMPTY;
+    }
 }

@@ -24,7 +24,7 @@ import net.minecraftforge.fml.network.NetworkEvent.Context;
 import java.util.function.Supplier;
 
 public interface IMessage {
-	void encode(PacketBuffer buf);
+    void encode(PacketBuffer buf);
 
-	void process(Supplier<Context> ctx);
+    void process(Supplier<Context> ctx);
 }

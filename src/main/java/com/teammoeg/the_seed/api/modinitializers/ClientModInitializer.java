@@ -25,7 +25,9 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
  */
 public interface ClientModInitializer extends ModLifeCycleEvents {
 
-    /** Called on Client Setup */
+    /**
+     * Called on Client Setup
+     */
     void onModClientSetup2(FMLClientSetupEvent aEvent);
 
     default void onModClientSetup(FMLClientSetupEvent aEvent) {

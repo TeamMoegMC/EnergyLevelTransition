@@ -72,7 +72,7 @@ public final class TagData implements ICondition<ITagDataContainer> {
     }
 
     public String getTranslatableNameLong() {
-        return "gt.td.long."+mName.toLowerCase();
+        return "gt.td.long." + mName.toLowerCase();
     }
 
 //    public String getLocalisedNameLong() {
@@ -80,7 +80,7 @@ public final class TagData implements ICondition<ITagDataContainer> {
 //    }
 
     public String getTranslatableNameShort() {
-        return "gt.td.short."+mName.toLowerCase();
+        return "gt.td.short." + mName.toLowerCase();
     }
 
 //    public String getLocalisedNameShort() {
@@ -103,7 +103,7 @@ public final class TagData implements ICondition<ITagDataContainer> {
 
     @Override
     public boolean equals(Object aObject) {
-        return (aObject instanceof TagData && ((TagData)aObject).mTagID == mTagID);
+        return (aObject instanceof TagData && ((TagData) aObject).mTagID == mTagID);
     }
 
     @Override

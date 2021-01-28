@@ -168,15 +168,16 @@ public abstract class ELTContainerTileEntity extends TileEntity implements IInve
 
         return listnbt;
     }
+
     public void load(BlockState state, CompoundNBT nbt) {
         super.load(state, nbt);
         this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
-            ItemStackHelper.loadAllItems(nbt, this.items);
+        ItemStackHelper.loadAllItems(nbt, this.items);
     }
 
     public CompoundNBT save(CompoundNBT compound) {
         super.save(compound);
-            ItemStackHelper.saveAllItems(compound, this.items);
+        ItemStackHelper.saveAllItems(compound, this.items);
         return compound;
     }
 }

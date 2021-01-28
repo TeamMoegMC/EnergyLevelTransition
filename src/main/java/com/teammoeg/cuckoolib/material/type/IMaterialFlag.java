@@ -20,9 +20,9 @@ package com.teammoeg.cuckoolib.material.type;
 
 @FunctionalInterface
 public interface IMaterialFlag {
-	int getId();
+    int getId();
 
-	public default long getValue() {
-		return 1 << this.getId();
-	}
+    default long getValue() {
+        return 1 << this.getId();
+    }
 }
