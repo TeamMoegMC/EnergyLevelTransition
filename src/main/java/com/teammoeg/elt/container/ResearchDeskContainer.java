@@ -17,6 +17,7 @@ import net.minecraft.world.World;
 
 
 public class ResearchDeskContainer extends Container {
+    private final IInventory container;
     private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) {
         this(type, id, playerInventory, new Inventory(1),pos);
     }
@@ -28,7 +29,9 @@ public class ResearchDeskContainer extends Container {
     }
     public ResearchDeskContainer(ContainerType<?> type,int windowsid, PlayerInventory playerinventory, IInventory inventory,BlockPos pos) {
         super(type, windowsid);
+        this.container = inventory;
         World level=playerinventory.player.level;
+        inventory.startOpen(playerinventory.player);
         TileEntity tileEntity = level.getBlockEntity(pos);
         addSlot(new BookSlot(inventory, 0, 10, 10){
             @Override
@@ -61,5 +64,14 @@ public class ResearchDeskContainer extends Container {
     @Override
     public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
         return ItemStack.EMPTY;
+    }
+
+    public IInventory getContainer() {
+        return this.container;
+    }
+
+    public void removed(PlayerEntity playerIn) {
+        super.removed(playerIn);
+        this.container.stopOpen(playerIn);
     }
 }

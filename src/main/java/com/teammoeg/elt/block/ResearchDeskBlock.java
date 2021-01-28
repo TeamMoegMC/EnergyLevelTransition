@@ -155,5 +155,11 @@ public class ResearchDeskBlock extends ELTTileBlock {
     public static void setBlockhasbook(World worldIn, BlockPos pos, BlockState state, boolean hasBook) {
         worldIn.setBlock(pos, state.setValue(BOOK, hasBook), 3);
     }
+    @Override
+    public boolean triggerEvent(BlockState state, World worldIn, BlockPos pos, int id, int param) {
+        super.triggerEvent(state, worldIn, pos, id, param);
+        TileEntity tileentity = worldIn.getBlockEntity(pos);
+        return tileentity != null && tileentity.triggerEvent(id, param);
+    }
 }
 
