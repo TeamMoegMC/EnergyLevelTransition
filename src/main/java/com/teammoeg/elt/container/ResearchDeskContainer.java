@@ -38,7 +38,7 @@ import net.minecraft.world.World;
 
 public class ResearchDeskContainer extends Container {
     private final IInventory container;
-    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) { this(type, id, playerInventory, new Inventory(1), pos);
+    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) { this(type, id, playerInventory, new Inventory(3), pos);
     }
 
     public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, BlockPos pos){

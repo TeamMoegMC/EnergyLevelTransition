@@ -21,7 +21,9 @@ package com.teammoeg.elt.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teammoeg.elt.ELT;
+import com.teammoeg.elt.capability.ELTCapabilities;
 import com.teammoeg.elt.container.ResearchDeskContainer;
+import com.teammoeg.the_seed.api.IResearchProgress;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -30,6 +32,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.util.LazyOptional;
 
 public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30, INV_WIDTH = WIDTH, INV_HEIGHT = 87;
@@ -129,20 +132,19 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      */
     public void renderResearchExperienceBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
-
+            LazyOptional<IResearchProgress> Cap = player.getCapability(ELTCapabilities.RESEARCHPROGRESS);
             this.minecraft.getTextureManager().bind(BARS);
 
             this.minecraft.getProfiler().push("research");
 
             // 重点：获取研究经验值
-            int researchExpAmt = WIDTH - CORNER_SIZE - CORNER_SIZE;
-
-            // 经验条
-            this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, WIDTH - CORNER_SIZE * 2, 9);
-
-            // 数值文字
-            this.font.draw(matrixStack, "Research Experience: "+researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
-
+            Cap.ifPresent((P) -> {
+                int researchExpAmt = P.getResearchExperience();
+                // 经验条
+                this.blit(matrixStack, left + CORNER_SIZE, researchExpAmt, 0, 0, WIDTH - CORNER_SIZE * 2, 9);
+                // 数值文字
+                this.font.draw(matrixStack, "Research Experience: "+researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
+            });
             this.minecraft.getProfiler().pop();
         }
     }

@@ -20,6 +20,7 @@ package com.teammoeg.elt;
 
 
 import com.teammoeg.elt.block.ELTBlocks;
+import com.teammoeg.elt.capability.ELTCapabilityRegister;
 import com.teammoeg.elt.client.gui.ResearchDeskScreen;
 import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
@@ -68,6 +69,7 @@ public class ELT implements ModInitializer {
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
+        ELTCapabilityRegister.CapabilityRegister();
         WEAPON_RESEARCH.addQuest(KILL_ZOMBIE);
     }
 

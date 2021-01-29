@@ -18,11 +18,15 @@
 
 package com.teammoeg.elt;
 
+import com.teammoeg.elt.capability.ResearchProgressProvider;
 import com.teammoeg.elt.research.Quest;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -40,6 +44,13 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = ELT.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
+    @SubscribeEvent
+    public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
+        Entity entity = event.getObject();
+        if (entity instanceof PlayerEntity) {
+            event.addCapability(new ResourceLocation("elt", "researchprogress"), new ResearchProgressProvider());
+        }
+    }
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {

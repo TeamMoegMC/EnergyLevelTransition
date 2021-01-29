@@ -59,7 +59,7 @@ public class ResearchScreen extends Screen {
 
             // 重点：获取研究经验值
 
-            int researchExpAmt = 182;
+            int researchExpAmt = 0;
 
             this.blit(matrixStack, 0, 0, 0, 0, researchExpAmt, 9);
 
