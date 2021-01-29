@@ -140,8 +140,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             // 重点：获取研究经验值
             Cap.ifPresent((P) -> {
                 int researchExpAmt = P.getResearchExperience();
+                researchExpAmt +=100;
                 // 经验条
-                this.blit(matrixStack, left + CORNER_SIZE, researchExpAmt, 0, 0, WIDTH - CORNER_SIZE * 2, 9);
+                this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
                 // 数值文字
                 this.font.draw(matrixStack, "Research Experience: "+researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
             });
