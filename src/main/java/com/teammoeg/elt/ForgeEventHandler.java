@@ -21,6 +21,7 @@ package com.teammoeg.elt;
 import com.teammoeg.elt.capability.ResearchProgressProvider;
 import com.teammoeg.elt.handler.SaveHandler;
 import com.teammoeg.elt.research.Quest;
+import com.teammoeg.elt.util.JsonRead;
 import com.teammoeg.elt.util.JsonWriter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -64,7 +65,7 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
-
+        JsonRead.readFile();
     }
 
     @SubscribeEvent

@@ -32,15 +32,14 @@ public class JsonWriter {
 
     public static void writeJson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
+        ResearchTeam researchTeam = new ResearchTeam("wsdsb1");
         gsonBuilder.registerTypeAdapter(ResearchTeam.class, new ResearchTeamAdapter());
         Gson gson = gsonBuilder.create();
-        ResearchTeam researchTeam = new ResearchTeam("wsdsb");
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("saves",
                 "a1.json")), StandardCharsets.UTF_8))) {
 
             gson.toJson(researchTeam, out);
             out.flush();
-
 
             /*           File file = new File("saves/a1.json");
             if (!file.exists()){

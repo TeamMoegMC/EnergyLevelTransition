@@ -27,8 +27,26 @@ import com.teammoeg.elt.team.TeamDataBase;
 import java.io.IOException;
 
 public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
+
     @Override
     public ResearchTeam read(JsonReader in) throws IOException {
+        while (in.hasNext()){
+            in.beginObject();
+            while (in.hasNext()) {
+                ResearchTeam researchTeam = new ResearchTeam(in.nextName());
+                in.beginArray();
+                in.beginObject();
+                switch (in.nextName()) {
+                    case "XP":
+                        researchTeam.setResearchTeamXP(in.nextInt());
+                        break;
+                }
+                in.endObject();
+                in.endArray();
+                return researchTeam;
+            }
+            in.endObject();
+        }
         return null;
     }
 
@@ -36,11 +54,10 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
     public void write(JsonWriter out, ResearchTeam researchTeam) throws IOException {
         out.setIndent(" ");
         out.beginObject();
-        for (ResearchTeam t : TeamDataBase.TEAMS) {
-            out.name("Team:" + t.getName()).beginArray().beginObject();
+        for (ResearchTeam t : TeamDataBase.TEAMS.values()) {
+            out.name(t.getName()).beginArray().beginObject();
             out.name("XP").value(t.getResearchTeamXP());
             out.endObject().endArray();
-            out.endObject();
         }
         out.endObject();
     }

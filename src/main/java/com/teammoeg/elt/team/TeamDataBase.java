@@ -19,7 +19,8 @@
 package com.teammoeg.elt.team;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class TeamDataBase {
-    public static ArrayList<ResearchTeam> TEAMS = new ArrayList<>();
+    public static HashMap<String,ResearchTeam> TEAMS = new HashMap();
 }

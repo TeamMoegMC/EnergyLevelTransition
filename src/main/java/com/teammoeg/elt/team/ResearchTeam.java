@@ -30,12 +30,15 @@ public class ResearchTeam {
 
     public ResearchTeam(String name) {
         this.name = name;
-        TeamDataBase.TEAMS.add(this);
+        TeamDataBase.TEAMS.put(name,this);
         //players.put(UUID,0);
     }
-
     public int getResearchTeamXP() {
         return researchTeamXP;
+    }
+
+    public void setResearchTeamXP(int researchTeamXP) {
+        this.researchTeamXP = researchTeamXP;
     }
 
     public String getName() {
