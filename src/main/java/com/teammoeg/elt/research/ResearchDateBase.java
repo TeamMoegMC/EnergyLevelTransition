@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class ResearchDateBase {
-
+    public static final ResearchDateBase RESEARCH_DATE_BASE = new ResearchDateBase();
     public synchronized ListNBT writeProgressToNBT(ListNBT json, @Nullable List<UUID> users)
     {
 /*       for(Research research : this.getEntries()) {

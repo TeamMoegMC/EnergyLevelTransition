@@ -19,7 +19,9 @@
 package com.teammoeg.elt;
 
 import com.teammoeg.elt.capability.ResearchProgressProvider;
+import com.teammoeg.elt.handler.SaveHandler;
 import com.teammoeg.elt.research.Quest;
+import com.teammoeg.elt.util.JsonWriter1;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,6 +30,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartedEvent;
@@ -44,6 +47,11 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = ELT.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
+    @SubscribeEvent
+    public static void WorldSave(WorldEvent.Save event){
+        SaveHandler.Save2();
+        JsonWriter1.JsonWriter();
+    };
     @SubscribeEvent
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
