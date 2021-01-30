@@ -21,7 +21,7 @@ package com.teammoeg.elt;
 import com.teammoeg.elt.capability.ResearchProgressProvider;
 import com.teammoeg.elt.handler.SaveHandler;
 import com.teammoeg.elt.research.Quest;
-import com.teammoeg.elt.util.JsonWriter1;
+import com.teammoeg.elt.util.JsonWriter;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -47,11 +47,13 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = ELT.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
+
     @SubscribeEvent
-    public static void WorldSave(WorldEvent.Save event){
-        SaveHandler.Save2();
-        JsonWriter1.JsonWriter();
-    };
+    public static void WorldSave(WorldEvent.Save event) {
+        SaveHandler.save2();
+        JsonWriter.writeJson();
+    }
+
     @SubscribeEvent
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
@@ -94,17 +96,5 @@ public class ForgeEventHandler {
         }
 
     }
-
-//    @SubscribeEvent
-//    @OnlyIn(Dist.CLIENT)
-//    public void onKey(GuiScreenEvent.KeyboardKeyEvent event)
-//    {
-//        Minecraft mc = Minecraft.getInstance();
-//
-//        if(ELTKeyBindings.openQuests.isDown())
-//        {
-//            ModularGuiInfo.openModularGui(new ResearchModularGui(), (ServerPlayerEntity) mc.player);
-//        }
-//    }
 
 }

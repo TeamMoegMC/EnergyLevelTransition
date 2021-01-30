@@ -26,7 +26,7 @@ import net.minecraft.util.ResourceLocation;
  * @author YueSha (GitHub @yuesha-yc)
  * Json Utils
  */
-public class JsonUtil {
+public class ResourceJsonUtil {
     public static String createItemModelJson(ResourceLocation id, String type) {
         return createItemModelJson(MD.ELT, id, type);
     }

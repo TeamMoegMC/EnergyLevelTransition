@@ -16,23 +16,10 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.handler;
+package com.teammoeg.elt.team;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.util.ArrayList;
 
-import java.io.File;
-
-public class SaveHandler {
-    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
-
-    public static void save2() {
-        save(new File("saves", "abc.json"));
-    }
-
-    public static void save(File file) {
-
-
-    }
+public class TeamDataBase {
+    public static ArrayList<ResearchTeam> TEAMS = new ArrayList<>();
 }

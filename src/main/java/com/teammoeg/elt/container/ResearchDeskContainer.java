@@ -38,20 +38,22 @@ import net.minecraft.world.World;
 
 public class ResearchDeskContainer extends Container {
     private final IInventory container;
-    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory,BlockPos pos) { this(type, id, playerInventory, new Inventory(3), pos);
+
+    private ResearchDeskContainer(ContainerType<?> type, int id, PlayerInventory playerInventory, BlockPos pos) {
+        this(type, id, playerInventory, new Inventory(3), pos);
     }
 
-    public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, BlockPos pos){
+    public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, BlockPos pos) {
         return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, pos);
     }
 
-    public static ResearchDeskContainer create ( int id, PlayerInventory playerinventory, IInventory blockEntity, BlockPos pos){
+    public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, IInventory blockEntity, BlockPos pos) {
         return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, blockEntity, pos);
     }
 
     public static int SIDE = 9, TOP = 4, SUB_SLOT_SIDE = 227;
 
-    public ResearchDeskContainer(ContainerType < ? > type,int windowsid, PlayerInventory playerinventory, IInventory inventory, BlockPos pos){
+    public ResearchDeskContainer(ContainerType<?> type, int windowsid, PlayerInventory playerinventory, IInventory inventory, BlockPos pos) {
         super(type, windowsid);
         this.container = inventory;
         World level = playerinventory.player.level;
@@ -79,7 +81,7 @@ public class ResearchDeskContainer extends Container {
         });
 
         // 实体灵感消化曹
-        addSlot(new SolidInspirationSlot(inventory, 2, SUB_SLOT_SIDE, TOP  + 29  + 28) {
+        addSlot(new SolidInspirationSlot(inventory, 2, SUB_SLOT_SIDE, TOP + 29 + 28) {
             @Override
             public void setChanged() {
                 ItemStack stack = this.getItem();
@@ -91,7 +93,7 @@ public class ResearchDeskContainer extends Container {
         // Player Inventory
         for (int k = 0; k < 3; ++k) {
             for (int j = 0; j < 9; ++j) {
-                this.addSlot(new Slot(playerinventory, j + k * 9 + 9,  SIDE + j * 18, TOP + k * 18));
+                this.addSlot(new Slot(playerinventory, j + k * 9 + 9, SIDE + j * 18, TOP + k * 18));
             }
         }
 
@@ -102,18 +104,20 @@ public class ResearchDeskContainer extends Container {
     }
 
     @Override
-    public boolean stillValid (PlayerEntity playerIn){
+    public boolean stillValid(PlayerEntity playerIn) {
         return true;
     }
-            @Override
-    public ItemStack quickMoveStack (PlayerEntity playerIn,int index){
+
+    @Override
+    public ItemStack quickMoveStack(PlayerEntity playerIn, int index) {
         return ItemStack.EMPTY;
     }
-    public IInventory getContainer () {
+
+    public IInventory getContainer() {
         return this.container;
     }
 
-    public void removed (PlayerEntity playerIn){
+    public void removed(PlayerEntity playerIn) {
         super.removed(playerIn);
         this.container.stopOpen(playerIn);
     }

@@ -104,7 +104,8 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
             return super.triggerEvent(id, type);
         }
     }
+
     private void playSound(SoundEvent soundIn) {
-            this.level.playSound((PlayerEntity)null, this.worldPosition.getX(), this.worldPosition.getY() ,this.worldPosition.getZ(), soundIn, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 1F);
-        }
+        this.level.playSound(null, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), soundIn, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 1F);
+    }
 }

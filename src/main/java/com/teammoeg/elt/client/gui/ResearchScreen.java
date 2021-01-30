@@ -30,7 +30,7 @@ public class ResearchScreen extends Screen {
     private final ResourceLocation BG = new ResourceLocation(ELT.MOD_ID, "textures/gui/researchdesk.png");
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
 
-    private PlayerEntity player;
+    private final PlayerEntity player;
 
     // 问题1：需要获取打开这个GUI的玩家的实例
     // 问题2：
@@ -45,8 +45,7 @@ public class ResearchScreen extends Screen {
     }
 
     /**
-     * @param matrixStack
-     * 渲染团队研究经验条
+     * @param matrixStack 渲染团队研究经验条
      */
     public void renderResearchExperienceBar(MatrixStack matrixStack) {
 

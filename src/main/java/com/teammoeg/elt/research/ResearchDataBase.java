@@ -16,23 +16,23 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.handler;
+package com.teammoeg.elt.research;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import net.minecraft.nbt.ListNBT;
 
-import java.io.File;
+import javax.annotation.Nullable;
+import java.util.List;
+import java.util.UUID;
 
-public class SaveHandler {
-    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
+public class ResearchDataBase {
+    public static final ResearchDataBase RESEARCH_DATA_BASE = new ResearchDataBase();
 
-
-    public static void save2() {
-        save(new File("saves", "abc.json"));
-    }
-
-    public static void save(File file) {
-
-
+    public synchronized ListNBT writeProgressToNBT(ListNBT json, @Nullable List<UUID> users) {
+/*       for(Research research : this.getEntries()) {
+            CompoundNBT jq = new CompoundNBT();
+            jq.putString("questID", Research.getId());
+            json.appendTag(jq);
+        }*/
+        return json;
     }
 }

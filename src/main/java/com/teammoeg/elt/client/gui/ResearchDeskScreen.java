@@ -94,7 +94,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // Top left corner
         this.blit(matrixStack, left, top, 0, 0, CORNER_SIZE, CORNER_SIZE);
         // Top side
-        renderRepeating(this, matrixStack, left + CORNER_SIZE, top, width - CORNER_SIZE - 2*SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, 0, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
+        renderRepeating(this, matrixStack, left + CORNER_SIZE, top, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, 0, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
         // Top right corner
         this.blit(matrixStack, right - CORNER_SIZE, top, WIDTH - CORNER_SIZE, 0, CORNER_SIZE, CORNER_SIZE);
         // Left side
@@ -104,7 +104,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // Bottom left corner
         this.blit(matrixStack, left, bottom - CORNER_SIZE, 0, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         // Bottom side
-        renderRepeating(this, matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, width - CORNER_SIZE - 2*SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
+        renderRepeating(this, matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
         // Bottom right corner
         this.blit(matrixStack, right - CORNER_SIZE, bottom - CORNER_SIZE, WIDTH - CORNER_SIZE, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
 
@@ -127,24 +127,23 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     }
 
     /**
-     * @param matrixStack
-     * 渲染团队研究经验条
+     * @param matrixStack 渲染团队研究经验条
      */
     public void renderResearchExperienceBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
-            LazyOptional<IResearchProgress> Cap = player.getCapability(ELTCapabilities.RESEARCHPROGRESS);
             this.minecraft.getTextureManager().bind(BARS);
-
             this.minecraft.getProfiler().push("research");
 
             // 重点：获取研究经验值
+            LazyOptional<IResearchProgress> Cap = player.getCapability(ELTCapabilities.RESEARCHPROGRESS);
             Cap.ifPresent((P) -> {
                 int researchExpAmt = P.getResearchExperience();
                 // 经验条
                 this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
                 // 数值文字
-                this.font.draw(matrixStack, "Research Experience: "+researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
+                this.font.draw(matrixStack, "Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
             });
+
             this.minecraft.getProfiler().pop();
         }
     }
