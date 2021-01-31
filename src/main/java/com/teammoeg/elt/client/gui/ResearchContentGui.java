@@ -19,7 +19,6 @@
 package com.teammoeg.elt.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
-import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.research.Research;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -27,7 +26,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class ResearchContentGui extends AbstractGui {
 
-    private final ResourceLocation FRAMES = new ResourceLocation(ELT.MOD_ID, "textures/gui/research_frames.png");
+    private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
 
     protected static final int ADVANCEMENT_SIZE = 26;
     private static final int CORNER_SIZE = 10;
@@ -63,7 +62,7 @@ public class ResearchContentGui extends AbstractGui {
         if (true) {
 //            float f = this.progress == null ? 0.0F : this.progress.getPercent();
             this.minecraft.getTextureManager().bind(FRAMES);
-            this.blit(matrixStack, x + this.x + 3, y + this.y, 0, 0, 24, 24);
+            this.blit(matrixStack, x + this.x + 3, y + this.y, 0, 130, 24, 24);
         }
     }
 }
