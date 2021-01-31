@@ -31,8 +31,11 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraftforge.common.util.LazyOptional;
+
+import java.util.ArrayList;
 
 public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30, INV_WIDTH = WIDTH, INV_HEIGHT = 87;
@@ -44,7 +47,18 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
     private final ResourceLocation FRAMES = new ResourceLocation(ELT.MOD_ID, "textures/gui/research_frames.png");
     private final PlayerEntity player;
+
     private boolean isScrolling;
+    private float zoom = MIN_ZOOM;
+    private double scrollX, scrollY;
+    private boolean centered;
+
+    private int minX = Integer.MAX_VALUE;
+    private int minY = Integer.MAX_VALUE;
+    private int maxX = Integer.MIN_VALUE;
+    private int maxY = Integer.MIN_VALUE;
+
+    private final ArrayList<ResearchContentGui> widgets = new ArrayList<>();
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -58,6 +72,19 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.imageHeight = INV_HEIGHT;
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
+
+        for (int i = 1; i <= 20; i++) {
+            addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", SIDE + 40 * i, TOP + 30 * 1));
+        }
+
+        for (int i = 1; i <= 20; i++) {
+            addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", SIDE + 40 * 1, TOP + 30 * i));
+        }
+
+        for (int i = 2; i <= 20; i++) {
+            addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", SIDE + 40 * i, TOP + 30 * i));
+        }
+
     }
 
     @Override
@@ -77,6 +104,36 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     }
 
     @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
+        int wheel = (int) scroll;
+        if (wheel < 0 && zoom > MIN_ZOOM) {
+            zoom -= ZOOM_STEP;
+        } else if (wheel > 0 && zoom < MAX_ZOOM) {
+            zoom += ZOOM_STEP;
+        }
+        return super.mouseScrolled(mouseX, mouseY, scroll);
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double mouseDeltaX, double mouseDeltaY) {
+        int left = SIDE;
+        int top = TOP;
+        boolean inGui = mouseX < left + width - 2 * SIDE - PADDING && mouseX > left + PADDING && mouseY < top + height - TOP + 1 && mouseY > top + 2 * PADDING;
+
+        if (button != 0) {
+            this.isScrolling = false;
+            return false;
+        } else {
+            if (!this.isScrolling) {
+                this.isScrolling = true;
+            } else if (inGui) {
+                this.scroll(mouseDeltaX, mouseDeltaY);
+            }
+            return true;
+        }
+    }
+
+    @Override
     protected void renderLabels(MatrixStack matrixStack, int x, int y) {
 
     }
@@ -91,6 +148,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         RenderSystem.enableBlend();
         RenderHelper.setupForFlatItems();
         this.minecraft.getTextureManager().bind(WINDOW);
+
+        // 研究界面边框
         // Top left corner
         this.blit(matrixStack, left, top, 0, 0, CORNER_SIZE, CORNER_SIZE);
         // Top side
@@ -108,27 +167,35 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // Bottom right corner
         this.blit(matrixStack, right - CORNER_SIZE, bottom - CORNER_SIZE, WIDTH - CORNER_SIZE, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
 
+        // 标题
         String windowTitle = I18n.get("elt.gui.research");
         this.font.draw(matrixStack, windowTitle, left + 8, top + 6, 4210752);
 
+        // 玩家背包界面
         this.minecraft.getTextureManager().bind(INVENTORY);
         this.blit(matrixStack, (width - INV_WIDTH) / 2, bottom, 0, 141, INV_WIDTH, INV_HEIGHT);
 
     }
 
-    /**
-     * 渲染研究内容
-     */
     public void renderResearchContent(MatrixStack matrixStack, int left, int top, int right, int bottom) {
+        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
+        int scrollRangeY = height - TOP - BOTTOM - 2*PADDING;
+
+        if (!this.centered) {
+            this.scrollX = (double)(scrollRangeX / 2 - (this.maxX + this.minX) / 2);
+            this.scrollY = (double)(scrollRangeY / 2 - (this.maxY + this.minY) / 2);
+            this.centered = true;
+        }
+
+        int i = MathHelper.floor(this.scrollX);
+        int j = MathHelper.floor(this.scrollY);
+
         this.minecraft.getTextureManager().bind(FRAMES);
-        this.blit(matrixStack, left + 20, top + 20, 0, 0, 24, 24);
-        this.blit(matrixStack, left + 20, top + 60, 0, 0, 24, 24);
-        this.blit(matrixStack, left + 60, top + 20, 0, 0, 24, 24);
+        for (ResearchContentGui researchContentGui : widgets) {
+            researchContentGui.draw(matrixStack, i, j);
+        }
     }
 
-    /**
-     * @param matrixStack 渲染团队研究经验条
-     */
     public void renderResearchExperienceBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
             this.minecraft.getTextureManager().bind(BARS);
@@ -148,6 +215,38 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         }
     }
 
+    public void scroll(double dragX, double dragY) {
+
+        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
+        int scrollRangeY = height - TOP - BOTTOM - 2*PADDING;
+
+        if (this.maxX - this.minX > scrollRangeX) {
+            this.scrollX = MathHelper.clamp(this.scrollX + dragX, (double)(-(this.maxX - scrollRangeX)), 0.0D);
+        }
+
+        if (this.maxY - this.minY > scrollRangeY) {
+            this.scrollY = MathHelper.clamp(this.scrollY + dragY, (double)(-(this.maxY - scrollRangeY)), 0.0D);
+        }
+
+    }
+
+    private void addWidget(ResearchContentGui gui) {
+        this.widgets.add(gui);
+        int i = gui.getX();
+        int j = i + 28;
+        int k = gui.getY();
+        int l = k + 27;
+        this.minX = Math.min(this.minX, i);
+        this.maxX = Math.max(this.maxX, j);
+        this.minY = Math.min(this.minY, k);
+        this.maxY = Math.max(this.maxY, l);
+
+//        for(ResearchContentGui researchContentGui : this.widgets) {
+//            advancemententrygui.attachToParent();
+//        }
+
+    }
+
     private static void renderRepeating(AbstractGui abstractGui, MatrixStack matrixStack, int x, int y, int width, int height, int textureX, int textureY, int textureWidth, int textureHeight) {
         for (int i = 0; i < width; i += textureWidth) {
             int drawX = x + i;
@@ -161,54 +260,4 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         }
     }
 
-//    @Override
-//    public boolean mouseDragged(double mouseX, double mouseY, int button, double mouseDeltaX, double mouseDeltaY) {
-//        int left = SIDE;
-//        int top = TOP;
-//
-//        if (button != 0) {
-//            this.isScrolling = false;
-//            return false;
-//        }
-//
-//        if (!this.isScrolling) {
-//            if (this.advConnectedToMouse == null) {
-//                boolean inGui = mouseX < left + width - 2*SIDE - PADDING && mouseX > left + PADDING && mouseY < top + height - TOP + 1 && mouseY > top + 2*PADDING;
-//                if (this.selectedTab != null && inGui) {
-//                    for (BetterAdvancementEntryGui betterAdvancementEntryGui : this.selectedTab.guis.values()) {
-//                        if (betterAdvancementEntryGui.isMouseOver(this.selectedTab.scrollX, this.selectedTab.scrollY, mouseX - left - PADDING, mouseY - top - 2*PADDING)) {
-//
-//                            if (betterAdvancementEntryGui.betterDisplayInfo.allowDragging())
-//                            {
-//                                this.advConnectedToMouse = betterAdvancementEntryGui;
-//                                break;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            else {
-//                this.advConnectedToMouse.x = (int)Math.round(this.advConnectedToMouse.x + mouseDeltaX);
-//                this.advConnectedToMouse.y = (int)Math.round(this.advConnectedToMouse.y + mouseDeltaY);
-//            }
-//        }
-//        else {
-//            if (this.advConnectedToMouse != null) {
-//                //Create and post event for the advancement movement
-//                final AdvancementMovedEvent event = new AdvancementMovedEvent(advConnectedToMouse);
-//                MinecraftForge.EVENT_BUS.post(event);
-//            }
-//            this.advConnectedToMouse = null;
-//        }
-//
-//        if (this.advConnectedToMouse == null) {
-//            if (!this.isScrolling) {
-//                this.isScrolling = true;
-//            } else if (this.selectedTab != null) {
-//                this.selectedTab.scroll(mouseDeltaX , mouseDeltaY, internalWidth - 2 * SIDE - 3 * PADDING, internalHeight - TOP - BOTTOM - 3 * PADDING);
-//            }
-//        }
-//
-//        return true;
-//    }
 }
