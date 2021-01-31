@@ -71,7 +71,7 @@ public interface ModLifeCycleEvents {
 
     }
 
-    default void onFMLContructMod(FMLConstructModEvent aEvent) {
+    default void onFMLConstructMod(FMLConstructModEvent aEvent) {
         System.out.println(getModNameForLog() + ": ===================");
         System.out.println(getModNameForLog() + ": FML Construct Mod Started");
 
