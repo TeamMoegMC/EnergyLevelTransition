@@ -9,11 +9,19 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 
 public class JsonRead {
+    public static File SAVESELTPATH;
         public static void readFile(){
+            if (!SAVESELTPATH.exists()) {
+                try {
+                    SAVESELTPATH.mkdir();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapter(ResearchTeam.class, new ResearchTeamAdapter());
             Gson gson = gsonBuilder.create();
-            try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(new File("saves",
+            try (BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(new File(SAVESELTPATH,
                     "a1.json")), StandardCharsets.UTF_8))) {
                 gson.fromJson(rd,ResearchTeam.class);
             }catch (Exception e){

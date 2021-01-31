@@ -29,6 +29,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
@@ -65,6 +66,7 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
+        JsonRead.SAVESELTPATH =aEvent.getServer().getWorldPath(new FolderName("elt")).toFile();
         JsonRead.readFile();
     }
 
