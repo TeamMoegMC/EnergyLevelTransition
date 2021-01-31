@@ -29,13 +29,12 @@ import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
 public class JsonWriter {
-
     public static void writeJson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
         ResearchTeam researchTeam = new ResearchTeam("wsdsb1");
         gsonBuilder.registerTypeAdapter(ResearchTeam.class, new ResearchTeamAdapter());
         Gson gson = gsonBuilder.create();
-        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File("saves",
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(JsonRead.SAVESELTPATH,
                 "a1.json")), StandardCharsets.UTF_8))) {
 
             gson.toJson(researchTeam, out);
