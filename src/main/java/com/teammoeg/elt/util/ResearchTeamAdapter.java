@@ -30,7 +30,7 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
 
     @Override
     public ResearchTeam read(JsonReader in) throws IOException {
-        while (in.hasNext()){
+        while (in.hasNext()) {
             in.beginObject();
             while (in.hasNext()) {
                 ResearchTeam researchTeam = new ResearchTeam(in.nextName());

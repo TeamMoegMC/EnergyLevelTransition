@@ -88,8 +88,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
         // 添加研究图标
         for (int i = 1; i <= 20; i++)
-            for (int j = 0; j < 20; j++) {
-                addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", SIDE + 40 * i, TOP + 30 * i));
+            for (int j = 1; j < 20; j++) {
+                addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", 48 * i, 48 * j));
             }
     }
 
@@ -164,7 +164,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      * @param right
      * @param bottom
      */
-    public void renderWindow(MatrixStack matrixStack, int left, int top, int right, int bottom) {
+    private void renderWindow(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
         RenderHelper.setupForFlatItems();
@@ -216,14 +216,14 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      *
      * @param matrixStack
      */
-    public void drawContents(MatrixStack matrixStack) {
+    private void drawContents(MatrixStack matrixStack) {
         // calculations
         int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
         int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
 
         if (!this.centered) {
-            this.scrollX = (double) (scrollRangeX / 2 - (this.maxX + this.minX) / 2);
-            this.scrollY = (double) (scrollRangeY / 2 - (this.maxY + this.minY) / 2);
+            this.scrollX = scrollRangeX / 2 - (this.maxX + this.minX) / 2;
+            this.scrollY = scrollRangeY / 2 - (this.maxY + this.minY) / 2;
             this.centered = true;
         }
 
@@ -284,7 +284,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 渲染研究经验条
      */
-    public void renderResearchXpBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
+    private void renderResearchXpBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
             this.minecraft.getTextureManager().bind(BARS);
             this.minecraft.getProfiler().push("research");
@@ -309,17 +309,17 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      * @param dragX
      * @param dragY
      */
-    public void scroll(double dragX, double dragY) {
+    private void scroll(double dragX, double dragY) {
 
         int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
         int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING;
 
         if (this.maxX - this.minX > scrollRangeX) {
-            this.scrollX = MathHelper.clamp(this.scrollX + dragX, (double) (-(this.maxX - scrollRangeX)), 0.0D);
+            this.scrollX = MathHelper.clamp(this.scrollX + dragX, -(this.maxX - scrollRangeX), 0.0D);
         }
 
         if (this.maxY - this.minY > scrollRangeY) {
-            this.scrollY = MathHelper.clamp(this.scrollY + dragY, (double) (-(this.maxY - scrollRangeY)), 0.0D);
+            this.scrollY = MathHelper.clamp(this.scrollY + dragY, -(this.maxY - scrollRangeY), 0.0D);
         }
 
     }

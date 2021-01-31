@@ -60,13 +60,13 @@ public class ForgeEventHandler {
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
-            event.addCapability(new ResourceLocation("elt", "researchprogress"), new ResearchProgressProvider());
+            event.addCapability(new ResourceLocation(ELT.MOD_ID, "researchprogress"), new ResearchProgressProvider());
         }
     }
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
-        JsonRead.SAVESELTPATH =aEvent.getServer().getWorldPath(new FolderName("elt")).toFile();
+        JsonRead.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_NAME.replace(" ", ""))).toFile();
         JsonRead.readFile();
     }
 

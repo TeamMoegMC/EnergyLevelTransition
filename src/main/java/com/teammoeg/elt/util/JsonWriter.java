@@ -34,7 +34,7 @@ public class JsonWriter {
         ResearchTeam researchTeam = new ResearchTeam("wsdsb1");
         gsonBuilder.registerTypeAdapter(ResearchTeam.class, new ResearchTeamAdapter());
         Gson gson = gsonBuilder.create();
-        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(JsonRead.SAVESELTPATH,
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(JsonRead.SAVE_ELT_FOLDER_PATH,
                 "a1.json")), StandardCharsets.UTF_8))) {
 
             gson.toJson(researchTeam, out);
