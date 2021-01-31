@@ -55,7 +55,7 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
     @Nullable
     @Override
     public Container createMenu(int ID, PlayerInventory inventory, PlayerEntity player) {
-        return ResearchDeskContainer.create(ID, inventory, this, this.getBlockPos());
+        return ResearchDeskContainer.create(ID, inventory, this);
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
         }
 
         if (this.openCount > 0 && this.leftPages == 0.0F && getBlockState().getValue(ResearchDeskBlock.BOOK)) {
-            this.playSound(SoundEvents.BOOK_PAGE_TURN);
+            this.level.playSound(null, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), SoundEvents.BOOK_PAGE_TURN, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 1F);
         }
         if (this.openCount > 0) {
             this.leftPages += 0.1F;
@@ -103,9 +103,5 @@ public class ResearchDeskTileEntity extends ELTContainerTileEntity implements IT
         } else {
             return super.triggerEvent(id, type);
         }
-    }
-
-    private void playSound(SoundEvent soundIn) {
-        this.level.playSound(null, this.worldPosition.getX(), this.worldPosition.getY(), this.worldPosition.getZ(), soundIn, SoundCategory.BLOCKS, 0.5F, this.level.random.nextFloat() * 0.1F + 1F);
     }
 }
