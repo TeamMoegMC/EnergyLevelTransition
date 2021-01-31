@@ -43,7 +43,6 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
                 }
                 in.endObject();
                 in.endArray();
-                return researchTeam;
             }
             in.endObject();
         }
