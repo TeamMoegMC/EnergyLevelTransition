@@ -19,7 +19,6 @@
 package com.teammoeg.elt;
 
 import com.teammoeg.elt.capability.ResearchProgressProvider;
-import com.teammoeg.elt.handler.SaveHandler;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.util.JsonRead;
 import com.teammoeg.elt.util.JsonWriter;
@@ -52,7 +51,6 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public static void WorldSave(WorldEvent.Save event) {
-        SaveHandler.save2();
         JsonWriter.writeJson();
     }
 
@@ -66,7 +64,7 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
-        JsonRead.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_NAME.replace(" ", ""))).toFile();
+        JsonRead.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_ID)).toFile();
         JsonRead.readFile();
     }
 

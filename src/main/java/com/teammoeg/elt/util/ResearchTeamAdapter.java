@@ -34,6 +34,7 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
             in.beginObject();
             while (in.hasNext()) {
                 ResearchTeam researchTeam = new ResearchTeam(in.nextName());
+                researchTeam.JoinResearchTeam();
                 in.beginArray();
                 in.beginObject();
                 switch (in.nextName()) {
@@ -54,6 +55,7 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
         out.setIndent(" ");
         out.beginObject();
         for (ResearchTeam t : TeamDataBase.TEAMS.values()) {
+            System.out.println(t.getName());
             out.name(t.getName()).beginArray().beginObject();
             out.name("XP").value(t.getResearchTeamXP());
             out.endObject().endArray();

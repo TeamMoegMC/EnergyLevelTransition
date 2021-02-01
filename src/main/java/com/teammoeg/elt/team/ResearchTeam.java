@@ -25,12 +25,12 @@ public class ResearchTeam {
     HashMap<UUID, Integer> players = new HashMap();
     //ArrayList<UUID> uuids = (ArrayList<UUID>) players.keySet();
 
-    private final String name;
+    private String name;
     private int researchTeamXP;
 
     public ResearchTeam(String name) {
         this.name = name;
-        TeamDataBase.TEAMS.put(name, this);
+        JoinResearchTeam();
         //players.put(UUID,0);
     }
 
@@ -48,5 +48,9 @@ public class ResearchTeam {
 
     public void addPlayer(UUID uuid) {
         players.put(uuid, 1);
+    }
+
+    public void JoinResearchTeam() {
+        TeamDataBase.TEAMS.put(name, this);
     }
 }

@@ -20,10 +20,12 @@ package com.teammoeg.elt.util;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.stream.JsonReader;
 import com.teammoeg.elt.team.ResearchTeam;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
 public class JsonRead {
@@ -34,7 +36,6 @@ public class JsonRead {
             try {
                 SAVE_ELT_FOLDER_PATH.mkdir();
             } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         GsonBuilder gsonBuilder = new GsonBuilder();
@@ -47,20 +48,5 @@ public class JsonRead {
 
         }
     }
-
-    public static ResearchTeam readjson(JsonReader in) throws IOException {
-/*            in.beginObject();
-            while (in.hasNext()) {
-                ResearchTeam researchTeam = new ResearchTeam(in.nextName());
-                in.beginArray();
-                switch (in.nextName()) {
-                    case "XP":
-                        researchTeam.setResearchTeamXP(in.nextInt());
-                }
-                in.endArray();
-                return researchTeam;
-            }
-            in.endObject();*/
-        return null;
-    }
 }
+
