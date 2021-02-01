@@ -19,6 +19,8 @@
 package com.teammoeg.elt.research;
 
 import com.teammoeg.elt.ELT;
+import com.teammoeg.elt.item.ELTItems;
+import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -31,17 +33,27 @@ public class Research {
     private HashSet<Quest> containedQuests = new HashSet<>();
     private final TranslationTextComponent name;
     private final TranslationTextComponent desc;
-    private boolean unlocked, completed;
 
-    public Research(String path, Research... parents) {
-        this(new ResourceLocation(ELT.MOD_ID, path), parents);
+    public Item getIcon() {
+        return icon;
     }
 
-    public Research(ResourceLocation id, Research... parents) {
+    private final Item icon;
+
+    public Research(String path, Research... parents) {
+        this(new ResourceLocation(ELT.MOD_ID, path), ELTItems.RESEARCH_SCROLL, parents);
+    }
+
+    public Research(String path, Item icon, Research... parents) {
+        this(new ResourceLocation(ELT.MOD_ID, path), icon, parents);
+    }
+
+    public Research(ResourceLocation id, Item icon, Research... parents) {
         this.id = id;
         for (Research parent : parents) this.parents.add(parent);
         this.name = new TranslationTextComponent(id.getNamespace() + "." + id.getPath() + ".name");
         this.desc = new TranslationTextComponent(id.getNamespace() + "." + id.getPath() + ".desc");
+        this.icon = icon;
     }
 
     /**
@@ -71,6 +83,21 @@ public class Research {
             }
         }
         return true;
+    }
+
+    /**
+     * @return 此研究是否显示
+     * 如果所有前置研究已解锁，就会显示
+     */
+    public boolean isHidden() {
+        if (!this.parents.isEmpty()) {
+            for (Research research : parents) {
+                if (!research.isUnlocked()) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     public ResourceLocation getId() {
@@ -105,11 +132,4 @@ public class Research {
         this.containedQuests.add(quest);
     }
 
-    public void unlock() {
-        this.unlocked = true;
-    }
-
-    public void complete() {
-        this.completed = true;
-    }
 }

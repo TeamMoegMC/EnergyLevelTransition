@@ -50,7 +50,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private final ResourceLocation ICON_PIC = new ResourceLocation(ELT.MOD_ID, "textures/item/materialicons/dust.png");
     private final ResourceLocation BG_PIC = new ResourceLocation("textures/block/netherite_block.png");
     private final PlayerEntity player;
-    private final ArrayList<ResearchContentGui> widgets = new ArrayList<>();
+    private final ArrayList<ResearchIconGui> widgets = new ArrayList<>();
     private boolean isScrolling;
     private float zoom = MIN_ZOOM;
     private double scrollX, scrollY;
@@ -86,11 +86,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
 
-        // 添加研究图标
-        for (int i = 1; i <= 20; i++)
-            for (int j = 1; j < 20; j++) {
-                addWidget(new ResearchContentGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon Research 1", 48 * i, 48 * j));
-            }
+        addWidget(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
+        addWidget(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
+        addWidget(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
+        addWidget(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
+
     }
 
     @Override
@@ -263,8 +263,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.minecraft.getTextureManager().bind(FRAMES);
 
         // draw frames
-        for (ResearchContentGui researchContentGui : widgets) {
-            researchContentGui.draw(matrixStack, deltaX, deltaY);
+        for (ResearchIconGui researchIconGui : widgets) {
+            researchIconGui.draw(matrixStack, deltaX, deltaY);
         }
 
         // TODO: draw connectivity
@@ -329,7 +329,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      *
      * @param gui
      */
-    private void addWidget(ResearchContentGui gui) {
+    private void addWidget(ResearchIconGui gui) {
         this.widgets.add(gui);
         int i = gui.getX();
         int j = i + 28;

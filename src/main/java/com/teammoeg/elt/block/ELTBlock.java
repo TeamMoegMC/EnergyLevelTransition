@@ -18,7 +18,7 @@
 
 package com.teammoeg.elt.block;
 
-import com.teammoeg.elt.ELT;
+import com.teammoeg.elt.RegistryEventHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.item.Item;
@@ -43,12 +43,12 @@ public class ELTBlock extends Block {
         this.setRegistryName(name);
         this.registerDefaultState(getInitDefaultState());
         this.properties = Arrays.copyOf(pr, pr.length);
-        ELT.RegistryEvents.registeredBlocks.add(this);
+        RegistryEventHandler.registeredBlocks.add(this);
 
         Item item = BlockItem.apply(this, new Item.Properties().tab(ItemGroup.TAB_MATERIALS));
         if (item != null) {
             item.setRegistryName(name);
-            ELT.RegistryEvents.registeredItems.add(item);
+            RegistryEventHandler.registeredItems.add(item);
         }
     }
 

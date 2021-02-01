@@ -31,11 +31,9 @@ import com.teammoeg.elt.research.Research;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.ScreenManager;
-import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.Mod;
@@ -43,9 +41,6 @@ import net.minecraftforge.fml.event.lifecycle.*;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 @Mod(ELT.MOD_ID)
@@ -57,20 +52,26 @@ public class ELT implements ModInitializer {
     public ELT() {
         FMLJavaModLoadingContext.get().getModEventBus().register(this);
         MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
-        MinecraftForge.EVENT_BUS.register(RegistryEvents.class);
+        FMLJavaModLoadingContext.get().getModEventBus().register(new RegistryEventHandler());
         new ELTItems();
         new ELTBlocks();
-        ELTTileEntityTypes.TILE_ENTITIES_REGISTRY.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ELTContainerType.CONTAINERS.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTTileEntityTypes.TILE_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTContainerType.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final Quest KILL_ZOMBIE = new Quest("killzombie");
-    public static final Research WEAPON_RESEARCH = new Research("weaponresearch");
+    public static final Quest KILL_ZOMBIE = new Quest("kill_zombie");
+    public static final Research FIRST_RESEARCH = new Research("first_research");
+    public static final Research SECOND_RESEARCH = new Research("second_research", Items.DIRT);
+    public static final Research THIRD_RESEARCH = new Research("third_research", Items.NETHERITE_SCRAP);
+    public static final Research WEAPON_RESEARCH = new Research("weapon_research", Items.WOODEN_SWORD, FIRST_RESEARCH, SECOND_RESEARCH);
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
         ELTCapabilityRegister.CapabilityRegister();
         WEAPON_RESEARCH.addQuest(KILL_ZOMBIE);
+        FIRST_RESEARCH.addQuest(KILL_ZOMBIE);
+        SECOND_RESEARCH.addQuest(KILL_ZOMBIE);
+        THIRD_RESEARCH.addQuest(KILL_ZOMBIE);
     }
 
     @Override
@@ -93,26 +94,6 @@ public class ELT implements ModInitializer {
     @Override
     public void onModIMCProcess2(InterModProcessEvent aEvent) {
 
-    }
-
-    @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD)
-    public static class RegistryEvents {
-        public static List<Item> registeredItems = new ArrayList<>();
-        public static List<Block> registeredBlocks = new ArrayList<>();
-
-        @SubscribeEvent
-        public static void onBlocksRegistry(RegistryEvent.Register<Block> blockRegistryEvent) {
-            for (Block block : registeredBlocks) {
-                blockRegistryEvent.getRegistry().register(block);
-            }
-        }
-
-        @SubscribeEvent
-        public static void registerItems(RegistryEvent.Register<Item> itemRegistryEvent) {
-            for (Item item : registeredItems) {
-                itemRegistryEvent.getRegistry().register(item);
-            }
-        }
     }
 
     // Do not modify the codes below

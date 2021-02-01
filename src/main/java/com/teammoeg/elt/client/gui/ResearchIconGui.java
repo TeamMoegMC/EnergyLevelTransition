@@ -22,9 +22,10 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.teammoeg.elt.research.Research;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
-public class ResearchContentGui extends AbstractGui {
+public class ResearchIconGui extends AbstractGui {
 
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
 
@@ -49,7 +50,7 @@ public class ResearchContentGui extends AbstractGui {
     private final int screenScale;
     private int width;
 
-    public ResearchContentGui(Minecraft mc, Research research, String title, int x, int y) {
+    public ResearchIconGui(Minecraft mc, Research research, String title, int x, int y) {
         this.research = research;
         this.minecraft = mc;
         this.title = title;
@@ -59,10 +60,23 @@ public class ResearchContentGui extends AbstractGui {
     }
 
     public void draw(MatrixStack matrixStack, int x, int y) {
-        if (true) {
+        if (!this.research.isHidden()) {
 //            float f = this.progress == null ? 0.0F : this.progress.getPercent();
             this.minecraft.getTextureManager().bind(FRAMES);
             this.blit(matrixStack, x + this.x + 3, y + this.y, 0, 130, 24, 24);
+            this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.research.getIcon()), x + this.x + 8, y + this.y + 5);
+        }
+    }
+
+    public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
+        if (!this.research.isHidden()) {
+            int i = x + this.x;
+            int j = i + 26;
+            int k = y + this.y;
+            int l = k + 26;
+            return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= l;
+        } else {
+            return false;
         }
     }
 }

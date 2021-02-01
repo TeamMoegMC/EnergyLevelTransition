@@ -32,10 +32,10 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class ELTTileEntityTypes {
-    public static final DeferredRegister<TileEntityType<?>> TILE_ENTITIES_REGISTRY =
+    public static final DeferredRegister<TileEntityType<?>> TILE_TYPE_REG =
             DeferredRegister.create(ForgeRegistries.TILE_ENTITIES, ELT.MOD_ID);
 
-    public static final RegistryObject<TileEntityType<ResearchDeskTileEntity>> RESEARCH_DESK = TILE_ENTITIES_REGISTRY.register(
+    public static final RegistryObject<TileEntityType<ResearchDeskTileEntity>> RESEARCH_DESK = TILE_TYPE_REG.register(
             "research_desk", makeType(ResearchDeskTileEntity::new, () -> ELTBlocks.RESEARCH_DESK));
 
     private static <T extends TileEntity> Supplier<TileEntityType<T>> makeType(Supplier<T> create, Supplier<Block> valid) {

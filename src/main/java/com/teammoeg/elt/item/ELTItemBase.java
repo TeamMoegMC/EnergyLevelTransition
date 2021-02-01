@@ -18,7 +18,7 @@
 
 package com.teammoeg.elt.item;
 
-import com.teammoeg.elt.ELT;
+import com.teammoeg.elt.RegistryEventHandler;
 import net.minecraft.item.Item;
 
 public class ELTItemBase extends Item {
@@ -28,6 +28,6 @@ public class ELTItemBase extends Item {
         super(properties);
         this.name = name;
         this.setRegistryName(name);
-        ELT.RegistryEvents.registeredItems.add(this);
+        RegistryEventHandler.registeredItems.add(this);
     }
 }
