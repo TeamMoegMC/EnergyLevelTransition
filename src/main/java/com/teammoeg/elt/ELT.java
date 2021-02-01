@@ -28,6 +28,7 @@ import com.teammoeg.elt.container.ELTContainerType;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
+import com.teammoeg.elt.research.team.TeamDatabase;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
@@ -67,11 +68,16 @@ public class ELT implements ModInitializer {
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
-        ELTCapabilityRegister.CapabilityRegister();
+        ELTCapabilityRegister.registerCapability();
         WEAPON_RESEARCH.addQuest(KILL_ZOMBIE);
         FIRST_RESEARCH.addQuest(KILL_ZOMBIE);
         SECOND_RESEARCH.addQuest(KILL_ZOMBIE);
         THIRD_RESEARCH.addQuest(KILL_ZOMBIE);
+        TeamDatabase.createTeam("dsb");
+        TeamDatabase.createTeam("ys");
+        TeamDatabase.createTeam("evan");
+        TeamDatabase.createTeam("duck");
+        TeamDatabase.createTeam("hd");
     }
 
     @Override

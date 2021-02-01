@@ -18,7 +18,6 @@
 
 package com.teammoeg.elt.capability;
 
-import com.teammoeg.the_seed.api.IResearchProgress;
 import net.minecraft.nbt.INBT;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
@@ -27,7 +26,7 @@ import net.minecraftforge.common.capabilities.CapabilityManager;
 import javax.annotation.Nullable;
 
 public class ELTCapabilityRegister {
-    public static void CapabilityRegister() {
+    public static void registerCapability() {
         CapabilityManager.INSTANCE.register(IResearchProgress.class, new Capability.IStorage<IResearchProgress>() {
                     @Nullable
                     @Override

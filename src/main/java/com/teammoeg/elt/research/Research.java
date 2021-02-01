@@ -19,8 +19,8 @@
 package com.teammoeg.elt.research;
 
 import com.teammoeg.elt.ELT;
-import com.teammoeg.elt.item.ELTItems;
 import net.minecraft.item.Item;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
 
@@ -41,7 +41,7 @@ public class Research {
     private final Item icon;
 
     public Research(String path, Research... parents) {
-        this(new ResourceLocation(ELT.MOD_ID, path), ELTItems.RESEARCH_SCROLL, parents);
+        this(new ResourceLocation(ELT.MOD_ID, path), Items.GRASS_BLOCK, parents);
     }
 
     public Research(String path, Item icon, Research... parents) {

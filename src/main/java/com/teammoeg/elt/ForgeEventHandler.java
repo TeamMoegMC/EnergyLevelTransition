@@ -18,10 +18,14 @@
 
 package com.teammoeg.elt;
 
+import com.mojang.brigadier.CommandDispatcher;
 import com.teammoeg.elt.capability.ResearchProgressProvider;
+import com.teammoeg.elt.client.ELTCommands;
+import com.teammoeg.elt.research.JsonRead;
+import com.teammoeg.elt.research.JsonWriter;
 import com.teammoeg.elt.research.Quest;
-import com.teammoeg.elt.util.JsonRead;
-import com.teammoeg.elt.util.JsonWriter;
+import com.teammoeg.elt.research.team.TeamDatabase;
+import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -30,6 +34,7 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -63,6 +68,12 @@ public class ForgeEventHandler {
     }
 
     @SubscribeEvent
+    public static void onRegisterCommands(RegisterCommandsEvent event) {
+        CommandDispatcher<CommandSource> dispatcher = event.getDispatcher();
+        ELTCommands.register(dispatcher);
+    }
+
+    @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
         JsonRead.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_ID)).toFile();
         JsonRead.readFile();
@@ -89,6 +100,8 @@ public class ForgeEventHandler {
             return;
 
         if (event.getEntityLiving() instanceof ZombieEntity) {
+            TeamDatabase.TEAMS.get("dsb").addResearchTeamXP(10);
+            TeamDatabase.TEAMS.get("ys").addResearchTeamXP(10);
             for (Quest quest : ELT.WEAPON_RESEARCH.getContainedQuests()) {
                 quest.complete();
                 event.getSource().getDirectEntity().sendMessage(new StringTextComponent("You have completed a Quest: "), Util.NIL_UUID);

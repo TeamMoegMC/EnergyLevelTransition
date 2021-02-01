@@ -16,10 +16,8 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.team;
+package com.teammoeg.elt.capability;
 
-import java.util.HashMap;
-
-public class TeamDataBase {
-    public static HashMap<String, ResearchTeam> TEAMS = new HashMap();
+public interface IResearchProgress {
+    int getResearchExperience();
 }

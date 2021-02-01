@@ -29,7 +29,6 @@ public class ResearchIconGui extends AbstractGui {
 
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
 
-    protected static final int ADVANCEMENT_SIZE = 26;
     private static final int CORNER_SIZE = 10;
     private static final int WIDGET_WIDTH = 256, WIDGET_HEIGHT = 26, TITLE_SIZE = 32, ICON_OFFSET = 128, ICON_SIZE = 26;
 
@@ -63,7 +62,7 @@ public class ResearchIconGui extends AbstractGui {
         if (!this.research.isHidden()) {
 //            float f = this.progress == null ? 0.0F : this.progress.getPercent();
             this.minecraft.getTextureManager().bind(FRAMES);
-            this.blit(matrixStack, x + this.x + 3, y + this.y, 0, 130, 24, 24);
+            this.blit(matrixStack, x + this.x + 3, y + this.y, 0, ICON_OFFSET, ICON_SIZE, ICON_SIZE);
             this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.research.getIcon()), x + this.x + 8, y + this.y + 5);
         }
     }

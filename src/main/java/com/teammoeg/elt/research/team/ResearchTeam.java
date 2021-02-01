@@ -16,22 +16,20 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.team;
+package com.teammoeg.elt.research.team;
 
 import java.util.HashMap;
 import java.util.UUID;
 
 public class ResearchTeam {
     HashMap<UUID, Integer> players = new HashMap();
-    //ArrayList<UUID> uuids = (ArrayList<UUID>) players.keySet();
 
     private String name;
     private int researchTeamXP;
 
     public ResearchTeam(String name) {
         this.name = name;
-        JoinResearchTeam();
-        //players.put(UUID,0);
+        addToDatabase();
     }
 
     public int getResearchTeamXP() {
@@ -42,6 +40,10 @@ public class ResearchTeam {
         this.researchTeamXP = researchTeamXP;
     }
 
+    public void addResearchTeamXP(int amount) {
+        this.researchTeamXP += amount;
+    }
+
     public String getName() {
         return name;
     }
@@ -50,7 +52,7 @@ public class ResearchTeam {
         players.put(uuid, 1);
     }
 
-    public void JoinResearchTeam() {
-        TeamDataBase.TEAMS.put(name, this);
+    public void addToDatabase() {
+        TeamDatabase.TEAMS.put(name, this);
     }
 }

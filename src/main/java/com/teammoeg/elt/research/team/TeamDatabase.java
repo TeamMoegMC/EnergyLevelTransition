@@ -16,16 +16,15 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.capability;
+package com.teammoeg.elt.research.team;
 
-public class ResearchProgress implements IResearchProgress {
-    public int ResearchExperience;
+import java.util.HashMap;
 
-    public ResearchProgress(int xp) {
-        this.ResearchExperience = xp;
+public class TeamDatabase {
+    public static HashMap<String, ResearchTeam> TEAMS = new HashMap();
+
+    public static void createTeam(String name) {
+        TEAMS.put(name, new ResearchTeam(name));
     }
 
-    public int getResearchExperience() {
-        return ResearchExperience;
-    }
 }

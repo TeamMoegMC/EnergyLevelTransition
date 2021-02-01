@@ -18,7 +18,6 @@
 
 package com.teammoeg.elt.capability;
 
-import com.teammoeg.the_seed.api.IResearchProgress;
 import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;

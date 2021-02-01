@@ -16,13 +16,11 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.util;
+package com.teammoeg.elt.research.team;
 
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
-import com.teammoeg.elt.team.ResearchTeam;
-import com.teammoeg.elt.team.TeamDataBase;
 
 import java.io.IOException;
 
@@ -34,7 +32,7 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
             in.beginObject();
             while (in.hasNext()) {
                 ResearchTeam researchTeam = new ResearchTeam(in.nextName());
-                researchTeam.JoinResearchTeam();
+                researchTeam.addToDatabase();
                 in.beginArray();
                 in.beginObject();
                 switch (in.nextName()) {
@@ -51,14 +49,16 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
     }
 
     @Override
-    public void write(JsonWriter out, ResearchTeam researchTeam) throws IOException {
-        out.setIndent(" ");
-        out.beginObject();
-        for (ResearchTeam t : TeamDataBase.TEAMS.values()) {
-            out.name(t.getName()).beginArray().beginObject();
-            out.name("XP").value(t.getResearchTeamXP());
-            out.endObject().endArray();
+    public void write(JsonWriter writer, ResearchTeam value) throws IOException {
+        if (value == null) {
+            writer.nullValue();
+            return;
         }
-        out.endObject();
+        writer.setIndent(" ");
+        writer.beginObject();
+        writer.name(value.getName()).beginArray().beginObject();
+        writer.name("XP").value(value.getResearchTeamXP());
+        writer.endObject().endArray();
+        writer.endObject();
     }
 }

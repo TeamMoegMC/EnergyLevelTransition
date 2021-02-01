@@ -16,16 +16,22 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.capability;
+package com.teammoeg.elt.client;
 
-public class ResearchProgress implements IResearchProgress {
-    public int ResearchExperience;
+import com.mojang.brigadier.Command;
+import com.mojang.brigadier.context.CommandContext;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import com.teammoeg.elt.research.team.TeamDatabase;
+import net.minecraft.command.CommandSource;
+import net.minecraft.util.text.StringTextComponent;
 
-    public ResearchProgress(int xp) {
-        this.ResearchExperience = xp;
-    }
+public class CreateTeamCommand implements Command<CommandSource> {
+    public static CreateTeamCommand instance = new CreateTeamCommand();
 
-    public int getResearchExperience() {
-        return ResearchExperience;
+    @Override
+    public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
+        TeamDatabase.createTeam("");
+        context.getSource().sendSuccess(new StringTextComponent("Joined the team"), false);
+        return 0;
     }
 }
