@@ -32,7 +32,6 @@ public class ResearchTeamAdapter extends TypeAdapter<ResearchTeam> {
             in.beginObject();
             while (in.hasNext()) {
                 ResearchTeam researchTeam = new ResearchTeam(in.nextName());
-                researchTeam.addToDatabase();
                 in.beginArray();
                 in.beginObject();
                 switch (in.nextName()) {

@@ -30,10 +30,12 @@ import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
 import com.teammoeg.elt.research.team.TeamDatabase;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
+import com.teammoeg.elt.world.biome.ELTBiomes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.Items;
+import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -58,6 +60,7 @@ public class ELT implements ModInitializer {
         new ELTBlocks();
         ELTTileEntityTypes.TILE_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
         ELTContainerType.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
     public static final Quest KILL_ZOMBIE = new Quest("kill_zombie");
@@ -74,10 +77,7 @@ public class ELT implements ModInitializer {
         SECOND_RESEARCH.addQuest(KILL_ZOMBIE);
         THIRD_RESEARCH.addQuest(KILL_ZOMBIE);
         TeamDatabase.createTeam("dsb");
-        TeamDatabase.createTeam("ys");
-        TeamDatabase.createTeam("evan");
-        TeamDatabase.createTeam("duck");
-        TeamDatabase.createTeam("hd");
+        BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get()), 1000));
     }
 
     @Override
