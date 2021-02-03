@@ -53,6 +53,6 @@ public class ResearchTeam {
     }
 
     public void addToDatabase() {
-        TeamDatabase.TEAMS.put(name, this);
+        ResearchTeamDatabase.TEAMS.put(name, this);
     }
 }

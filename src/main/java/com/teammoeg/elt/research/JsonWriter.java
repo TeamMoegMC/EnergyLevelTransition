@@ -22,7 +22,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.teammoeg.elt.research.team.ResearchTeam;
 import com.teammoeg.elt.research.team.ResearchTeamAdapter;
-import com.teammoeg.elt.research.team.TeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -38,7 +38,7 @@ public class JsonWriter {
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(JsonRead.SAVE_ELT_FOLDER_PATH,
                 "ResearchProgress.json")), StandardCharsets.UTF_8))) {
 
-            gson.toJson(TeamDatabase.TEAMS.values().toArray(), out);
+            gson.toJson(ResearchTeamDatabase.TEAMS.values().toArray(), out);
 
             out.flush();
         } catch (Exception e) {

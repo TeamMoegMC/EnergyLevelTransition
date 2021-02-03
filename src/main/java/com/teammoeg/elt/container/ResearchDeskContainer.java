@@ -44,11 +44,11 @@ public class ResearchDeskContainer extends Container {
     }
 
     public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, BlockPos pos) {
-        return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, pos);
+        return new ResearchDeskContainer(ELTContainerTypes.RESEARCHDESKCONTAINER.get(), id, playerinventory, pos);
     }
 
     public static ResearchDeskContainer create(int id, PlayerInventory playerinventory, TileEntity blockEntity) {
-        return new ResearchDeskContainer(ELTContainerType.RESEARCHDESKCONTAINER.get(), id, playerinventory, (IInventory) blockEntity, blockEntity.getBlockPos());
+        return new ResearchDeskContainer(ELTContainerTypes.RESEARCHDESKCONTAINER.get(), id, playerinventory, (IInventory) blockEntity, blockEntity.getBlockPos());
     }
 
     public static int SIDE = 9, TOP = 4, SUB_SLOT_SIDE = 227;

@@ -24,7 +24,7 @@ import com.teammoeg.elt.client.ELTCommands;
 import com.teammoeg.elt.research.JsonRead;
 import com.teammoeg.elt.research.JsonWriter;
 import com.teammoeg.elt.research.Quest;
-import com.teammoeg.elt.research.team.TeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -100,8 +100,8 @@ public class ForgeEventHandler {
             return;
 
         if (event.getEntityLiving() instanceof ZombieEntity) {
-            TeamDatabase.TEAMS.get("dsb").addResearchTeamXP(10);
-            TeamDatabase.TEAMS.get("ys").addResearchTeamXP(10);
+            ResearchTeamDatabase.TEAMS.get("dsb").addResearchTeamXP(10);
+            ResearchTeamDatabase.TEAMS.get("ys").addResearchTeamXP(10);
             for (Quest quest : ELT.WEAPON_RESEARCH.getContainedQuests()) {
                 quest.complete();
                 event.getSource().getDirectEntity().sendMessage(new StringTextComponent("You have completed a Quest: "), Util.NIL_UUID);

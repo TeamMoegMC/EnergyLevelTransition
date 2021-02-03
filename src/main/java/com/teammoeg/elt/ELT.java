@@ -24,11 +24,11 @@ import com.teammoeg.elt.capability.ELTCapabilityRegister;
 import com.teammoeg.elt.client.gui.ResearchDeskScreen;
 import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
-import com.teammoeg.elt.container.ELTContainerType;
+import com.teammoeg.elt.container.ELTContainerTypes;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
-import com.teammoeg.elt.research.team.TeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.elt.world.biome.ELTBiomes;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
@@ -59,7 +59,7 @@ public class ELT implements ModInitializer {
         new ELTItems();
         new ELTBlocks();
         ELTTileEntityTypes.TILE_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ELTContainerType.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTContainerTypes.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
         ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
@@ -76,7 +76,7 @@ public class ELT implements ModInitializer {
         FIRST_RESEARCH.addQuest(KILL_ZOMBIE);
         SECOND_RESEARCH.addQuest(KILL_ZOMBIE);
         THIRD_RESEARCH.addQuest(KILL_ZOMBIE);
-        TeamDatabase.createTeam("dsb");
+        ResearchTeamDatabase.createTeam("dsb");
         BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get()), 1000));
     }
 
@@ -84,7 +84,7 @@ public class ELT implements ModInitializer {
     public void onModClientSetup2(FMLClientSetupEvent aEvent) {
         ELTKeyBindings.registerKeyBindings();
         ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_DESK.get(), ResearchDeskTileEntityRenderer::new);
-        ScreenManager.register(ELTContainerType.RESEARCHDESKCONTAINER.get(), ResearchDeskScreen::new);
+        ScreenManager.register(ELTContainerTypes.RESEARCHDESKCONTAINER.get(), ResearchDeskScreen::new);
     }
 
     @Override

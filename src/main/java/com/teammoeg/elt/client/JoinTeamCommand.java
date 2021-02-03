@@ -21,7 +21,7 @@ package com.teammoeg.elt.client;
 import com.mojang.brigadier.Command;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.teammoeg.elt.research.team.TeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.command.CommandSource;
 import net.minecraft.util.text.StringTextComponent;
 
@@ -30,7 +30,7 @@ public class JoinTeamCommand implements Command<CommandSource> {
 
     @Override
     public int run(CommandContext<CommandSource> context) throws CommandSyntaxException {
-        TeamDatabase.TEAMS.get("dsb").addPlayer(context.getSource().getPlayerOrException().getUUID());
+        ResearchTeamDatabase.TEAMS.get("dsb").addPlayer(context.getSource().getPlayerOrException().getUUID());
         context.getSource().sendSuccess(new StringTextComponent("Joined the team"), false);
         return 0;
     }

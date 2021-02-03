@@ -22,7 +22,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.container.ResearchDeskContainer;
-import com.teammoeg.elt.research.team.TeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.RenderHelper;
@@ -296,11 +296,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 //                this.font.draw(matrixStack, "Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
 //            });
 
-            int researchExpAmt = TeamDatabase.TEAMS.get("dsb").getResearchTeamXP();
+            int researchExpAmt = ResearchTeamDatabase.TEAMS.get("dsb").getResearchTeamXP();
             this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
             this.font.draw(matrixStack, "DSB Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
 
-            int researchExpAmt2 = TeamDatabase.TEAMS.get("ys").getResearchTeamXP();
+            int researchExpAmt2 = ResearchTeamDatabase.TEAMS.get("ys").getResearchTeamXP();
             this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE - 20, 0, 0, researchExpAmt2, 9);
             this.font.draw(matrixStack, "YS Research Experience: " + researchExpAmt2, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9 - 20, 0);
 

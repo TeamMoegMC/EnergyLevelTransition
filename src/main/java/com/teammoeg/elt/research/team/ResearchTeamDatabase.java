@@ -16,23 +16,15 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.handler;
+package com.teammoeg.elt.research.team;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import java.util.HashMap;
 
-import java.io.File;
+public class ResearchTeamDatabase {
+    public static HashMap<String, ResearchTeam> TEAMS = new HashMap();
 
-public class SaveHandler {
-    public static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-
-
-    public static void save2() {
-        save(new File("saves", "abc.json"));
+    public static void createTeam(String name) {
+        TEAMS.put(name, new ResearchTeam(name));
     }
 
-    public static void save(File file) {
-
-
-    }
 }
