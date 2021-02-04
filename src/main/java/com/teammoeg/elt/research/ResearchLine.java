@@ -18,6 +18,7 @@
 
 package com.teammoeg.elt.research;
 
+import com.teammoeg.elt.ELT;
 import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TranslationTextComponent;
@@ -27,6 +28,10 @@ public class ResearchLine {
     private final TranslationTextComponent name;
     private final TranslationTextComponent desc;
     private final Item icon;
+
+    public ResearchLine(String path, Item icon) {
+        this(new ResourceLocation(ELT.MOD_ID, path), icon);
+    }
 
     public ResearchLine(ResourceLocation id, Item icon) {
         this.id = id;

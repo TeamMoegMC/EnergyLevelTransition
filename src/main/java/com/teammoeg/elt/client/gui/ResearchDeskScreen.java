@@ -24,9 +24,11 @@ import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.capability.ELTCapabilities;
 import com.teammoeg.elt.capability.ITeamCapability;
 import com.teammoeg.elt.container.ResearchDeskContainer;
+import com.teammoeg.elt.research.ResearchLine;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
-import net.minecraft.client.gui.AbstractGui;
+import com.teammoeg.the_seed.api.gui.GuiUtil;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
+import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
@@ -34,6 +36,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
 import java.util.ArrayList;
@@ -47,10 +50,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private final ResourceLocation INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png");
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
-    private final ResourceLocation ICON_PIC = new ResourceLocation(ELT.MOD_ID, "textures/item/materialicons/dust.png");
+    private final ResourceLocation LINE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png");
     private final ResourceLocation BG_PIC = new ResourceLocation("textures/block/netherite_block.png");
     private final PlayerEntity player;
     private final ArrayList<ResearchIconGui> widgets = new ArrayList<>();
+    private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
     private boolean isScrolling;
     private float zoom = MIN_ZOOM;
     private double scrollX, scrollY;
@@ -59,24 +63,12 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int minY = Integer.MAX_VALUE;
     private int maxX = Integer.MIN_VALUE;
     private int maxY = Integer.MIN_VALUE;
-    private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
+    private boolean isLinePage = false;
+    private ResearchLine selectedLine;
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.player = inv.player;
-    }
-
-    private static void renderRepeating(AbstractGui abstractGui, MatrixStack matrixStack, int x, int y, int width, int height, int textureX, int textureY, int textureWidth, int textureHeight) {
-        for (int i = 0; i < width; i += textureWidth) {
-            int drawX = x + i;
-            int drawWidth = Math.min(textureWidth, width - i);
-
-            for (int l = 0; l < height; l += textureHeight) {
-                int drawY = y + l;
-                int drawHeight = Math.min(textureHeight, height - l);
-                abstractGui.blit(matrixStack, drawX, drawY, textureX, textureY, drawWidth, drawHeight);
-            }
-        }
     }
 
     @Override
@@ -87,11 +79,24 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
 
-        addWidget(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 2, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 3, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 4, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 5, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 6, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 7, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 8, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 9, 48));
 
+//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
+//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
+//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
+//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
+
+        addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, LINE_BUTTON, 20, 20, (button) -> {
+            this.isLinePage = !this.isLinePage;
+        }, StringTextComponent.EMPTY));
     }
 
     @Override
@@ -101,8 +106,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         int right = width - SIDE;
         int bottom = height - BOTTOM;
 
-        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
-        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING;
+        int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
+        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
 
         int i = (this.width - scrollRangeX) / 2;
         int j = (this.height - scrollRangeY) / 2;
@@ -114,6 +119,28 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 //        this.renderResearchXpBar(matrixStack, left, top, right, bottom);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
+
+        if (isLinePage && buttonIn == 0) {
+
+            int deltaX = MathHelper.floor(this.scrollX);
+            int deltaY = MathHelper.floor(this.scrollY);
+
+            for (LineIconGui lineIconGui : lineIcons) {
+//                this.selectedTab.drawTooltips(matrixStack, mouseX - offsetX - 9, mouseY - offsetY - 18, offsetX, offsetY); todo fix
+                if (lineIconGui.isMouseOver(deltaX, deltaY, mouseX, mouseY)) {
+                    this.selectedLine = lineIconGui.getResearchLine();
+                    System.out.println("LINE: " + this.selectedLine.getName());
+                    return true;
+                }
+            }
+
+        }
+
+        return super.mouseClicked(mouseX, mouseY, buttonIn);
     }
 
     @Override
@@ -169,17 +196,17 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // Top left corner
         this.blit(matrixStack, left, top, 0, 0, CORNER_SIZE, CORNER_SIZE);
         // Top side
-        renderRepeating(this, matrixStack, left + CORNER_SIZE, top, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, 0, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
+        GuiUtil.renderRepeating(this, matrixStack, left + CORNER_SIZE, top, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, 0, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
         // Top right corner
         this.blit(matrixStack, right - CORNER_SIZE, top, WIDTH - CORNER_SIZE, 0, CORNER_SIZE, CORNER_SIZE);
         // Left side
-        renderRepeating(this, matrixStack, left, top + CORNER_SIZE, CORNER_SIZE, bottom - top - 2 * CORNER_SIZE, 0, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE - CORNER_SIZE);
+        GuiUtil.renderRepeating(this, matrixStack, left, top + CORNER_SIZE, CORNER_SIZE, bottom - top - 2 * CORNER_SIZE, 0, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE - CORNER_SIZE);
         // Right side
-        renderRepeating(this, matrixStack, right - CORNER_SIZE, top + CORNER_SIZE, CORNER_SIZE, bottom - top - 2 * CORNER_SIZE, WIDTH - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE - CORNER_SIZE);
+        GuiUtil.renderRepeating(this, matrixStack, right - CORNER_SIZE, top + CORNER_SIZE, CORNER_SIZE, bottom - top - 2 * CORNER_SIZE, WIDTH - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE - CORNER_SIZE);
         // Bottom left corner
         this.blit(matrixStack, left, bottom - CORNER_SIZE, 0, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
         // Bottom side
-        renderRepeating(this, matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
+        GuiUtil.renderRepeating(this, matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, width - CORNER_SIZE - 2 * SIDE - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE, HEIGHT - CORNER_SIZE, WIDTH - CORNER_SIZE - CORNER_SIZE, CORNER_SIZE);
         // Bottom right corner
         this.blit(matrixStack, right - CORNER_SIZE, bottom - CORNER_SIZE, WIDTH - CORNER_SIZE, HEIGHT - CORNER_SIZE, CORNER_SIZE, CORNER_SIZE);
 
@@ -215,15 +242,13 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
 
         if (!this.centered) {
-            this.scrollX = scrollRangeX / 2 - (this.maxX + this.minX) / 2;
-            this.scrollY = scrollRangeY / 2 - (this.maxY + this.minY) / 2;
+            this.scrollX = (double) scrollRangeX / 2 - (double) (this.maxX + this.minX) / 2;
+            this.scrollY = (double) scrollRangeY / 2 - (double) (this.maxY + this.minY) / 2;
             this.centered = true;
         }
 
         int deltaX = MathHelper.floor(this.scrollX);
         int deltaY = MathHelper.floor(this.scrollY);
-        int hexReducedDeltaX = deltaX % 16;
-        int hexReducedDeltaY = deltaY % 16;
 
         // render borders and color masks
         RenderSystem.pushMatrix();
@@ -237,9 +262,13 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         fill(matrixStack, scrollRangeX, scrollRangeY, 0, 0, -16777216);
         RenderSystem.depthFunc(515);
 
-        drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
+        this.drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
 
-        drawResearchIcons(matrixStack, deltaX, deltaY);
+        if (!isLinePage) {
+            this.drawResearchIcons(matrixStack, deltaX, deltaY);
+        } else {
+            this.drawResearchLineIcons(matrixStack, deltaX, deltaY);
+        }
 
         RenderSystem.depthFunc(518);
         RenderSystem.translatef(0.0F, 0.0F, -950.0F);
@@ -277,8 +306,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      */
     private void scroll(double dragX, double dragY) {
 
-        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
-        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING;
+        int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
+        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
 
         if (this.maxX - this.minX > scrollRangeX) {
             this.scrollX = MathHelper.clamp(this.scrollX + dragX, -(this.maxX - scrollRangeX), 0.0D);
@@ -293,8 +322,20 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 添加一个研究图标
      */
-    private void addWidget(ResearchIconGui gui) {
+    private void addResearchIcon(ResearchIconGui gui) {
         this.widgets.add(gui);
+        int i = gui.getX();
+        int j = i + 28;
+        int k = gui.getY();
+        int l = k + 27;
+        this.minX = Math.min(this.minX, i);
+        this.maxX = Math.max(this.maxX, j);
+        this.minY = Math.min(this.minY, k);
+        this.maxY = Math.max(this.maxY, l);
+    }
+
+    private void addResearchLineIcon(LineIconGui gui) {
+        this.lineIcons.add(gui);
         int i = gui.getX();
         int j = i + 28;
         int k = gui.getY();

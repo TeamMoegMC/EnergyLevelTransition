@@ -28,6 +28,7 @@ import com.teammoeg.elt.container.ELTContainerTypes;
 import com.teammoeg.elt.item.ELTItems;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.Research;
+import com.teammoeg.elt.research.ResearchLine;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.elt.world.biome.ELTBiomes;
@@ -63,6 +64,7 @@ public class ELT implements ModInitializer {
         ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
+    public static final ResearchLine STONE_AGE = new ResearchLine("stone_age_line", Items.STONE);
     public static final Quest KILL_ZOMBIE = new Quest("kill_zombie");
     public static final Research FIRST_RESEARCH = new Research("first_research");
     public static final Research SECOND_RESEARCH = new Research("second_research", Items.DIRT);

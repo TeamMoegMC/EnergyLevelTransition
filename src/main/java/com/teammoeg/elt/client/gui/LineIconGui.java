@@ -55,7 +55,7 @@ public class LineIconGui extends AbstractGui {
         this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.researchLine.getIcon()), x + this.x + 8, y + this.y + 5);
     }
 
-    public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
+    public boolean isMouseOver(int x, int y, double mouseX, double mouseY) {
         int i = x + this.x;
         int j = i + ICON_SIZE;
         int k = y + this.y;

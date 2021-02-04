@@ -18,26 +18,21 @@
 
 package com.teammoeg.the_seed.api.gui;
 
-import com.teammoeg.cuckoolib.util.math.Vector2i;
+import com.mojang.blaze3d.matrix.MatrixStack;
 import net.minecraft.client.gui.AbstractGui;
 
-public class Button extends AbstractGui {
-    public Vector2i size, position;
+public class GuiUtil {
 
-    public Button(int x, int y, int width, int height) {
-        this.position = new Vector2i(x, y);
-        this.size = new Vector2i(width, height);
-    }
+    public static void renderRepeating(AbstractGui abstractGui, MatrixStack matrixStack, int x, int y, int width, int height, int textureX, int textureY, int textureWidth, int textureHeight) {
+        for (int i = 0; i < width; i += textureWidth) {
+            int drawX = x + i;
+            int drawWidth = Math.min(textureWidth, width - i);
 
-    public boolean onMouseClicked(double mouseX, double mouseY, int buttonIn) {
-        return false;
-    }
-
-    public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
-        int i = x + this.position.getX();
-        int j = i + this.size.getX();
-        int k = y + this.position.getY();
-        int l = k + this.size.getY();
-        return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= l;
+            for (int l = 0; l < height; l += textureHeight) {
+                int drawY = y + l;
+                int drawHeight = Math.min(textureHeight, height - l);
+                abstractGui.blit(matrixStack, drawX, drawY, textureX, textureY, drawWidth, drawHeight);
+            }
+        }
     }
 }
