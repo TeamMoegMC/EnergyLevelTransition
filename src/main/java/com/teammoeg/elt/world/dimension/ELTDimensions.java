@@ -22,6 +22,8 @@ import com.teammoeg.elt.ELT;
 import net.minecraft.util.RegistryKey;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.SimpleRegistry;
+import net.minecraft.world.Dimension;
 import net.minecraft.world.DimensionType;
 import net.minecraft.world.World;
 
@@ -29,5 +31,8 @@ public class ELTDimensions {
     public static final RegistryKey<DimensionType> FAIRYTALETYPE = RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(ELT.MOD_ID, "fairytaletype"));
     public static final RegistryKey<World> FAIRYTALE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ELT.MOD_ID, "fairytale"));
 
+    public static void init(SimpleRegistry<Dimension> simpleRegistry) {
+
+    }
 }
 
