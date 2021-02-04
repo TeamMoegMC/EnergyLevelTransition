@@ -44,8 +44,7 @@ public class CreateTeamCommand {
     private static void createTeam(CommandSource source, String team) {
         if (source.getEntity() instanceof ServerPlayerEntity) {
             UUID uuid = source.getEntity() == null ? Util.NIL_UUID : source.getEntity().getUUID();
-            ResearchTeam researchTeam = new ResearchTeam(team);
-            researchTeam.addPlayer(uuid);
+            new ResearchTeam(team).addPlayer(uuid);
             LazyOptional<ITeamCapability> Cap = source.getEntity().getCapability(ELTCapabilities.teamCapability);
             Cap.ifPresent((P) -> P.setTeam(team));
         }
