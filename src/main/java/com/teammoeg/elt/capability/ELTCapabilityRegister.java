@@ -27,15 +27,15 @@ import javax.annotation.Nullable;
 
 public class ELTCapabilityRegister {
     public static void registerCapability() {
-        CapabilityManager.INSTANCE.register(IResearchProgress.class, new Capability.IStorage<IResearchProgress>() {
+        CapabilityManager.INSTANCE.register(ITeamCapability.class, new Capability.IStorage<ITeamCapability>() {
                     @Nullable
                     @Override
-                    public INBT writeNBT(Capability<IResearchProgress> capability, IResearchProgress instance, Direction side) {
+                    public INBT writeNBT(Capability<ITeamCapability> capability, ITeamCapability instance, Direction side) {
                         return null;
                     }
 
                     @Override
-                    public void readNBT(Capability<IResearchProgress> capability, IResearchProgress instance, Direction side, INBT nbt) {
+                    public void readNBT(Capability<ITeamCapability> capability, ITeamCapability instance, Direction side, INBT nbt) {
 
                     }
                 },

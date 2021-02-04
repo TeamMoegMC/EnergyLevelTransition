@@ -22,7 +22,7 @@ import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
 
 public class ELTCapabilities {
-    @CapabilityInject(IResearchProgress.class)
-    public static Capability<IResearchProgress> RESEARCHPROGRESS;
+    @CapabilityInject(ITeamCapability.class)
+    public static Capability<ITeamCapability> teamCapability;
 
 }

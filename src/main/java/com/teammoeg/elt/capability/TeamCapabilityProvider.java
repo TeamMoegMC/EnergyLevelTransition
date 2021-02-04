@@ -26,23 +26,23 @@ import net.minecraftforge.common.util.LazyOptional;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class ResearchProgressProvider implements ICapabilityProvider {
-    private IResearchProgress ResearchProgres;
+public class TeamCapabilityProvider implements ICapabilityProvider {
+    private ITeamCapability researchTeam;
 
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ELTCapabilities.RESEARCHPROGRESS) {
+        if (cap == ELTCapabilities.teamCapability) {
             return LazyOptional.of(this::getDate).cast();
         }
         return LazyOptional.empty();
     }
 
     @Nonnull
-    public IResearchProgress getDate() {
-        if (ResearchProgres == null) {
-            this.ResearchProgres = new ResearchProgress(0);
+    public ITeamCapability getDate() {
+        if (researchTeam == null) {
+            this.researchTeam = new TeamCapability("default");
         }
-        return this.ResearchProgres;
+        return this.researchTeam;
     }
 }

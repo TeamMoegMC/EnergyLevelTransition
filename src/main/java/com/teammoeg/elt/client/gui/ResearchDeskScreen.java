@@ -21,6 +21,8 @@ package com.teammoeg.elt.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.teammoeg.elt.ELT;
+import com.teammoeg.elt.capability.ELTCapabilities;
+import com.teammoeg.elt.capability.ITeamCapability;
 import com.teammoeg.elt.container.ResearchDeskContainer;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.client.gui.AbstractGui;
@@ -33,6 +35,7 @@ import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraftforge.common.util.LazyOptional;
 
 import java.util.ArrayList;
 
@@ -285,25 +288,16 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private void renderResearchXpBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
         if (this.player != null) {
             this.minecraft.getTextureManager().bind(BARS);
-            this.minecraft.getProfiler().push("research");
+            this.minecraft.getProfiler().push("research_desk_exp_bar");
 
-//            LazyOptional<IResearchProgress> Cap = player.getCapability(ELTCapabilities.RESEARCHPROGRESS);
-//            Cap.ifPresent((P) -> {
-//                int researchExpAmt = P.getResearchExperience();
-//                // 经验条
-//                this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
-//                // 数值文字
-//                this.font.draw(matrixStack, "Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
-//            });
-
-            int researchExpAmt = ResearchTeamDatabase.TEAMS.get("dsb").getResearchTeamXP();
-            this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
-            this.font.draw(matrixStack, "DSB Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
-
-            int researchExpAmt2 = ResearchTeamDatabase.TEAMS.get("ys").getResearchTeamXP();
-            this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE - 20, 0, 0, researchExpAmt2, 9);
-            this.font.draw(matrixStack, "YS Research Experience: " + researchExpAmt2, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9 - 20, 0);
-
+            LazyOptional<ITeamCapability> Cap = player.getCapability(ELTCapabilities.teamCapability);
+            Cap.ifPresent((P) -> {
+                String team = P.getTeam();
+                System.out.println("Team: " + team);
+                int researchExpAmt = ResearchTeamDatabase.TEAMS.get(team).getResearchTeamXP();
+                this.blit(matrixStack, left + CORNER_SIZE, bottom - CORNER_SIZE, 0, 0, researchExpAmt, 9);
+                this.font.draw(matrixStack, "Research Experience: " + researchExpAmt, left + CORNER_SIZE + 8, bottom - CORNER_SIZE - 9, 0);
+            });
 
             this.minecraft.getProfiler().pop();
         }

@@ -18,6 +18,18 @@
 
 package com.teammoeg.elt.capability;
 
-public interface IResearchProgress {
-    int getResearchExperience();
+public class TeamCapability implements ITeamCapability {
+    public String team;
+
+    public TeamCapability(String team) {
+        this.team = team;
+    }
+
+    public String getTeam() {
+        return this.team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
 }
