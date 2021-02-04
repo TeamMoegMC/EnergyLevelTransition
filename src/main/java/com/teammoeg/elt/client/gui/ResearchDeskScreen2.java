@@ -28,6 +28,7 @@ import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -38,7 +39,7 @@ import net.minecraftforge.common.util.LazyOptional;
 
 import java.util.ArrayList;
 
-public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
+public class ResearchDeskScreen2 extends ContainerScreen<ResearchDeskContainer> {
     private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30, INV_WIDTH = WIDTH, INV_HEIGHT = 87;
     private static final int SIDE = 10, TOP = 10, BOTTOM = 87, PADDING = 9;
     private static final float MIN_ZOOM = 1, MAX_ZOOM = 2, ZOOM_STEP = 0.2F;
@@ -59,9 +60,18 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int minY = Integer.MAX_VALUE;
     private int maxX = Integer.MIN_VALUE;
     private int maxY = Integer.MIN_VALUE;
-    private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
 
-    public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
+    private final int scrollRangeX = this.width - 2 * SIDE - 2 * PADDING + 2;
+    private final int scrollRangeY = this.height - TOP - BOTTOM - 2 * PADDING - 6;
+    private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
+    private static final ResourceLocation ACCESSIBILITY_TEXTURE = new ResourceLocation("textures/gui/accessibility.png");
+    private int left = SIDE;
+    private int top = TOP;
+    private int right = width - SIDE;
+    private int bottom = height - BOTTOM;
+    private boolean isLinePage = false;
+
+    public ResearchDeskScreen2(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
         this.player = inv.player;
     }
@@ -87,33 +97,29 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
 
-        addWidget(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
-        addWidget(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
-
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
     }
 
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        int left = SIDE;
-        int top = TOP;
-        int right = width - SIDE;
-        int bottom = height - BOTTOM;
-
-        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
-        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING;
-
         int i = (this.width - scrollRangeX) / 2;
         int j = (this.height - scrollRangeY) / 2;
 
-        this.renderWindow(matrixStack, left, top, right, bottom);
+        this.renderWindow(matrixStack);
         if (this.menu.getSlot(0).hasItem()) {
             this.renderInside(matrixStack, mouseX, mouseY, i, j);
         }
-//        this.renderResearchXpBar(matrixStack, left, top, right, bottom);
+//        this.renderResearchXpBar(matrixStack);
 
         super.render(matrixStack, mouseX, mouseY, partialTicks);
+    }
+
+    @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
+        return super.mouseClicked(mouseX, mouseY, buttonIn);
     }
 
     @Override
@@ -159,7 +165,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 渲染研究窗口的框，以及背包，和标题
      */
-    private void renderWindow(MatrixStack matrixStack, int left, int top, int right, int bottom) {
+    private void renderWindow(MatrixStack matrixStack) {
         RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
         RenderSystem.enableBlend();
         RenderHelper.setupForFlatItems();
@@ -208,22 +214,15 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     /**
      * 渲染内部背景，研究图标，研究连线等内容。
+     *
+     * @param matrixStack
      */
     private void drawContents(MatrixStack matrixStack) {
-        // calculations
-        int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
-        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
-
         if (!this.centered) {
             this.scrollX = scrollRangeX / 2 - (this.maxX + this.minX) / 2;
             this.scrollY = scrollRangeY / 2 - (this.maxY + this.minY) / 2;
             this.centered = true;
         }
-
-        int deltaX = MathHelper.floor(this.scrollX);
-        int deltaY = MathHelper.floor(this.scrollY);
-        int hexReducedDeltaX = deltaX % 16;
-        int hexReducedDeltaY = deltaY % 16;
 
         // render borders and color masks
         RenderSystem.pushMatrix();
@@ -237,10 +236,17 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         fill(matrixStack, scrollRangeX, scrollRangeY, 0, 0, -16777216);
         RenderSystem.depthFunc(515);
 
-        drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
+        int deltaX = MathHelper.floor(this.scrollX);
+        int deltaY = MathHelper.floor(this.scrollY);
 
-        drawResearchIcons(matrixStack, deltaX, deltaY);
+        // BG
+        this.drawInsideBg(matrixStack, deltaX, deltaY);
 
+        // Draw Icons
+        this.drawResearchIcons(matrixStack, deltaX, deltaY);
+        this.drawResearchLineIcons(matrixStack, deltaX, deltaY);
+
+        // Finish
         RenderSystem.depthFunc(518);
         RenderSystem.translatef(0.0F, 0.0F, -950.0F);
         RenderSystem.colorMask(false, false, false, false);
@@ -254,7 +260,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 渲染研究经验条
      */
-    private void renderResearchXpBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
+    private void renderResearchXpBar(MatrixStack matrixStack) {
         if (this.player != null) {
             this.minecraft.getTextureManager().bind(BARS);
             this.minecraft.getProfiler().push("research_desk_exp_bar");
@@ -277,9 +283,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
      */
     private void scroll(double dragX, double dragY) {
 
-        int scrollRangeX = width - 2 * SIDE - 2 * PADDING;
-        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING;
-
         if (this.maxX - this.minX > scrollRangeX) {
             this.scrollX = MathHelper.clamp(this.scrollX + dragX, -(this.maxX - scrollRangeX), 0.0D);
         }
@@ -293,7 +296,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 添加一个研究图标
      */
-    private void addWidget(ResearchIconGui gui) {
+    private void addResearchIcon(ResearchIconGui gui) {
         this.widgets.add(gui);
         int i = gui.getX();
         int j = i + 28;
@@ -327,9 +330,14 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // todo: draw connectivity
     }
 
-    private void drawInsideBg(MatrixStack matrixStack, int deltaX, int deltaY, int scrollRangeX, int scrollRangeY) {
+    private void drawInsideBg(MatrixStack matrixStack, int deltaX, int deltaY) {
         // bind texture of background
-        this.minecraft.getTextureManager().bind(BG_PIC);
+        ResourceLocation resourcelocation = BG_PIC; // TODO: this should be a get function from the gui content
+        if (resourcelocation != null) {
+            this.minecraft.getTextureManager().bind(resourcelocation);
+        } else {
+            this.minecraft.getTextureManager().bind(TextureManager.INTENTIONAL_MISSING_TEXTURE);
+        }
 
         int hexReducedDeltaX = deltaX % 16;
         int hexReducedDeltaY = deltaY % 16;
