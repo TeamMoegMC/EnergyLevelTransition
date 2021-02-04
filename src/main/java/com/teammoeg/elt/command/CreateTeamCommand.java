@@ -35,7 +35,7 @@ import java.util.UUID;
 
 public class CreateTeamCommand {
     public static void register(CommandDispatcher<CommandSource> dispatcher) {
-        LiteralCommandNode<CommandSource> node = dispatcher.register(Commands.literal(ELT.MOD_ID).then(Commands.argument("team", StringArgumentType.word()).executes((commandContext_) -> {
+        LiteralCommandNode<CommandSource> node = dispatcher.register(Commands.literal(ELT.MOD_ID).then(Commands.literal("create_team")).then(Commands.argument("team", StringArgumentType.word()).executes((commandContext_) -> {
             createTeam(commandContext_.getSource(), StringArgumentType.getString(commandContext_, "team"));
             return 0;
         })));

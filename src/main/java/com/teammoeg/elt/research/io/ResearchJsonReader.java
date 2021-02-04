@@ -16,7 +16,7 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.research;
+package com.teammoeg.elt.research.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -29,7 +29,7 @@ import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 
-public class JsonRead {
+public class ResearchJsonReader {
     public static File SAVE_ELT_FOLDER_PATH;
 
     public static void readFile() {

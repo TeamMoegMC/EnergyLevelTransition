@@ -16,23 +16,9 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.research;
+package com.teammoeg.the_seed.api.data;
 
-import net.minecraft.nbt.ListNBT;
-
-import javax.annotation.Nullable;
-import java.util.List;
-import java.util.UUID;
-
-public class ResearchDataBase {
-    public static final ResearchDataBase RESEARCH_DATA_BASE = new ResearchDataBase();
-
-    public synchronized ListNBT writeProgressToNBT(ListNBT json, @Nullable List<UUID> users) {
-/*       for(Research research : this.getEntries()) {
-            CompoundNBT jq = new CompoundNBT();
-            jq.putString("questID", Research.getId());
-            json.appendTag(jq);
-        }*/
-        return json;
-    }
+// Constants
+public class CC {
+    public static final int LEFT_MOUSE = 0, RIGHT_MOUSE = 1, MID_MOUSE = 2;
 }

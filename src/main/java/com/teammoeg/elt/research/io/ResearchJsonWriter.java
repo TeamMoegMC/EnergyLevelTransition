@@ -16,7 +16,7 @@
  *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.teammoeg.elt.research;
+package com.teammoeg.elt.research.io;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -30,12 +30,12 @@ import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.nio.charset.StandardCharsets;
 
-public class JsonWriter {
+public class ResearchJsonWriter {
     public static void writeJson() {
         Gson gson = new GsonBuilder()
                 .registerTypeAdapter(ResearchTeam.class, new ResearchTeamAdapter())
                 .create();
-        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(JsonRead.SAVE_ELT_FOLDER_PATH,
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(new File(ResearchJsonReader.SAVE_ELT_FOLDER_PATH,
                 "ResearchProgress.json")), StandardCharsets.UTF_8))) {
 
             gson.toJson(ResearchTeamDatabase.TEAMS.values().toArray(), out);

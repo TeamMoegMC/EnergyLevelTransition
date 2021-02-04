@@ -21,9 +21,9 @@ package com.teammoeg.elt;
 import com.mojang.brigadier.CommandDispatcher;
 import com.teammoeg.elt.capability.TeamCapabilityProvider;
 import com.teammoeg.elt.command.CreateTeamCommand;
-import com.teammoeg.elt.research.JsonRead;
-import com.teammoeg.elt.research.JsonWriter;
 import com.teammoeg.elt.research.Quest;
+import com.teammoeg.elt.research.io.ResearchJsonReader;
+import com.teammoeg.elt.research.io.ResearchJsonWriter;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
@@ -56,7 +56,7 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public static void WorldSave(WorldEvent.Save event) {
-        JsonWriter.writeJson();
+        ResearchJsonWriter.writeJson();
     }
 
     @SubscribeEvent
@@ -75,8 +75,8 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent aEvent) {
-        JsonRead.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_ID)).toFile();
-        JsonRead.readFile();
+        ResearchJsonReader.SAVE_ELT_FOLDER_PATH = aEvent.getServer().getWorldPath(new FolderName(ELT.MOD_ID)).toFile();
+        ResearchJsonReader.readFile();
     }
 
     @SubscribeEvent
