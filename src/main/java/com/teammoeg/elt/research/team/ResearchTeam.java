@@ -25,7 +25,7 @@ public class ResearchTeam {
     HashMap<UUID, Integer> players = new HashMap();
 
     private String name;
-    private int researchTeamXP;
+    private int researchTeamXP = 0;
 
     public ResearchTeam(String name) {
         this.name = name;

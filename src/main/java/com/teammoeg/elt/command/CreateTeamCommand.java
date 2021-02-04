@@ -24,7 +24,7 @@ import com.mojang.brigadier.tree.LiteralCommandNode;
 import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.capability.ELTCapabilities;
 import com.teammoeg.elt.capability.ITeamCapability;
-import com.teammoeg.elt.research.team.ResearchTeamDatabase;
+import com.teammoeg.elt.research.team.ResearchTeam;
 import net.minecraft.command.CommandSource;
 import net.minecraft.command.Commands;
 import net.minecraft.entity.player.ServerPlayerEntity;
@@ -44,12 +44,10 @@ public class CreateTeamCommand {
     private static void createTeam(CommandSource source, String team) {
         if (source.getEntity() instanceof ServerPlayerEntity) {
             UUID uuid = source.getEntity() == null ? Util.NIL_UUID : source.getEntity().getUUID();
-            ResearchTeamDatabase.createTeam(team);
-            ResearchTeamDatabase.TEAMS.get(team).addPlayer(uuid);
+            ResearchTeam researchTeam = new ResearchTeam(team);
+            researchTeam.addPlayer(uuid);
             LazyOptional<ITeamCapability> Cap = source.getEntity().getCapability(ELTCapabilities.teamCapability);
-            Cap.ifPresent((P) -> {
-                P.setTeam(team);
-            });
+            Cap.ifPresent((P) -> P.setTeam(team));
         }
     }
 
