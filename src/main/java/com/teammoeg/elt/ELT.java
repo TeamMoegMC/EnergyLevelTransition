@@ -64,7 +64,16 @@ public class ELT implements ModInitializer {
         ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
     }
 
-    public static final ResearchLine STONE_AGE = new ResearchLine("stone_age_line", Items.STONE);
+    public static final ResearchLine PALEOLITHIC_AGE = new ResearchLine("paleolithic_age_line", Items.FLINT);
+    public static final ResearchLine NEOLITHIC_AGE = new ResearchLine("neolithic_age_line", Items.STONE_HOE);
+    public static final ResearchLine COPPER_AGE = new ResearchLine("copper_age_line", Items.BRICK);
+    public static final ResearchLine BRONZE_AGE = new ResearchLine("bronze_age_line", Items.NETHER_BRICK);
+    public static final ResearchLine IRON_AGE = new ResearchLine("iron_age_line", Items.IRON_HOE);
+    public static final ResearchLine STEEL_AGE = new ResearchLine("steel_age_line", Items.GOLD_INGOT);
+    public static final ResearchLine STEAM_AGE = new ResearchLine("steam_age_line", Items.FURNACE);
+    public static final ResearchLine ELECTRIC_AGE = new ResearchLine("electric_age_line", Items.IRON_BLOCK);
+    public static final ResearchLine ATOMIC_AGE = new ResearchLine("atomic_age_line", Items.HEART_OF_THE_SEA);
+    public static final ResearchLine SPACE_AGE = new ResearchLine("space_age_line", Items.FIREWORK_ROCKET);
     public static final Quest KILL_ZOMBIE = new Quest("kill_zombie");
     public static final Research FIRST_RESEARCH = new Research("first_research");
     public static final Research SECOND_RESEARCH = new Research("second_research", Items.DIRT);

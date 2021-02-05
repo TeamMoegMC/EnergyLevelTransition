@@ -79,15 +79,16 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
 
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 2, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 3, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 4, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 5, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 6, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 7, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 8, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STONE_AGE, 48 * 9, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.PALEOLITHIC_AGE, 48, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.NEOLITHIC_AGE, 48 * 2, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.COPPER_AGE, 48 * 3, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.BRONZE_AGE, 48 * 4, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.IRON_AGE, 48 * 5, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STEEL_AGE, 48 * 6, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STEAM_AGE, 48 * 7, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.ELECTRIC_AGE, 48 * 8, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.ATOMIC_AGE, 48 * 9, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.SPACE_AGE, 48 * 10, 48));
 
 //        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
 //        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
@@ -227,7 +228,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         RenderSystem.pushMatrix();
         /// 这似乎是把坐标系迁移
         RenderSystem.translatef(18.0f, 28.0f, 0.0F);
-        this.drawContents(matrixStack);
+        this.drawContents(matrixStack, mouseX, mouseY);
         RenderSystem.popMatrix();
         RenderSystem.depthFunc(515);
         RenderSystem.disableDepthTest();
@@ -236,7 +237,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     /**
      * 渲染内部背景，研究图标，研究连线等内容。
      */
-    private void drawContents(MatrixStack matrixStack) {
+    private void drawContents(MatrixStack matrixStack, int mouseX, int mouseY) {
         // calculations
         int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
         int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
@@ -267,7 +268,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         if (!isLinePage) {
             this.drawResearchIcons(matrixStack, deltaX, deltaY);
         } else {
-            this.drawResearchLineIcons(matrixStack, deltaX, deltaY);
+            this.drawResearchLineIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
         }
 
         RenderSystem.depthFunc(518);
@@ -346,13 +347,13 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.maxY = Math.max(this.maxY, l);
     }
 
-    private void drawResearchLineIcons(MatrixStack matrixStack, int deltaX, int deltaY) {
+    private void drawResearchLineIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
         // bind texture of frames
         this.minecraft.getTextureManager().bind(FRAMES);
 
         // draw frames
         for (LineIconGui lineIconGui : lineIcons) {
-            lineIconGui.draw(matrixStack, deltaX, deltaY);
+            lineIconGui.draw(matrixStack, mouseX, mouseY, deltaX, deltaY);
         }
     }
 

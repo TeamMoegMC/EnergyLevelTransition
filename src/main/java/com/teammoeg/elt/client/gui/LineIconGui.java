@@ -49,16 +49,16 @@ public class LineIconGui extends AbstractGui {
         return this.y;
     }
 
-    public void draw(MatrixStack matrixStack, int x, int y) {
+    public void draw(MatrixStack matrixStack, int mouseX, int mouseY, int x, int y) {
         this.minecraft.getTextureManager().bind(FRAMES);
-        this.blit(matrixStack, x + this.x + 3, y + this.y, 0, ICON_OFFSET, ICON_SIZE, ICON_SIZE);
+        this.blit(matrixStack, x + this.x + 3, y + this.y, 0, this.isMouseOver(x, y, mouseX, mouseY) ? ICON_OFFSET : ICON_OFFSET + ICON_SIZE, ICON_SIZE, ICON_SIZE);
         this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.researchLine.getIcon()), x + this.x + 8, y + this.y + 5);
     }
 
     public boolean isMouseOver(int x, int y, double mouseX, double mouseY) {
-        int i = x + this.x;
+        int i = x + this.x + ICON_SIZE;
         int j = i + ICON_SIZE;
-        int k = y + this.y;
+        int k = y + this.y + ICON_SIZE;
         int l = k + ICON_SIZE;
         return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= l;
     }
