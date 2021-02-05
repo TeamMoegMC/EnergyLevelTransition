@@ -4,6 +4,9 @@
   "package": "com.teammoeg.elt.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ForgeHooksMixin",
+    "MinecraftServerMixin",
+    "UtilMixin"
   ],
   "client": [
   ],
