@@ -85,10 +85,17 @@ public class ELT implements ModInitializer {
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {
         ELTCapabilityRegister.registerCapability();
+
         WEAPON_RESEARCH.addQuest(KILL_ZOMBIE);
         FIRST_RESEARCH.addQuest(KILL_ZOMBIE);
         SECOND_RESEARCH.addQuest(KILL_ZOMBIE);
         THIRD_RESEARCH.addQuest(KILL_ZOMBIE);
+
+        WEAPON_RESEARCH.setLine(PALEOLITHIC_AGE);
+        FIRST_RESEARCH.setLine(NEOLITHIC_AGE);
+        SECOND_RESEARCH.setLine(COPPER_AGE);
+        THIRD_RESEARCH.setLine(BRONZE_AGE);
+
         ResearchTeamDatabase.createTeam("dsb");
         BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get()), 1000));
         FairyTaleChunkGenerator.registerChunkgenerator();

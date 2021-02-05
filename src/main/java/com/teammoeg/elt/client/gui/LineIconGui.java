@@ -19,6 +19,7 @@
 package com.teammoeg.elt.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
+import com.mojang.blaze3d.systems.RenderSystem;
 import com.teammoeg.elt.research.ResearchLine;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.AbstractGui;
@@ -26,8 +27,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 public class LineIconGui extends AbstractGui {
-    private static final int CORNER_SIZE = 10;
-    private static final int WIDGET_WIDTH = 256, WIDGET_HEIGHT = 26, TITLE_SIZE = 32, ICON_OFFSET = 128, ICON_SIZE = 26;
+    private static final int ICON_OFFSET = 128, ICON_SIZE = 26;
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
     private final Minecraft minecraft;
     private final ResearchLine researchLine;
@@ -50,8 +50,20 @@ public class LineIconGui extends AbstractGui {
     }
 
     public void draw(MatrixStack matrixStack, int mouseX, int mouseY, int x, int y) {
+        int descWidth = this.minecraft.font.width(this.researchLine.getDesc());
+        int nameWidth = 29 + this.minecraft.font.width(this.researchLine.getName()) + 8;
+
         this.minecraft.getTextureManager().bind(FRAMES);
         this.blit(matrixStack, x + this.x + 3, y + this.y, 0, this.isMouseOver(x, y, mouseX, mouseY) ? ICON_OFFSET : ICON_OFFSET + ICON_SIZE, ICON_SIZE, ICON_SIZE);
+        if (isMouseOver(x, y, mouseX, mouseY)) {
+
+            RenderSystem.color4f(1.0F, 1.0F, 1.0F, 1.0F);
+            RenderSystem.enableBlend();
+
+            this.minecraft.font.drawShadow(matrixStack, this.researchLine.getName(), (float) (x + this.x + 32), (float) (y + this.y + 9), -1);
+            this.minecraft.font.drawShadow(matrixStack, this.researchLine.getDesc(), (float) (x + this.x + nameWidth - descWidth - 5), (float) (y + this.y + 9), -1);
+        }
+
         this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.researchLine.getIcon()), x + this.x + 8, y + this.y + 5);
     }
 

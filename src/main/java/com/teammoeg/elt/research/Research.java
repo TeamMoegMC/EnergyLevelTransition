@@ -34,6 +34,7 @@ public class Research {
     private ResourceLocation id;
     private HashSet<Research> parents = new HashSet<>();
     private HashSet<Quest> containedQuests = new HashSet<>();
+    private ResearchLine line;
 
     public Research(String path, Research... parents) {
         this(new ResourceLocation(ELT.MOD_ID, path), Items.GRASS_BLOCK, parents);
@@ -138,5 +139,17 @@ public class Research {
 
     public TranslationTextComponent getDesc() {
         return desc;
+    }
+
+    public ResearchLine getLine() {
+        return line;
+    }
+
+    public void setLine(ResearchLine line) {
+        this.line = line;
+    }
+
+    public String toString() {
+        return "Research:" + id;
     }
 }

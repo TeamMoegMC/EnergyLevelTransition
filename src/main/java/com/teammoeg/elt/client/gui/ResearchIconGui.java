@@ -29,12 +29,10 @@ public class ResearchIconGui extends AbstractGui {
 
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
 
-    private static final int CORNER_SIZE = 10;
-    private static final int WIDGET_WIDTH = 256, WIDGET_HEIGHT = 26, TITLE_SIZE = 32, ICON_OFFSET = 128, ICON_SIZE = 26;
+    private static final int ICON_OFFSET = 128, ICON_SIZE = 26;
 
     private final Research research;
     private final Minecraft minecraft;
-    private final String title;
     protected int x;
 
     public int getX() {
@@ -46,36 +44,38 @@ public class ResearchIconGui extends AbstractGui {
     }
 
     protected int y;
-    private final int screenScale;
-    private int width;
 
-    public ResearchIconGui(Minecraft mc, Research research, String title, int x, int y) {
+    public ResearchIconGui(Minecraft mc, Research research, int x, int y) {
         this.research = research;
         this.minecraft = mc;
-        this.title = title;
         this.x = x;
         this.y = y;
-        this.screenScale = mc.getWindow().calculateScale(0, false);
     }
 
-    public void draw(MatrixStack matrixStack, int x, int y) {
+    public void draw(MatrixStack matrixStack, int mouseX, int mouseY, int x, int y) {
         if (!this.research.isHidden()) {
-//            float f = this.progress == null ? 0.0F : this.progress.getPercent();
             this.minecraft.getTextureManager().bind(FRAMES);
             this.blit(matrixStack, x + this.x + 3, y + this.y, 0, ICON_OFFSET, ICON_SIZE, ICON_SIZE);
+            if (isMouseOver(x, y, mouseX, mouseY)) {
+                this.minecraft.font.draw(matrixStack, this.research.getName(), x + this.x + 3, y + this.y, -5592406);
+            }
             this.minecraft.getItemRenderer().renderAndDecorateFakeItem(new ItemStack(this.research.getIcon()), x + this.x + 8, y + this.y + 5);
         }
     }
 
     public boolean isMouseOver(int x, int y, int mouseX, int mouseY) {
         if (!this.research.isHidden()) {
-            int i = x + this.x;
-            int j = i + 26;
-            int k = y + this.y;
-            int l = k + 26;
+            int i = x + this.x + ICON_SIZE;
+            int j = i + ICON_SIZE;
+            int k = y + this.y + ICON_SIZE;
+            int l = k + ICON_SIZE;
             return mouseX >= i && mouseX <= j && mouseY >= k && mouseY <= l;
         } else {
             return false;
         }
+    }
+
+    public Research getResearch() {
+        return research;
     }
 }

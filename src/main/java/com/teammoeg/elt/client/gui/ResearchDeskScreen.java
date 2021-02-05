@@ -90,10 +90,10 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         addResearchLineIcon(new LineIconGui(this.minecraft, ELT.ATOMIC_AGE, 48 * 9, 48));
         addResearchLineIcon(new LineIconGui(this.minecraft, ELT.SPACE_AGE, 48 * 10, 48));
 
-//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, "Research 1", 48, 48));
-//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, "Research 2", 48 * 2, 48));
-//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, "Research 3", 48 * 3, 48));
-//        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, "Weapon", 48 * 4, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, 48 * 2, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, 48 * 3, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, 48 * 4, 48));
 
         addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, LINE_BUTTON, 20, 20, (button) -> {
             this.isLinePage = !this.isLinePage;
@@ -134,7 +134,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 //                this.selectedTab.drawTooltips(matrixStack, mouseX - offsetX - 9, mouseY - offsetY - 18, offsetX, offsetY); todo fix
                 if (lineIconGui.isMouseOver(deltaX, deltaY, mouseX, mouseY)) {
                     this.selectedLine = lineIconGui.getResearchLine();
-                    System.out.println("LINE: " + this.selectedLine.getName());
                     return true;
                 }
             }
@@ -266,7 +265,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
 
         if (!isLinePage) {
-            this.drawResearchIcons(matrixStack, deltaX, deltaY);
+            this.drawResearchIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
         } else {
             this.drawResearchLineIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
         }
@@ -357,13 +356,16 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         }
     }
 
-    private void drawResearchIcons(MatrixStack matrixStack, int deltaX, int deltaY) {
+    private void drawResearchIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
         // bind texture of frames
         this.minecraft.getTextureManager().bind(FRAMES);
 
         // draw frames
         for (ResearchIconGui researchIconGui : widgets) {
-            researchIconGui.draw(matrixStack, deltaX, deltaY);
+            // check whether the research's line is equal to the current selected line
+            if (researchIconGui.getResearch().getLine() != null && researchIconGui.getResearch().getLine() == this.selectedLine) {
+                researchIconGui.draw(matrixStack, mouseX, mouseY, deltaX, deltaY);
+            }
         }
 
         // todo: draw connectivity
