@@ -34,6 +34,7 @@ import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.elt.world.biome.ELTBiomes;
 import com.teammoeg.elt.world.biome.dreambiome.FairyTaleBiomeProvider;
 import com.teammoeg.elt.world.dimension.FairyTaleChunkGenerator;
+import com.teammoeg.elt.world.dimension.FairyTaleDimension;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.client.gui.ScreenManager;
@@ -93,6 +94,7 @@ public class ELT implements ModInitializer {
         BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get()), 1000));
         FairyTaleChunkGenerator.registerChunkgenerator();
         FairyTaleBiomeProvider.registerBiomeProvider();
+        FairyTaleDimension.initNoiseSettings();
     }
 
     @Override
