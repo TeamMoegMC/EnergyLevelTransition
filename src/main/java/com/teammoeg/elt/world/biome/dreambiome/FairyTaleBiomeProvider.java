@@ -17,7 +17,6 @@ public class FairyTaleBiomeProvider extends BiomeProvider {
     public static void registerBiomeProvider() {
         Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(ELT.MOD_ID, "biome_source"), FairyTaleBiomeProvider.CODEC);
     }
-
     private final long seed;
     private final Registry<Biome> biomes;
     private final Biome fallasleep;

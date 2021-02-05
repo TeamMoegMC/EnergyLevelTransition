@@ -27,7 +27,6 @@ public class FairyTaleChunkGenerator extends ChunkGenerator {
     public static void registerChunkgenerator() {
         Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(ELT.MOD_ID, "chunk_generator"), FairyTaleChunkGenerator.CODEC);
     }
-
     public static final Codec<FairyTaleChunkGenerator> CODEC = RecordCodecBuilder.create((instance_) -> {
         return instance_.group(BiomeProvider.CODEC.fieldOf("biome_source").forGetter((ftChunkGenerator2_) -> {
             return ftChunkGenerator2_.biomeSource;
@@ -35,7 +34,6 @@ public class FairyTaleChunkGenerator extends ChunkGenerator {
             return ftChunkGenerator_.settings;
         })).apply(instance_, instance_.stable(FairyTaleChunkGenerator::new));
     });
-
     public FairyTaleChunkGenerator(BiomeProvider biomeProvider, Supplier<DimensionSettings> supplier_) {
         this(biomeProvider, biomeProvider, supplier_);
     }

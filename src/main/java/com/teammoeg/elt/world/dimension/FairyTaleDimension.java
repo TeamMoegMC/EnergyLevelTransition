@@ -29,7 +29,7 @@ public class FairyTaleDimension {
 
 
     public static void initNoiseSettings() {
-        registerNoiseSettings(FAIRYTALE_NOISE_SETTINGS, createNoiseSettings(new DimensionStructuresSettings(false), false, Blocks.SNOW.defaultBlockState(), Blocks.WATER.defaultBlockState(), FAIRYTALE_NOISE_SETTINGS.getRegistryName()));
+        registerNoiseSettings(FAIRYTALE_NOISE_SETTINGS, createNoiseSettings(new DimensionStructuresSettings(false), false, Blocks.SAND.defaultBlockState(), Blocks.WATER.defaultBlockState(), FAIRYTALE_NOISE_SETTINGS.location()));
     }
 
     public static DimensionSettings createNoiseSettings(DimensionStructuresSettings structureSettingsIn, boolean flag1, BlockState fillerBlockIn, BlockState fluidBlockIn, ResourceLocation settingsLocationIn) {
@@ -52,7 +52,7 @@ public class FairyTaleDimension {
     }
 
     public static DimensionSettings registerNoiseSettings(RegistryKey<DimensionSettings> settingsKeyIn, DimensionSettings dimSettingsIn) {
-        WorldGenRegistries.register(WorldGenRegistries.NOISE_GENERATOR_SETTINGS, settingsKeyIn.getRegistryName(), dimSettingsIn);
+        WorldGenRegistries.register(WorldGenRegistries.NOISE_GENERATOR_SETTINGS, settingsKeyIn.location(), dimSettingsIn);
         return dimSettingsIn;
     }
 
