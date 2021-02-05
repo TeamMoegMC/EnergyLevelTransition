@@ -184,6 +184,9 @@ public class UT {
     }
 
     public static class Code {
+        public static final int[][] ASCENDING_ARRAYS = new int[1024][];
+        private static final DateFormat sDateFormat = DateFormat.getInstance();
+
         /**
          * Note: Does not work on huge amounts of Bytes.
          */
@@ -319,6 +322,12 @@ public class UT {
             return rBits;
         }
 
+//        public static ItemStack toStack(int aStack) {
+//            Item tItem = Item.getItemById(aStack&(~0>>>16));
+//            if (tItem != null) return ST.make(tItem, 1, aStack>>>16);
+//            return null;
+//        }
+
         public static boolean[] getBitsI(int aBits) {
             boolean[] rBits = new boolean[32];
             for (int i = 0; i < rBits.length; i++) if ((aBits & (1 << i)) != 0) rBits[i] = T;
@@ -330,12 +339,6 @@ public class UT {
             for (int i = 0; i < rBits.length; i++) if ((aBits & (1 << i)) != 0) rBits[i] = T;
             return rBits;
         }
-
-//        public static ItemStack toStack(int aStack) {
-//            Item tItem = Item.getItemById(aStack&(~0>>>16));
-//            if (tItem != null) return ST.make(tItem, 1, aStack>>>16);
-//            return null;
-//        }
 
         public static UUID getUUID(byte[] aData, int aOffset) {
             return aData.length - aOffset < 16 ? null : new UUID(combine(aData[aOffset], aData[aOffset + 1], aData[aOffset + 2], aData[aOffset + 3], aData[aOffset + 4], aData[aOffset + 5], aData[aOffset + 6], aData[aOffset + 7]), combine(aData[aOffset + 8], aData[aOffset + 9], aData[aOffset + 10], aData[aOffset + 11], aData[aOffset + 12], aData[aOffset + 13], aData[aOffset + 14], aData[aOffset + 15]));
@@ -433,8 +436,6 @@ public class UT {
             if (aArray != null) for (E tObject : aArray) if (tObject != null) return tObject;
             return null;
         }
-
-        private static final DateFormat sDateFormat = DateFormat.getInstance();
 
         public static String dateAndTime() {
             return sDateFormat.format(new Date());
@@ -557,8 +558,6 @@ public class UT {
             if (aObjects == null) return F;
             return aObjects.contains(aObject);
         }
-
-        public static final int[][] ASCENDING_ARRAYS = new int[1024][];
 
         public static int[] getAscendingArray(int aLength) {
             if (aLength <= 0) return ZL_INTEGER;

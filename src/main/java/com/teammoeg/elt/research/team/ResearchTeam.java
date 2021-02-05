@@ -24,7 +24,7 @@ import java.util.UUID;
 public class ResearchTeam {
     HashMap<UUID, Integer> players = new HashMap();
 
-    private String name;
+    private final String name;
     private int researchTeamXP = 0;
 
     public ResearchTeam(String name) {

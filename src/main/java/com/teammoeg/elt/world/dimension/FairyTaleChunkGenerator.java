@@ -1,3 +1,21 @@
+/*
+ *  Copyright (c) 2021. TeamMoeg
+ *
+ *  This file is part of Energy Level Transition.
+ *
+ *  Energy Level Transition is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, version 3.
+ *
+ *  Energy Level Transition is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with Energy Level Transition.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.teammoeg.elt.world.dimension;
 
 import com.mojang.serialization.Codec;
@@ -22,11 +40,6 @@ import net.minecraft.world.gen.feature.structure.StructureManager;
 import java.util.function.Supplier;
 
 public class FairyTaleChunkGenerator extends ChunkGenerator {
-    protected final Supplier<DimensionSettings> settings;
-
-    public static void registerChunkgenerator() {
-        Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(ELT.MOD_ID, "chunk_generator"), FairyTaleChunkGenerator.CODEC);
-    }
     public static final Codec<FairyTaleChunkGenerator> CODEC = RecordCodecBuilder.create((instance_) -> {
         return instance_.group(BiomeProvider.CODEC.fieldOf("biome_source").forGetter((ftChunkGenerator2_) -> {
             return ftChunkGenerator2_.biomeSource;
@@ -34,6 +47,8 @@ public class FairyTaleChunkGenerator extends ChunkGenerator {
             return ftChunkGenerator_.settings;
         })).apply(instance_, instance_.stable(FairyTaleChunkGenerator::new));
     });
+    protected final Supplier<DimensionSettings> settings;
+
     public FairyTaleChunkGenerator(BiomeProvider biomeProvider, Supplier<DimensionSettings> supplier_) {
         this(biomeProvider, biomeProvider, supplier_);
     }
@@ -43,6 +58,10 @@ public class FairyTaleChunkGenerator extends ChunkGenerator {
         DimensionSettings dimensionsettings = supplier_.get();
         this.settings = supplier_;
 
+    }
+
+    public static void registerChunkgenerator() {
+        Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(ELT.MOD_ID, "chunk_generator"), FairyTaleChunkGenerator.CODEC);
     }
 
     @Override

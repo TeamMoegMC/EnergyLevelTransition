@@ -38,6 +38,8 @@ import net.minecraft.world.World;
  */
 public class ResearchScroll extends ELTItemBase implements IModularGuiHolder {
 
+    public static final TextureArea BG = TextureArea.createFullTexture(new ResourceLocation("minecraft", "block/stone.png"));
+
     public ResearchScroll(String name) {
         super(name, new Item.Properties());
     }
@@ -55,8 +57,6 @@ public class ResearchScroll extends ELTItemBase implements IModularGuiHolder {
     public IGuiHolderCodec getCodec() {
         return ItemStackCodec.INSTANCE;
     }
-
-    public static final TextureArea BG = TextureArea.createFullTexture(new ResourceLocation("minecraft", "block/stone.png"));
 
     @Override
     public ModularGuiInfo createGuiInfo(PlayerEntity player) {

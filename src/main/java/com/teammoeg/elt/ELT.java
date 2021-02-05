@@ -54,18 +54,6 @@ public class ELT implements ModInitializer {
     public static final String MOD_ID = CS.ModIDs.ELT;
     public static final String MOD_NAME = "Energy Level Transition";
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-
-    public ELT() {
-        FMLJavaModLoadingContext.get().getModEventBus().register(this);
-        MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
-        FMLJavaModLoadingContext.get().getModEventBus().register(new RegistryEventHandler());
-        new ELTItems();
-        new ELTBlocks();
-        ELTTileEntityTypes.TILE_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ELTContainerTypes.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
-        ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
-    }
-
     public static final ResearchLine PALEOLITHIC_AGE = new ResearchLine("paleolithic_age_line", Items.FLINT);
     public static final ResearchLine NEOLITHIC_AGE = new ResearchLine("neolithic_age_line", Items.STONE_HOE);
     public static final ResearchLine COPPER_AGE = new ResearchLine("copper_age_line", Items.BRICK);
@@ -81,6 +69,17 @@ public class ELT implements ModInitializer {
     public static final Research SECOND_RESEARCH = new Research("second_research", Items.DIRT);
     public static final Research THIRD_RESEARCH = new Research("third_research", Items.NETHERITE_SCRAP);
     public static final Research WEAPON_RESEARCH = new Research("weapon_research", Items.WOODEN_SWORD, FIRST_RESEARCH, SECOND_RESEARCH);
+
+    public ELT() {
+        FMLJavaModLoadingContext.get().getModEventBus().register(this);
+        MinecraftForge.EVENT_BUS.register(new ForgeEventHandler());
+        FMLJavaModLoadingContext.get().getModEventBus().register(new RegistryEventHandler());
+        new ELTItems();
+        new ELTBlocks();
+        ELTTileEntityTypes.TILE_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTContainerTypes.CONTAINER_TYPE_REG.register(FMLJavaModLoadingContext.get().getModEventBus());
+        ELTBiomes.BIOMES.register(FMLJavaModLoadingContext.get().getModEventBus());
+    }
 
     @Override
     public void onModCommonSetup2(FMLCommonSetupEvent aEvent) {

@@ -27,22 +27,11 @@ import net.minecraft.util.ResourceLocation;
 
 public class ResearchIconGui extends AbstractGui {
 
-    private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
-
     private static final int ICON_OFFSET = 128, ICON_SIZE = 26;
-
+    private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
     private final Research research;
     private final Minecraft minecraft;
     protected int x;
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
     protected int y;
 
     public ResearchIconGui(Minecraft mc, Research research, int x, int y) {
@@ -50,6 +39,14 @@ public class ResearchIconGui extends AbstractGui {
         this.minecraft = mc;
         this.x = x;
         this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void draw(MatrixStack matrixStack, int mouseX, int mouseY, int x, int y) {

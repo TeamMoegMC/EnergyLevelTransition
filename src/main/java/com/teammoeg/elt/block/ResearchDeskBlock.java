@@ -59,6 +59,15 @@ public class ResearchDeskBlock extends ELTTileBlock {
         super(name, Properties.of(Material.WOOD).sound(SoundType.WOOD).strength(2, 8).noOcclusion(), ELTBlockItem::new, IS_NOT_MAIN, FACING, BOOK);
     }
 
+    //如果是主方块返回本身方向 不是主方块返回相反反向找到床的另一部分
+    private static Direction getNeighbourDirection(boolean b, Direction directionIn) {
+        return b == false ? directionIn : directionIn.getOpposite();
+    }
+
+    public static void setBlockhasbook(World worldIn, BlockPos pos, BlockState state, boolean hasBook) {
+        worldIn.setBlock(pos, state.setValue(BOOK, hasBook), 3);
+    }
+
     @Override
     public BlockState mirror(BlockState state, Mirror mirrorIn) {
         return state.rotate(mirrorIn.getRotation(state.getValue(FACING)));
@@ -67,11 +76,6 @@ public class ResearchDeskBlock extends ELTTileBlock {
     @Override
     public BlockState rotate(BlockState state, IWorld world, BlockPos pos, Rotation direction) {
         return state.setValue(FACING, direction.rotate(state.getValue(FACING)));
-    }
-
-    //如果是主方块返回本身方向 不是主方块返回相反反向找到床的另一部分
-    private static Direction getNeighbourDirection(boolean b, Direction directionIn) {
-        return b == false ? directionIn : directionIn.getOpposite();
     }
 
     @Nullable
@@ -149,10 +153,6 @@ public class ResearchDeskBlock extends ELTTileBlock {
 
         }
         return ActionResultType.SUCCESS;
-    }
-
-    public static void setBlockhasbook(World worldIn, BlockPos pos, BlockState state, boolean hasBook) {
-        worldIn.setBlock(pos, state.setValue(BOOK, hasBook), 3);
     }
 
     @Override
