@@ -3,7 +3,9 @@ package com.teammoeg.elt.world.biome.dreambiome;
 import com.google.common.collect.ImmutableList;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.world.biome.ELTBiomes;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryLookupCodec;
 import net.minecraft.world.biome.Biome;
@@ -12,6 +14,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 public class FairyTaleBiomeProvider extends BiomeProvider {
+    public static void registerBiomeProvider() {
+        Registry.register(Registry.BIOME_SOURCE, new ResourceLocation(ELT.MOD_ID, "biome_source"), FairyTaleBiomeProvider.CODEC);
+    }
+
     private final long seed;
     private final Registry<Biome> biomes;
     private final Biome fallasleep;
