@@ -28,7 +28,6 @@ import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.world.Dimension;
 import net.minecraft.world.DimensionType;
-import net.minecraft.world.World;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.DimensionSettings;
@@ -39,8 +38,6 @@ import java.util.function.Function;
 import java.util.function.Supplier;
 
 public class ELTDimensions {
-    public static final RegistryKey<DimensionType> FAIRYTALETYPE = RegistryKey.create(Registry.DIMENSION_TYPE_REGISTRY, new ResourceLocation(ELT.MOD_ID, "fairytaletype"));
-    public static final RegistryKey<World> FAIRYTALE = RegistryKey.create(Registry.DIMENSION_REGISTRY, new ResourceLocation(ELT.MOD_ID, "fairytale"));
     public static final RegistryKey<Dimension> FAIRYTALEDIM = RegistryKey.create(Registry.LEVEL_STEM_REGISTRY, new ResourceLocation(ELT.MOD_ID, "fairytale"));
 
 

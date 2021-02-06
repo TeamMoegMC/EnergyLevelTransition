@@ -38,7 +38,6 @@ import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.client.gui.ScreenManager;
 import net.minecraft.item.Items;
-import net.minecraftforge.common.BiomeManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -94,9 +93,7 @@ public class ELT implements ModInitializer {
         FIRST_RESEARCH.setLine(NEOLITHIC_AGE);
         SECOND_RESEARCH.setLine(COPPER_AGE);
         THIRD_RESEARCH.setLine(BRONZE_AGE);
-
         ResearchTeamDatabase.createTeam("dsb");
-        BiomeManager.addBiome(BiomeManager.BiomeType.COOL, new BiomeManager.BiomeEntry(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get()), 1000));
         FairyTaleChunkGenerator.registerChunkgenerator();
         FairyTaleDimension.initNoiseSettings();
     }
