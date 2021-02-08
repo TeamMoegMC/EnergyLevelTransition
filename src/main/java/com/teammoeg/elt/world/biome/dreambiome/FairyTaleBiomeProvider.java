@@ -46,20 +46,22 @@ public class FairyTaleBiomeProvider extends BiomeProvider {
     private final Registry<Biome> biomes;
     private final Biome fallasleep;
     private final Biome deepdream;
+    private final Biome mountaindream;
     private final SimplexNoiseGenerator noise;
 
     public FairyTaleBiomeProvider(Registry<Biome> lookupRegistry, long seed) {
-        this(lookupRegistry, seed, lookupRegistry.getOrThrow(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get())), lookupRegistry.getOrThrow(ELTBiomes.getKey(ELTBiomes.deepdreambiome.get())));
+        this(lookupRegistry, seed, lookupRegistry.getOrThrow(ELTBiomes.getKey(ELTBiomes.fallasleepbiome.get())), lookupRegistry.getOrThrow(ELTBiomes.getKey(ELTBiomes.deepdreambiome.get())),
+                lookupRegistry.getOrThrow(ELTBiomes.getKey(ELTBiomes.mountaindreambiome.get())));
     }
 
-    protected FairyTaleBiomeProvider(Registry<Biome> lookupRegistry, long seed, Biome fallasleep, Biome deep) {
-        super(ImmutableList.of(fallasleep));
+    protected FairyTaleBiomeProvider(Registry<Biome> lookupRegistry, long seed, Biome fallasleep, Biome deep, Biome mountaindream) {
+        super(ImmutableList.of(fallasleep, deep, mountaindream));
         this.biomes = lookupRegistry;
         this.seed = seed;
         this.fallasleep = fallasleep;
         this.deepdream = deep;
+        this.mountaindream = mountaindream;
         SharedSeedRandom sharedseedrandom = new SharedSeedRandom(seed);
-        sharedseedrandom.consumeCount(17292);
         this.noise = new SimplexNoiseGenerator(sharedseedrandom);
     }
 
@@ -71,17 +73,19 @@ public class FairyTaleBiomeProvider extends BiomeProvider {
     @OnlyIn(Dist.CLIENT)
     @Override
     public BiomeProvider withSeed(long seed) {
-        return new FairyTaleBiomeProvider(this.biomes, seed, this.fallasleep, this.deepdream);
+        return new FairyTaleBiomeProvider(this.biomes, seed, this.fallasleep, this.deepdream, this.mountaindream);
     }
 
     @Override
     public Biome getNoiseBiome(int x, int y, int z) {
         int a = x >> 2;
         int b = z >> 2;
-        float i = getHeightValue(this.noise, a * 2 + 1, b * 2 + 1);
-        if (i > 0) {
+        float i = getHeightValue(this.noise, a, b);
+        if (i > 50) {
             return this.fallasleep;
-        } else return this.deepdream;
+        } else if (i > 0) {
+            return this.deepdream;
+        } else return this.mountaindream;
     }
 
     public static float getHeightValue(SimplexNoiseGenerator noiseGenerator, int x, int z) {
@@ -90,7 +94,7 @@ public class FairyTaleBiomeProvider extends BiomeProvider {
         int k = x % 2;
         int l = z % 2;
         float f = 100.0F - MathHelper.sqrt((float) (x * x + z * z)) * 8.0F;
-        f = MathHelper.clamp(f, -100.0F, 80.0F);
+        f = MathHelper.clamp(f, -20.0F, 60.0F);
 
         for (int i1 = -12; i1 <= 12; ++i1) {
             for (int j1 = -12; j1 <= 12; ++j1) {
@@ -101,7 +105,7 @@ public class FairyTaleBiomeProvider extends BiomeProvider {
                     float f2 = (float) (k - i1 * 2);
                     float f3 = (float) (l - j1 * 2);
                     float f4 = 100.0F - MathHelper.sqrt(f2 * f2 + f3 * f3) * f1;
-                    f4 = MathHelper.clamp(f4, -100.0F, 80.0F);
+                    f4 = MathHelper.clamp(f4, -20.0F, 60.0F);
                     f = Math.max(f, f4);
                 }
             }
