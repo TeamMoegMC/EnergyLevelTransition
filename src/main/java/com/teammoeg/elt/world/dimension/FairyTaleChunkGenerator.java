@@ -20,13 +20,10 @@ package com.teammoeg.elt.world.dimension;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.teammoeg.elt.ELT;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkPos;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.biome.provider.BiomeProvider;
@@ -59,11 +56,6 @@ public class FairyTaleChunkGenerator extends ChunkGenerator {
         this.settings = supplier_;
 
     }
-
-    public static void registerChunkgenerator() {
-        Registry.register(Registry.CHUNK_GENERATOR, new ResourceLocation(ELT.MOD_ID, "chunk_generator"), FairyTaleChunkGenerator.CODEC);
-    }
-
     @Override
     protected Codec<? extends ChunkGenerator> codec() {
         return CODEC;

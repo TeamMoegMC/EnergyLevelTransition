@@ -32,7 +32,6 @@ import com.teammoeg.elt.research.ResearchLine;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.elt.tileentity.ELTTileEntityTypes;
 import com.teammoeg.elt.world.biome.ELTBiomes;
-import com.teammoeg.elt.world.dimension.FairyTaleChunkGenerator;
 import com.teammoeg.elt.world.dimension.FairyTaleDimension;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
@@ -94,7 +93,6 @@ public class ELT implements ModInitializer {
         SECOND_RESEARCH.setLine(COPPER_AGE);
         THIRD_RESEARCH.setLine(BRONZE_AGE);
         ResearchTeamDatabase.createTeam("dsb");
-        FairyTaleChunkGenerator.registerChunkgenerator();
         FairyTaleDimension.initNoiseSettings();
     }
 
