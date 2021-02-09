@@ -18,11 +18,12 @@
 
 package com.teammoeg.elt.block;
 
+import com.teammoeg.elt.block.world.ELTGrassBlock;
 import net.minecraft.block.Block;
 
 public class ELTBlocks {
-    public static final Block
-            RESEARCH_DESK = new ResearchDeskBlock("research_desk");
+    public static final Block RESEARCH_DESK = new ResearchDeskBlock("research_desk");
+    public static final Block ELTGRASSBLOCK = new ELTGrassBlock("elt_grass_block");
 
     public static void init() {
     }

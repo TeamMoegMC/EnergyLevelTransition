@@ -21,6 +21,7 @@ package com.teammoeg.elt;
 
 import com.teammoeg.elt.block.ELTBlocks;
 import com.teammoeg.elt.capability.ELTCapabilities;
+import com.teammoeg.elt.client.BlockColor;
 import com.teammoeg.elt.client.gui.ResearchDeskScreen;
 import com.teammoeg.elt.client.renderer.ResearchDeskTileEntityRenderer;
 import com.teammoeg.elt.client.settings.ELTKeyBindings;
@@ -33,6 +34,8 @@ import com.teammoeg.elt.world.dimension.FairyTaleDimension;
 import com.teammoeg.the_seed.api.modinitializers.ModInitializer;
 import com.teammoeg.the_seed.data.legacy.CS;
 import net.minecraft.client.gui.ScreenManager;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -74,6 +77,8 @@ public class ELT implements ModInitializer {
         ELTKeyBindings.init();
         ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_DESK.get(), ResearchDeskTileEntityRenderer::new);
         ScreenManager.register(ELTContainerTypes.RESEARCHDESKCONTAINER.get(), ResearchDeskScreen::new);
+        RenderTypeLookup.setRenderLayer(ELTBlocks.ELTGRASSBLOCK, RenderType.cutoutMipped());
+        BlockColor.blockcolor();
     }
 
     @Override
