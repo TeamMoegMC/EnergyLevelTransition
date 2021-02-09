@@ -1,0 +1,10 @@
+{
+  "parent": "block/grass_block",
+  "textures": {
+    "particle": "elt:block/world/elt_dirt",
+    "bottom": "elt:block/world/elt_dirt",
+    "top": "elt:block/world/elt_grass_block_top",
+    "side": "elt:block/world/elt_grass_block_side",
+    "overlay": "elt:block/world/elt_grass_block_side_overlay"
+  }
+}
