@@ -21,5 +21,9 @@ package com.teammoeg.elt.item;
 import net.minecraft.item.Item;
 
 public class ELTItems {
-    public static Item RESEARCH_SCROLL = new ResearchScroll("research_scroll");
+    public static final Item
+            RESEARCH_SCROLL = new ResearchScroll("research_scroll");
+
+    public static void init() {
+    }
 }

@@ -18,11 +18,31 @@
 
 package com.teammoeg.elt.capability;
 
+import net.minecraft.nbt.INBT;
+import net.minecraft.util.Direction;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.CapabilityInject;
+import net.minecraftforge.common.capabilities.CapabilityManager;
+
+import javax.annotation.Nullable;
 
 public class ELTCapabilities {
     @CapabilityInject(ITeamCapability.class)
     public static Capability<ITeamCapability> teamCapability;
+
+    public static void init() {
+        CapabilityManager.INSTANCE.register(ITeamCapability.class, new Capability.IStorage<ITeamCapability>() {
+                    @Nullable
+                    @Override
+                    public INBT writeNBT(Capability<ITeamCapability> capability, ITeamCapability instance, Direction side) {
+                        return null;
+                    }
+
+                    @Override
+                    public void readNBT(Capability<ITeamCapability> capability, ITeamCapability instance, Direction side, INBT nbt) {
+                    }
+                }, () -> null
+        );
+    }
 
 }

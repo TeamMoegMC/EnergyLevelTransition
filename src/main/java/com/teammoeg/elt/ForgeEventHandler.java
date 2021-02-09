@@ -21,6 +21,7 @@ package com.teammoeg.elt;
 import com.mojang.brigadier.CommandDispatcher;
 import com.teammoeg.elt.capability.TeamCapabilityProvider;
 import com.teammoeg.elt.command.CreateTeamCommand;
+import com.teammoeg.elt.research.ELTResearches;
 import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.io.ResearchJsonReader;
 import com.teammoeg.elt.research.io.ResearchJsonWriter;
@@ -102,7 +103,7 @@ public class ForgeEventHandler {
         if (event.getEntityLiving() instanceof ZombieEntity) {
             ResearchTeamDatabase.TEAMS.get("dsb").addResearchTeamXP(10);
             ResearchTeamDatabase.TEAMS.get("ys").addResearchTeamXP(10);
-            for (Quest quest : ELT.WEAPON_RESEARCH.getContainedQuests()) {
+            for (Quest quest : ELTResearches.WEAPON_RESEARCH.getContainedQuests()) {
                 quest.complete();
                 event.getSource().getDirectEntity().sendMessage(new StringTextComponent("You have completed a Quest: "), Util.NIL_UUID);
                 event.getSource().getDirectEntity().sendMessage(quest.getName(), Util.NIL_UUID);

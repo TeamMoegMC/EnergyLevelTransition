@@ -21,8 +21,10 @@ package com.teammoeg.elt.block;
 import net.minecraft.block.Block;
 
 public class ELTBlocks {
-    public static
-    Block
+    public static final Block
             RESEARCH_DESK = new ResearchDeskBlock("research_desk");
+
+    public static void init() {
+    }
 
 }

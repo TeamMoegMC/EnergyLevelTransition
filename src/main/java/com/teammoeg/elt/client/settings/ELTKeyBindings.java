@@ -21,13 +21,17 @@ package com.teammoeg.elt.client.settings;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
 
+// See InputMappings.java for keyCode and GameSettings.java for category
 public class ELTKeyBindings {
 
-    public static KeyBinding openQuests;
+    public static final KeyBinding openQuests = create("key.elt.research", 96, "key.categories.inventory");
 
-    // See InputMappings.java for keyCode and GameSettings.java for category
-    public static void registerKeyBindings() {
-        openQuests = new KeyBinding("key.elt.research", 96, "key.categories.inventory");
-        ClientRegistry.registerKeyBinding(openQuests);
+    public static KeyBinding create(String desc, int keyCode, String category) {
+        KeyBinding keyBinding = new KeyBinding(desc, keyCode, category);
+        ClientRegistry.registerKeyBinding(keyBinding);
+        return keyBinding;
+    }
+
+    public static void init() {
     }
 }

@@ -24,6 +24,7 @@ import com.teammoeg.elt.ELT;
 import com.teammoeg.elt.capability.ELTCapabilities;
 import com.teammoeg.elt.capability.ITeamCapability;
 import com.teammoeg.elt.container.ResearchDeskContainer;
+import com.teammoeg.elt.research.ELTResearches;
 import com.teammoeg.elt.research.ResearchLine;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.the_seed.api.gui.GuiUtil;
@@ -63,7 +64,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int minY = Integer.MAX_VALUE;
     private int maxX = Integer.MIN_VALUE;
     private int maxY = Integer.MIN_VALUE;
-    private boolean isLinePage = false;
+    private boolean isLinePage = true;
     private ResearchLine selectedLine;
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
@@ -79,21 +80,21 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.leftPos = (width - INV_WIDTH) / 2;
         this.topPos = height - BOTTOM;
 
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.PALEOLITHIC_AGE, 48, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.NEOLITHIC_AGE, 48 * 2, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.COPPER_AGE, 48 * 3, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.BRONZE_AGE, 48 * 4, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.IRON_AGE, 48 * 5, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STEEL_AGE, 48 * 6, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.STEAM_AGE, 48 * 7, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.ELECTRIC_AGE, 48 * 8, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.ATOMIC_AGE, 48 * 9, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELT.SPACE_AGE, 48 * 10, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.PALEOLITHIC_AGE, 48, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.NEOLITHIC_AGE, 48 * 2, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.COPPER_AGE, 48 * 3, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.BRONZE_AGE, 48 * 4, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.IRON_AGE, 48 * 5, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEEL_AGE, 48 * 6, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEAM_AGE, 48 * 7, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ELECTRIC_AGE, 48 * 8, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ATOMIC_AGE, 48 * 9, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.SPACE_AGE, 48 * 10, 48));
 
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.FIRST_RESEARCH, 48, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.SECOND_RESEARCH, 48 * 2, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.THIRD_RESEARCH, 48 * 3, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELT.WEAPON_RESEARCH, 48 * 4, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.FIRST_RESEARCH, 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.SECOND_RESEARCH, 48 * 2, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48 * 3, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48 * 4, 48));
 
         addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, LINE_BUTTON, 20, 20, (button) -> {
             this.isLinePage = !this.isLinePage;
