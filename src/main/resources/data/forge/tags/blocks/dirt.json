@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "elt:elt_grass_block",
+    "elt:elt_dirt_block"
+  ]
+}
