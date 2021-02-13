@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "elt:block/world/elt_spruce_wood_top",
+    "side": "elt:block/world/elt_spruce_wood"
+  }
+}

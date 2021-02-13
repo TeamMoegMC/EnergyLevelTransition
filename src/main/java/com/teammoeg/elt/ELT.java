@@ -77,7 +77,7 @@ public class ELT implements ModInitializer {
         ELTKeyBindings.init();
         ClientRegistry.bindTileEntityRenderer(ELTTileEntityTypes.RESEARCH_DESK.get(), ResearchDeskTileEntityRenderer::new);
         ScreenManager.register(ELTContainerTypes.RESEARCHDESKCONTAINER.get(), ResearchDeskScreen::new);
-        RenderTypeLookup.setRenderLayer(ELTBlocks.ELTGRASSBLOCK, RenderType.cutoutMipped());
+        RenderTypeLookup.setRenderLayer(ELTBlocks.ELT_GRASSBLOCK, RenderType.cutoutMipped());
         BlockColor.blockcolor();
     }
 

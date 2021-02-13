@@ -8,7 +8,7 @@ import net.minecraft.world.gen.surfacebuilders.SurfaceBuilder;
 import net.minecraft.world.gen.surfacebuilders.SurfaceBuilderConfig;
 
 public class ELTSurfaceBuilders {
-    public static final SurfaceBuilderConfig ELTGRASSBLOCK = new SurfaceBuilderConfig(ELTBlocks.ELTGRASSBLOCK.defaultBlockState(), ELTBlocks.ELTDIRTBLOCK.defaultBlockState(), ELTBlocks.ELTDIRTBLOCK.defaultBlockState());
+    public static final SurfaceBuilderConfig ELTGRASSBLOCK = new SurfaceBuilderConfig(ELTBlocks.ELT_GRASSBLOCK.defaultBlockState(), ELTBlocks.ELT_DIRTBLOCK.defaultBlockState(), ELTBlocks.ELT_DIRTBLOCK.defaultBlockState());
     public static final ConfiguredSurfaceBuilder<SurfaceBuilderConfig> ELTGRASS = register("eltgrass", SurfaceBuilder.DEFAULT.configured(ELTGRASSBLOCK));
 
     private static <SC extends ISurfaceBuilderConfig> ConfiguredSurfaceBuilder<SC> register(String string_, ConfiguredSurfaceBuilder<SC> configuredSurfaceBuilder_) {

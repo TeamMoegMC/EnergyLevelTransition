@@ -51,14 +51,14 @@ public class ELTGrassBlock extends GrassBlock {
     public void randomTick(BlockState state, ServerWorld worldIn, BlockPos pos, Random random) {
         if (!canBeGrass(state, worldIn, pos)) {
             if (!worldIn.isAreaLoaded(pos, 3)) return;
-            worldIn.setBlockAndUpdate(pos, ELTBlocks.ELTDIRTBLOCK.defaultBlockState());
+            worldIn.setBlockAndUpdate(pos, ELTBlocks.ELT_DIRTBLOCK.defaultBlockState());
         } else {
             if (worldIn.getMaxLocalRawBrightness(pos.above()) >= 9) {
                 BlockState blockstate = this.defaultBlockState();
 
                 for (int i = 0; i < 4; ++i) {
                     BlockPos blockpos = pos.offset(random.nextInt(3) - 1, random.nextInt(5) - 3, random.nextInt(3) - 1);
-                    if (worldIn.getBlockState(blockpos).is(ELTBlocks.ELTDIRTBLOCK) && canPropagate(blockstate, worldIn, blockpos)) {
+                    if (worldIn.getBlockState(blockpos).is(ELTBlocks.ELT_DIRTBLOCK) && canPropagate(blockstate, worldIn, blockpos)) {
                         worldIn.setBlockAndUpdate(blockpos, this.defaultBlockState());
                     }
                 }

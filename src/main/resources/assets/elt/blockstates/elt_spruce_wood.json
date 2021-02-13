@@ -1,0 +1,21 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "elt:block/elt_spruce_wood"
+      },
+      {
+        "model": "elt:block/elt_spruce_wood",
+        "y": 90
+      },
+      {
+        "model": "elt:block/elt_spruce_wood",
+        "y": 180
+      },
+      {
+        "model": "elt:block/elt_spruce_wood",
+        "y": 270
+      }
+    ]
+  }
+}

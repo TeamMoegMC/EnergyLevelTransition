@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/leaves",
+  "textures": {
+    "all": "elt:block/world/elt_spruce_leaves"
+  }
+}
