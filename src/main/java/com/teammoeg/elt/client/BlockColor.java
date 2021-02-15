@@ -9,6 +9,6 @@ public class BlockColor {
     public static void blockcolor() {
         Minecraft.getInstance().getBlockColors().register((state, reader, pos, colorIn) -> {
             return reader != null && pos != null ? BiomeColors.getAverageGrassColor(reader, pos) : GrassColors.get(0.5D, 1.0D);
-        }, ELTBlocks.ELTGRASSBLOCK);
+        }, ELTBlocks.ELT_GRASSBLOCK);
     }
 }
