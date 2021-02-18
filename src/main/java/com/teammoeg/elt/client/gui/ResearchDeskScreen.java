@@ -119,7 +119,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
         this.renderWindow(matrixStack, left, top, right, bottom);
         if (this.menu.getSlot(0).hasItem()) {
-            this.renderAnimatedSidebar(matrixStack, mouseX, mouseY, partialTicks);
             this.renderInside(matrixStack, mouseX, mouseY, i, j);
         }
 //        this.renderResearchXpBar(matrixStack, left, top, right, bottom);
@@ -188,8 +187,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     }
 
-    private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
-        this.minecraft.getTextureManager().bind(WINDOW2);
+    private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY) {
+        this.minecraft.getTextureManager().bind(WINDOW);
 
         int left = SIDE;
         int top = TOP;
@@ -229,8 +228,23 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             }
             // mouse is in zone this frame, so it is "in zone in last frame" for next frame
             this.inZoneLastTime = true;
-            // display the sidebar
-            GuiUtil.renderRepeating(this, matrixStack, SIDE + displacement, top, 10, bottom - top, 0, CORNER_SIZE, 10, HEIGHT - CORNER_SIZE - CORNER_SIZE);
+
+            // now we render the sidebar
+            int offsetX = 9, offsetY = 18;
+
+            // reduce displacement
+            displacement -= 68;
+
+            // top bar
+            this.blit(matrixStack, left + offsetX + displacement, top + offsetY, 0, 0, offsetX, offsetX);
+            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, top + offsetY, 68 - 9 - 9, 9, 9, 0, WIDTH - 9 - 9, 9);
+            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, top + offsetY, WIDTH - offsetX, 0, offsetX, offsetX);
+
+            // lower bar
+            this.blit(matrixStack, left + offsetX + displacement, bottom - offsetY, 0, HEIGHT - 9, offsetX, offsetX);
+            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, bottom - offsetY, 68 - 9 - 9, 9, 9, HEIGHT - 9, WIDTH - 9 - 9, 9);
+            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, bottom - offsetY, WIDTH - offsetX, HEIGHT - 9, offsetX, offsetX);
+
         }
     }
 
@@ -279,7 +293,55 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         RenderSystem.pushMatrix();
         /// 这似乎是把坐标系迁移
         RenderSystem.translatef(18.0f, 28.0f, 0.0F);
-        this.drawContents(matrixStack, mouseX, mouseY);
+
+
+        // calculations
+        int scrollRangeX = width - 2 * SIDE - 2 * PADDING + 2;
+        int scrollRangeY = height - TOP - BOTTOM - 2 * PADDING - 6;
+
+        if (!this.centered) {
+            this.scrollX = (double) scrollRangeX / 2 - (double) (this.maxX + this.minX) / 2;
+            this.scrollY = (double) scrollRangeY / 2 - (double) (this.maxY + this.minY) / 2;
+            this.centered = true;
+        }
+
+        int deltaX = MathHelper.floor(this.scrollX);
+        int deltaY = MathHelper.floor(this.scrollY);
+
+        // render borders and color masks
+//        RenderSystem.pushMatrix();
+        RenderSystem.enableDepthTest();
+        RenderSystem.translatef(0.0F, 0.0F, 950.0F);
+        RenderSystem.colorMask(false, false, false, false);
+        fill(matrixStack, 4680, 2260, -4680, -2260, -16777216);
+        RenderSystem.colorMask(true, true, true, true);
+        RenderSystem.translatef(0.0F, 0.0F, -950.0F);
+        RenderSystem.depthFunc(518);
+        fill(matrixStack, scrollRangeX, scrollRangeY, 0, 0, -16777216);
+        RenderSystem.depthFunc(515);
+
+        this.drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
+
+        RenderSystem.translatef(-18.0f, -28.0f, 0.0F);
+        this.renderAnimatedSidebar(matrixStack, mouseX, mouseY);
+        RenderSystem.translatef(18.0f, 28.0f, 0.0F);
+
+        if (!isLinePage) {
+            this.drawResearchIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
+        } else {
+            this.drawResearchLineIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
+        }
+
+        RenderSystem.depthFunc(518);
+        RenderSystem.translatef(0.0F, 0.0F, -950.0F);
+        RenderSystem.colorMask(false, false, false, false);
+        fill(matrixStack, 4680, 2260, -4680, -2260, -16777216);
+        RenderSystem.colorMask(true, true, true, true);
+        RenderSystem.translatef(0.0F, 0.0F, 950.0F);
+        RenderSystem.depthFunc(515);
+//        RenderSystem.popMatrix();
+
+
         RenderSystem.popMatrix();
         RenderSystem.depthFunc(515);
         RenderSystem.disableDepthTest();
@@ -315,6 +377,10 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         RenderSystem.depthFunc(515);
 
         this.drawInsideBg(matrixStack, deltaX, deltaY, scrollRangeX, scrollRangeY);
+
+        RenderSystem.translatef(-18.0f, -28.0f, 0.0F);
+        this.renderAnimatedSidebar(matrixStack, mouseX, mouseY);
+        RenderSystem.translatef(18.0f, 28.0f, 0.0F);
 
         if (!isLinePage) {
             this.drawResearchIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
