@@ -47,6 +47,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private static final int SIDE = 10, TOP = 10, BOTTOM = 87, PADDING = 9;
     private static final float MIN_ZOOM = 1, MAX_ZOOM = 2, ZOOM_STEP = 0.2F;
 
+    private final ResourceLocation WINDOW2 = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window_2.png");
     private final ResourceLocation WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png");
     private final ResourceLocation INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png");
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
@@ -66,6 +67,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int maxY = Integer.MIN_VALUE;
     private boolean isLinePage = true;
     private ResearchLine selectedLine;
+    private long startTime;
+    private boolean inZoneLastTime = false;
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -116,6 +119,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
         this.renderWindow(matrixStack, left, top, right, bottom);
         if (this.menu.getSlot(0).hasItem()) {
+            this.renderAnimatedSidebar(matrixStack, mouseX, mouseY, partialTicks);
             this.renderInside(matrixStack, mouseX, mouseY, i, j);
         }
 //        this.renderResearchXpBar(matrixStack, left, top, right, bottom);
@@ -183,6 +187,53 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     protected void renderBg(MatrixStack matrixStack, float partialTicks, int x, int y) {
 
     }
+
+    private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.minecraft.getTextureManager().bind(WINDOW2);
+
+        int left = SIDE;
+        int top = TOP;
+        int right = width - SIDE;
+        int bottom = height - BOTTOM;
+
+        int displacement;
+
+        // mouse not in this frame, display nothing
+        if (mouseX >= SIDE) {
+            if (this.inZoneLastTime) {
+                // in last frame, moved out this frame
+                displacement = 0;
+                // reset start time
+                this.startTime = 0;
+            } else {
+                // never in, just display nothing
+                displacement = 0;
+                // reset start time
+                this.startTime = 0;
+            }
+            // display nothing in this case
+            // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
+            this.inZoneLastTime = false;
+        }
+        // mouse in this frame, display the sidebar
+        else {
+            if (this.inZoneLastTime) {
+                // in last frame, still in this frame. We don't reset startTime in this case.
+                float time = MathHelper.clamp(System.currentTimeMillis() - this.startTime, 0, 500);
+                displacement = (int) (time / 500 * 68);
+            } else {
+                // not in last frame, moved in this frame. We set the startTime in this case.
+                this.startTime = System.currentTimeMillis();
+                // first frame in, so there is no replacement, only display.
+                displacement = 0;
+            }
+            // mouse is in zone this frame, so it is "in zone in last frame" for next frame
+            this.inZoneLastTime = true;
+            // display the sidebar
+            GuiUtil.renderRepeating(this, matrixStack, SIDE + displacement, top, 10, bottom - top, 0, CORNER_SIZE, 10, HEIGHT - CORNER_SIZE - CORNER_SIZE);
+        }
+    }
+
 
     /**
      * 渲染研究窗口的框，以及背包，和标题
