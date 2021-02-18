@@ -69,6 +69,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private ResearchLine selectedLine;
     private long startTime;
     private boolean inZoneLastTime = false;
+    private float sideBarScrollAmt = 0; // range: 0-1
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -148,14 +149,16 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     }
 
     @Override
-    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
-        int wheel = (int) scroll;
-        if (wheel < 0 && zoom > MIN_ZOOM) {
-            zoom -= ZOOM_STEP;
-        } else if (wheel > 0 && zoom < MAX_ZOOM) {
-            zoom += ZOOM_STEP;
+    public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
+        int allIconHeight = this.lineIcons.size() * 18;
+        System.out.println("DELTA: " + delta);
+        if (delta != 0 && mouseX < SIDE + 68 && mouseX > SIDE && mouseY > TOP && mouseY < height - BOTTOM) {
+            this.sideBarScrollAmt += delta;
+            this.sideBarScrollAmt = MathHelper.clamp(this.sideBarScrollAmt, 0.0F, allIconHeight);
+            return true;
+        } else {
+            return false;
         }
-        return super.mouseScrolled(mouseX, mouseY, scroll);
     }
 
     @Override
@@ -235,10 +238,14 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             // reduce displacement
             displacement -= 68;
 
-            // top bar
-            this.blit(matrixStack, left + offsetX + displacement, top + offsetY, 0, 0, offsetX, offsetX);
-            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, top + offsetY, 68 - 9 - 9, 9, 9, 0, WIDTH - 9 - 9, 9);
-            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, top + offsetY, WIDTH - offsetX, 0, offsetX, offsetX);
+            // render line icons
+            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY - (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+
+
+//            // top bar
+//            this.blit(matrixStack, left + offsetX + displacement, top + offsetY, 0, 0, offsetX, offsetX);
+//            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, top + offsetY, 68 - 9 - 9, 9, 9, 0, WIDTH - 9 - 9, 9);
+//            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, top + offsetY, WIDTH - offsetX, 0, offsetX, offsetX);
 
             // lower bar
             this.blit(matrixStack, left + offsetX + displacement, bottom - offsetY, 0, HEIGHT - 9, offsetX, offsetX);
