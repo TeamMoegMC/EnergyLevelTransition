@@ -1,5 +1,11 @@
 {
-  "elt.quest.killzombie.name" : "Kill A Zombie",
-  "elt.quest.killzombie.desc" : "You think killing a zombie might be an good idea for exploring weapon effectiveness. ",
-  "elt.gui.research": "Research"
+  "elt.quest.killzombie.name": "Kill A Zombie",
+  "elt.quest.killzombie.desc": "You think killing a zombie might be an good idea for exploring weapon effectiveness. ",
+  "elt.gui.research": "Research",
+  "elt.paleolithic_age_line.name": "Paleolithic Age",
+  "elt.neolithic_age_line.name": "Neolithic Age",
+  "elt.copper_age_line.name": "Copper Age",
+  "elt.bronze_age_line.name": "Bronze Age",
+  "elt.iron_age_line.name": "Iron Age",
+  "elt.steel_age_line.name": "Steel Age"
 }

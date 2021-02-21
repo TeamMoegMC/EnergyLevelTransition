@@ -47,7 +47,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private static final int
             WIDTH = 252,
             HEIGHT = 140,
-            CORNER_SIZE = 30;
+            CORNER_SIZE = 30,
+            TOP_PADDING = 18,
+            PADDING = 9;
 
     // Inventory texture data
     private static final int
@@ -58,8 +60,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private static final int
             SIDE = 10,
             TOP = 10,
-            BOTTOM = 87,
-            PADDING = 9;
+            BOTTOM = 87;
 
     // Zoom data
     private static final float
@@ -105,24 +106,10 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     protected void init() {
-        this.lineList = new ResearchLineList(this, minecraft, 68, height - BOTTOM - TOP, TOP, height - BOTTOM, 18);
+        this.lineList = new ResearchLineList(this, minecraft, 68, height - BOTTOM - TOP - TOP_PADDING - PADDING, TOP + TOP_PADDING, height - BOTTOM - PADDING, 18);
+        this.lineList.setLeftPos(SIDE + PADDING);
         this.children.add(lineList);
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.PALEOLITHIC_AGE, 48, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.NEOLITHIC_AGE, 48 * 2, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.COPPER_AGE, 48 * 3, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.BRONZE_AGE, 48 * 4, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.IRON_AGE, 48 * 5, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEEL_AGE, 48 * 6, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEAM_AGE, 48 * 7, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ELECTRIC_AGE, 48 * 8, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ATOMIC_AGE, 48 * 9, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.SPACE_AGE, 48 * 10, 48));
-
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.FIRST_RESEARCH, 48, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.SECOND_RESEARCH, 48 * 2, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48 * 3, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48 * 4, 48));
-
+        setupResearchContent();
         addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, SWITCH_PAGE_BUTTON, 20, 20, (button) -> {
             this.isLinePage = !this.isLinePage;
         }, StringTextComponent.EMPTY));
@@ -149,7 +136,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
-
         if (isLinePage && buttonIn == 0) {
 
             int deltaX = MathHelper.floor(this.scrollX);
@@ -174,9 +160,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         if (delta != 0 && mouseX < SIDE + 68 && mouseX > SIDE && mouseY > TOP && mouseY < height - BOTTOM) {
             this.sidebarScrollAmt += delta;
             this.sidebarScrollAmt = MathHelper.clamp(this.sidebarScrollAmt, 0.0F, allIconHeight);
-            return true;
+            return super.mouseScrolled(mouseX, mouseY, delta);
         } else {
-            return false;
+            return super.mouseScrolled(mouseX, mouseY, delta);
         }
     }
 
@@ -186,17 +172,19 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         int top = TOP;
         boolean inGui = mouseX < left + width - 2 * SIDE - PADDING && mouseX > left + PADDING && mouseY < top + height - TOP + 1 && mouseY > top + 2 * PADDING;
 
-        if (button != 0) {
-            this.isScrolling = false;
-            return false;
-        } else {
+        if (button == 0) {
             if (!this.isScrolling) {
                 this.isScrolling = true;
             } else if (inGui) {
                 this.drag(mouseDeltaX, mouseDeltaY);
             }
-            return true;
+            return super.mouseDragged(mouseX, mouseY, button, mouseDeltaX, mouseDeltaY);
+        } else {
+            this.isScrolling = false;
+            // is this needed? or just return false?
+            return super.mouseDragged(mouseX, mouseY, button, mouseDeltaX, mouseDeltaY);
         }
+
     }
 
     @Override
@@ -482,6 +470,24 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     public FontRenderer getFontRenderer() {
         return font;
+    }
+
+    private void setupResearchContent() {
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.PALEOLITHIC_AGE, 48, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.NEOLITHIC_AGE, 48 * 2, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.COPPER_AGE, 48 * 3, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.BRONZE_AGE, 48 * 4, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.IRON_AGE, 48 * 5, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEEL_AGE, 48 * 6, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEAM_AGE, 48 * 7, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ELECTRIC_AGE, 48 * 8, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ATOMIC_AGE, 48 * 9, 48));
+        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.SPACE_AGE, 48 * 10, 48));
+
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.FIRST_RESEARCH, 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.SECOND_RESEARCH, 48 * 2, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48 * 3, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48 * 4, 48));
     }
 
 }
