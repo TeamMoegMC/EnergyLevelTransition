@@ -28,6 +28,7 @@ import com.teammoeg.elt.research.io.ResearchJsonWriter;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.elt.world.dimension.ELTDimensions;
 import com.teammoeg.elt.world.dimension.ELTPlayerTeleporter;
+import net.minecraft.block.BlockState;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
@@ -79,9 +80,15 @@ public class ForgeEventHandler {
         if (!event.getEntity().level.isClientSide) {
             PlayerEntity player = event.getPlayer();
             MinecraftServer server = player.getServer();
-            if (player.level.dimensionType().equalTo(ELTDimensions.FAIRYTALETYPE)) {
+            if (player.level.dimension() == ELTDimensions.FAIRYTALE) {
                 player.sendMessage(ITextComponent.nullToEmpty("ABC"), player.getUUID());
             } else {
+                player.getSleepingPos().filter(player.level::hasChunkAt).ifPresent((blockPos) -> {
+                    BlockState blockstate = player.level.getBlockState(blockPos);
+                    if (blockstate.isBed(player.level, blockPos, player)) {
+                        blockstate.setBedOccupied(player.level, blockPos, player, false);
+                    }
+                });
                 ELTPlayerTeleporter.to(player, server.getLevel(ELTDimensions.FAIRYTALE));
             }
         }
@@ -89,8 +96,10 @@ public class ForgeEventHandler {
 
     @SubscribeEvent
     public static void setspawn(PlayerSetSpawnEvent event) {
-        if (event.getEntity().level.dimensionType().equalTo(ELTDimensions.FAIRYTALETYPE)) {
-            event.setCanceled(true);
+        if (!event.getEntity().level.isClientSide) {
+            if (event.getSpawnWorld() == ELTDimensions.FAIRYTALE) {
+                event.setCanceled(true);
+            }
         }
     }
 
@@ -137,5 +146,4 @@ public class ForgeEventHandler {
         }
 
     }
-
 }
