@@ -150,8 +150,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        int allIconHeight = this.lineIcons.size() * 18;
-        System.out.println("DELTA: " + delta);
+        int allIconHeight = 18 * 6; //this.lineIcons.size() * 18;
         if (delta != 0 && mouseX < SIDE + 68 && mouseX > SIDE && mouseY > TOP && mouseY < height - BOTTOM) {
             this.sideBarScrollAmt += delta;
             this.sideBarScrollAmt = MathHelper.clamp(this.sideBarScrollAmt, 0.0F, allIconHeight);
@@ -193,6 +192,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY) {
         this.minecraft.getTextureManager().bind(WINDOW);
 
+        int offsetX = 9, offsetY = 18;
         int left = SIDE;
         int top = TOP;
         int right = width - SIDE;
@@ -203,19 +203,29 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         // mouse not in this frame, display nothing
         if (mouseX >= SIDE) {
             if (this.inZoneLastTime) {
-                // in last frame, moved out this frame
-                displacement = 0;
-                // reset start time
-                this.startTime = 0;
+
+                // if mouse is within the new range
+                if (mouseX < SIDE + 68) {
+                    // just make displacement equals zero this time
+                    displacement = 0;
+                    GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+                    // we don't reset start time in this case
+                } else {
+                    // in last frame, moved out this frame
+                    // reset start time
+                    this.startTime = 0;
+                    // display nothing in this case
+                    // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
+                    this.inZoneLastTime = false;
+                }
             } else {
                 // never in, just display nothing
-                displacement = 0;
                 // reset start time
                 this.startTime = 0;
+                // display nothing in this case
+                // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
+                this.inZoneLastTime = false;
             }
-            // display nothing in this case
-            // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
-            this.inZoneLastTime = false;
         }
         // mouse in this frame, display the sidebar
         else {
@@ -233,13 +243,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             this.inZoneLastTime = true;
 
             // now we render the sidebar
-            int offsetX = 9, offsetY = 18;
-
             // reduce displacement
             displacement -= 68;
 
             // render line icons
-            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY - (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
 
 
 //            // top bar
@@ -248,9 +256,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 //            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, top + offsetY, WIDTH - offsetX, 0, offsetX, offsetX);
 
             // lower bar
-            this.blit(matrixStack, left + offsetX + displacement, bottom - offsetY, 0, HEIGHT - 9, offsetX, offsetX);
-            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, bottom - offsetY, 68 - 9 - 9, 9, 9, HEIGHT - 9, WIDTH - 9 - 9, 9);
-            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, bottom - offsetY, WIDTH - offsetX, HEIGHT - 9, offsetX, offsetX);
+//            this.blit(matrixStack, left + offsetX + displacement, bottom - offsetY, 0, HEIGHT - 9, offsetX, offsetX);
+//            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, bottom - offsetY, 68 - 9 - 9, 9, 9, HEIGHT - 9, WIDTH - 9 - 9, 9);
+//            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, bottom - offsetY, WIDTH - offsetX, HEIGHT - 9, offsetX, offsetX);
 
         }
     }
