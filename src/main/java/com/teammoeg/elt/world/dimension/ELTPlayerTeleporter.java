@@ -10,7 +10,7 @@ import net.minecraft.world.server.ServerWorld;
 public class ELTPlayerTeleporter {
     public static void to(PlayerEntity entity, ServerWorld world) {
         ServerPlayerEntity playerEntity = (ServerPlayerEntity) entity;
-        BlockPos.Mutable valid = validPlayerSpawnLocation(world, playerEntity.blockPosition(), 64).mutable();
+        BlockPos valid = validPlayerSpawnLocation(world, playerEntity.blockPosition(), 64);
         if (valid == null) {
             playerEntity.teleportTo(world, playerEntity.getX(), playerEntity.getY(), playerEntity.getZ(), entity.yRot, entity.xRot);
         } else {
