@@ -68,6 +68,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             MAX_ZOOM = 2,
             ZOOM_STEP = 0.2F;
 
+    public static final int SIDEBAR_WIDTH = 68;
+
     // Texture locations
     private static final ResourceLocation
             WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png"),
@@ -104,7 +106,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     protected void init() {
-        this.lineList = new ResearchLineList(this, minecraft, 68, height - BOTTOM - TOP - TOP_PADDING - PADDING, TOP + TOP_PADDING, height - BOTTOM - PADDING, 18);
+        this.lineList = new ResearchLineList(this, minecraft, SIDEBAR_WIDTH, height - BOTTOM - TOP - TOP_PADDING - PADDING, TOP + TOP_PADDING, height - BOTTOM - PADDING, 18);
         this.lineList.setLeftPos(SIDE + PADDING);
         this.children.add(lineList);
         setupResearchContent();
@@ -187,7 +189,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             if (this.sidebarActivatedLastTime) {
 
                 // if mouse is within the new range
-                if (mouseX < SIDE + 68) {
+                if (mouseX < SIDE + SIDEBAR_WIDTH) {
                     // just make displacement equals zero this time
                     displacement = 0;
                     this.lineList.setLeftPos(SIDE + PADDING + displacement);
@@ -215,7 +217,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             if (this.sidebarActivatedLastTime) {
                 // in last frame, still in this frame. We don't reset startTime in this case.
                 float time = MathHelper.clamp(System.currentTimeMillis() - this.sidebarAnimationStartTime, 0, 500);
-                displacement = (int) (time / 500 * 68);
+                displacement = (int) (time / 500 * SIDEBAR_WIDTH);
             } else {
                 // not in last frame, moved in this frame. We set the startTime in this case.
                 this.sidebarAnimationStartTime = System.currentTimeMillis();
@@ -227,7 +229,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
             // now we render the sidebar
             // reduce displacement
-            displacement -= 68;
+            displacement -= SIDEBAR_WIDTH;
 
             // render line icons
             this.lineList.setLeftPos(SIDE + PADDING + displacement);
