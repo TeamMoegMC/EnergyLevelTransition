@@ -19,15 +19,11 @@ public class ELTPlayerTeleporter {
     }
 
     private static BlockPos validPlayerSpawnLocation(World world, BlockPos position, int maximumRange) {
-        //Try to find 2 non-solid spaces around it that the player can spawn at
         int radius;
         int outerRadius;
         int distanceSq;
         BlockPos.Mutable currentPos = new BlockPos.Mutable(position.getX(), position.getY(), position.getZ());
 
-        //checks for 2 non-solid blocks with solid block below feet
-        //checks outward from center position in both x, y, and z.
-        //The x2, y2, and z2 is so it checks at center of the range box instead of the corner.
         for (int range = 0; range < maximumRange; range++) {
             radius = range * range;
             outerRadius = (range + 1) * (range + 1);
