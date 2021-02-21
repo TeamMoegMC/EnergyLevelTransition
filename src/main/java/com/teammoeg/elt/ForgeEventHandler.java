@@ -26,17 +26,23 @@ import com.teammoeg.elt.research.Quest;
 import com.teammoeg.elt.research.io.ResearchJsonReader;
 import com.teammoeg.elt.research.io.ResearchJsonWriter;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
+import com.teammoeg.elt.world.dimension.ELTDimensions;
+import com.teammoeg.elt.world.dimension.ELTPlayerTeleporter;
 import net.minecraft.command.CommandSource;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.monster.ZombieEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Util;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.storage.FolderName;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
+import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -65,6 +71,26 @@ public class ForgeEventHandler {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
             event.addCapability(new ResourceLocation(ELT.MOD_ID, "research_team"), new TeamCapabilityProvider());
+        }
+    }
+
+    @SubscribeEvent
+    public static void playerWakeup(PlayerWakeUpEvent event) {
+        if (!event.getEntity().level.isClientSide) {
+            PlayerEntity player = event.getPlayer();
+            MinecraftServer server = player.getServer();
+            if (player.level.dimensionType().equalTo(ELTDimensions.FAIRYTALETYPE)) {
+                player.sendMessage(ITextComponent.nullToEmpty("ABC"), player.getUUID());
+            } else {
+                ELTPlayerTeleporter.to(player, server.getLevel(ELTDimensions.FAIRYTALE));
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void setspawn(PlayerSetSpawnEvent event) {
+        if (event.getEntity().level.dimensionType().equalTo(ELTDimensions.FAIRYTALETYPE)) {
+            event.setCanceled(true);
         }
     }
 
