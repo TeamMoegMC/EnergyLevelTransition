@@ -97,8 +97,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     // Animated sidebar related
     private long sidebarAnimationStartTime;
     private boolean sidebarActivatedLastTime = false;
-    private float sidebarScrollAmt = 0;
-
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -125,53 +123,35 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     @Override
     public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.renderWindow(matrixStack);
-
         if (this.menu.getSlot(0).hasItem()) {
             this.renderInside(matrixStack, mouseX, mouseY, partialTicks);
-            this.lineList.render(matrixStack, mouseX, mouseY, partialTicks);
         }
-
         super.render(matrixStack, mouseX, mouseY, partialTicks);
     }
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
         if (isLinePage && buttonIn == 0) {
-
             int deltaX = MathHelper.floor(this.scrollX);
             int deltaY = MathHelper.floor(this.scrollY);
-
             for (LineIconGui lineIconGui : lineIcons) {
-//                this.selectedTab.drawTooltips(matrixStack, mouseX - offsetX - 9, mouseY - offsetY - 18, offsetX, offsetY); todo fix
                 if (lineIconGui.isMouseOver(deltaX, deltaY, mouseX, mouseY)) {
                     this.selectedLine = lineIconGui.getResearchLine();
                     return true;
                 }
             }
-
         }
-
         return super.mouseClicked(mouseX, mouseY, buttonIn);
     }
 
     @Override
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
-        int allIconHeight = 18 * 6; //this.lineIcons.size() * 18;
-        if (delta != 0 && mouseX < SIDE + 68 && mouseX > SIDE && mouseY > TOP && mouseY < height - BOTTOM) {
-            this.sidebarScrollAmt += delta;
-            this.sidebarScrollAmt = MathHelper.clamp(this.sidebarScrollAmt, 0.0F, allIconHeight);
-            return super.mouseScrolled(mouseX, mouseY, delta);
-        } else {
-            return super.mouseScrolled(mouseX, mouseY, delta);
-        }
+        return super.mouseScrolled(mouseX, mouseY, delta);
     }
 
     @Override
     public boolean mouseDragged(double mouseX, double mouseY, int button, double mouseDeltaX, double mouseDeltaY) {
-        int left = SIDE;
-        int top = TOP;
-        boolean inGui = mouseX < left + width - 2 * SIDE - PADDING && mouseX > left + PADDING && mouseY < top + height - TOP + 1 && mouseY > top + 2 * PADDING;
-
+        boolean inGui = mouseX < SIDE + width - 2 * SIDE - PADDING && mouseX > SIDE + PADDING && mouseY < TOP + height - TOP + 1 && mouseY > TOP + 2 * PADDING;
         if (button == 0) {
             if (!this.isScrolling) {
                 this.isScrolling = true;
@@ -197,14 +177,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     }
 
-    private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY) {
+    private void renderAnimatedSidebar(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
         this.minecraft.getTextureManager().bind(WINDOW);
-
-        int offsetX = 9, offsetY = 18;
-        int left = SIDE;
-        int top = TOP;
-        int right = width - SIDE;
-        int bottom = height - BOTTOM;
 
         int displacement;
 
@@ -216,7 +190,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
                 if (mouseX < SIDE + 68) {
                     // just make displacement equals zero this time
                     displacement = 0;
-                    GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sidebarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+                    this.lineList.setLeftPos(SIDE + PADDING + displacement);
+                    this.lineList.render(matrixStack, mouseX, mouseY, partialTicks);
                     // we don't reset start time in this case
                 } else {
                     // in last frame, moved out this frame
@@ -255,18 +230,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             displacement -= 68;
 
             // render line icons
-            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sidebarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
-
-//            // top bar
-//            this.blit(matrixStack, left + offsetX + displacement, top + offsetY, 0, 0, offsetX, offsetX);
-//            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, top + offsetY, 68 - 9 - 9, 9, 9, 0, WIDTH - 9 - 9, 9);
-//            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, top + offsetY, WIDTH - offsetX, 0, offsetX, offsetX);
-
-            // lower bar
-//            this.blit(matrixStack, left + offsetX + displacement, bottom - offsetY, 0, HEIGHT - 9, offsetX, offsetX);
-//            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + offsetX + displacement, bottom - offsetY, 68 - 9 - 9, 9, 9, HEIGHT - 9, WIDTH - 9 - 9, 9);
-//            this.blit(matrixStack, left + offsetX + 68 - 9 + displacement, bottom - offsetY, WIDTH - offsetX, HEIGHT - 9, offsetX, offsetX);
-
+            this.lineList.setLeftPos(SIDE + PADDING + displacement);
+            this.lineList.render(matrixStack, mouseX, mouseY, partialTicks);
         }
     }
 
@@ -345,7 +310,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
         // draw animated sidebar
         RenderSystem.translatef(-18.0f, -28.0f, 0.0F);
-        this.renderAnimatedSidebar(matrixStack, mouseX, mouseY);
+        this.renderAnimatedSidebar(matrixStack, mouseX, mouseY, partialTicks);
         RenderSystem.translatef(18.0f, 28.0f, 0.0F);
 
         // draw research icons

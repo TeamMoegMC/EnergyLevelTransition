@@ -73,14 +73,12 @@ public class ResearchLineList extends ExtendedList<ResearchLineList.Entry> {
             FontRenderer font = ResearchLineList.this.parent.getFontRenderer();
             ITextComponent s = this.researchLine.getName();
             font.draw(mStack, LanguageMap.getInstance().getVisualOrder(ITextProperties.composite(font.substrByWidth(s, 68))), left + 3, top + 2, 0xFFFFFF);
-
-//            font.drawShadow(mStack, s, (float)(ResearchLineList.this.width / 2 - font.width(s) / 2), (float)(top + 1), 16777215);
         }
 
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
             if (buttonIn == 0) {
-//                this.select();
+                ResearchLineList.this.setSelected(this);
                 return true;
             } else {
                 return false;
