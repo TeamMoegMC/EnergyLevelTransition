@@ -28,6 +28,7 @@ import com.teammoeg.elt.research.ELTResearches;
 import com.teammoeg.elt.research.ResearchLine;
 import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.the_seed.api.gui.GuiUtil;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.renderer.RenderHelper;
@@ -42,20 +43,47 @@ import net.minecraftforge.common.util.LazyOptional;
 import java.util.ArrayList;
 
 public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
-    private static final int WIDTH = 252, HEIGHT = 140, CORNER_SIZE = 30, INV_WIDTH = WIDTH, INV_HEIGHT = 87;
-    private static final int SIDE = 10, TOP = 10, BOTTOM = 87, PADDING = 9;
-    private static final float MIN_ZOOM = 1, MAX_ZOOM = 2, ZOOM_STEP = 0.2F;
+    // Window texture data
+    private static final int
+            WIDTH = 252,
+            HEIGHT = 140,
+            CORNER_SIZE = 30;
 
-    private final ResourceLocation WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png");
-    private final ResourceLocation INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png");
-    private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
-    private final ResourceLocation RESEARCH_ICONS = new ResourceLocation("textures/gui/advancements/widgets.png");
-    private final ResourceLocation SWITCH_PAGE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png");
-    private final ResourceLocation INSIDE_BACKGROUND = new ResourceLocation("textures/block/netherite_block.png");
-    private final ArrayList<ResearchIconGui> widgets = new ArrayList<>();
-    private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
-    private boolean isScrolling;
+    // Inventory texture data
+    private static final int
+            INV_WIDTH = 252,
+            INV_HEIGHT = 87;
+
+    // These represent the distance from the border of the WindowGui to the border of the GameScreen
+    private static final int
+            SIDE = 10,
+            TOP = 10,
+            BOTTOM = 87,
+            PADDING = 9;
+
+    // Zoom data
+    private static final float
+            MIN_ZOOM = 1,
+            MAX_ZOOM = 2,
+            ZOOM_STEP = 0.2F;
+
+    // Texture locations
+    private static final ResourceLocation
+            WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png"),
+            INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png"),
+            BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png"),
+            RESEARCH_ICONS = new ResourceLocation("textures/gui/advancements/widgets.png"),
+            SWITCH_PAGE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png"),
+            INSIDE_BACKGROUND = new ResourceLocation("textures/block/netherite_block.png");
+
+    // children
+    private ArrayList<ResearchIconGui> widgets = new ArrayList<>();
+    private ArrayList<LineIconGui> lineIcons = new ArrayList<>();
+    private ResearchLineList lineList;
+
+    // Dragging/Zooming related
     private float zoom = MIN_ZOOM;
+    private boolean isScrolling;
     private double scrollX, scrollY;
     private boolean centered;
     private int minX = Integer.MAX_VALUE;
@@ -64,11 +92,12 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int maxY = Integer.MIN_VALUE;
     private boolean isLinePage = true;
     private ResearchLine selectedLine;
-    private long startTime;
-    private boolean inZoneLastTime = false;
-    private float sideBarScrollAmt = 0;
 
-    private ResearchLineList lineList;
+    // Animated sidebar related
+    private long sidebarAnimationStartTime;
+    private boolean sidebarActivatedLastTime = false;
+    private float sidebarScrollAmt = 0;
+
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
@@ -76,7 +105,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     protected void init() {
-        this.lineList = new ResearchLineList(minecraft, 68, height - BOTTOM - TOP, TOP, height - BOTTOM, 18);
+        this.lineList = new ResearchLineList(this, minecraft, 68, height - BOTTOM - TOP, TOP, height - BOTTOM, 18);
         this.children.add(lineList);
         addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.PALEOLITHIC_AGE, 48, 48));
         addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.NEOLITHIC_AGE, 48 * 2, 48));
@@ -143,8 +172,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     public boolean mouseScrolled(double mouseX, double mouseY, double delta) {
         int allIconHeight = 18 * 6; //this.lineIcons.size() * 18;
         if (delta != 0 && mouseX < SIDE + 68 && mouseX > SIDE && mouseY > TOP && mouseY < height - BOTTOM) {
-            this.sideBarScrollAmt += delta;
-            this.sideBarScrollAmt = MathHelper.clamp(this.sideBarScrollAmt, 0.0F, allIconHeight);
+            this.sidebarScrollAmt += delta;
+            this.sidebarScrollAmt = MathHelper.clamp(this.sidebarScrollAmt, 0.0F, allIconHeight);
             return true;
         } else {
             return false;
@@ -193,52 +222,52 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
         // mouse not in this frame, display nothing
         if (mouseX >= SIDE) {
-            if (this.inZoneLastTime) {
+            if (this.sidebarActivatedLastTime) {
 
                 // if mouse is within the new range
                 if (mouseX < SIDE + 68) {
                     // just make displacement equals zero this time
                     displacement = 0;
-                    GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+                    GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sidebarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
                     // we don't reset start time in this case
                 } else {
                     // in last frame, moved out this frame
                     // reset start time
-                    this.startTime = 0;
+                    this.sidebarAnimationStartTime = 0;
                     // display nothing in this case
                     // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
-                    this.inZoneLastTime = false;
+                    this.sidebarActivatedLastTime = false;
                 }
             } else {
                 // never in, just display nothing
                 // reset start time
-                this.startTime = 0;
+                this.sidebarAnimationStartTime = 0;
                 // display nothing in this case
                 // mouse is not in zone this frame, so it is "not in zone in last frame" for next frame
-                this.inZoneLastTime = false;
+                this.sidebarActivatedLastTime = false;
             }
         }
         // mouse in this frame, display the sidebar
         else {
-            if (this.inZoneLastTime) {
+            if (this.sidebarActivatedLastTime) {
                 // in last frame, still in this frame. We don't reset startTime in this case.
-                float time = MathHelper.clamp(System.currentTimeMillis() - this.startTime, 0, 500);
+                float time = MathHelper.clamp(System.currentTimeMillis() - this.sidebarAnimationStartTime, 0, 500);
                 displacement = (int) (time / 500 * 68);
             } else {
                 // not in last frame, moved in this frame. We set the startTime in this case.
-                this.startTime = System.currentTimeMillis();
+                this.sidebarAnimationStartTime = System.currentTimeMillis();
                 // first frame in, so there is no replacement, only display.
                 displacement = 0;
             }
             // mouse is in zone this frame, so it is "in zone in last frame" for next frame
-            this.inZoneLastTime = true;
+            this.sidebarActivatedLastTime = true;
 
             // now we render the sidebar
             // reduce displacement
             displacement -= 68;
 
             // render line icons
-            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sideBarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
+            GuiUtil.renderRepeating(this, matrixStack, left + offsetX + displacement, top + offsetY + (int) this.sidebarScrollAmt, 68, 18, 9, 0, WIDTH - 9 - 9, 18);
 
 //            // top bar
 //            this.blit(matrixStack, left + offsetX + displacement, top + offsetY, 0, 0, offsetX, offsetX);
@@ -449,6 +478,10 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
                 blit(matrixStack, hexReducedDeltaX + 16 * i1, hexReducedDeltaY + 16 * j1, 0.0F, 0.0F, 16, 16, 16, 16);
             }
         }
+    }
+
+    public FontRenderer getFontRenderer() {
+        return font;
     }
 
 }
