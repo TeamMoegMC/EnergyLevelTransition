@@ -32,7 +32,6 @@ import net.minecraft.client.gui.screen.inventory.ContainerScreen;
 import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
-import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
@@ -50,10 +49,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private final ResourceLocation WINDOW = new ResourceLocation(ELT.MOD_ID, "textures/gui/vanilla_window.png");
     private final ResourceLocation INVENTORY = new ResourceLocation(ELT.MOD_ID, "textures/gui/window.png");
     private final ResourceLocation BARS = new ResourceLocation(ELT.MOD_ID, "textures/gui/bars.png");
-    private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");
-    private final ResourceLocation LINE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png");
-    private final ResourceLocation BG_PIC = new ResourceLocation("textures/block/netherite_block.png");
-    private final PlayerEntity player;
+    private final ResourceLocation RESEARCH_ICONS = new ResourceLocation("textures/gui/advancements/widgets.png");
+    private final ResourceLocation SWITCH_PAGE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png");
+    private final ResourceLocation INSIDE_BACKGROUND = new ResourceLocation("textures/block/netherite_block.png");
     private final ArrayList<ResearchIconGui> widgets = new ArrayList<>();
     private final ArrayList<LineIconGui> lineIcons = new ArrayList<>();
     private boolean isScrolling;
@@ -74,7 +72,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     public ResearchDeskScreen(ResearchDeskContainer screenContainer, PlayerInventory inv, ITextComponent titleIn) {
         super(screenContainer, inv, titleIn);
-        this.player = inv.player;
     }
 
     @Override
@@ -97,7 +94,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48 * 3, 48));
         addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48 * 4, 48));
 
-        addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, LINE_BUTTON, 20, 20, (button) -> {
+        addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, SWITCH_PAGE_BUTTON, 20, 20, (button) -> {
             this.isLinePage = !this.isLinePage;
         }, StringTextComponent.EMPTY));
 
@@ -355,11 +352,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     }
 
     private void drawResearchExperienceBar(MatrixStack matrixStack, int left, int top, int right, int bottom) {
-        if (this.player != null) {
+        if (this.inventory.player != null) {
             this.minecraft.getTextureManager().bind(BARS);
             this.minecraft.getProfiler().push("research_desk_exp_bar");
 
-            LazyOptional<ITeamCapability> Cap = player.getCapability(ELTCapabilities.teamCapability);
+            LazyOptional<ITeamCapability> Cap = this.inventory.player.getCapability(ELTCapabilities.teamCapability);
             Cap.ifPresent((P) -> {
                 String team = P.getTeam();
                 System.out.println("Team: " + team);
@@ -416,7 +413,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     private void drawResearchLineIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
         // bind texture of frames
-        this.minecraft.getTextureManager().bind(FRAMES);
+        this.minecraft.getTextureManager().bind(RESEARCH_ICONS);
 
         // draw frames
         for (LineIconGui lineIconGui : lineIcons) {
@@ -426,7 +423,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     private void drawResearchIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
         // bind texture of frames
-        this.minecraft.getTextureManager().bind(FRAMES);
+        this.minecraft.getTextureManager().bind(RESEARCH_ICONS);
 
         // draw frames
         for (ResearchIconGui researchIconGui : widgets) {
@@ -441,7 +438,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     private void drawInsideBackground(MatrixStack matrixStack, int deltaX, int deltaY, int scrollRangeX, int scrollRangeY) {
         // bind texture of background
-        this.minecraft.getTextureManager().bind(BG_PIC);
+        this.minecraft.getTextureManager().bind(INSIDE_BACKGROUND);
 
         int hexReducedDeltaX = deltaX % 16;
         int hexReducedDeltaY = deltaY % 16;
