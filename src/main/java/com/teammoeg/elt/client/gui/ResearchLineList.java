@@ -30,7 +30,8 @@ import net.minecraft.util.text.LanguageMap;
 
 public class ResearchLineList extends ExtendedList<ResearchLineList.Entry> {
 
-    private ResearchDeskScreen parent;
+    public static final int SIDEBAR_WIDTH = 100;
+    private final ResearchDeskScreen parent;
 
     public ResearchLineList(ResearchDeskScreen parent, Minecraft mc, int width, int height, int topPos, int bottomPos, int itemHeightIn) {
         super(mc, width, height, topPos, bottomPos, itemHeightIn);
@@ -51,16 +52,35 @@ public class ResearchLineList extends ExtendedList<ResearchLineList.Entry> {
     }
 
     @Override
+    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        this.renderBackground(matrixStack);
+        int x = this.getRowLeft();
+        int y = this.y0 + 4 - (int) this.getScrollAmount();
+        this.renderList(matrixStack, x, y, mouseX, mouseY, partialTicks);
+        this.renderDecorations(matrixStack, mouseX, mouseY);
+    }
+
+
+    @Override
     public int getRowWidth() {
-        return 68;
+        return SIDEBAR_WIDTH;
     }
 
     @Override
     protected int getScrollbarPosition() {
-        return 68;
+        return SIDEBAR_WIDTH;
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int buttonIn, double dragX, double dragY) {
+        return false;
     }
 
     public class Entry extends ExtendedList.AbstractListEntry<ResearchLineList.Entry> {
+
+        public ResearchLine getResearchLine() {
+            return researchLine;
+        }
 
         private final ResearchLine researchLine;
 
@@ -72,13 +92,14 @@ public class ResearchLineList extends ExtendedList<ResearchLineList.Entry> {
         public void render(MatrixStack mStack, int entryIdx, int top, int left, int entryWidth, int entryHeight, int mouseX, int mouseY, boolean p_194999_5_, float partialTicks) {
             FontRenderer font = ResearchLineList.this.parent.getFontRenderer();
             ITextComponent s = this.researchLine.getName();
-            font.draw(mStack, LanguageMap.getInstance().getVisualOrder(ITextProperties.composite(font.substrByWidth(s, 68))), left + 3, top + 2, 0xFFFFFF);
+            font.draw(mStack, LanguageMap.getInstance().getVisualOrder(ITextProperties.composite(font.substrByWidth(s, SIDEBAR_WIDTH))), left + 3, top + 2, 0xFFFFFF);
         }
 
         @Override
         public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
             if (buttonIn == 0) {
                 ResearchLineList.this.setSelected(this);
+                ResearchLineList.this.parent.setSelectedLine(this.researchLine);
                 return true;
             } else {
                 return false;

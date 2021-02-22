@@ -26,6 +26,7 @@ import net.minecraft.client.gui.AbstractGui;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
+@Deprecated
 public class LineIconGui extends AbstractGui {
     private static final int ICON_OFFSET = 128, ICON_SIZE = 26;
     private final ResourceLocation FRAMES = new ResourceLocation("textures/gui/advancements/widgets.png");

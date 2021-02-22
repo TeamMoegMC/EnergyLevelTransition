@@ -30,14 +30,12 @@ import com.teammoeg.elt.research.team.ResearchTeamDatabase;
 import com.teammoeg.the_seed.api.gui.GuiUtil;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.inventory.ContainerScreen;
-import net.minecraft.client.gui.widget.button.ImageButton;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.StringTextComponent;
 import net.minecraftforge.common.util.LazyOptional;
 
 import java.util.ArrayList;
@@ -68,7 +66,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             MAX_ZOOM = 2,
             ZOOM_STEP = 0.2F;
 
-    public static final int SIDEBAR_WIDTH = 68;
+    public static final int SIDEBAR_WIDTH = 100;
+    public static final int SIDEBAR_ANIMATION_TIME = 500;
 
     // Texture locations
     private static final ResourceLocation
@@ -79,11 +78,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
             SWITCH_PAGE_BUTTON = new ResourceLocation(ELT.MOD_ID, "textures/gui/research/line_button.png"),
             INSIDE_BACKGROUND = new ResourceLocation("textures/block/netherite_block.png");
 
-    // children
-    private ArrayList<ResearchIconGui> widgets = new ArrayList<>();
-    private ArrayList<LineIconGui> lineIcons = new ArrayList<>();
-    private ResearchLineList lineList;
-
     // Dragging/Zooming related
     private float zoom = MIN_ZOOM;
     private boolean isScrolling;
@@ -93,8 +87,11 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     private int minY = Integer.MAX_VALUE;
     private int maxX = Integer.MIN_VALUE;
     private int maxY = Integer.MIN_VALUE;
-    private boolean isLinePage = true;
+
+    // Icons related
     private ResearchLine selectedLine;
+    private ArrayList<ResearchIconGui> researchIcons = new ArrayList<>();
+    private ResearchLineList lineList;
 
     // Animated sidebar related
     private long sidebarAnimationStartTime;
@@ -110,9 +107,9 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.lineList.setLeftPos(SIDE + PADDING);
         this.children.add(lineList);
         setupResearchContent();
-        addButton(new ImageButton(width - SIDE - 27, TOP + 5, 20, 10, 0, 0, 10, SWITCH_PAGE_BUTTON, 20, 20, (button) -> {
-            this.isLinePage = !this.isLinePage;
-        }, StringTextComponent.EMPTY));
+        if (this.selectedLine == null) {
+            this.selectedLine = this.lineList.children().get(0).getResearchLine();
+        }
 
         // Super must be before the rest!
         super.init();
@@ -133,16 +130,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int buttonIn) {
-        if (isLinePage && buttonIn == 0) {
-            int deltaX = MathHelper.floor(this.scrollX);
-            int deltaY = MathHelper.floor(this.scrollY);
-            for (LineIconGui lineIconGui : lineIcons) {
-                if (lineIconGui.isMouseOver(deltaX, deltaY, mouseX, mouseY)) {
-                    this.selectedLine = lineIconGui.getResearchLine();
-                    return true;
-                }
-            }
-        }
         return super.mouseClicked(mouseX, mouseY, buttonIn);
     }
 
@@ -216,8 +203,8 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         else {
             if (this.sidebarActivatedLastTime) {
                 // in last frame, still in this frame. We don't reset startTime in this case.
-                float time = MathHelper.clamp(System.currentTimeMillis() - this.sidebarAnimationStartTime, 0, 500);
-                displacement = (int) (time / 500 * SIDEBAR_WIDTH);
+                float time = MathHelper.clamp(System.currentTimeMillis() - this.sidebarAnimationStartTime, 0, SIDEBAR_ANIMATION_TIME);
+                displacement = (int) (time / SIDEBAR_ANIMATION_TIME * SIDEBAR_WIDTH);
             } else {
                 // not in last frame, moved in this frame. We set the startTime in this case.
                 this.sidebarAnimationStartTime = System.currentTimeMillis();
@@ -316,11 +303,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         RenderSystem.translatef(18.0f, 28.0f, 0.0F);
 
         // draw research icons
-        if (!isLinePage) {
-            this.drawResearchIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
-        } else {
-            this.drawResearchLineIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
-        }
+        this.drawResearchIcons(matrixStack, mouseX, mouseY, deltaX, deltaY);
 
         RenderSystem.depthFunc(518);
         RenderSystem.translatef(0.0F, 0.0F, -950.0F);
@@ -372,7 +355,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
     }
 
     private void addResearchIcon(ResearchIconGui gui) {
-        this.widgets.add(gui);
+        this.researchIcons.add(gui);
         int i = gui.getX();
         int j = i + 28;
         int k = gui.getY();
@@ -381,28 +364,6 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.maxX = Math.max(this.maxX, j);
         this.minY = Math.min(this.minY, k);
         this.maxY = Math.max(this.maxY, l);
-    }
-
-    private void addResearchLineIcon(LineIconGui gui) {
-        this.lineIcons.add(gui);
-        int i = gui.getX();
-        int j = i + 28;
-        int k = gui.getY();
-        int l = k + 27;
-        this.minX = Math.min(this.minX, i);
-        this.maxX = Math.max(this.maxX, j);
-        this.minY = Math.min(this.minY, k);
-        this.maxY = Math.max(this.maxY, l);
-    }
-
-    private void drawResearchLineIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
-        // bind texture of frames
-        this.minecraft.getTextureManager().bind(RESEARCH_ICONS);
-
-        // draw frames
-        for (LineIconGui lineIconGui : lineIcons) {
-            lineIconGui.draw(matrixStack, mouseX, mouseY, deltaX, deltaY);
-        }
     }
 
     private void drawResearchIcons(MatrixStack matrixStack, int mouseX, int mouseY, int deltaX, int deltaY) {
@@ -410,7 +371,7 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         this.minecraft.getTextureManager().bind(RESEARCH_ICONS);
 
         // draw frames
-        for (ResearchIconGui researchIconGui : widgets) {
+        for (ResearchIconGui researchIconGui : researchIcons) {
             // check whether the research's line is equal to the current selected line
             if (researchIconGui.getResearch().getLine() != null && researchIconGui.getResearch().getLine() == this.selectedLine) {
                 researchIconGui.draw(matrixStack, mouseX, mouseY, deltaX, deltaY);
@@ -439,22 +400,19 @@ public class ResearchDeskScreen extends ContainerScreen<ResearchDeskContainer> {
         return font;
     }
 
-    private void setupResearchContent() {
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.PALEOLITHIC_AGE, 48, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.NEOLITHIC_AGE, 48 * 2, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.COPPER_AGE, 48 * 3, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.BRONZE_AGE, 48 * 4, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.IRON_AGE, 48 * 5, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEEL_AGE, 48 * 6, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.STEAM_AGE, 48 * 7, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ELECTRIC_AGE, 48 * 8, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.ATOMIC_AGE, 48 * 9, 48));
-        addResearchLineIcon(new LineIconGui(this.minecraft, ELTResearches.SPACE_AGE, 48 * 10, 48));
+    public ResearchLine getSelectedLine() {
+        return selectedLine;
+    }
 
+    public void setSelectedLine(ResearchLine researchLine) {
+        this.selectedLine = researchLine;
+    }
+
+    private void setupResearchContent() {
         addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.FIRST_RESEARCH, 48, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.SECOND_RESEARCH, 48 * 2, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48 * 3, 48));
-        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48 * 4, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.SECOND_RESEARCH, 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.THIRD_RESEARCH, 48, 48));
+        addResearchIcon(new ResearchIconGui(this.minecraft, ELTResearches.WEAPON_RESEARCH, 48, 48));
     }
 
 }
