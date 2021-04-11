@@ -12,7 +12,7 @@ public class FightCapability implements IFightCapability {
     }
 
     @Override
-    public void reducePhysicalStrength() {
-        this.PhysicalStrength -= 100;
+    public void decreasePhysicalStrength() {
+        this.PhysicalStrength -= 10;
     }
 }

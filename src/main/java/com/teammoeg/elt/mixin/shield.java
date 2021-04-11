@@ -17,7 +17,7 @@ public class shield {
             if (cap.getPhysicalStrength() < 0) {
                 playerEntity.disableShield(true);
             } else {
-                cap.reducePhysicalStrength();
+                cap.decreasePhysicalStrength();
             }
 
         });
