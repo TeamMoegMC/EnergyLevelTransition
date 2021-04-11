@@ -29,6 +29,8 @@ import javax.annotation.Nullable;
 public class ELTCapabilities {
     @CapabilityInject(ITeamCapability.class)
     public static Capability<ITeamCapability> teamCapability;
+    @CapabilityInject(IFightCapability.class)
+    public static Capability<IFightCapability> fightCapability;
 
     public static void init() {
         CapabilityManager.INSTANCE.register(ITeamCapability.class, new Capability.IStorage<ITeamCapability>() {
@@ -40,6 +42,19 @@ public class ELTCapabilities {
 
                     @Override
                     public void readNBT(Capability<ITeamCapability> capability, ITeamCapability instance, Direction side, INBT nbt) {
+                    }
+                }, () -> null
+        );
+        CapabilityManager.INSTANCE.register(IFightCapability.class, new Capability.IStorage<IFightCapability>() {
+                    @Nullable
+                    @Override
+                    public INBT writeNBT(Capability<IFightCapability> capability, IFightCapability instance, Direction side) {
+                        return null;
+                    }
+
+                    @Override
+                    public void readNBT(Capability<IFightCapability> capability, IFightCapability instance, Direction side, INBT nbt) {
+
                     }
                 }, () -> null
         );

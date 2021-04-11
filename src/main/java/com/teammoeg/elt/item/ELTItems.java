@@ -21,8 +21,8 @@ package com.teammoeg.elt.item;
 import net.minecraft.item.Item;
 
 public class ELTItems {
-    public static final Item
-            RESEARCH_SCROLL = new ResearchScroll("research_scroll");
+    public static final Item RESEARCH_SCROLL = new ResearchScroll("research_scroll");
+    public static final Item BRONZE_TOWER_SHIELD = new BronzeTowerShield("bronze_tower_shield");
 
     public static void init() {
     }

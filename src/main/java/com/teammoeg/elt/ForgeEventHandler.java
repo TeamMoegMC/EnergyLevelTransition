@@ -19,6 +19,7 @@
 package com.teammoeg.elt;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.teammoeg.elt.capability.FightCapabilityProvider;
 import com.teammoeg.elt.capability.TeamCapabilityProvider;
 import com.teammoeg.elt.command.CreateTeamCommand;
 import com.teammoeg.elt.research.ELTResearches;
@@ -71,6 +72,7 @@ public class ForgeEventHandler {
     public static void onAttachCapabilityEvent(AttachCapabilitiesEvent<Entity> event) {
         Entity entity = event.getObject();
         if (entity instanceof PlayerEntity) {
+            event.addCapability(new ResourceLocation(ELT.MOD_ID, "fightcap"), new FightCapabilityProvider());
             event.addCapability(new ResourceLocation(ELT.MOD_ID, "research_team"), new TeamCapabilityProvider());
         }
     }
