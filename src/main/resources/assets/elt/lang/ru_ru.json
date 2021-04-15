@@ -1,0 +1,12 @@
+
+{
+  "elt.quest.killzombie.name": "Убить зомби",
+  "elt.quest.killzombie.desc": "Ты считаешь, что убийство зомби — хорошая идея для познавания эффективности оружия.",
+  "elt.gui.research": "Исследование",
+  "elt.paleolithic_age_line.name": "Палеолит",
+  "elt.neolithic_age_line.name": "Неолит",
+  "elt.copper_age_line.name": "Медный век",
+  "elt.bronze_age_line.name": "Бронзовый век",
+  "elt.iron_age_line.name": "Железный век",
+  "elt.steel_age_line.name": "Стальной век"
+}
