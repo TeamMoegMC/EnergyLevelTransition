@@ -25,7 +25,7 @@ WIP
 
 ## Background
 
-ELT gains some inspiration from the following posts created by Lyuuke(https://github.com/Lyuuke)
+ELT gains some inspiration from the following posts created by [Lyuuke](https://github.com/Lyuuke)
 - ELT II: https://tieba.baidu.com/p/3491285047
 - ELT IIS: https://tieba.baidu.com/p/5858060400
 - ELT Wiki: https://energy-level-transition.fandom.com/zh/wiki/Fraxinus_In_A_Gale
@@ -50,11 +50,7 @@ TBA
 
 ## Setup Dev Environment
 
-If you are using Windows, use the following style
-
-```gradlew <task>```
-
-or if you're using MacOSX/Linux/Unix:
+If you are using Windows, MacOSX, Linux, FreeBSD etc.:
 
 ```./gradlew <task>```
 
@@ -67,7 +63,7 @@ or if you're using MacOSX/Linux/Unix:
 
 - Setup Gradle
 
-    - Then, Use IntelliJ or Eclipse to open `build.gradle` file in the project directory, and choose`import as project`
+    - Then, Use IntelliJ or Eclipse to open `build.gradle` file in the project directory, and choose `Import as project`
 
     - Wait for Gradle to sync
 
@@ -85,7 +81,7 @@ or if you're using MacOSX/Linux/Unix:
 
 - Running and Building
   
-    - Run `gradlew build` under root directory to build artifacts in `./build/libs`
+    - Run `gradlew build` under root directory to build artifacts in `build/libs`
 
     - Run `gradlew runClient` to run Minecraft Client with the Mod.
 
