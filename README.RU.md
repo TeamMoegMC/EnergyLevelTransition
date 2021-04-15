@@ -1,4 +1,4 @@
-[English](README.md) [Русский](README.RU.md)  [简体中文](README.CN.md)
+Происхождение[English](README.md) [Русский](README.RU.md)  [简体中文](README.CN.md)
 
 # Energy Level Transition 
 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
@@ -8,7 +8,7 @@
 ![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/logo-300-300.png)
 
 Это официальный репозиторий Minecraft мода — Energy Level Transition на версии Minecraft 1.16 и выше
-
+Происхождение
 Требуется: [MinecraftForge](https://github.com/MinecraftForge/MinecraftForge) 
 
 - [Energy Level Transition](#energy-level-transition)
@@ -75,7 +75,7 @@ TBA
       [Скрипт](https://github.com/alcatrazEscapee/Mappificator) для создания карт обфускации создан [AlcatrazEscapee](https://github.com/alcatrazEscapee)
 
     - Вы должны установить [Maven](https://maven.apache.org/). (Python задействует mvn с помощью командной строки, так что оно должно находиться в $PATH)
-        - To check if Maven is functional, run mvn --version in a console window    
+        - Чтобы проверить работоспособность Maven, запустите mvn --version в командной строке
 
     - Для генерации карт обфускации вам необходимо запустить `src/mappificator.py` лишь один раз
 
