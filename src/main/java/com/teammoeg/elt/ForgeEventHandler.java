@@ -19,8 +19,10 @@
 package com.teammoeg.elt;
 
 import com.mojang.brigadier.CommandDispatcher;
+import com.teammoeg.elt.capability.ELTCapabilities;
 import com.teammoeg.elt.capability.FightCapabilityProvider;
 import com.teammoeg.elt.capability.TeamCapabilityProvider;
+import com.teammoeg.elt.client.hud.HudPhysicalStrength;
 import com.teammoeg.elt.command.CreateTeamCommand;
 import com.teammoeg.elt.research.ELTResearches;
 import com.teammoeg.elt.research.Quest;
@@ -40,8 +42,12 @@ import net.minecraft.util.Util;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.storage.FolderName;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.event.entity.player.PlayerSetSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerWakeUpEvent;
@@ -62,6 +68,22 @@ import org.apache.logging.log4j.Logger;
 @Mod.EventBusSubscriber(modid = ELT.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ForgeEventHandler {
     private static final Logger LOGGER = LogManager.getLogger("ELT");
+
+    @SubscribeEvent
+    @OnlyIn(Dist.CLIENT)
+    public static void Render(RenderGameOverlayEvent event) {
+        if (event.getType() != RenderGameOverlayEvent.ElementType.ALL) {
+            return;
+        }
+        new HudPhysicalStrength().render(event.getMatrixStack());
+    }
+
+    @SubscribeEvent
+    public static void tick(TickEvent.PlayerTickEvent event) {
+        event.player.getCapability(ELTCapabilities.fightCapability).ifPresent(cap -> {
+            cap.increasePhysicalStrength(1);
+        });
+    }
 
     @SubscribeEvent
     public static void WorldSave(WorldEvent.Save event) {

@@ -8,16 +8,16 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(PlayerEntity.class)
-public class shield {
+public class Shield {
 
     @Inject(at = @At("TAIL"), method = "hurtCurrentlyUsedShield")
     private void init(float damage, CallbackInfo ci) {
         PlayerEntity playerEntity = ((PlayerEntity) (Object) this);
         playerEntity.getCapability(ELTCapabilities.fightCapability).ifPresent((cap) -> {
-            if (cap.getPhysicalStrength() < 0) {
+            if (cap.getPhysicalStrength() < 1) {
                 playerEntity.disableShield(true);
             } else {
-                cap.decreasePhysicalStrength();
+                cap.decreasePhysicalStrength(playerEntity.getUseItem().getItem(), (int) damage);
             }
 
         });

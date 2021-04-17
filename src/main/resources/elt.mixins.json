@@ -6,7 +6,7 @@
   "mixins": [
     "ForgeHooksMixin",
     "MinecraftServerMixin",
-    "shield",
+    "Shield",
     "UtilMixin"
   ],
   "client": [
