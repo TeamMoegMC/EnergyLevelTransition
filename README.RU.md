@@ -1,4 +1,4 @@
-Происхождение[English](README.md) [Русский](README.RU.md)  [简体中文](README.CN.md)
+[English](README.md) | [Русский](README.RU.md) | [简体中文](README.CN.md)
 
 # Energy Level Transition 
 ![Build](https://github.com/MoegTech/EnergyLevelTransition/workflows/Build/badge.svg) 
@@ -8,12 +8,12 @@
 ![LOGO](https://raw.githubusercontent.com/MoegTech/EnergyLevelTransition/1.16/src/main/resources/logos/logo-300-300.png)
 
 Это официальный репозиторий Minecraft мода — Energy Level Transition на версии Minecraft 1.16 и выше
-Происхождение
+
 Требуется: [MinecraftForge](https://github.com/MinecraftForge/MinecraftForge) 
 
 - [Energy Level Transition](#energy-level-transition)
 - [Введение](#введение)
-- [Происхождение](#происхождение)
+- [Влияние](#влияние)
 - [Лицензия](#лицензия)
 - [Благодарности](#благодарности)
 - [Зависимости](#зависимости)
@@ -21,9 +21,10 @@
 
 ## Введение
 
-WIP
+Скоро
 
-## Происхождение
+## Влияние
+
 Мод ELT вдохновлялся следующими постами, написанные [Lyuuke](https://github.com/Lyuuke)
 - ELT II: https://tieba.baidu.com/p/3491285047
 - ELT IIS: https://tieba.baidu.com/p/5858060400
@@ -45,10 +46,9 @@ WIP
 
 ## Зависимости
 
-TBA
+Скоро
 
 ## Настройка среды разработки
-
 
 Если вы используете Windows, MacOS, Linux, FreeBSD и так далее:
 
@@ -85,4 +85,4 @@ TBA
 
     - Запустите `gradlew runClient` для запуска Minecraft клиента с модом.
 
-Если у вас возникли вопросы или вы хотите больше инструкций, заходите на [Forge Docs](https://mcforge.readthedocs.io)
+Если у вас возникли вопросы или вы хотите получить больше инструкций, заходите на [Forge Docs](https://mcforge.readthedocs.io) и следуйте инструкции для вашей IDE
